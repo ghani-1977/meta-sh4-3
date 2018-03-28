@@ -21,11 +21,6 @@ GCCVERSION = "4.9.4"
 GLIBCVERSION = "2.23"
 OLDEST_KERNEL = "2.6.32"
 
-PREFERRED_PROVIDER_gstreamer1.0-plugins-good = "libeplayer3"
-PREFERRED_PROVIDER_gstreamer1.0-plugins-ugly = "libeplayer3"
-PREFERRED_PROVIDER_gstreamer1.0-plugins-base = "libeplayer3"
-PREFERRED_PROVIDER_gstreamer1.0-plugins-bad = "libeplayer3"
-
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan"
 PREFERRED_VERSION_linux-libc-headers = "2.6.32"
 PREFERRED_VERSION_directfb = "1.7.7"
@@ -39,7 +34,7 @@ SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-OPENPLI_FEATURES = "usbconsole"
+OPENPLI_FEATURES += "usbconsole ci"
 MACHINE_FEATURES += "ext2 serial wlan dvb-c hdmicec 3dtv switchoff textlcd fulan singlecore directfb sh4booster legacykernel"
 DISTRO_FEATURES_remove = "x11 wayland"
 
@@ -51,6 +46,7 @@ JFFS2_ERASEBLOCK = "0x20000"
 JFFS2_ENDIANNESS = "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--little-endian', '--big-endian', d)}"
 EXTRA_IMAGECMD_jffs2 = "--pad ${JFFS2_ENDIANNESS} --eraseblock=${JFFS2_ERASEBLOCK} --no-cleanmarkers"
 MKUBIFS_ARGS = "--pad ${JFFS2_ENDIANNESS} --eraseblock=${JFFS2_ERASEBLOCK} --no-cleanmarkers"
+DVBMEDIASINK_CONFIG = "--with-machine=${MACHINE} --with-wma --with-wmv --with-pcm --with-dtsdownmix --with-eac3"
 
 IMAGE_FSTYPES ?= "jffs2"
 
@@ -113,6 +109,8 @@ MACHINE_EXTRA_RRECOMMENDS = " \
     firmware-mt7601u \
     firmware-rtl8188eu \
     firmware-rtl8xxxu \
+    \
+    gstreamer1.0-plugin-dvbmediasink \
     \
     kernel-module-rtl8187 \
     kernel-module-zd1211rw \
