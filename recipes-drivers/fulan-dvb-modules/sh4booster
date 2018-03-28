@@ -6,6 +6,9 @@ if [ "$(grep config.plugins.booster.startfrequenz= /etc/enigma2/settings | sed '
 fi
 
 # load ramzswap
-insmod /lib/modules/`uname -r`/extra/compcache/ramzswap.ko 
-swapon /dev/ramzswap0
-swapon -a
+if [ -e /etc/.zram ]
+then
+	insmod /lib/modules/`uname -r`/extra/compcache/ramzswap.ko 
+	swapon /dev/ramzswap0
+	swapon -a
+fi
