@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 DEPENDS = "ffmpeg ${@bb.utils.contains('TARGET_ARCH', 'sh4', 'fulan-dvb-modules-${MACHINE}', '', d)}"
 RDEPENDS_${PN} = "ffmpeg"
-RPROVIDES_${PN} = "libeplayer"
+RPROVIDES_${PN} += "libeplayer"
 
 inherit gitpkgv autotools
 
