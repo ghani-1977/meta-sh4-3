@@ -20,8 +20,9 @@ S = "${WORKDIR}/git/tools"
 inherit autotools 
 
 EXTRA_OECONF = "--enable-silent-rules --prefix="
-
 LDFLAGS += "-lpthread -lrt"
+EXTRA_OEMAKE = " DRIVER_TOPDIR=${STAGING_KERNEL_DIR}"
+CFLAGS_append = " -I${STAGING_KERNEL_DIR}/multicom/include"
 
 do_configure() {
     cd ${S}

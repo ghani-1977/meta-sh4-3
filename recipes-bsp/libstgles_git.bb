@@ -4,7 +4,7 @@ require ddt-apps.inc
 inherit pkgconfig
 
 DEPENDS += " directfb"
-CFLAGS_append = " -I${STAGING_INCDIR}/directfb"
+CFLAGS_append = " -I${STAGING_INCDIR}/directfb -I${WORKDIR}/git/tools/libstgles/includes"
 
 PROVIDES = "virtual/libgles1 virtual/egl"
 
