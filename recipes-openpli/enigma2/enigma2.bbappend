@@ -1,3 +1,5 @@
+CXXFLAGS_append += " -fPIC -fno-strict-aliasing "
+
 DEPENDS_append_sh4 = " \
 	libmmeimage libmme-host libeplayer3 \
 	"
