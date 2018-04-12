@@ -29,6 +29,7 @@ PREFERRED_VERSION_samba = "3.%"
 
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
 PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
+PREFERRED_PROVIDER_virtual/enigma2-mediaservice ?= "enigma2-plugin-systemplugins-servicemp3epl"
 
 SERIAL_CONSOLE = "115200 ttyAS0"
 
@@ -93,7 +94,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
     flash-tools \
     mountspark \
     mtd-utils-jffs2 \
-    libeplayer3 \
     "
 
 MACHINE_EXTRA_RRECOMMENDS = " \
@@ -109,8 +109,6 @@ MACHINE_EXTRA_RRECOMMENDS = " \
     firmware-mt7601u \
     firmware-rtl8188eu \
     firmware-rtl8xxxu \
-    \
-    gstreamer1.0-plugin-dvbmediasink \
     \
     kernel-module-rtl8187 \
     kernel-module-zd1211rw \
