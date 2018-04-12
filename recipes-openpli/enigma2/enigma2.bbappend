@@ -13,4 +13,4 @@ EXTRA_OECONF_append_sh4 = "\
 	--enable-${MACHINE} --with-lcd --enable-gstreamer --enable-libeplayer3 \
 	"
 
-SRC_URI_sh4 = "${GITHUB_URI}/PLi-metas/enigma2-openpli-fulan.git;branch=master"
+SRC_URI_sh4 = "${GITHUB_URI}/PLi-metas/enigma2-openpli-fulan.git;branch=master;name=enigma2"
