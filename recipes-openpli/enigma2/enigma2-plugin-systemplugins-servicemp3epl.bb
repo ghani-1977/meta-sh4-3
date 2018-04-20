@@ -73,6 +73,7 @@ GST_UGLY_RDEPS = "\
 PACKAGECONFIG ??= "gstreamer libeplayer"
 PACKAGECONFIG[gstreamer]       = "--enable-gstreamer --with-gstversion=${GST_VERSION},--disable-gstreamer,gstreamer${GST_VERSION}-plugins-base gstreamer${GST_VERSION}"
 PACKAGECONFIG[libeplayer]      = "--enable-libeplayer3,--disable-libeplayer3,libeplayer3"
+
 DEPENDS = "\
 	enigma2 \
 	"

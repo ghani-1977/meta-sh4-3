@@ -1,14 +1,14 @@
 CXXFLAGS_append += " -std=c++11 -fPIC -fno-strict-aliasing "
 
-DEPENDS_append_sh4 = " \
+DEPENDS_append_sh4 += " \
 	libmmeimage libmme-host \
 	"
 
-RDEPENDS_${PN}_append_sh4 = " \
+RDEPENDS_${PN}_append_sh4 += " \
 	libmme-host \
 	"
 
-EXTRA_OECONF_append_sh4 = "\
+EXTRA_OECONF_append_sh4 += "\
 	--enable-${MACHINE} --with-lcd \
 	"
 
