@@ -1,3 +1,7 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
+
+COMPATIBLE_MACHINE = "spark|spark7162"
+
 DEPENDS += " ${@bb.utils.contains("MACHINE_FEATURES", "sdl", "libsdl", "", d)} ${@bb.utils.contains("TARGET_ARCH", "sh4", "libmme-host fulan-dvb-modules-${MACHINE} stlirc", "", d)}"
 
 SRC_URI_prepend_sh4 = " \
