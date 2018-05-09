@@ -1,1 +1,1 @@
-SRC_URI_sh4 = "git://github.com/oe-alliance/aio-grab.git;protocol=git"
+SRC_URI_sh4 = "${GITHUB_URI}/oe-alliance/${BPN}.git"
