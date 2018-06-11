@@ -3,6 +3,8 @@ LICENSE = "CLOSED"
 SECTION = "base"
 inherit allarch
 
+COMPATIBLE_MACHINE = "(spark|spark7162)"
+
 # fix architecture mismatch QA error
 INSANE_SKIP_${PN} = "arch"
 
