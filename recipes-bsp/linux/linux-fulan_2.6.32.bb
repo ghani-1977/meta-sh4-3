@@ -3,6 +3,8 @@ LICENSE = "GPLv2"
 SECTION = "kernel"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+COMPATIBLE_MACHINE = "(spark|spark7162)"
+
 KV = "2.6.32"
 SRCDATE = "20160701"
 
