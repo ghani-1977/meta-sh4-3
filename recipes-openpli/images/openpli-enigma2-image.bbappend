@@ -7,5 +7,6 @@ ENIGMA2_PLUGINS_append_sh4 = " \
 	"
 
 ENIGMA2_PLUGINS_remove_sh4 = " \
+	enigma2-plugin-systemplugins-osdpositionsetup \
 	enigma2-plugin-systemplugins-serviceapp \
 	"
