@@ -1,9 +1,6 @@
 # We know about rtc
 include conf/machine/include/build-extras.inc
 
-BRAND_OEM = "fulan"
-MACHINE_NAME = "${@bb.utils.contains('MACHINE', 'spark7162', 'SPARK TRIPLEX', 'SPARK 990 LX', d)}"
-MACHINE_BRAND = "GOLDEN MEDIA"
 IMAGEDIR ?= "enigma2"
 MTD_KERNEL = "mtd5"
 MTD_ROOTFS = "mtd6"
