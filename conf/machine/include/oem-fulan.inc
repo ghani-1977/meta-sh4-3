@@ -35,13 +35,11 @@ SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-OPENPLI_FEATURES += "usbconsole ci"
-MACHINE_FEATURES += "ext2 serial wlan dvb-c hdmicec 3dtv switchoff textlcd fulan singlecore directfb sh4booster legacykernel"
+MACHINE_FEATURES += "ext2 serial wlan dvb-c hdmicec 3dtv switchoff textlcd fulan singlecore directfb sh4booster legacykernel usbconsole ci"
 DISTRO_FEATURES_append += "gtk-directfb libsigc2"
 
 KERNEL_IMAGETYPE = "uImage"
 #KERNEL_OUTPUT = "${KERNEL_IMAGETYPE}"
-
 
 JFFS2_ERASEBLOCK = "0x20000"
 JFFS2_ENDIANNESS = "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--little-endian', '--big-endian', d)}"
@@ -59,11 +57,11 @@ IMAGE_FSTYPES += "spark71xxusbimg"
 IMAGE_CLASSES += "usb_image-spark71xx"
 INITRAMFS_FSTYPES =  "ext2.gz sparkupdt"
 
-IMAGE_CMD_jffs2_prepend = " \
+IMAGE_CMD_jffs2_prepend = "\
     rm -rf ${IMAGE_ROOTFS}/tmp/*; \
     "
 
-IMAGE_CMD_jffs2_append = " ; \
+IMAGE_CMD_jffs2_append = "\
     cp ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2; \
     mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
     mv ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${ROOTFS_FILE}; \
@@ -78,11 +76,11 @@ IMAGE_CMD_jffs2_append = " ; \
     "
 
 # Add uImage in tar image boot directory
-IMAGE_CMD_tar_prepend = " \
+IMAGE_CMD_tar_prepend = "\
     cp ${DEPLOY_DIR_IMAGE}/uImage ${IMAGE_ROOTFS}/boot/${KERNEL_FILE}; \
     "
 	
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stx7111-fdma-firmware \
     stslave-fw \
     ustslave \
@@ -96,7 +94,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += " \
     mtd-utils-jffs2 \
     "
 
-MACHINE_EXTRA_RRECOMMENDS = " \
+MACHINE_EXTRA_RRECOMMENDS += "\
     firmware-carl9170 \
     firmware-htc7010 \
     firmware-htc9271 \
@@ -109,7 +107,6 @@ MACHINE_EXTRA_RRECOMMENDS = " \
     firmware-mt7601u \
     firmware-rtl8188eu \
     firmware-rtl8xxxu \
-    \
     kernel-module-rtl8187 \
     kernel-module-zd1211rw \
     kernel-module-ar9170usb \
@@ -135,13 +132,13 @@ MACHINE_EXTRA_RRECOMMENDS = " \
     rt7777-sh4 \
     "
 
-EXTRA_IMAGEDEPENDS += " \
+EXTRA_IMAGEDEPENDS += "\
     libpcre \
     libstgles \
     aio-grab \
     "
 
-MACHINE_EXTRA_RDEPENDS = "\
+MACHINE_EXTRA_RDEPENDS += "\
     libpcre \
     aio-grab \
     "
