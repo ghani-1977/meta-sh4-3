@@ -1,4 +1,4 @@
-ENIGMA2_PLUGINS_append_sh4 = " \
+ENIGMA2_PLUGINS_append_sh4 += "\
 	kernel-module-block2mtd libcrypto \
 	enigma2-plugin-systemplugins-sparkvfdcontrol \
 	enigma2-plugin-systemplugins-sh4osdadjustment \
@@ -6,7 +6,7 @@ ENIGMA2_PLUGINS_append_sh4 = " \
 	${@bb.utils.contains("MACHINE_FEATURES", "spark7162", "enigma2-plugin-systemplugins-uniontunertype", "", d)} \
 	"
 
-ENIGMA2_PLUGINS_remove_sh4 = " \
+ENIGMA2_PLUGINS_remove_sh4 += "\
 	enigma2-plugin-systemplugins-osdpositionsetup \
 	enigma2-plugin-systemplugins-serviceapp \
 	"
