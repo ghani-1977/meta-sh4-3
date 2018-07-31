@@ -92,18 +92,36 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     "
 
 MACHINE_EXTRA_RRECOMMENDS += "\
+    firmware-carl9170 \
+    firmware-htc7010 \
+    firmware-htc9271 \
+    firmware-rt2870 \
+    firmware-rt73 \
+    firmware-rtl8712u \
+    firmware-zd1211 \
+    firmware-rtl8192cu \
+    firmware-rtl8188eu \
+    rtl8192eu \
+    kernel-module-rtl8187 \
+    kernel-module-zd1211rw \
+    kernel-module-ar9170usb \
+    kernel-module-rt2500usb \
+    kernel-module-rt73usb \
+    kernel-module-rt2800usb \
+    kernel-module-ath \
+    kernel-module-8188eu \
+    kernel-module-8192cu \
+    kernel-module-8712u \
     ntfs-3g \
     "
 
 EXTRA_IMAGEDEPENDS += "\
     libpcre \
     libstgles \
-    aio-grab \
     "
 
 MACHINE_EXTRA_RDEPENDS += "\
     libpcre \
-    aio-grab \
     "
 
 include conf/machine/include/autoload-filesystems.inc
