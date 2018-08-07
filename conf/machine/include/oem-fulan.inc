@@ -94,6 +94,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \
+    enigma2-plugin-systemplugins-serviceapp \
     "
 
 EXTRA_IMAGEDEPENDS += "\
