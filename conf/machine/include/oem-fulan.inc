@@ -45,11 +45,9 @@ MKUBIFS_ARGS = "--pad ${JFFS2_ENDIANNESS} --eraseblock=${JFFS2_ERASEBLOCK} --no-
 DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix --with-eac3"
 
 IMAGE_FSTYPES ?= "jffs2"
-
-# enable this for debug
+# For debugging.. but lets enable anyways..
 IMAGE_FSTYPES += "tar.gz"
 IMAGE_FSTYPES += "spark71xxusbimg"
-# INHERIT += "usb_image-spark71xx"
 
 IMAGE_CLASSES += "usb_image-spark71xx"
 INITRAMFS_FSTYPES =  "ext2.gz sparkupdt"
@@ -59,8 +57,11 @@ IMAGE_CMD_jffs2_prepend = "\
     "
 
 IMAGE_CMD_jffs2_append = "\
+    ; \
+    while [ ! -s ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.jffs2 ]; do sleep 1; done ; \
     cp ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2; \
     mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
+    while [ ! -s ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ]; do sleep 1; done ; \
     mv ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${ROOTFS_FILE}; \
     cp ${DEPLOY_DIR_IMAGE}/uImage ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${KERNEL_FILE}; \
     cd ${DEPLOY_DIR_IMAGE}; \
@@ -92,26 +93,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     "
 
 MACHINE_EXTRA_RRECOMMENDS += "\
-    firmware-carl9170 \
-    firmware-htc7010 \
-    firmware-htc9271 \
-    firmware-rt2870 \
-    firmware-rt73 \
-    firmware-rtl8712u \
-    firmware-zd1211 \
-    firmware-rtl8192cu \
-    firmware-rtl8188eu \
-    rtl8192eu \
-    kernel-module-rtl8187 \
-    kernel-module-zd1211rw \
-    kernel-module-ar9170usb \
-    kernel-module-rt2500usb \
-    kernel-module-rt73usb \
-    kernel-module-rt2800usb \
-    kernel-module-ath \
-    kernel-module-8188eu \
-    kernel-module-8192cu \
-    kernel-module-8712u \
     ntfs-3g \
     "
 
@@ -127,3 +108,4 @@ MACHINE_EXTRA_RDEPENDS += "\
 include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/tune-sh4.inc
 require conf/machine/include/soc-family.inc
+require conf/machine/include/wifi-fulan.inc
