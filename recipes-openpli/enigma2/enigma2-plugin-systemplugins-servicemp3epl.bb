@@ -114,13 +114,13 @@ EXTRA_OECONF = "\
 	"
 
 do_install_append() {
-	rm ${D}${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3EPL/*.pyc
+	rm ${D}${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/*.pyc
 }
 
 FILES_${PN} = "\
-	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3EPL/*.pyo \
-	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3EPL/servicemp3epl.so"
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/*.pyo \
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/servicemp3epl.so"
 
 FILES_${PN}-dev = "\
-	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3EPL/*.py \
-	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3EPL/servicemp3epl.la"
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/*.py \
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/servicemp3epl.la"
