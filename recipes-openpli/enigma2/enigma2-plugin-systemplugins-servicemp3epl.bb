@@ -119,8 +119,8 @@ do_install_append() {
 
 FILES_${PN} = "\
 	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/*.pyo \
-	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/servicemp3epl.so"
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/servicemp3.so"
 
 FILES_${PN}-dev = "\
 	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/*.py \
-	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/servicemp3epl.la"
+	${libdir}/enigma2/python/Plugins/SystemPlugins/ServiceMP3/servicemp3.la"
