@@ -14,5 +14,6 @@ EXTRA_OECONF_append_sh4 += "\
 
 SRC_URI_sh4 = "\
 	${GITHUB_URI}/PLi-metas/enigma2-openpli-fulan.git;branch=master;name=enigma2 \
-	${@bb.utils.contains("IMAGE_BASENAME", "pli-extras-enigma2", "file://prince.patch", "file://epgcache.patch", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "epgcache1", "file://epgcache.patch", "", d)} \
+	${@bb.utils.contains("IMAGE_BASENAME", "pli-extras-enigma2", "file://prince.patch", "", d)} \
 	"
