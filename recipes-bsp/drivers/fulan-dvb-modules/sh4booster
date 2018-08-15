@@ -5,3 +5,7 @@ if [ "$(grep config.plugins.booster.startfrequenz= /etc/enigma2/settings | sed '
 	echo  $(grep config.plugins.booster.startfrequenz= /etc/enigma2/settings | sed 's/config.plugins.booster.startfrequenz=//g') > /proc/cpu_frequ/pll0_ndiv_mdiv
 fi
 
+insmod /lib/modules/`uname -r`/extra/compcache/zram.ko num_devices=1
+echo "16777216" > /sys/block/zram0/disksize
+mkswap /dev/zram0
+swapon -p 100 /dev/zram0
