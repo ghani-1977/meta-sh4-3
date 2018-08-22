@@ -3,31 +3,31 @@ LICENSE = "GPLv2"
 SECTION = "kernel"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(spark|spark7162)"
-
 KV = "2.6.32"
 SRCDATE = "20160701"
 
+COMPATIBLE_MACHINE = "(spark|spark7162)"
+
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-MACHINE_KERNEL_PR_append = ".2"
+MACHINE_KERNEL_PR_append = ".3"
 
 inherit kernel machine_kernel_pr
 
 DEPENDS_append_spark7162 = " \
-           stlinux24-sh4-stx7105-fdma-firmware \
+  stlinux24-sh4-stx7105-fdma-firmware \
 "
 
 DEPENDS_append_spark = " \
-           stlinux24-sh4-stx7111-fdma-firmware \
+  stlinux24-sh4-stx7111-fdma-firmware \
 "
 
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
-PKG_kernel-base = "kernel-base"
-PKG_kernel-image = "kernel-image"
-RPROVIDES_kernel-base = "kernel-${KERNEL_VERSION}"
+PKG_${KERNEL_PACKAGE_NAME}-base = "kernel-base"
+PKG_${KERNEL_PACKAGE_NAME}-image = "kernel-image"
+RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "kernel-${KERNEL_VERSION}"
 RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
 
 STM_PATCH_STR = "0217"
@@ -93,8 +93,8 @@ EXTRA_OEMAKE_prepend = " ${PARALLEL_MAKE} "
 
 PACKAGES =+ "kernel-headers"
 FILES_kernel-headers = "${exec_prefix}/src/linux*"
-FILES_kernel-dev += "${includedir}/linux"
-FILES_kernel-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}"
+FILES_${KERNEL_PACKAGE_NAME}-dev += "${includedir}/linux"
+FILES_${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}"
 
 do_configure_prepend() {
     oe_machinstall -m 0644 ${WORKDIR}/defconfig ${B}/.config
