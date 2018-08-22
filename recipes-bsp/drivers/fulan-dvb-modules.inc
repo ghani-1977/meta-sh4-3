@@ -10,74 +10,55 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/COPYING;md5=751419260aa954499f7abaabaa882b
 RDEPENDS_${PN} = "stinit"
 
 KV = "2.6.32.71-stm24-0217"
-SRCREV = "${AUTOREV}"
+SRCREV = "b269c18f195aa97cfdfa970480c43407f8ced533"
 
 inherit module
 
 PACKAGES = "${PN} ${PN}-dev"
 
-INC_PR = "r1"
+INC_PR = "r2"
 PV = "${KV}+${SRCDATE}"
 
-KERNEL_MODULE_PACKAGE_SUFFIX = ""
 PTI_NP_PATH ?= "/data/pti_np"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/fulan-dvb-modules:"
 
 SRC_URI = " \
-    git://github.com/PLi-metas/fulan-dvb-drivers.git;protocol=git \
+    git://github.com/Duckbox-Developers/driver.git;protocol=git \
+    file://aotom_spark_procfs.patch;patch=1 \
     file://ddbootup \
     file://sh4booster \
+    file://vdstandby \
     file://modules.conf \
     file://modules-conf.conf \
-    file://RT2870STA.dat \
-    file://vdstandby \
     file://COPYING \
+    file://Compcache.patch \
 " 
 
-FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d ${sysconfdir}/Wireless/RT2870STA /bin"
+FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin"
 FILES = ""
 
 S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "-e MAKEFLAGS="
 
-do_configure_prepend () {
+CLEANBROKEN = "1"
 
+do_configure_prepend () {
     # if a custom pti source is present, add it to the sources
     if [ -e ${PTI_NP_PATH}/Makefile ]; then
         echo "Found custom pti sources.."
         cp -r ${PTI_NP_PATH} ${S}
     fi
-
-    if [ -L include/stmfb ]; then
-        rm include/stmfb
-    fi
-    if [ -L include/player2 ]; then
-        rm include/player2
-    fi
     if [ -L include/multicom ]; then
         rm include/multicom
-    fi
-    if [ -L player2 ]; then
-        rm player2
-    fi
-    if [ -L stgfb/stmfb ]; then
-        rm stgfb/stmfb
     fi
     if [ -L multicom ]; then
         rm multicom 
     fi
-    ln -sf ${S}/include/stmfb-3.1_stm24_0104 ${S}/include/stmfb
-    ln -sf ${S}/include/player2_191 ${S}/include/player2
-    ln -sf ${S}/multicom-3.2.4/include ${S}/include/multicom
-    ln -sf ${S}/player2_191 ${S}/player2
-    ln -sf ${S}/multicom-3.2.4 ${S}/multicom
-    ln -sf ${S}/stgfb/stmfb-3.1_stm24_0104 ${S}/stgfb/stmfb
-    rm -f .config 
-    printf "export CONFIG_PLAYER_191=y\nexport CONFIG_MULTICOM324=y\n" > .config
+    ln -sf ${S}/multicom/include ${S}/include/multicom
     export KERNEL_LOCATION="${STAGING_KERNEL_DIR}"
-    cp -R ${S}/multicom-3.2.4 ${STAGING_KERNEL_DIR}/multicom
+    cp -R ${S}/multicom ${STAGING_KERNEL_DIR}/multicom
 }
 
 do_compile() {
@@ -90,13 +71,11 @@ do_compile() {
         ${@d.getVar('MACHINE',1).upper()}=1 \
         M=${S} V=1 \
         ARCH=sh \
-        PLAYER191=player191 \
         DRIVER_TOPDIR="${S}" \
         KERNEL_LOCATION="${STAGING_KERNEL_DIR}" \
         CONFIG_KERNEL_BUILD="${STAGING_KERNEL_BUILDDIR}" \
         CONFIG_KERNEL_PATH="${STAGING_KERNEL_DIR}" \
         CONFIG_MODULES_PATH="${D}" \
-        CONFIG_PLAYER_191=y \
         CCFLAGSY="-I${STAGING_DIR_HOST}/usr/include" \
         modules 
 }
@@ -111,13 +90,11 @@ do_install() {
         ${@d.getVar('MACHINE',1).upper()}=1 \
         M=${S} V=1 \
         ARCH=sh \
-        PLAYER191=player191 \
         DRIVER_TOPDIR="${S}" \
         KERNEL_LOCATION="${STAGING_KERNEL_DIR}" \
         CONFIG_KERNEL_BUILD="${STAGING_KERNEL_BUILDDIR}" \
         CONFIG_KERNEL_PATH="${STAGING_KERNEL_DIR}" \
         CONFIG_MODULES_PATH="${D}" \
-        CONFIG_PLAYER_191=y \
         CCFLAGSY="-I${STAGING_DIR_HOST}/usr/include" \
         INSTALL_MOD_PATH=${D} modules_install
 
@@ -125,11 +102,10 @@ do_install() {
     install -d ${D}/${includedir}/
     install -m 644 multicom/include/mme.h ${D}/${includedir}
     install -m 644 include/player2/JPEG_VideoTransformerTypes.h ${D}/${includedir}
-    install -m 644 include/player2/JPEG_TransformerTypes.h ${D}/${includedir}
     install -m 644 include/player2/JPEGDECHW_VideoTransformerTypes.h ${D}/${includedir}
     install -m 644 include/player2/PNGDecode_interface.h ${D}/${includedir}
     install -m 644 include/player2/RLEDecode_interface.h ${D}/${includedir}
-    install -m 644 frontcontroller/aotom/aotom_main.h ${D}/${includedir}
+    install -m 644 frontcontroller/aotom_spark/aotom_main.h ${D}/${includedir}
     install -m 644 player2/components/include/stddefs.h ${D}/${includedir}
 
     #install modutils config
@@ -143,12 +119,9 @@ do_install() {
     ln -sf ../init.d/ddbootup ${D}${sysconfdir}/rcS.d/S04ddbootup
     install -d ${D}/bin
     install -m 755 ${WORKDIR}/vdstandby ${D}/bin
-    install -d ${D}${sysconfdir}/Wireless
-    install -d ${D}${sysconfdir}/Wireless/RT2870STA
-    install -m 0644 ${WORKDIR}/RT2870STA.dat ${D}/${sysconfdir}/Wireless/RT2870STA
     install -m 0755 ${WORKDIR}/sh4booster ${D}${sysconfdir}/init.d
     ln -sf ../init.d/sh4booster ${D}${sysconfdir}/rcS.d/S05sh4booster
-    
+
     # if no pti_np sources are available and a custom pti.ko is present, overwrite the tdt one
     if [ ! -e ${PTI_NP_PATH}/Makefile ]; then
         if [ -e ${PTI_NP_PATH}/pti.ko ]; then
@@ -167,6 +140,4 @@ python handle_driver_rename () {
     d.setVar("RREPLACES_fulan-dvb-modules-${MACHINE}", "fulan-dvb-modules")
     d.setVar("RCONFLICTS_fulan-dvb-modules-${MACHINE}", "fulan-dvb-modules")
 }
-
 FILES_${PN}-dev += "${includedir}"
-
