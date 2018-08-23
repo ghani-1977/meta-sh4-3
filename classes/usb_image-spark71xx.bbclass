@@ -1,5 +1,7 @@
 inherit image_types
 
+BB_HASH_IGNORE_MISMATCH = "1"
+
 # This image reciope was taken from the raspberry pi meta layer
 # Create an image that can by written onto a USB Thumb drive card using dd.
 #
