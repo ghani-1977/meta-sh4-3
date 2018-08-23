@@ -10,13 +10,13 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/COPYING;md5=751419260aa954499f7abaabaa882b
 RDEPENDS_${PN} = "stinit"
 
 KV = "2.6.32.71-stm24-0217"
-SRCREV = "b269c18f195aa97cfdfa970480c43407f8ced533"
+SRCREV = "7f83e008c7ea4c385015ebd08a86f8aea9ab9f9e"
 
 inherit module
 
 PACKAGES = "${PN} ${PN}-dev"
 
-INC_PR = "r2"
+INC_PR = "r3"
 PV = "${KV}+${SRCDATE}"
 
 PTI_NP_PATH ?= "/data/pti_np"
