@@ -1,4 +1,5 @@
 CXXFLAGS_append_sh4 = " -std=c++11 "
+RRECOMMENDS_${PN}_sh4 = "exteplayer3 gstplayer curl"
 
 pkg_postinst_${PN}_sh4() {
 	touch $D/etc/enigma2/serviceapp_replaceservicemp3
