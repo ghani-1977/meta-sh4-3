@@ -16,7 +16,7 @@ inherit module
 
 PACKAGES = "${PN} ${PN}-dev"
 
-INC_PR = "r4"
+INC_PR = "r5"
 PV = "${KV}+${SRCDATE}"
 
 PTI_NP_PATH ?= "/data/pti_np"
