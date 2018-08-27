@@ -32,6 +32,7 @@ SRC_URI = " \
     file://modules.conf \
     file://modules-conf.conf \
     file://COPYING \
+    file://zram.patch \
     file://Compcache.patch \
     file://joeuser.patch \
 " 
