@@ -2,17 +2,15 @@ DESCRIPTION = "MME image library"
 
 require ddt-apps.inc
 
-DEPENDS += "jpeg"
-PR = "r0"
+DEPENDS += " jpeg"
 
 do_install_append () {
-	install -d ${D}${includedir}/libmmeimage
-	install -m 644 ${S}/libmmeimage.h ${D}${includedir}/libmmeimage
-	install -m 644 ${S}/libmmeimg_error.h ${D}${includedir}/libmmeimage
+	install -d ${D}${includedir}/mmeimage
+	install -m 644 ${S}/*.h ${D}${includedir}/mmeimage
 }
 
 FILES_${PN} += "${libdir}/libmmeimage.so"
-FILES_${PN}-dev = "${includedir}/libmmeimage ${libdir}/libmmeimage.la"
+FILES_${PN}-dev += "${includedir}/mmeimage ${includedir}/libmmeimage  ${libdir}/libmmeimage.la"
 
 INSANE_SKIP_${PN} += "dev-so"
 
