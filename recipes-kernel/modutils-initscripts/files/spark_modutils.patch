@@ -4,7 +4,7 @@
  		esac
  		[ -n "$(echo $loaded_modules | grep " $module ")" ] && continue
  		[ "$VERBOSE" != no ] && echo -n "$module "
-+		[ "$module" == "cec" ] && [ ! `grep 'hdmicec.enabled=true' /etc/enigma2/settings` ] && args="activemode=1" # Load cec in activemode if disabled in enigma2
++		# [ "$module" == "cec" ] && [ ! `grep 'hdmicec.enabled=true' /etc/enigma2/settings` ] && args="activemode=1" # Load cec in activemode if disabled in enigma2
  		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
  		loaded_modules="${loaded_modules}${module} "
 +		[ "$module" == "stmfb" ] && echo "LOAD" > /dev/dbox/oled0
@@ -26,8 +26,8 @@
 +fi
 +
 +# Unload cec if disabled in enigma2
-+if [ ! `grep 'hdmicec.enabled=true' /etc/enigma2/settings` ]; then
-+	rmmod cec
-+fi
++# if [ ! `grep 'hdmicec.enabled=true' /etc/enigma2/settings` ]; then
++#	rmmod cec
++# fi
 +
  exit 0
