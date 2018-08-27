@@ -314,7 +314,7 @@ new file mode 100644
 index 0000000..931caab
 --- /dev/null
 +++ b/frontcontroller/aotom_spark/aotom_procfs.c
-@@ -0,0 +1,759 @@
+@@ -0,0 +1,760 @@
 +/*
 + * aotom_procfs.c
 + *
@@ -1034,6 +1034,7 @@ index 0000000..931caab
 +  { "stb/fp/rtc_offset", aotom_read_rtc_offset, aotom_write_rtc_offset },
 +  { "stb/fp/aotom", NULL, aotom_write },
 +  { "stb/fp/led0_pattern", NULL, led0_pattern_write },
++  { "stb/fp/led1_pattern", NULL, led1_pattern_write },
 +  { "stb/fp/wakeup_time", wakeup_time_read, wakeup_time_write },
 +  { "stb/fp/was_timer_wakeup", was_timer_wakeup_read, null_write },
 +  { "stb/fp/version", fp_version_read, NULL },
