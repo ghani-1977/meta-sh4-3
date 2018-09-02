@@ -7,7 +7,6 @@ MTD_ROOTFS = "mtd6"
 KERNEL_FILE = "uImage"
 ROOTFS_FILE = "e2jffs2.img"
 
-MACHINE_KERNEL_PR = "r1"
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
 
 TARGET_ARCH = "sh4"
@@ -33,7 +32,7 @@ SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-MACHINE_FEATURES += "ext2 serial wlan dvb-c hdmicec 3dtv switchoff textlcd fulan singlecore directfb sh4booster legacykernel usbconsole ci"
+MACHINE_FEATURES += "ext2 serial dvb-c hdmicec 3dtv switchoff textlcd fulan singlecore directfb sh4booster legacykernel usbconsole ci"
 DISTRO_FEATURES_append += "gtk-directfb libsigc2"
 
 KERNEL_IMAGETYPE = "uImage"
