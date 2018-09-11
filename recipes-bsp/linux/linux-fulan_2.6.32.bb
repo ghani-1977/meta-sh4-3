@@ -14,11 +14,11 @@ MACHINE_KERNEL_PR_append = ".4"
 
 inherit kernel machine_kernel_pr
 
-DEPENDS_append_spark7162 = " \
+DEPENDS_append_spark7162 += "\
   stlinux24-sh4-stx7105-fdma-firmware \
 "
 
-DEPENDS_append_spark = " \
+DEPENDS_append_spark += "\
   stlinux24-sh4-stx7111-fdma-firmware \
 "
 
@@ -59,23 +59,237 @@ SRC_URI = "git://github.com/Duckbox-Developers/linux-sh4-2.6.32.71.git;protocol=
     file://linux-sh4-linux_yaffs2.patch;patch=1 \
     file://linux-sh4-fix-crash-usb-reboot.patch;patch=1 \
     file://timeconst_perl5.patch;patch=1 \
-    file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1 \
-    file://linux-sh4-lmb_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://defconfig \
     file://st-coprocessor.h \
     file://linux-net_stm24.patch;patch=1 \
     file://zram.patch;patch=1 \
 "
 
-SRC_URI_append_spark7162 = " \
-    file://linux-sh4-spark7162_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
+SRC_URI_append_spark7162 += "\
+    file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1 \
+    file://linux-sh4-lmb_stm24_${STM_PATCH_STR}.patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
 "
 
-SRC_URI_append_spark = " \
-    file://linux-sh4-spark_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
+SRC_URI_append_spark += "\
+    file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1 \
+    file://linux-sh4-lmb_stm24_${STM_PATCH_STR}.patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-sh4-lirc_stm_stm24_${STM_PATCH_STR}.patch;patch=1 \
-    file://linux-sh4-spark-af901x-NXP-TDA18218.patch;patch=1 \
-    file://linux-sh4-spark-dvb-as102.patch;patch=1 \
+    file://linux-sh4-${MACHINE}-af901x-NXP-TDA18218.patch;patch=1 \
+    file://linux-sh4-${MACHINE}-dvb-as102.patch;patch=1 \
+"
+
+SRC_URI_append_tf7700 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+	file://linux-usbwait123_stm24.patch;patch=1 \
+	file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+	file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_ufs910 += "\
+    file://linux-sh4-stx7100_fdma_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-sata_32bit_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-sata_stx7100_B4Team_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-usbwait123_stm24.patch;patch=1 \
+    file://linux-sh4-${MACHINE}_reboot_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-smsc911x_dma_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-pcm_noise_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_ufs912 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_ufs913 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_sf1008 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-usbwait123_stm24.patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_atevio7500 += "\
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_mtdconcat_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_hs7110 += "\
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_hs7119 += "\
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_hs7420 += "\
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_hs7429 += "\
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_hs7810a += "\
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_hs7819 += "\
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_atemio520 += "\
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-squashfs-downgrade-stm24_$(STM_PATCH_STR)-to-stm23.patch;patch=1 \
+    file://linux-squashfs3.0_lzma_stm23.patch;patch=1 \
+    file://linux-squashfs-downgrade-stm24-patch-2.6.25.patch;patch=1 \
+    file://linux-squashfs-downgrade-stm24-rm_d_alloc_anon.patch;patch=1 \
+"
+
+SRC_URI_append_atemio530 += "\
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-squashfs-downgrade-stm24_$(STM_PATCH_STR)-to-stm23.patch;patch=1 \
+    file://linux-squashfs3.0_lzma_stm23.patch;patch=1 \
+    file://linux-squashfs-downgrade-stm24-patch-2.6.25.patch;patch=1 \
+    file://linux-squashfs-downgrade-stm24-rm_d_alloc_anon.patch;patch=1 \
+"
+
+SRC_URI_append_ufs922 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-fortishdbox_i2c_st40_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_ufc960 += "\
+    file://linux-sh4-ufs922_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-fortishdbox_i2c_st40_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_hl101 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-usbwait123_stm24.patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_fortishdbox += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-usbwait123_stm24.patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_adbbox += "\
+    file://linux-sh4-stx7100_fdma_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-sata_32bit_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-usbwait123_stm24.patch;patch=1 \
+    file://linux-sh4-ufs910_reboot_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-pcm_noise_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_ipbox9900 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-ipbox_bdinfo_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-ipbox_dvb_ca_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_ipbox99 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-ipbox_bdinfo_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_ipbox55 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-ipbox_bdinfo_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_cuberevo += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_cuberevomini += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_cuberevomini2 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_cuberevo250hd += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_cuberevo2000hd += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_cuberevo9500hd += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_cuberevo3000hd += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_sagemcom88 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_sound_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_arivalink200 += "\
+    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-ipbox_bdinfo_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-ipbox_dvb_ca_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
 S = "${WORKDIR}/git"
