@@ -455,7 +455,9 @@ CONFIG_IPV6=y
 # CONFIG_IRDA is not set
 # CONFIG_BT is not set
 # CONFIG_AF_RXRPC is not set
-# CONFIG_WIRELESS is not set
+CONFIG_WIRELESS=y
+CONFIG_WIRELESS_EXT=y
+# CONFIG_WIRELESS_EXT_SYSFS is not set
 # CONFIG_WIMAX is not set
 # CONFIG_RFKILL is not set
 # CONFIG_NET_9P is not set
@@ -703,7 +705,8 @@ CONFIG_STMMAC_PLATFORM=y
 CONFIG_STMMAC_RING=y
 # CONFIG_STMMAC_CHAINED is not set
 # CONFIG_NETDEV_10000 is not set
-# CONFIG_WLAN is not set
+CONFIG_WLAN=y
+CONFIG_WLAN_80211=y
 
 #
 # Enable WiMAX (Networking options) to see the WiMAX drivers
