@@ -1,12 +1,6 @@
 # We know about rtc
 include conf/machine/include/build-extras.inc
 
-IMAGEDIR ?= "enigma2"
-MTD_KERNEL = "mtd5"
-MTD_ROOTFS = "mtd6"
-KERNEL_FILE = "uImage"
-ROOTFS_FILE = "e2jffs2.img"
-
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
 
 TARGET_ARCH = "sh4"
@@ -32,8 +26,8 @@ SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-MACHINE_FEATURES += "ext2 serial dvb-c hdmicec 3dtv switchoff textlcd fulan singlecore directfb sh4booster legacykernel usbconsole ci"
-DISTRO_FEATURES_append += "gtk-directfb libsigc2"
+MACHINE_FEATURES += "ext2 serial dvb-c 3dtv switchoff textlcd fulan singlecore sh4booster legacykernel usbconsole"
+DISTRO_FEATURES_append += "libsigc2"
 
 KERNEL_IMAGETYPE = "uImage"
 #KERNEL_OUTPUT = "${KERNEL_IMAGETYPE}"
@@ -79,7 +73,6 @@ IMAGE_CMD_tar_prepend = "\
     "
 	
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    stlinux24-sh4-stx7111-fdma-firmware \
     stslave-fw \
     ustslave \
     stfbcontrol \
@@ -90,11 +83,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     flash-tools \
     mountspark \
     mtd-utils-jffs2 \
-    "
-
-MACHINE_EXTRA_RRECOMMENDS += "\
-    ntfs-3g \
-    enigma2-plugin-systemplugins-serviceapp \
     "
 
 EXTRA_IMAGEDEPENDS += "\
