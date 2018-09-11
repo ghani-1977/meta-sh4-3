@@ -109,4 +109,3 @@ MACHINE_EXTRA_RDEPENDS += "\
 include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/tune-sh4.inc
 require conf/machine/include/soc-family.inc
-require conf/machine/include/wifi-fulan.inc
