@@ -132,7 +132,13 @@ do_install() {
             install -m 644 ${PTI_NP_PATH}/pti.ko ${D}/lib/modules/${KERNEL_VERSION}/extra/pti/pti.ko
         fi
     fi
+}
 
+do_install_append_spark() {
+    find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
+}
+
+do_install_append_spark7162() {
     find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
 }
 
