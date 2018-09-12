@@ -82,9 +82,9 @@ SRC_URI_append_spark += "\
 
 SRC_URI_append_tf7700 += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
-	file://linux-usbwait123_stm24.patch;patch=1 \
-	file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
-	file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-usbwait123_stm24.patch;patch=1 \
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
 SRC_URI_append_ufs910 += "\
