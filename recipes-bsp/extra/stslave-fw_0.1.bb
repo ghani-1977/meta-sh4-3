@@ -3,18 +3,18 @@ LICENSE = "CLOSED"
 SECTION = "base"
 inherit allarch
 
-COMPATIBLE_MACHINE = "adbbox|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo250hd|cuberevo2000hd|cuberevo3000hd|cuberevo9500hd|cuberevomini|cuberevomini2|fortishdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|sf1008|spark|spark7162|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vip1v2|vip2v1|vitaminhd5000"
+COMPATIBLE_MACHINE = "adbbox|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo250hd|cuberevo2000hd|cuberevo3000hd|cuberevo9500hd|cuberevomini|cuberevomini2|fortishdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|sf1008|spark|spark7105|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vip1v2|vip2v1|vitaminhd5000"
 
 # fix architecture mismatch QA error
 INSANE_SKIP_${PN} = "arch"
 
 SRC_URI = "file://audio_7100.elf \
     file://audio_7111.elf \
-	file://audio_7162.elf \
+	file://audio_7105.elf \
 	file://video_7100.elf \
 	file://video_7109.elf \
 	file://video_7111.elf \
-	file://video_7162.elf \
+	file://video_7105.elf \
 "
 
 # For audio_7109.elf just use audio_7100.elf
@@ -37,10 +37,10 @@ do_install_append_spark () {
     install -m 644 ${WORKDIR}/video_7111.elf  ${D}/boot/video.elf
 }
 
-do_install_append_spark7162 () {
+do_install_append_spark7105 () {
     install -d ${D}/boot
-    install -m 644 ${WORKDIR}/audio_7162.elf  ${D}/boot/audio.elf
-    install -m 644 ${WORKDIR}/video_7162.elf  ${D}/boot/video.elf
+    install -m 644 ${WORKDIR}/audio_7105.elf  ${D}/boot/audio.elf
+    install -m 644 ${WORKDIR}/video_7105.elf  ${D}/boot/video.elf
 }
 
 do_install_append_cuberevo () {
@@ -117,8 +117,8 @@ do_install_append_ufs912 () {
 
 do_install_append_ufs913 () {
     install -d ${D}/boot
-    install -m 644 ${WORKDIR}/audio_7162.elf  ${D}/boot/audio.elf
-    install -m 644 ${WORKDIR}/video_7162.elf  ${D}/boot/video.elf
+    install -m 644 ${WORKDIR}/audio_7105.elf  ${D}/boot/audio.elf
+    install -m 644 ${WORKDIR}/video_7105.elf  ${D}/boot/video.elf
 }
 
 do_install_append_ufs922 () {
@@ -141,8 +141,8 @@ do_install_append_fortishdbox () {
 
 do_install_append_atevio7500 () {
     install -d ${D}/boot
-    install -m 644 ${WORKDIR}/audio_7162.elf  ${D}/boot/audio.elf
-    install -m 644 ${WORKDIR}/video_7162.elf  ${D}/boot/video.elf
+    install -m 644 ${WORKDIR}/audio_7105.elf  ${D}/boot/audio.elf
+    install -m 644 ${WORKDIR}/video_7105.elf  ${D}/boot/video.elf
 }
 
 do_install_append_sf1008 () {
@@ -225,8 +225,8 @@ do_install_append_vitaminhd5000 () {
 
 do_install_append_sagemcom88 () {
     install -d ${D}/boot
-    install -m 644 ${WORKDIR}/audio_7162.elf  ${D}/boot/audio.elf
-    install -m 644 ${WORKDIR}/video_7162.elf  ${D}/boot/video.elf
+    install -m 644 ${WORKDIR}/audio_7105.elf  ${D}/boot/audio.elf
+    install -m 644 ${WORKDIR}/video_7105.elf  ${D}/boot/video.elf
 }
 
 do_install_append_arivalink200 () {
