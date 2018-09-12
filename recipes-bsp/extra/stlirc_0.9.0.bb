@@ -11,7 +11,7 @@ RDEPENDS_lirc-exec = "stlirc"
 RRECOMMENDS_${PN} = "stlirc-exec kernel-module-uinput"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(spark|spark7162)"
+#COMPATIBLE_MACHINE = "(spark|spark7162)"
 
 RCONFLICTS_${PN} = "lirc"
 RCONFLICTS_stlirc-exec = "lirc-exec"
@@ -77,4 +77,3 @@ FILES_${PN}-dev += "${libdir}/liblirc_client.so"
 FILES_${PN} = "${bindir} ${sbindir} ${libdir}/lib*.so.* ${sysconfdir} ${exec_prefix}/var"
 FILES_stlirc-exec = "${bindir}/irexec ${sysconfdir}/init.d/lircexec"
 FILES_stlirc-remotes = "${datadir}/lirc/remotes"
-

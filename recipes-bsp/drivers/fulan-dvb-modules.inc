@@ -134,14 +134,6 @@ do_install() {
     fi
 }
 
-do_install_append_spark() {
-    find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
-}
-
-do_install_append_spark7162() {
-    find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
-}
-
 PACKAGESPLITFUNCS_append = " handle_driver_rename "
 
 python handle_driver_rename () {

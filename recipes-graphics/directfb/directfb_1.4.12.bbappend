@@ -1,10 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-COMPATIBLE_MACHINE = "spark|spark7162"
+#COMPATIBLE_MACHINE = "spark|spark7162"
 
 DEPENDS += " ${@bb.utils.contains("MACHINE_FEATURES", "sdl", "libsdl", "", d)} ${@bb.utils.contains("TARGET_ARCH", "sh4", "libmme-host fulan-dvb-modules-${MACHINE} stlirc", "", d)}"
 
-SRC_URI_prepend_sh4 = " \
+SRC_URI_prepend_sh4 += "\
     file://directfb-1.4.12+STM2011.09.27-3.patch;patch=1 \
     file://directfb-1.4.11+STM2010.12.15-4.libpng.patch;patch=1 \
     file://directfb-1.4.11+STM2010.12.15-4.no-vt.patch;patch=1 \

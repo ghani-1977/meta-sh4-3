@@ -42,8 +42,6 @@ EXTRA_OECONF = "\
 
 # NOTE: monolithic packaging for now, should improve that eventually
 
-
-
 FILES_${PN}-dbg += "\
   ${libdir}/directfb-${RV}/*/*/.debug/*.so \
   ${libdir}/directfb-${RV}/*/.debug/*.so \
