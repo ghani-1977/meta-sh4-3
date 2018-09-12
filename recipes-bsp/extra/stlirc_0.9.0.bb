@@ -11,7 +11,7 @@ RDEPENDS_lirc-exec = "stlirc"
 RRECOMMENDS_${PN} = "stlirc-exec kernel-module-uinput"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-#COMPATIBLE_MACHINE = "(spark|spark7162)"
+COMPATIBLE_MACHINE = "adbbox|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo250hd|cuberevo2000hd|cuberevo3000hd|cuberevo9500hd|cuberevomini|cuberevomini2|fortishdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|sf1008|spark|spark7162|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vip1v2|vip2v1|vitaminhd5000"
 
 RCONFLICTS_${PN} = "lirc"
 RCONFLICTS_stlirc-exec = "lirc-exec"
