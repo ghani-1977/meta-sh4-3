@@ -12,4 +12,3 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 MACHINE_FEATURES += "hdmicec directfb"
 
 DISTRO_FEATURES_append += "gtk-directfb"
-
