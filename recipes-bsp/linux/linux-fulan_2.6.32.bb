@@ -162,7 +162,7 @@ SRC_URI_append_hs7819 += "\
 SRC_URI_append_atemio520 += "\
     file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
-    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_211.patch;patch=1 \
     file://linux-squashfs-downgrade-stm24_$(STM_PATCH_STR)-to-stm23.patch;patch=1 \
     file://linux-squashfs3.0_lzma_stm23.patch;patch=1 \
     file://linux-squashfs-downgrade-stm24-patch-2.6.25.patch;patch=1 \
@@ -172,7 +172,7 @@ SRC_URI_append_atemio520 += "\
 SRC_URI_append_atemio530 += "\
     file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
-    file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_211.patch;patch=1 \
     file://linux-squashfs-downgrade-stm24_$(STM_PATCH_STR)-to-stm23.patch;patch=1 \
     file://linux-squashfs3.0_lzma_stm23.patch;patch=1 \
     file://linux-squashfs-downgrade-stm24-patch-2.6.25.patch;patch=1 \
@@ -284,6 +284,12 @@ SRC_URI_append_arivalink200 += "\
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-ipbox_bdinfo_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-ipbox_dvb_ca_stm24_$(STM_PATCH_STR).patch;patch=1 \
+"
+
+SRC_URI_append_vitamin_hd5000 += "\
+    file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-lmb_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-${MACHINE}_setup_stm24_211.patch;patch=1 \
 "
 
 S = "${WORKDIR}/git"
