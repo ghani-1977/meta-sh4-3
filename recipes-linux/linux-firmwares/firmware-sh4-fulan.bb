@@ -73,3 +73,15 @@ do_install_ufc960() {
     install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
+
+do_install_atevio7500() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_sf1008() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+}
