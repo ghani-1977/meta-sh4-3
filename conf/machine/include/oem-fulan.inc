@@ -77,7 +77,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     ustslave \
     stfbcontrol \
     fp-control \
-    stlirc \
     stinit \
     fulan-dvb-modules-${MACHINE} \
     flash-tools \

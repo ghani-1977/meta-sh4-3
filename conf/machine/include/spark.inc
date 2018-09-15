@@ -9,6 +9,10 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     enigma2-plugin-systemplugins-serviceapp \
     "
 
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	stlirc \
+"
+
 MACHINE_FEATURES += "hdmicec directfb"
 
 DISTRO_FEATURES_append += "gtk-directfb"
