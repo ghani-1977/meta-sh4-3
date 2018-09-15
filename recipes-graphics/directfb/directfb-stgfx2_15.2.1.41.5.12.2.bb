@@ -3,7 +3,7 @@ SECTION = "kernel/modules"
 LICENSE = "GPLv2"
 require conf/license/license-gplv2.inc
 
-DEPENDS = "directfb fulan-dvb-modules-${MACHINE}"
+DEPENDS = "directfb fulan-dvb-modules"
 
 inherit module autotools pkgconfig
 
