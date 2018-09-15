@@ -52,6 +52,24 @@ do_install_cuberevomini2() {
 
 do_install_ufs910() {
     install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/dvb-fe-cx24116.fw
+}
+
+do_install_ufs913() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_ufs922() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_ufc960() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
