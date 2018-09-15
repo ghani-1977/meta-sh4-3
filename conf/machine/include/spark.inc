@@ -11,8 +11,12 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlirc \
+    flash-tools \
+    mountspark \
 "
 
 MACHINE_FEATURES += "hdmicec directfb"
 
 DISTRO_FEATURES_append += "gtk-directfb"
+
+require conf/machine/include/wifi-fulan.inc

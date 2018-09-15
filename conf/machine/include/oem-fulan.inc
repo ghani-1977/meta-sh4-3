@@ -62,8 +62,6 @@ IMAGE_CMD_jffs2_append = "\
     zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.jffs2; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.manifest; \
-    rm -f ${DEPLOY_DIR_IMAGE}/.jffs2; \
-    rm -f ${DEPLOY_DIR_IMAGE}/.manifest; \
     rm -rf ${IMAGEDIR}; \
     "
 
@@ -79,8 +77,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     fp-control \
     stinit \
     fulan-dvb-modules \
-    flash-tools \
-    mountspark \
     mtd-utils-jffs2 \
     "
 
