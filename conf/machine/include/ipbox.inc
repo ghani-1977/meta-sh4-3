@@ -7,6 +7,10 @@ SOC_FAMILY = "sti7109"
 
 MACHINE_FEATURES += "ipbox"
 
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	stlinux24-sh4-stx7109-fdma-firmware \
+"
+
 #What we need
 #$(SILENT)cp $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/frontends/*.ko $(RELEASE_DIR)/lib/modules/
 #$(SILENT)cp $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/stgfb/stmfb/stmcore-display-stx7109c3.ko $(RELEASE_DIR)/lib/modules/
