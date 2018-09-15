@@ -2,7 +2,7 @@ SUMMARY = "Firmware files for sh4 fulan"
 LICENSE = "CLOSED"
 require conf/license/license-close.inc
 
-PACKAGE_ARCH = "all"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 SRC_URI = "https://raw.githubusercontent.com/PLi-metas/linux-firmwares/master/sh4-firmwares.zip"
 
@@ -13,6 +13,12 @@ S = "${WORKDIR}"
 
 PACKAGES = "${PN}"
 FILES_${PN} += "${base_libdir}/firmware"
+
+do_install() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 *.fw ${D}${base_libdir}/firmware/
+    install -m 0644 *.hex ${D}${base_libdir}/firmware/
+}
 
 do_install_cuberevo() {
     install -d ${D}${base_libdir}/firmware
@@ -84,4 +90,39 @@ do_install_sf1008() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_hl101() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_adbbox() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+    install -m 0644 as102_data1_st.hex ${D}${base_libdir}/firmware/
+    install -m 0644 as102_data2_st.hex ${D}${base_libdir}/firmware/
+}
+
+do_install_tf7700() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_vitaminhd5000() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_sagemcom88() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+}
+
+do_install_arivalink200() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
 }

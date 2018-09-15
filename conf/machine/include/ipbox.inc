@@ -19,3 +19,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 #$(SILENT)rm -f $(RELEASE_DIR)/lib/modules/boxtype.ko
 #$(SILENT)rm -f $(RELEASE_DIR)/lib/modules/stmvbi.ko
 #$(SILENT)rm -f $(RELEASE_DIR)/lib/modules/stmvout.ko
+#$(SILENT)cp -f $(SKEL_ROOT)/root_enigma2/usr/local/share/enigma2/keymap_ipbox.xml $(RELEASE_DIR)/usr/local/share/enigma2/keymap.xml
