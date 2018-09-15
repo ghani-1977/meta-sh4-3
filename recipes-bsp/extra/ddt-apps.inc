@@ -2,7 +2,7 @@ HOMEPAGE = "https://github/Duckbox-Developers/apps"
 SECTION = "base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${OPENPLI_BASE}/LICENSE;md5=eb723b61539feef013de476e68b5c50a"
-DEPENDS = "fulan-dvb-modules-${MACHINE}"
+DEPENDS = "fulan-dvb-modules"
 
 inherit autotools gitpkgv
 
