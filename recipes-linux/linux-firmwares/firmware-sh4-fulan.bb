@@ -26,31 +26,31 @@ do_install_cuberevo() {
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_cuberevo250hd() {
+do_install_cuberevo_250hd() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_cuberevo2000hd() {
+do_install_cuberevo_2000hd() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_cuberevo3000hd() {
+do_install_cuberevo_3000hd() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_cuberevomini() {
+do_install_cuberevo_mini() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_cuberevomini2() {
+do_install_cuberevo_mini2() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
@@ -86,7 +86,7 @@ do_install_atevio7500() {
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_sf1008() {
+do_install_octagon1008() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
@@ -98,7 +98,7 @@ do_install_hl101() {
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_adbbox() {
+do_install_adb_box() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
@@ -111,7 +111,7 @@ do_install_tf7700() {
     install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
 }
 
-do_install_vitaminhd5000() {
+do_install_vitamin_hd5000() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
 }

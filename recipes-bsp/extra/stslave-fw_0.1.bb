@@ -3,7 +3,7 @@ LICENSE = "CLOSED"
 SECTION = "base"
 inherit allarch
 
-COMPATIBLE_MACHINE = "adbbox|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo250hd|cuberevo2000hd|cuberevo3000hd|cuberevomini|cuberevomini2|fortishdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|sf1008|spark|spark7162|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vitaminhd5000"
+COMPATIBLE_MACHINE = "adb_box|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|fortis_hdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|octagon1008|spark|spark7162|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vitamin_hd5000"
 
 # fix architecture mismatch QA error
 INSANE_SKIP_${PN} = "arch"
@@ -49,31 +49,31 @@ do_install_append_cuberevo () {
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_cuberevo250hd () {
+do_install_append_cuberevo_250hd () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_cuberevo2000hd () {
+do_install_append_cuberevo_2000hd () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_cuberevo3000hd () {
+do_install_append_cuberevo_3000hd () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_cuberevomini () {
+do_install_append_cuberevo_mini () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_cuberevomini2 () {
+do_install_append_cuberevo_mini2 () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
@@ -127,7 +127,7 @@ do_install_append_ufc960 () {
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_fortishdbox () {
+do_install_append_fortis_hdbox () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
@@ -139,7 +139,7 @@ do_install_append_atevio7500 () {
     install -m 644 ${WORKDIR}/video_7105.elf  ${D}/boot/video.elf
 }
 
-do_install_append_sf1008 () {
+do_install_append_octagon1008 () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
@@ -199,7 +199,7 @@ do_install_append_hl101 () {
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_adbbox () {
+do_install_append_adb_box () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7100.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7100.elf  ${D}/boot/video.elf
@@ -211,7 +211,7 @@ do_install_append_tf7700 () {
     install -m 644 ${WORKDIR}/video_7109.elf  ${D}/boot/video.elf
 }
 
-do_install_append_vitaminhd5000 () {
+do_install_append_vitamin_hd5000 () {
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/audio_7111.elf  ${D}/boot/audio.elf
     install -m 644 ${WORKDIR}/video_7111.elf  ${D}/boot/video.elf

@@ -6,7 +6,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 KV = "2.6.32"
 SRCDATE = "20160701"
 
-COMPATIBLE_MACHINE = "adbbox|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo250hd|cuberevo2000hd|cuberevo3000hd|cuberevomini|cuberevomini2|fortishdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|sf1008|spark|spark7162|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vitaminhd5000"
+COMPATIBLE_MACHINE = "adb_box|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|fortis_hdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|octagon1008|spark|spark7162|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vitamin_hd5000"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
@@ -109,7 +109,7 @@ SRC_URI_append_ufs913 += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_sf1008 += "\
+SRC_URI_append_octagon1008 += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-usbwait123_stm24.patch;patch=1 \
     file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
@@ -183,14 +183,14 @@ SRC_URI_append_ufs922 += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
-    file://linux-sh4-fortishdbox_i2c_st40_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-fortis_hdbox_i2c_st40_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
 SRC_URI_append_ufc960 += "\
     file://linux-sh4-ufs922_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
-    file://linux-sh4-fortishdbox_i2c_st40_stm24_$(STM_PATCH_STR).patch;patch=1 \
+    file://linux-sh4-fortis_hdbox_i2c_st40_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
 SRC_URI_append_hl101 += "\
@@ -200,14 +200,14 @@ SRC_URI_append_hl101 += "\
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_fortishdbox += "\
+SRC_URI_append_fortis_hdbox += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-usbwait123_stm24.patch;patch=1 \
     file://linux-sh4-stmmac_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_adbbox += "\
+SRC_URI_append_adb_box += "\
     file://linux-sh4-stx7100_fdma_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-sata_32bit_fix_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
@@ -242,31 +242,31 @@ SRC_URI_append_cuberevo += "\
     file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_cuberevomini += "\
+SRC_URI_append_cuberevo_mini += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_cuberevomini2 += "\
+SRC_URI_append_cuberevo_mini2 += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_cuberevo250hd += "\
+SRC_URI_append_cuberevo_250hd += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_cuberevo2000hd += "\
+SRC_URI_append_cuberevo_2000hd += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
 "
 
-SRC_URI_append_cuberevo3000hd += "\
+SRC_URI_append_cuberevo_3000hd += "\
     file://linux-sh4-${MACHINE}_setup_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_$(STM_PATCH_STR).patch;patch=1 \
     file://linux-sh4-cuberevo_rtl8201_stm24_$(STM_PATCH_STR).patch;patch=1 \
