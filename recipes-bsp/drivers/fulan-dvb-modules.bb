@@ -16,13 +16,15 @@ inherit module
 
 PACKAGES = "${PN} ${PN}-dev"
 
+SRCDATE = "20180824"
+
 PV = "${KV}+${SRCDATE}"
 
 PR = "r1"
 
 PTI_NP_PATH ?= "/data/pti_np"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/fulan-dvb-modules:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = " \
     git://github.com/Duckbox-Developers/driver.git;protocol=git \
@@ -140,6 +142,8 @@ do_install() {
             install -m 644 ${PTI_NP_PATH}/pti.ko ${D}/lib/modules/${KERNEL_VERSION}/extra/pti/pti.ko
         fi
     fi
+	
+	find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
 }
 
 PACKAGESPLITFUNCS_append = " handle_driver_rename "
