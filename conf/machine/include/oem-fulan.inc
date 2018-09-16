@@ -88,7 +88,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 
 EXTRA_IMAGEDEPENDS += "\
     libpcre \
-    libstgles \
     "
 
 MACHINE_EXTRA_RDEPENDS += "\

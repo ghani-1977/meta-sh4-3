@@ -9,6 +9,10 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     mountspark \
 "
 
+EXTRA_IMAGEDEPENDS += "\
+    libstgles \
+    "
+
 MACHINE_FEATURES += "hdmicec directfb"
 
 DISTRO_FEATURES_append += "gtk-directfb"
