@@ -17,7 +17,7 @@ GCCVERSION = "4.9.4"
 GLIBCVERSION = "2.23"
 OLDEST_KERNEL = "2.6.32"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-fulan"
+PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
 PREFERRED_VERSION_linux-libc-headers = "3.4.100"
 PREFERRED_VERSION_directfb = "1.4.12"
 PREFERRED_VERSION_rt8812au = "4.3.14"
