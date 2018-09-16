@@ -1,3 +1,5 @@
+PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
+
 #MTD_KERNEL = "mtd5"
 #MTD_ROOTFS = "mtd6"
 #KERNEL_FILE = "uImage"

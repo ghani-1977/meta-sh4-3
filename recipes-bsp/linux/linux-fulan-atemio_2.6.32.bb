@@ -1,6 +1,6 @@
 require linux-fulan.inc
 
-COMPATIBLE_MACHINE = "atemio520"
+COMPATIBLE_MACHINE = "atemio520|atemio530"
 
 STXNUMBER = "stx7111"
 

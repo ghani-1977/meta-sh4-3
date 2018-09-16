@@ -1,3 +1,5 @@
+PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
+
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \
     enigma2-plugin-systemplugins-serviceapp \

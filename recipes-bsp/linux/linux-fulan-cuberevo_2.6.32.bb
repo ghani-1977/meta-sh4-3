@@ -1,6 +1,6 @@
 require linux-fulan.inc
 
-COMPATIBLE_MACHINE = "cuberevo"
+COMPATIBLE_MACHINE = "cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2"
 
 STXNUMBER = "stx7109"
 

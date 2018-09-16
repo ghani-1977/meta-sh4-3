@@ -1,3 +1,5 @@
+PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-atemio"
+
 SOC_FAMILY = "sti7111"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
