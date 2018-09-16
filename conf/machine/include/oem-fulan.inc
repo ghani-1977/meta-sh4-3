@@ -1,6 +1,12 @@
 # We know about rtc
 include conf/machine/include/build-extras.inc
 
+IMAGEDIR ?= "enigma2"
+MTD_KERNEL = "mtd5"
+MTD_ROOTFS = "mtd6"
+KERNEL_FILE = "uImage"
+ROOTFS_FILE = "e2jffs2.img"
+
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
 
 TARGET_ARCH = "sh4"

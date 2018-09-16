@@ -6,8 +6,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 "
 
 #What we need
-#$(SILENT)cp $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/frontcontroller/nuvoton/nuvoton.ko $(RELEASE_DIR)/lib/modules/
-#$(SILENT)cp $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/frontends/lnb/lnb.ko $(RELEASE_DIR)/lib/modules/
-#$(SILENT)cp $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/frontends/*.ko $(RELEASE_DIR)/lib/modules/
-#$(SILENT)cp $(TARGET_DIR)/lib/modules/$(KERNEL_VER)/extra/stgfb/stmfb/stmcore-display-sti7111.ko $(RELEASE_DIR)/lib/modules/
-#$(SILENT)cp -f $(SKEL_ROOT)/root_enigma2/usr/local/share/enigma2/keymap_fortis.xml $(RELEASE_DIR)/usr/local/share/enigma2/keymap.xml
+#extra/frontcontroller/nuvoton/nuvoton.ko /lib/modules/
+#extra/frontends/lnb/lnb.ko /lib/modules/
+#extra/frontends/*.ko /lib/modules/
+#extra/stgfb/stmfb/stmcore-display-sti7111.ko /lib/modules/
+#keymap_fortis.xml /usr/local/share/enigma2/keymap.xml

@@ -1,9 +1,3 @@
-IMAGEDIR ?= "enigma2"
-MTD_KERNEL = "mtd5"
-MTD_ROOTFS = "mtd6"
-KERNEL_FILE = "uImage"
-ROOTFS_FILE = "e2jffs2.img"
-
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \
     enigma2-plugin-systemplugins-serviceapp \
