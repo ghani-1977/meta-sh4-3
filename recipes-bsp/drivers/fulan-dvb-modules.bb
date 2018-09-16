@@ -20,7 +20,7 @@ PACKAGES = "${PN} ${PN}-dev"
 
 SRCDATE = "20180824"
 
-PV = "${KV}+${SRCDATE}"
+PV = "${KV}+${SRCDATE}-${MACHINE}"
 
 PR = "r1"
 
@@ -42,7 +42,7 @@ SRC_URI = " \
     file://ddt-driver-backward-compat.patch;patch=1 \
     file://ddt-driver-silence-dvbdemux.patch;patch=1 \
     file://ddt-driver-silence-misc-drivers.patch;patch=1 \
-    file://spark_dvbapi5-stv090x-fix-up-GM990-ix7306-tuning.patch \
+    file://0001-spark_dvbapi5-stv090x-fix-up-GM990-ix7306-tuning.patch \
     file://bpamem-new-toolchain-workaround.diff \
     file://COPYING \
     file://zram.patch \
