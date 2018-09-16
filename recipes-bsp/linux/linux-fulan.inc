@@ -13,8 +13,10 @@ MACHINE_KERNEL_PR_append = ".4"
 inherit kernel machine_kernel_pr
 
 DEPENDS_append += "\
-  stlinux24-sh4-${STXNUMBER}-fdma-firmware \
+    stlinux24-sh4-${STXNUMBER}-fdma-firmware \
 "
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/linux-fulan:"
 
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
