@@ -8,7 +8,7 @@ SRCDATE = "20160701"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-MACHINE_KERNEL_PR_append = ".4"
+MACHINE_KERNEL_PR_append = ".1"
 
 inherit kernel machine_kernel_pr
 
