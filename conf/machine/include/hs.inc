@@ -1,5 +1,8 @@
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-hs"
 
+AUDIOELF = "audio_7111.elf"
+VIDEOELF = "video_7111.elf"
+
 SOC_FAMILY = "sti7111"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\

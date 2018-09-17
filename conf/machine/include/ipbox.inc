@@ -5,6 +5,9 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
 #KERNEL_FILE = "uImage"
 #ROOTFS_FILE = "usb_update.img"
 
+AUDIOELF = "audio_7100.elf"
+VIDEOELF = "video_7109.elf"
+
 SOC_FAMILY = "sti7109"
 
 MACHINE_FEATURES += "ipbox"
