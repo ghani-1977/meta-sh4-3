@@ -28,26 +28,10 @@ PTI_NP_PATH ?= "/data/pti_np"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI = " \
-    git://github.com/Duckbox-Developers/driver.git;protocol=git \
-    file://aotom_spark_procfs.patch;patch=1 \
-    file://ddbootup \
-    file://sh4booster \
-    file://vdstandby \
+SRC_URI = "\
+    git://github.com/PLi-metas/driver.git;protocol=git \
     file://modules.conf \
     file://modules-conf.conf \
-    file://silence_stmerger_printk.patch;patch=1 \
-    file://ddt-driver-avoid-buildtime.patch \
-    file://ddt-driver-bpamem-auto-deallocate.patch \
-    file://ddt-driver-backward-compat.patch;patch=1 \
-    file://ddt-driver-silence-dvbdemux.patch;patch=1 \
-    file://ddt-driver-silence-misc-drivers.patch;patch=1 \
-    file://0001-spark_dvbapi5-stv090x-fix-up-GM990-ix7306-tuning.patch \
-    file://bpamem-new-toolchain-workaround.diff \
-    file://COPYING \
-    file://zram.patch \
-    file://Compcache.patch \
-    file://joeuser.patch \
 " 
 
 FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin"
