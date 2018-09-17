@@ -4,6 +4,8 @@ require conf/license/license-close.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+COMPATIBLE_MACHINE = "adb_box|arivalink200|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|hl101|sagemcom88|octagon1008|tf7700|ufc960|ufs910|ufs913|ufs922|vitamin_hd5000"
+
 SRC_URI = "https://raw.githubusercontent.com/PLi-metas/linux-firmwares/master/sh4-firmwares.zip"
 
 SRC_URI[md5sum] = "61b4877cf8170832d82ec876cf6b0a56"
@@ -16,44 +18,8 @@ FILES_${PN} += "${base_libdir}/firmware"
 
 do_install() {
     install -d ${D}${base_libdir}/firmware
-    install -m 0644 *.fw ${D}${base_libdir}/firmware/
-    install -m 0644 *.hex ${D}${base_libdir}/firmware/
-}
-
-do_install_cuberevo() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_cuberevo_250hd() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_cuberevo_2000hd() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_cuberevo_3000hd() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_cuberevo_mini() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_cuberevo_mini2() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+    install -m 0644 ${DVB1FIRMWARE} ${D}${base_libdir}/firmware/
+    install -m 0644 ${DVB2FIRMWARE} ${D}${base_libdir}/firmware/
 }
 
 do_install_ufs910() {
@@ -71,30 +37,6 @@ do_install_ufs922() {
     install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_ufc960() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_atevio7500() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_octagon1008() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_hl101() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
     install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
 }
 
@@ -119,10 +61,4 @@ do_install_vitamin_hd5000() {
 do_install_sagemcom88() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_arivalink200() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
 }

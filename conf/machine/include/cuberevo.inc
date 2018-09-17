@@ -10,6 +10,9 @@ VIDEOELF = "video_7109.elf"
 
 SOC_FAMILY = "sti7109"
 
+DVB1FIRMWARE = "dvb-fe-cx24116.fw"
+DVB2FIRMWARE = "dvb-fe-stv6306.fw"
+
 MACHINE_FEATURES += "cuberevo"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
