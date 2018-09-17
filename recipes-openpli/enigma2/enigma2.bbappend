@@ -14,6 +14,5 @@ EXTRA_OECONF_append_sh4 += "\
 
 SRC_URI_sh4 = "${GITHUB_URI}/PLi-metas/enigma2-openpli-fulan.git;branch=master;name=enigma2"
 SRC_URI_remove_sh4 += "\
-	file://prince.patch \
 	file://defaultskin.patch \
 	"
