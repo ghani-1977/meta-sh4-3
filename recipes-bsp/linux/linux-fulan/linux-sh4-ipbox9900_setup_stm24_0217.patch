@@ -343,17 +343,17 @@ diff -urN linux-sh4-2.6.32.16_stm24_0205.org/drivers/usb/core/hub.c linux-sh4-2.
 diff -urN linux-sh4-2.6.32.16_stm24_0205.org/drivers/media/dvb/dvb-core/dvb_ca_en50221.c linux-sh4-2.6.32.16_stm24_0205/drivers/media/dvb/dvb-core/dvb_ca_en50221.c
 --- linux-sh4-2.6.32.16_stm24_0205.org/drivers/media/dvb/dvb-core/dvb_ca_en50221.c	2011-08-28 17:32:52.000000000 +0200
 +++ linux-sh4-2.6.32.16_stm24_0205/drivers/media/dvb/dvb-core/dvb_ca_en50221.c	2011-08-28 18:33:15.580391981 +0200
-@@ -2008,13 +2008,13 @@
+@@ -2021,13 +2021,13 @@
  		atomic_set(&ca->slot_info[i].camchange_count, 0);
  		ca->slot_info[i].camchange_type = DVB_CA_EN50221_CAMCHANGE_REMOVED;
  		mutex_init(&ca->slot_info[i].slot_lock);
 -
 +#if defined(CONFIG_SH_IPBOX9900)
  		/* add a ci device entry */
- 		ret = dvb_register_device(dvb_adapter, &ca->dvbdev_ci[i], &dvbdev_ci[i], ca, DVB_DEVICE_CI);
+ 	        ret = dvb_register_device(dvb_adapter, &ca->dvbdev_ci[i], &dvbdev_ci[i], ca, DVB_DEVICE_CI);
  		ca->slot_states[i] = DVB_CA_EN50221_CAMCHANGE_REMOVED;
- 		if (ret)
- 			printk("error creating ci device for slot %d\n", i);
+ 	        if (ret)
+ 		    printk("error creating ci device for slot %d\n", i);
 -
 +#endif
  	}
