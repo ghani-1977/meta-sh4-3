@@ -1,7 +1,7 @@
 diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c linux-sh4/arch/sh/boards/mach-mb442/setup.c
 --- linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c	2011-09-08 14:15:40.000000000 +0200
 +++ linux-sh4/arch/sh/boards/mach-mb442/setup.c	2011-11-01 21:26:59.000000000 +0100
-@@ -18,17 +18,37 @@
+@@ -18,6 +18,9 @@
  #include <linux/delay.h>
  #include <linux/spi/spi.h>
  #include <linux/mtd/mtd.h>
@@ -11,14 +11,13 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c 
  #include <linux/mtd/physmap.h>
  #include <linux/stm/platform.h>
  #include <linux/stm/stx7100.h>
- #include <asm/irl.h>
--
--
--
+@@ -25,9 +28,30 @@
+ 
+ 
+ 
 -#define MB442_PIO_STE100P_RESET stm_gpio(2, 4)
 -#define MB442_PIO_SMC91X_RESET stm_gpio(2, 6)
 -#define MB442_PIO_FLASH_VPP stm_gpio(2, 7)
--
 +#include <linux/bpa2.h>
 +#include <linux/stm/emi.h>
 +#include <linux/stm/gpio.h> 
@@ -45,8 +44,8 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c 
 +        };
  
  
- void __init mb442_setup(char** cmdline_p)
-@@ -43,17 +63,18 @@
+ 
+@@ -43,17 +67,18 @@
  	stx7100_configure_asc(3, &(struct stx7100_asc_config) {
  			.hw_flow_control = 0,
  			.is_console = 0, });
@@ -69,7 +68,7 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c 
  		.flags	= IORESOURCE_IRQ,
  	},
  };
-@@ -65,52 +86,91 @@
+@@ -65,50 +90,87 @@
  	.resource	= mb442_smc91x_resources,
  };
  
@@ -99,7 +98,7 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c 
 +	.parts		= mtd_parts_table, 
 +	.nr_parts	= ARRAY_SIZE(mtd_parts_table),
 +	.parts		= mtd_parts_table
-+}; 
++};
  
 -static struct platform_device mb442_physmap_flash = {
 +static struct platform_device physmap_flash = {
@@ -108,18 +107,19 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c 
 -	.num_resources	= 1,
 -	.resource	= (struct resource[]) {
 -		STM_PLAT_RESOURCE_MEM(0, 8*1024*1024),
-+	.dev		= { 
-+	.platform_data	= &physmap_flash_data,
- 	},
+-	},
 -	.dev.platform_data = &(struct physmap_flash_data) {
 -		.width		= 2,
 -		.set_vpp	= mb442_set_vpp,
--	},
++	.dev		= { 
++	.platform_data	= &physmap_flash_data,
+ 	},
 -};
+-
 +	.num_resources	= 1,
 +	.resource	= &physmap_flash_resource,
 +}; 
- 
++ 
 +static struct mtd_partition mb442_nand_flash_partitions[] = {
  
 -static int mb442_phy_reset(void* bus)
@@ -184,24 +184,21 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c 
 -	&mb442_physmap_flash,
 +        &physmap_flash,
 +	&mb442_nand_device,
-+       
  };
  
-+
  static int __init mb442_device_init(void)
- {
- 	stx7100_configure_sata();
-@@ -120,8 +180,7 @@
+@@ -120,8 +182,8 @@
  			.out1_enabled = 1, });
  
- 	stx7100_configure_ssc_i2c(0);
+ 	stx7100_configure_ssc_i2c(0, NULL);
 -	stx7100_configure_ssc_spi(1, NULL);
--	stx7100_configure_ssc_i2c(2);
-+	stx7100_configure_ssc_i2c(1);
+-	stx7100_configure_ssc_i2c(2, NULL);
++/*	stx7100_configure_ssc_spi(1, NULL); */
++	stx7100_configure_ssc_i2c(1, NULL);
  
  	stx7100_configure_usb();
  
-@@ -130,32 +189,6 @@
+@@ -130,33 +192,6 @@
  			.tx_enabled = 0,
  			.tx_od_enabled = 0, });
  
@@ -231,9 +228,10 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/arch/sh/boards/mach-mb442/setup.c 
 -	gpio_set_value(MB442_PIO_SMC91X_RESET, 1);
 -	udelay(1);
 -	gpio_set_value(MB442_PIO_SMC91X_RESET, 0);
- 
+-
  	return platform_add_devices(mb442_devices,
  			ARRAY_SIZE(mb442_devices));
+ }
 diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/ata/sata_stm.c linux-sh4/drivers/ata/sata_stm.c
 --- linux-sh4-2.6.32.28_stm24_0207_orig/drivers/ata/sata_stm.c	2011-10-28 00:21:08.000000000 +0200
 +++ linux-sh4/drivers/ata/sata_stm.c	2011-11-03 21:54:28.000000000 +0100
@@ -295,14 +293,16 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/Kconfig linux-sh4
 diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/stm_nand_emi.c linux-sh4/drivers/mtd/nand/stm_nand_emi.c
 --- linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/stm_nand_emi.c	2011-09-08 14:15:42.000000000 +0200
 +++ linux-sh4/drivers/mtd/nand/stm_nand_emi.c	2011-11-01 19:20:43.000000000 +0100
-@@ -37,13 +37,14 @@
+@@ -37,7 +37,7 @@
  #include <linux/stm/platform.h>
  #include <linux/stm/nand.h>
  #include <asm/dma.h>
+-
 +#include <linux/stm/pio.h>
+ #include "stm_nand_bbt.h"
  
  #ifdef CONFIG_MTD_PARTITIONS
- #include <linux/mtd/partitions.h>
+@@ -45,7 +45,7 @@
  #endif
  
  #define NAME	"stm-nand-emi"
@@ -311,7 +311,7 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/stm_nand_emi.c li
  /*
   * Private data for stm_emi_nand driver.  Concurrency and device locking
   * handled by MTD layers.
-@@ -461,12 +462,24 @@
+@@ -463,11 +463,23 @@
  
  	if (ctrl & NAND_CTRL_CHANGE) {
  		if (ctrl & NAND_CLE) {
@@ -321,7 +321,7 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/stm_nand_emi.c li
 -		} else {
 -			this->IO_ADDR_W = data->io_base;
 +			this->IO_ADDR_W = (void *)((unsigned int)this->IO_ADDR_W | (unsigned int)(1 << 17));
- 		}
++		}
 +		else {
 +			this->IO_ADDR_W = (void *)((unsigned int)this->IO_ADDR_W & ~(unsigned int)(1 << 17));
 +		}
@@ -337,11 +337,10 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/stm_nand_emi.c li
 +			}
 +			else {
 +			stpio_set_pin(nand_ce_pin, 1); 
-+		}	
+ 		}
  	}
  
- 	if (cmd != NAND_CMD_NONE)
-@@ -629,10 +642,10 @@
+@@ -730,10 +742,10 @@
  		goto out4;
  	}
  
@@ -354,18 +353,18 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/stm_nand_emi.c li
  		res = -ENOMEM;
  		goto out5;
  	}
-@@ -646,8 +659,8 @@
- 
- 	tm = bank->timing_data;
+@@ -746,8 +758,8 @@
+ 	/* Assign more sensible name (default is string from nand_ids.c!) */
+ 	data->mtd.name = dev_name(&pdev->dev);
  
 -	data->chip.IO_ADDR_R = data->io_base;
 -	data->chip.IO_ADDR_W = data->io_base;
 +	data->chip.IO_ADDR_R = 0xA0400000;
 +	data->chip.IO_ADDR_W = 0xA0800000;
- 	data->chip.chip_delay = tm->chip_delay;
+ 	data->rbn_gpio = -1;
+ 	data->chip.chip_delay = 50;
  	data->chip.cmd_ctrl = nand_cmd_ctrl_emi;
- 
-@@ -746,7 +759,7 @@
+@@ -913,7 +925,7 @@
  			GFP_KERNEL);
  	if (!group)
  		return -ENOMEM;
@@ -373,7 +372,7 @@ diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/mtd/nand/stm_nand_emi.c li
 +	nand_ce_pin = stpio_request_set_pin(3, 6, "nand_sel", STPIO_OUT, 0);
  	rbn_gpio = pdata->emi_rbn_gpio;
  	if (gpio_is_valid(rbn_gpio)) {
- 		res = gpio_request(rbn_gpio, "nand_RBn");
+ 		err = gpio_request(rbn_gpio, "nand_RBn");
 diff -Nur linux-sh4-2.6.32.28_stm24_0207_orig/drivers/net/smc91x.c linux-sh4/drivers/net/smc91x.c
 --- linux-sh4-2.6.32.28_stm24_0207_orig/drivers/net/smc91x.c	2011-09-20 19:49:00.000000000 +0200
 +++ linux-sh4/drivers/net/smc91x.c	2011-10-09 11:51:23.000000000 +0200
