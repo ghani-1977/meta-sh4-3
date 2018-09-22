@@ -8,7 +8,7 @@ PV = "2.6.32.71-0217"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-MACHINE_KERNEL_PR_append = ".3"
+MACHINE_KERNEL_PR_append = ".4"
 
 inherit kernel machine_kernel_pr
 
@@ -34,8 +34,8 @@ SRC_URI = "https://github.com/PLi-metas/linux-sh4-2.6.32.71/archive/stmicro.tar.
     file://st-coprocessor.h \
 "
 
-SRC_URI[md5sum] = "2527c5c98ada7665986f825bf1868240"
-SRC_URI[sha256sum] = "b0525fcd28f369a56200c6d4e9b5ca19b8ad4ae37687a32d6c4ae1761e954c73"
+SRC_URI[md5sum] = "2aece22b6af35eaa72099d8cf1b58eaf"
+SRC_URI[sha256sum] = "0eaacfb8b9b0db58c0f26f23e00c8d206a884e3b10045fb49fe3f05e2055be3a"
 
 S = "${WORKDIR}/linux-sh4-2.6.32.71-stmicro"
 B = "${WORKDIR}/build"
