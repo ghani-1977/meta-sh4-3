@@ -34,8 +34,8 @@ SRC_URI = "https://github.com/PLi-metas/linux-sh4-2.6.32.71/archive/stmicro.tar.
     file://st-coprocessor.h \
 "
 
-SRC_URI[md5sum] = "2aece22b6af35eaa72099d8cf1b58eaf"
-SRC_URI[sha256sum] = "0eaacfb8b9b0db58c0f26f23e00c8d206a884e3b10045fb49fe3f05e2055be3a"
+SRC_URI[md5sum] = "3bc5f1e12a413e9426fe6d5824225b46"
+SRC_URI[sha256sum] = "d28ae0df471c29e8d13e992420ef035eb9ef2ec3443048b650e54a962c3bdd71"
 
 S = "${WORKDIR}/linux-sh4-2.6.32.71-stmicro"
 B = "${WORKDIR}/build"
