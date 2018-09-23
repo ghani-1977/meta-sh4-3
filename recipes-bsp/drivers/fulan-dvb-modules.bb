@@ -1,6 +1,5 @@
 SUMMARY = "Fulan driver modules from TDT"
 DESCRIPTION = "Fulan driver modules from TDT"
-HOMEPAGE = "http://github.com/Duckbox-Developers"
 SECTION = "base"
 PRIORITY = "required"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -24,7 +23,7 @@ PKGV = "git${GITPKGV}"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "\
-    git://github.com/PLi-metas/driver.git;protocol=git \
+    git://github.com/PLi-metas/sh4-driver.git;protocol=git \
     file://modules.conf \
     file://modules-conf.conf \
 " 
