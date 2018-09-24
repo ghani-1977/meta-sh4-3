@@ -20,6 +20,8 @@ PACKAGES = "${PN} ${PN}-dev"
 PV = "${KV}+git${SRCPV}-${MACHINE}"
 PKGV = "git${GITPKGV}"
 
+PTI_NP_PATH ?= "/data/pti_np"
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "\
@@ -38,6 +40,11 @@ EXTRA_OEMAKE = "-e MAKEFLAGS="
 CLEANBROKEN = "1"
 
 do_configure_prepend () {
+    # if a custom pti source is present, add it to the sources
+    if [ -e ${PTI_NP_PATH}/Makefile ]; then
+        echo "Found custom pti sources.."
+        cp -r ${PTI_NP_PATH} ${S}
+    fi
     if [ -L include/multicom ]; then
         rm include/multicom
     fi
@@ -109,8 +116,16 @@ do_install() {
     install -m 755 ${S}/vdstandby ${D}/bin
     install -m 0755 ${S}/sh4booster ${D}${sysconfdir}/init.d
     ln -sf ../init.d/sh4booster ${D}${sysconfdir}/rcS.d/S05sh4booster
-    
-    find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
+
+    # if no pti_np sources are available and a custom pti.ko is present, overwrite the tdt one
+    if [ ! -e ${PTI_NP_PATH}/Makefile ]; then
+        if [ -e ${PTI_NP_PATH}/pti.ko ]; then
+            echo "Found custom pti binary.." 
+            install -m 644 ${PTI_NP_PATH}/pti.ko ${D}/lib/modules/${KERNEL_VERSION}/extra/pti/pti.ko
+        fi
+    fi
+	
+	find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
 }
 
 PACKAGESPLITFUNCS_append = " handle_driver_rename "
