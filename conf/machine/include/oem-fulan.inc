@@ -19,7 +19,6 @@ PREFERRED_VERSION_linux-libc-headers = "3.4.100"
 PREFERRED_VERSION_directfb = "1.4.12"
 PREFERRED_VERSION_rt8812au = "4.3.14"
 PREFERRED_VERSION_samba = "3.%"
-PREFERRED_VERSION_wscan = "20130331"
 
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
 PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
