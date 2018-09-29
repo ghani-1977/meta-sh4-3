@@ -4,8 +4,6 @@ include conf/machine/include/build-extras.inc
 IMAGEDIR ?= "enigma2"
 MTD_KERNEL = "mtd5"
 MTD_ROOTFS = "mtd6"
-KERNEL_FILE = "uImage"
-ROOTFS_FILE = "e2jffs2.img"
 
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
 
@@ -42,8 +40,6 @@ DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix --with
 
 IMAGE_FSTYPES ?= "jffs2"
 # For debugging.. but lets enable anyways..
-IMAGE_FSTYPES += "tar.gz"
-IMAGE_FSTYPES += "spark71xxusbimg"
 
 IMAGE_CLASSES += "usb_image-spark71xx"
 INITRAMFS_FSTYPES =  "ext2.gz sparkupdt"
@@ -54,11 +50,11 @@ IMAGE_CMD_jffs2_prepend = "\
 
 IMAGE_CMD_jffs2_append = "\
     ; \
-    while [ ! -s ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.jffs2 ]; do sleep 1; done ; \
-    cp ${IMGDEPLOYDIR}/${IMAGE_NAME}.rootfs.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2; \
+    while [ ! -s ${IMGDEPLOYDIR}/${IMAGE_NAME}.jffs2 ]; do sleep 1; done ; \
+    cp ${IMGDEPLOYDIR}/${IMAGE_NAME}.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.jffs2; \
     mkdir -p ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}; \
-    while [ ! -s ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ]; do sleep 1; done ; \
-    mv ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${ROOTFS_FILE}; \
+    while [ ! -s ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.jffs2 ]; do sleep 1; done ; \
+    mv ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${ROOTFS_FILE}; \
     cp ${DEPLOY_DIR_IMAGE}/uImage ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${KERNEL_FILE}; \
     cd ${DEPLOY_DIR_IMAGE}; \
     zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \

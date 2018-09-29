@@ -6,13 +6,13 @@ BOOTDD_VOLUME_ID ?= "${MACHINE}"
 
 # Use an ext2 by default as rootfs
 UPDATEIMG_ROOTFS_TYPE ?= "ext2.gz"
-UPDATEIMG_ROOTFS = "${IMAGE_NAME}.rootfs.${UPDATEIMG_ROOTFS_TYPE}"
+UPDATEIMG_ROOTFS = "${IMAGE_NAME}.${UPDATEIMG_ROOTFS_TYPE}"
 UPDATEIMG_KERNEL_NAME = "${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin"
 
 do_image_sparkupdt[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
 
 # USB-pendrive image name
-UPDATEIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.sparkupdt"
+UPDATEIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sparkupdt"
 
 
 # Additional files and/or directories to be copied into the vfat partition from the IMAGE_ROOTFS.

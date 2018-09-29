@@ -1,4 +1,11 @@
+require conf/machine/include/wifi-fulan.inc
+
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
+
+ROOTFS_FILE = "e2jffs2.img"
+KERNEL_FILE = "uImage"
+
+IMAGE_FSTYPES += "spark71xxusbimg"
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \
@@ -18,5 +25,3 @@ EXTRA_IMAGEDEPENDS += "\
 MACHINE_FEATURES += "hdmicec directfb"
 
 DISTRO_FEATURES_append += "gtk-directfb"
-
-require conf/machine/include/wifi-fulan.inc

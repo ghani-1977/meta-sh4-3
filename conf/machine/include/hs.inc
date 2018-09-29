@@ -1,4 +1,10 @@
+require conf/machine/include/oem-fulan.inc
+
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-hs"
+
+ROOTFS_FILE = "root.img"
+
+IMAGE_FSTYPES += "spark71xxusbimg"
 
 AUDIOELF = "audio_7111.elf"
 VIDEOELF = "video_7111.elf"

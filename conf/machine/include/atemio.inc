@@ -1,4 +1,13 @@
+require conf/machine/include/oem-fulan.inc
+require conf/machine/include/smallflash.inc
+
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-atemio"
+
+ROOTFS_FILE = "root.img"
+KERNEL_FILE = "uImage"
+
+IMAGE_FSTYPES += "tar.gz"
+IMAGE_FSTYPES += "spark71xxusbimg"
 
 AUDIOELF = "audio_7111.elf"
 VIDEOELF = "video_7111.elf"

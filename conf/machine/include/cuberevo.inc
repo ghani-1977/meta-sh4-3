@@ -1,9 +1,11 @@
+require conf/machine/include/oem-fulan.inc
+
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-cuberevo"
 
-#MTD_KERNEL = "mtd5"
-#MTD_ROOTFS = "mtd6"
-#KERNEL_FILE = "uImage"
-#ROOTFS_FILE = "usb_update.img"
+ROOTFS_FILE = "root.img"
+KERNEL_FILE = "uImage"
+
+IMAGE_FSTYPES += "tar.gz"
 
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7109.elf"

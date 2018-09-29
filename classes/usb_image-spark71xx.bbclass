@@ -36,13 +36,13 @@ IMAGE_ROOTFS_ALIGNMENT = "4096"
 
 # Use an uncompressed ext2 by default as rootfs
 SDIMG_ROOTFS_TYPE ?= "ext2"
-SDIMG_ROOTFS = "${IMAGE_NAME}.rootfs.${SDIMG_ROOTFS_TYPE}"
+SDIMG_ROOTFS = "${IMAGE_NAME}.${SDIMG_ROOTFS_TYPE}"
 
 
 do_image_spark71xxusbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
 
 # SD card image name
-SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.spark71xxusbimg"
+SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.spark71xxusbimg"
 
 # Additional files and/or directories to be copied into the vfat partition from the IMAGE_ROOTFS.
 FATPAYLOAD ?= ""
