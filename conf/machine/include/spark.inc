@@ -5,7 +5,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
 ROOTFS_FILE = "e2jffs2.img"
 KERNEL_FILE = "uImage"
 
-IMAGE_FSTYPES += "spark71xxusbimg"
+IMAGE_FSTYPES += "sparkusbimg"
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \

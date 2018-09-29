@@ -39,17 +39,17 @@ SDIMG_ROOTFS_TYPE ?= "ext2"
 SDIMG_ROOTFS = "${IMAGE_NAME}.${SDIMG_ROOTFS_TYPE}"
 
 
-do_image_spark71xxusbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
+do_image_sparkusbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
 
 # SD card image name
-SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.spark71xxusbimg"
+SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sparkusbimg"
 
 # Additional files and/or directories to be copied into the vfat partition from the IMAGE_ROOTFS.
 FATPAYLOAD ?= ""
 
 IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
-IMAGE_CMD_spark71xxusbimg () {
+IMAGE_CMD_sparkusbimg () {
 	# Delete old image first
 	rm -f "${SDIMG}"
 

@@ -41,7 +41,7 @@ DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix --with
 IMAGE_FSTYPES ?= "jffs2"
 # For debugging.. but lets enable anyways..
 
-IMAGE_CLASSES += "usb_image-spark71xx"
+IMAGE_CLASSES += "usb_image-spark"
 INITRAMFS_FSTYPES =  "ext2.gz sparkupdt"
 
 IMAGE_CMD_jffs2_prepend = "\

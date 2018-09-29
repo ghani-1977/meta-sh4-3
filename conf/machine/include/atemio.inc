@@ -7,7 +7,6 @@ ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
-IMAGE_FSTYPES += "spark71xxusbimg"
 
 AUDIOELF = "audio_7111.elf"
 VIDEOELF = "video_7111.elf"
