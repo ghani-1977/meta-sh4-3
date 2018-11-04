@@ -12,7 +12,7 @@ EXTRA_OECONF_append_sh4 += "\
 	--enable-${MACHINE} --with-lcd \
 	"
 
-SRC_URI_sh4 = "${GITHUB_URI}/PLi-metas/enigma2-openpli-fulan.git;branch=master;name=enigma2"
-SRC_URI_remove_sh4 += "\
-	file://defaultskin.patch \
-	"
+PV = "sh4+git${SRCPV}"
+PKGV = "sh4+git${GITPKGV}"
+
+SRC_URI_sh4 = "git://github.com/PLi-metas/enigma2-openpli-sh4.git;branch=develop;name=enigma2"
