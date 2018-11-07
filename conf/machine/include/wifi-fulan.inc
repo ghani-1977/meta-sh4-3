@@ -27,7 +27,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	kernel-module-8188eu \
 	kernel-module-8192cu \
 	kernel-module-8712u \
-	mt7610u \
 	rt8723a \
 	rt8812au \
 	rtl8192eu \
