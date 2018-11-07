@@ -29,7 +29,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	kernel-module-8712u \
 	mt7610u \
 	rt8723a \
-	rt8723bs \
 	rt8812au \
 	rtl8192eu \
 	rt7777-legacy \
