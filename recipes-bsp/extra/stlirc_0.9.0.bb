@@ -21,8 +21,8 @@ RREPLACES_stlirc-exec = "lirc-exec"
 RREPLACES_stlirc-remotes = "lirc-remotes"
 
 SRC_URI = "http://sourceforge.mirrorservice.org/l/li/lirc/LIRC/0.9.0/lirc-${PV}.tar.bz2 \
-           file://fix-libusb-config.patch;apply=no \
-           file://${PN}.patch;apply=no \
+           file://fix-libusb-config.patch \
+           file://${PN}.patch \
            file://lircd_${MACHINE}.conf \
            file://lircd.conf.09_00_07 \
            file://lircd.conf.09_00_08 \
@@ -33,9 +33,9 @@ SRC_URI = "http://sourceforge.mirrorservice.org/l/li/lirc/LIRC/0.9.0/lirc-${PV}.
            file://lircmd.init \
            file://lircexec.init \
           "
-SRC_URI[md5sum] = "3afc84e79c0839823cc20e7a710dd06d"
-SRC_URI[sha256sum] = "4e3f948fcdee6dce009171143f0cb7cd7be48593dd58138db4101a41f651a1dd"
-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+SRC_URI[md5sum] = "b232aef26f23fe33ea8305d276637086"
+SRC_URI[sha256sum] = "6323afae6ad498d4369675f77ec3dbb680fe661bea586aa296e67f2e2daba4ff"
+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 S = "${WORKDIR}/lirc-${PV}"
 
