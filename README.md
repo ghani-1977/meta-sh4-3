@@ -1,2 +1,2 @@
 # meta-fulan
-Fulan BSP layer for PLi's OE
+Fulan BSP layer for Open Vision
