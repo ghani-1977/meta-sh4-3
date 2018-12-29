@@ -6,7 +6,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "adb_box|arivalink200|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|hl101|sagemcom88|octagon1008|tf7700|ufc960|ufs910|ufs913|ufs922|vitamin_hd5000"
 
-SRC_URI = "https://raw.githubusercontent.com/PLi-metas/linux-firmwares/master/sh4-firmwares.zip"
+SRC_URI = "https://raw.githubusercontent.com/OpenVisionE2/linux-firmwares/master/sh4-firmwares.zip"
 
 SRC_URI[md5sum] = "61b4877cf8170832d82ec876cf6b0a56"
 SRC_URI[sha256sum] = "869b07c99b77a54449ed766bdcd6ea219d1860129fe801f2d92d5d515bff69f1"

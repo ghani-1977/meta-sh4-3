@@ -29,7 +29,7 @@ RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
 STM_PATCH_STR = "0217"
 LINUX_VERSION = "2.6.32.71"
 
-SRC_URI = "https://github.com/PLi-metas/linux-sh4-2.6.32.71/archive/stmicro.tar.gz \
+SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-2.6.32.71/archive/stmicro.tar.gz \
     file://defconfig \
     file://st-coprocessor.h \
 "

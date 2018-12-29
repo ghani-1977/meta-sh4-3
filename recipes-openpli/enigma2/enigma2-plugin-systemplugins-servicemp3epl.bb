@@ -97,7 +97,7 @@ RRECOMMENDS_${PN} = "\
 	"
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/PLi-metas/servicemp3epl.git;branch=master"
+SRC_URI = "git://github.com/OpenVisionE2/servicemp3epl.git;branch=master"
 
 S = "${WORKDIR}/git"
 

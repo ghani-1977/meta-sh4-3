@@ -15,4 +15,4 @@ EXTRA_OECONF_append_sh4 += "\
 PV_sh4 = "sh4+git${SRCPV}"
 PKGV_sh4 = "sh4+git${GITPKGV}"
 
-SRC_URI_sh4 = "git://github.com/PLi-metas/enigma2-openpli-sh4.git;branch=develop;name=enigma2"
+SRC_URI_sh4 = "git://github.com/OpenVisionE2/enigma2-openpli-sh4.git;branch=develop;name=enigma2"
