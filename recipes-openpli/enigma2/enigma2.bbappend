@@ -1,5 +1,7 @@
 CXXFLAGS_append += " -std=c++11 -fPIC -fno-strict-aliasing "
 
+MAINTAINER = "Open Vision Developers"
+
 DEPENDS_append_sh4 += "\
 	libmme-image libmme-host \
 	"
