@@ -34,12 +34,12 @@ BOOT_SPACE ?= "10240"
 # Set alignment to 4MB [in KiB]
 IMAGE_ROOTFS_ALIGNMENT = "4096"
 
-# Use an uncompressed ext2 by default as rootfs
-SDIMG_ROOTFS_TYPE ?= "ext2"
-SDIMG_ROOTFS = "${IMAGE_NAME}.${SDIMG_ROOTFS_TYPE}"
+# Use an uncompressed ext3 by default as rootfs
+SDIMG_ROOTFS_TYPE ?= "ext3"
+IMAGE_FSTYPES += "${SDIMG_ROOTFS_TYPE}"
+SDIMG_ROOTFS = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.${SDIMG_ROOTFS_TYPE}"
 
-
-do_image_sparkusbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
+do_image_sparkusbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot ${DISTRO}-enigma2-image:do_image_${SDIMG_ROOTFS_TYPE}"
 
 # SD card image name
 SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sparkusbimg"
@@ -67,7 +67,7 @@ IMAGE_CMD_sparkusbimg () {
 	parted -s ${SDIMG} unit KiB mkpart primary fat32 ${IMAGE_ROOTFS_ALIGNMENT} $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT})
 	parted -s ${SDIMG} set 1 boot on
 	# Create rootfs partition
-	parted -s ${SDIMG} unit KiB mkpart primary ext2 $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT}) $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT} \+ ${ROOTFS_SIZE})
+	parted -s ${SDIMG} unit KiB mkpart primary ${SDIMG_ROOTFS_TYPE} $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT}) $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT} \+ ${ROOTFS_SIZE})
 	parted ${SDIMG} print
 
 	# Create a vfat image with boot files
@@ -85,7 +85,7 @@ IMAGE_CMD_sparkusbimg () {
 	fi
 
 	echo "fatload usb 0:1 80000000 uImage" > ${WORKDIR}/script.scr
-	echo "setenv bootargs console=ttyAS0,115200 root=/dev/sda2 rootfstype=ext2 rw coprocessor_mem=4m@0x40000000,4m@0x40400000 printk=1 printk.time=1 nwhwconf=device:eth0,hwaddr:00:80:E1:12:40:69 bigphysarea=6000 stmmaceth=msglvl:0,phyaddr:2,watchdog:5000 panic=10 rootwait usb_storage.delay_use=0" >> ${WORKDIR}/script.scr
+	echo "setenv bootargs console=ttyAS0,115200 root=/dev/sda2 rootfstype=${SDIMG_ROOTFS_TYPE} rw coprocessor_mem=4m@0x40000000,4m@0x40400000 printk=1 printk.time=1 nwhwconf=device:eth0,hwaddr:00:80:E1:12:40:69 bigphysarea=6000 stmmaceth=msglvl:0,phyaddr:2,watchdog:5000 panic=10 rootwait usb_storage.delay_use=0" >> ${WORKDIR}/script.scr
 	echo "bootm 80000000" >> ${WORKDIR}/script.scr
 
 	mkimage -A sh -O linux -T script -C none -a 0 -e 0 -n "autoscript" -d ${WORKDIR}/script.scr ${WORKDIR}/script.img
@@ -93,16 +93,18 @@ IMAGE_CMD_sparkusbimg () {
 
 	# Add stamp file
 	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/image-version-info
-	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}//image-version-info ::
+	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/image-version-info ::
 
 	# Burn Partitions
-	dd if=${WORKDIR}/boot.img of=${SDIMG} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync
+	dd if=${WORKDIR}/boot.img of=${SDIMG} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && /usr/bin/sync && /usr/bin/sync
 	# If SDIMG_ROOTFS_TYPE is a .xz file use xzcat
 	if [[ "$SDIMG_ROOTFS_TYPE" == *.xz ]]
 	then
-		xzcat ${SDIMG_ROOTFS} | dd of=${SDIMG} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync
+		xzcat ${SDIMG_ROOTFS} | dd of=${SDIMG} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && /usr/bin/sync && /usr/bin/sync
 	else
-		dd if=${SDIMG_ROOTFS} of=${SDIMG} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && sync && sync
+		dd if=${SDIMG_ROOTFS} of=${SDIMG} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && /usr/bin/sync && /usr/bin/sync
 	fi
+	# Finally show the current image again
+	parted ${SDIMG} print
 }
 
