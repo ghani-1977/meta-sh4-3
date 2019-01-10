@@ -22,30 +22,30 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 
 IMAGE_CMD_sparkupdt  () {
     # Initialize sdcard image file
-    dd if=/dev/zero of=${UPDATEIMG} bs=1 count=0 seek=$(expr 1000 \* 1000 \* ${UPDATEIMG_SIZE})
+    dd if=/dev/zero of="${UPDATEIMG}" bs=1 count=0 seek=$(expr 1000 \* 1000 \* ${UPDATEIMG_SIZE})
 
     # Create partition table
-    parted -s ${UPDATEIMG} mklabel msdos
+    parted -s "${UPDATEIMG}" mklabel msdos
     # Create boot partition and mark it as bootable
-    parted -s ${UPDATEIMG} mkpart primary fat32 1MiB 100% 
-    parted -s ${UPDATEIMG} set 1 boot on
+    parted -s "${UPDATEIMG}" mkpart primary fat32 1MiB 100% 
+    parted -s "${UPDATEIMG}" set 1 boot on
 
     # Create a vfat image with boot files
-    BOOT_BLOCKS=$(LC_ALL=C parted -s ${UPDATEIMG} unit b print | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 512 /2 }')
-    mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS
+    BOOT_BLOCKS=$(LC_ALL=C parted -s "${UPDATEIMG}" unit b print | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 512 /2 }')
+    mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C "${WORKDIR}/boot.img" $BOOT_BLOCKS
 
     if [ -n ${FATPAYLOAD} ] ; then
         echo "Copying payload into VFAT"
         for entry in ${FATPAYLOAD} ; do
                 # add the || true to stop aborting on vfat issues like not supporting .~lock files
-                mcopy -i ${WORKDIR}/boot.img -s -v ${IMAGE_ROOTFS}$entry :: || true
+                mcopy -i "${WORKDIR}/boot.img" -s -v ${IMAGE_ROOTFS}$entry :: || true
         done
     fi
 
     # Add stamp file
-    echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/image-version-info
-    mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}//image-version-info ::
+    echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > "${WORKDIR}/image-version-info"
+    mcopy -i "${WORKDIR}/boot.img" -v "${WORKDIR}/image-version-info" ::
 
     # Burn Partitions
-    dd if=${WORKDIR}/boot.img of=${UPDATEIMG} conv=notrunc seek=1 bs=1M && sync && sync
+    dd if="${WORKDIR}/boot.img" of="${UPDATEIMG}" conv=notrunc seek=1 bs=1M && sync && sync
 }

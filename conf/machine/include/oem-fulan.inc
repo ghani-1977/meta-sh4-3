@@ -65,6 +65,7 @@ IMAGE_CMD_jffs2_append = "\
 
 # Add uImage in tar image boot directory
 IMAGE_CMD_tar_prepend = "\
+    ; \
     cp ${DEPLOY_DIR_IMAGE}/uImage ${IMAGE_ROOTFS}/boot/${KERNEL_FILE}; \
     "
 	

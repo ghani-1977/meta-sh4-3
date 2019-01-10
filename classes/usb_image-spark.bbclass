@@ -36,13 +36,11 @@ IMAGE_ROOTFS_ALIGNMENT = "4096"
 
 # Use an uncompressed ext3 by default as rootfs
 SDIMG_ROOTFS_TYPE ?= "ext3"
-IMAGE_FSTYPES += "${SDIMG_ROOTFS_TYPE}"
-SDIMG_ROOTFS = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.${SDIMG_ROOTFS_TYPE}"
+SDIMG_ROOTFS = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SDIMG_ROOTFS_TYPE}"
+# SD image filename
+SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.spark-usb.img"
 
-do_image_sparkusbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot ${DISTRO}-enigma2-image:do_image_${SDIMG_ROOTFS_TYPE}"
-
-# SD card image name
-SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sparkusbimg"
+do_image_sparkusbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot zip-native:do_populate_sysroot ${DISTRO}-enigma2-image:do_rootfs e2fsprogs-native:do_populate_sysroot"
 
 # Additional files and/or directories to be copied into the vfat partition from the IMAGE_ROOTFS.
 FATPAYLOAD ?= ""
@@ -52,6 +50,12 @@ IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
 IMAGE_CMD_sparkusbimg () {
 	# Delete old image first
 	rm -f "${SDIMG}"
+	rm -f "${SDIMG}".zip
+	rm -f "${SDIMG_ROOTFS}"
+
+	# Create ext-fs image
+	dd if=/dev/zero of="${SDIMG_ROOTFS}" seek=${ROOTFS_SIZE} count=0 bs=1024
+	mkfs.${SDIMG_ROOTFS_TYPE} -F -i 4096 "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SDIMG_ROOTFS_TYPE}" -d "${IMAGE_ROOTFS}"
 
 	# Align partitions
 	BOOT_SPACE_ALIGNED=$(expr ${BOOT_SPACE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1)
@@ -59,52 +63,56 @@ IMAGE_CMD_sparkusbimg () {
 	SDIMG_SIZE=$(expr ${IMAGE_ROOTFS_ALIGNMENT} + ${BOOT_SPACE_ALIGNED} + $ROOTFS_SIZE + ${IMAGE_ROOTFS_ALIGNMENT})
 
 	# Initialize sdcard image file
-	dd if=/dev/zero of=${SDIMG} bs=1 count=0 seek=$(expr 1024 \* ${SDIMG_SIZE})
+	dd if=/dev/zero of="${SDIMG}" bs=1 count=0 seek=$(expr 1024 \* ${SDIMG_SIZE})
 
 	# Create partition table
-	parted -s ${SDIMG} mklabel msdos
+	parted -s "${SDIMG}" mklabel msdos
 	# Create boot partition and mark it as bootable
-	parted -s ${SDIMG} unit KiB mkpart primary fat32 ${IMAGE_ROOTFS_ALIGNMENT} $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT})
-	parted -s ${SDIMG} set 1 boot on
+	parted -s "${SDIMG}" unit KiB mkpart primary fat32 ${IMAGE_ROOTFS_ALIGNMENT} $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT})
+	parted -s "${SDIMG}" set 1 boot on
 	# Create rootfs partition
-	parted -s ${SDIMG} unit KiB mkpart primary ${SDIMG_ROOTFS_TYPE} $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT}) $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT} \+ ${ROOTFS_SIZE})
-	parted ${SDIMG} print
+	parted -s "${SDIMG}" unit KiB mkpart primary ${SDIMG_ROOTFS_TYPE} $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT}) $(expr ${BOOT_SPACE_ALIGNED} \+ ${IMAGE_ROOTFS_ALIGNMENT} \+ ${ROOTFS_SIZE})
+	parted "${SDIMG}" print
 
 	# Create a vfat image with boot files
-	BOOT_BLOCKS=$(LC_ALL=C parted -s ${SDIMG} unit b print | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 512 /2 }')
-	rm -f ${WORKDIR}/boot.img
-	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C ${WORKDIR}/boot.img $BOOT_BLOCKS
-	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::uImage
+	BOOT_BLOCKS=$(LC_ALL=C parted -s "${SDIMG}" unit b print | awk '/ 1 / { print substr($4, 1, length($4 -1)) / 512 /2 }')
+	rm -f "${WORKDIR}/boot.img"
+	mkfs.vfat -n "${BOOTDD_VOLUME_ID}" -S 512 -C "${WORKDIR}/boot.img" $BOOT_BLOCKS
+	mcopy -i "${WORKDIR}/boot.img" -s "${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin" ::uImage
 
 	if [ -n ${FATPAYLOAD} ] ; then
 		echo "Copying payload into VFAT"
 		for entry in ${FATPAYLOAD} ; do
 				# add the || true to stop aborting on vfat issues like not supporting .~lock files
-				mcopy -i ${WORKDIR}/boot.img -s -v ${IMAGE_ROOTFS}$entry :: || true
+				mcopy -i "${WORKDIR}/boot.img" -s -v ${IMAGE_ROOTFS}$entry :: || true
 		done
 	fi
 
-	echo "fatload usb 0:1 80000000 uImage" > ${WORKDIR}/script.scr
-	echo "setenv bootargs console=ttyAS0,115200 root=/dev/sda2 rootfstype=${SDIMG_ROOTFS_TYPE} rw coprocessor_mem=4m@0x40000000,4m@0x40400000 printk=1 printk.time=1 nwhwconf=device:eth0,hwaddr:00:80:E1:12:40:69 bigphysarea=6000 stmmaceth=msglvl:0,phyaddr:2,watchdog:5000 panic=10 rootwait usb_storage.delay_use=0" >> ${WORKDIR}/script.scr
-	echo "bootm 80000000" >> ${WORKDIR}/script.scr
+	echo "fatload usb 0:1 80000000 uImage" > "${WORKDIR}/script.scr"
+	echo "setenv bootargs console=ttyAS0,115200 root=/dev/sda2 rootfstype=${SDIMG_ROOTFS_TYPE} rw coprocessor_mem=4m@0x40000000,4m@0x40400000 printk=1 printk.time=1 nwhwconf=device:eth0,hwaddr:00:80:E1:12:40:69 bigphysarea=6000 stmmaceth=msglvl:0,phyaddr:2,watchdog:5000 panic=10 rootwait usb_storage.delay_use=0" >> "${WORKDIR}/script.scr"
+	echo "bootm 80000000" >> "${WORKDIR}/script.scr"
 
-	mkimage -A sh -O linux -T script -C none -a 0 -e 0 -n "autoscript" -d ${WORKDIR}/script.scr ${WORKDIR}/script.img
-	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}//script.img ::
+	mkimage -A sh -O linux -T script -C none -a 0 -e 0 -n "autoscript" -d "${WORKDIR}/script.scr" "${WORKDIR}/script.img"
+	mcopy -i "${WORKDIR}/boot.img" -v "${WORKDIR}//script.img" ::
 
 	# Add stamp file
-	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > ${WORKDIR}/image-version-info
-	mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/image-version-info ::
+	echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > "${WORKDIR}/image-version-info"
+	mcopy -i "${WORKDIR}/boot.img" -v "${WORKDIR}/image-version-info" ::
 
 	# Burn Partitions
-	dd if=${WORKDIR}/boot.img of=${SDIMG} conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && /usr/bin/sync && /usr/bin/sync
+	dd if="${WORKDIR}/boot.img" of="${SDIMG}" conv=notrunc seek=1 bs=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* 1024)
 	# If SDIMG_ROOTFS_TYPE is a .xz file use xzcat
-	if [[ "$SDIMG_ROOTFS_TYPE" == *.xz ]]
+	if [[ "${SDIMG_ROOTFS_TYPE}" == *.xz ]]
 	then
-		xzcat ${SDIMG_ROOTFS} | dd of=${SDIMG} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && /usr/bin/sync && /usr/bin/sync
+		xzcat "${SDIMG_ROOTFS}" | dd of="${SDIMG}" conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024)
 	else
-		dd if=${SDIMG_ROOTFS} of=${SDIMG} conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024) && /usr/bin/sync && /usr/bin/sync
+		dd if="${SDIMG_ROOTFS}" of="${SDIMG}" conv=notrunc seek=1 bs=$(expr 1024 \* ${BOOT_SPACE_ALIGNED} + ${IMAGE_ROOTFS_ALIGNMENT} \* 1024)
 	fi
 	# Finally show the current image again
-	parted ${SDIMG} print
+	parted "${SDIMG}" print
+	# Cleanup and compress
+	zip -9 "${SDIMG}".zip "${SDIMG}"
+	rm -f "${SDIMG}"
+	rm -f "${SDIMG_ROOTFS}"
 }
 
