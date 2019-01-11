@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.32.71
-# Thu Sep  7 22:13:03 2017
+# Fri Jan 11 21:53:07 2019
 #
 CONFIG_SUPERH=y
 CONFIG_SUPERH32=y
@@ -104,9 +104,10 @@ CONFIG_HAVE_PERF_EVENTS=y
 # CONFIG_PERF_EVENTS is not set
 # CONFIG_PERF_COUNTERS is not set
 # CONFIG_VM_EVENT_COUNTERS is not set
+# CONFIG_SLUB_DEBUG is not set
 CONFIG_COMPAT_BRK=y
-CONFIG_SLAB=y
-# CONFIG_SLUB is not set
+# CONFIG_SLAB is not set
+CONFIG_SLUB=y
 # CONFIG_SLOB is not set
 CONFIG_HAVE_IOREMAP_PROT=y
 CONFIG_HAVE_KPROBES=y
@@ -120,7 +121,6 @@ CONFIG_HAVE_DMA_API_DEBUG=y
 #
 CONFIG_SLOW_WORK=y
 CONFIG_HAVE_GENERIC_DMA_COHERENT=y
-CONFIG_SLABINFO=y
 CONFIG_RT_MUTEXES=y
 CONFIG_BASE_SMALL=0
 CONFIG_MODULES=y
@@ -456,8 +456,20 @@ CONFIG_IPV6=y
 # CONFIG_BT is not set
 # CONFIG_AF_RXRPC is not set
 CONFIG_WIRELESS=y
+# CONFIG_CFG80211 is not set
+CONFIG_CFG80211_DEFAULT_PS_VALUE=0
+# CONFIG_WIRELESS_OLD_REGULATORY is not set
 CONFIG_WIRELESS_EXT=y
 # CONFIG_WIRELESS_EXT_SYSFS is not set
+# CONFIG_LIB80211 is not set
+
+#
+# CFG80211 needs to be enabled for MAC80211
+#
+
+#
+# Some wireless drivers require a rate control algorithm
+#
 # CONFIG_WIMAX is not set
 # CONFIG_RFKILL is not set
 # CONFIG_NET_9P is not set
@@ -697,7 +709,11 @@ CONFIG_STMMAC_RING=y
 # CONFIG_STMMAC_CHAINED is not set
 # CONFIG_NETDEV_10000 is not set
 CONFIG_WLAN=y
+# CONFIG_WLAN_PRE80211 is not set
 CONFIG_WLAN_80211=y
+# CONFIG_LIBERTAS is not set
+# CONFIG_USB_ZD1201 is not set
+# CONFIG_HOSTAP is not set
 
 #
 # Enable WiMAX (Networking options) to see the WiMAX drivers
@@ -1438,6 +1454,7 @@ CONFIG_MISC_FILESYSTEMS=y
 # CONFIG_BEFS_FS is not set
 # CONFIG_BFS_FS is not set
 # CONFIG_EFS_FS is not set
+# CONFIG_YAFFS_FS is not set
 CONFIG_JFFS2_FS=y
 CONFIG_JFFS2_FS_DEBUG=0
 CONFIG_JFFS2_FS_WRITEBUFFER=y
