@@ -57,7 +57,7 @@ IMAGE_CMD_jffs2_append = "\
     mv ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${ROOTFS_FILE}; \
     cp ${DEPLOY_DIR_IMAGE}/uImage ${DEPLOY_DIR_IMAGE}/${IMAGEDIR}/${KERNEL_FILE}; \
     cd ${DEPLOY_DIR_IMAGE}; \
-    zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \
+    zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.jffs2; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.manifest; \
     rm -rf ${IMAGEDIR}; \
@@ -65,7 +65,6 @@ IMAGE_CMD_jffs2_append = "\
 
 # Add uImage in tar image boot directory
 IMAGE_CMD_tar_prepend = "\
-    ; \
     cp ${DEPLOY_DIR_IMAGE}/uImage ${IMAGE_ROOTFS}/boot/${KERNEL_FILE}; \
     "
 	
