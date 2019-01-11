@@ -1,3 +1,4 @@
+require conf/machine/include/oem-fulan.inc
 require conf/machine/include/wifi-fulan.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
@@ -22,6 +23,6 @@ EXTRA_IMAGEDEPENDS += "\
     libstgles \
     "
 
-MACHINE_FEATURES += "hdmicec directfb"
+MACHINE_FEATURES += "hdmicec directfb modspark"
 
 DISTRO_FEATURES_append += "gtk-directfb"

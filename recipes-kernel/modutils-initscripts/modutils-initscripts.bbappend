@@ -1,10 +1,6 @@
-SRC_URI_append_sh4 += "\
-    file://sh4_modutils.patch \
-"
-SRC_URI_append_spark += "\
-    file://spark_modutils.patch \
-"
-SRC_URI_append_spark7162 += "\
-    file://spark_modutils.patch \
-"
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+
+SRC_URI_append += "\
+	${@bb.utils.contains("MACHINE_FEATURES", "modspark", "file://spark_modutils.patch", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modsh4", "file://sh4_modutils.patch", "", d)} \
+	"
