@@ -52,10 +52,11 @@ IMAGE_CMD_sparkusbimg () {
 	rm -f "${SDIMG}"
 	rm -f "${SDIMG}".zip
 	rm -f "${SDIMG_ROOTFS}"
+	rm -f "${WORKDIR}/boot.img"
 
 	# Create ext-fs image
 	dd if=/dev/zero of="${SDIMG_ROOTFS}" seek=${ROOTFS_SIZE} count=0 bs=1024
-	mkfs.${SDIMG_ROOTFS_TYPE} -F -i 4096 "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SDIMG_ROOTFS_TYPE}" -d "${IMAGE_ROOTFS}"
+	mkfs.${SDIMG_ROOTFS_TYPE} -F -i 4096 "${SDIMG_ROOTFS}" -d "${IMAGE_ROOTFS}"
 
 	# Align partitions
 	BOOT_SPACE_ALIGNED=$(expr ${BOOT_SPACE} + ${IMAGE_ROOTFS_ALIGNMENT} - 1)
