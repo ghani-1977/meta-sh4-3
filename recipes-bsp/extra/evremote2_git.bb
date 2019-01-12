@@ -1,5 +1,7 @@
 require ddt-apps.inc
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 DESCRIPTION = "A tool for SH4 remotes"
 
 SRC_URI_append += "file://evremote2.sh"

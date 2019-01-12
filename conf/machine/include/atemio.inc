@@ -17,6 +17,7 @@ SOC_FAMILY = "sti7111"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stx7111-fdma-firmware \
     stlinux24-sh4-stmfb-firmware-stx7111 \
+    evremote2 \
 "
 
 #What we need

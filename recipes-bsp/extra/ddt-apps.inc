@@ -13,10 +13,7 @@ SRCREV = "${AUTOREV}"
 PV = "1.1+git${SRCPV}"
 PKGV = "1.1+git${GITPKGV}"
 
-SRC_URI = " \
-    git://github.com/Audioniek/apps.git;protocol=git \
-    file://remove-branding.patch \
-"
+SRC_URI = "git://github.com/Audioniek/apps.git;protocol=git"
 
 S = "${WORKDIR}/git/tools/${@d.getVar('PN',1).replace('-', '_')}"
 
