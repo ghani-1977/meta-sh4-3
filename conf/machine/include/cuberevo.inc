@@ -19,7 +19,7 @@ DVB2FIRMWARE = "dvb-fe-stv6306.fw"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
 	firmware-sh4-fulan \
-	stlirc \
+	evremote2 \
 "
 
 #What we need
