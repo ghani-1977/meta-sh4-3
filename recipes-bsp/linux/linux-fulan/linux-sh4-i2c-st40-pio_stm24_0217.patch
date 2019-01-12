@@ -230,7 +230,7 @@
  	  will be called i2c-simtec.
 +	  
 +config I2C_ST40_PIO
-+	tristate "Team Ducktales STM I2C Controller in PIO Mode"
++	tristate "STM I2C Controller in PIO Mode"
 +	depends on CPU_SUBTYPE_ST40
 +	help
 +	  Enable this option to add support for STMicroelectronics SoCs

@@ -1,5 +1,5 @@
-SUMMARY = "Fulan driver modules from TDT"
-DESCRIPTION = "Fulan driver modules from TDT"
+SUMMARY = "SH4 driver modules"
+DESCRIPTION = "SH4 driver modules"
 SECTION = "base"
 PRIORITY = "required"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -117,7 +117,7 @@ do_install() {
     install -m 0755 ${S}/sh4booster ${D}${sysconfdir}/init.d
     ln -sf ../init.d/sh4booster ${D}${sysconfdir}/rcS.d/S05sh4booster
 
-    # if no pti_np sources are available and a custom pti.ko is present, overwrite the tdt one
+    # if no pti_np sources are available and a custom pti.ko is present, overwrite the SH4 one
     if [ ! -e ${PTI_NP_PATH}/Makefile ]; then
         if [ -e ${PTI_NP_PATH}/pti.ko ]; then
             echo "Found custom pti binary.." 
