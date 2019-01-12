@@ -1,4 +1,4 @@
-HOMEPAGE = "https://github/Duckbox-Developers/apps"
+HOMEPAGE = "https://github.com/Audioniek/apps"
 SECTION = "base"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${OPENPLI_BASE}/LICENSE;md5=eb723b61539feef013de476e68b5c50a"
@@ -7,11 +7,11 @@ DEPENDS = "fulan-dvb-modules"
 inherit autotools gitpkgv
 
 SRCREV = "${AUTOREV}"
-PV = "1.0+git${SRCPV}"
-PKGV = "1.0+git${GITPKGV}"
+PV = "1.1+git${SRCPV}"
+PKGV = "1.1+git${GITPKGV}"
 
 SRC_URI = " \
-    git://github.com/Duckbox-Developers/apps.git;protocol=git \
+    git://github.com/Audioniek/apps.git;protocol=git \
 "
 
 S = "${WORKDIR}/git/tools/${@d.getVar('PN',1).replace('-', '_')}"
@@ -28,4 +28,3 @@ do_configure_prepend() {
     touch ${S}/COPYING
     touch ${S}/ChangeLog
 }
-
