@@ -15,6 +15,7 @@ PKGV = "1.1+git${GITPKGV}"
 
 SRC_URI = " \
     git://github.com/Audioniek/apps.git;protocol=git \
+    file://remove-branding.patch \
 "
 
 S = "${WORKDIR}/git/tools/${@d.getVar('PN',1).replace('-', '_')}"
