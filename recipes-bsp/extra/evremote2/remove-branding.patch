@@ -1,6 +1,7 @@
-diff -Naur git/tools/evremote2/global.c git-PersianPrince/tools/evremote2/global.c
---- git/tools/evremote2/global.c	2019-01-12 14:23:40.326869000 +0330
-+++ git-PersianPrince/tools/evremote2/global.c	2019-01-12 14:26:12.955795447 +0330
+diff --git a/global.c b/global.c
+index 859a0bb..904312e 100644
+--- a/global.c
++++ b/global.c
 @@ -37,7 +37,7 @@
  #include "global.h"
  #include "map.h"
