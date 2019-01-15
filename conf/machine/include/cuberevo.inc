@@ -1,5 +1,4 @@
 require conf/machine/include/oem-fulan.inc
-require conf/machine/include/modsh4.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-cuberevo"
 
@@ -21,6 +20,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	firmware-sh4-fulan \
 	evremote2 \
 "
+MACHINE_FEATURES += "modcuberevo"
 
 #What we need
 #extra/stgfb/stmfb/stmcore-display-stx7109c3.ko /lib/modules/

@@ -1,13 +1,14 @@
---- a/modutils.sh	2019-01-15 20:30:05.596382293 +0300
-+++ b/modutils.sh	2019-01-15 20:30:01.357774488 +0300
-@@ -34,8 +34,26 @@
+--- a/modutils.sh	2019-01-15 20:20:08.708171583 +0300
++++ b/modutils.sh	2019-01-15 20:20:01.636335481 +0300
+@@ -34,8 +34,27 @@
  		esac
  		[ -n "$(echo $loaded_modules | grep " $module ")" ] && continue
  		[ "$VERBOSE" != no ] && echo -n "$module "
 +		# [ "$module" == "cec" ] && [ ! `grep 'hdmicec.enabled=true' /etc/enigma2/settings` ] && args="activemode=1" # Load cec in activemode if disabled in enigma2
  		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
  		loaded_modules="${loaded_modules}${module} "
-+		[ "$module" == "stmfb" ] && echo "LOAD" > /dev/vfd
++		[ "$module" == "stmfb" ] && echo "LOADING" > /dev/vfd
++		touch /dev/.devfsd
 +
 +		if [ -e /boot/audio.elf ] ; then
 +			/bin/ustslave /dev/st231-1 /boot/audio.elf > /dev/null
@@ -27,7 +28,7 @@
  	done
  }
  
-@@ -49,4 +67,18 @@
+@@ -49,4 +68,18 @@
  done
  [ "$VERBOSE" != no ] && echo
  
