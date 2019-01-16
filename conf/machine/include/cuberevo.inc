@@ -20,6 +20,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	firmware-sh4-fulan \
 	evremote2 \
 "
+
 MACHINE_FEATURES += "modcuberevo"
 
 #What we need
