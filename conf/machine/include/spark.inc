@@ -17,6 +17,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlirc \
     flash-tools \
     mountspark \
+	enigma2-plugin-systemplugins-sh4boostercontrol \
 "
 
 EXTRA_IMAGEDEPENDS += "\
