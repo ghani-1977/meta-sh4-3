@@ -19,6 +19,10 @@ RCONFLICTS_stlirc-remotes = "lirc-remotes"
 RREPLACES_${PN} = "lirc"
 RREPLACES_stlirc-exec = "lirc-exec"
 RREPLACES_stlirc-remotes = "lirc-remotes"
+RPROVIDES_${PN} += "lirc"
+RPROVIDES_${PN}-exec += "lirc-exec"
+RPROVIDES_${PN}-remotes += "lirc-remotes"
+PROVIDES += "lirc lirc-exec lirc-remotes"
 
 SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar.bz2 \
            file://fix-libusb-config.patch \

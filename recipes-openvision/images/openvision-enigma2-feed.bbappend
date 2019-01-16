@@ -1,5 +1,6 @@
 OPTIONAL_PACKAGES_remove_sh4 += "\
 	gdb \
+	lirc \
 	nodejs \
 	smbnetfs \
 	rtl8189es \
