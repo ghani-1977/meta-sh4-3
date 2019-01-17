@@ -17,13 +17,12 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlirc \
     flash-tools \
     mountspark \
-    enigma2-plugin-systemplugins-sh4boostercontrol \
 "
 
 EXTRA_IMAGEDEPENDS += "\
     libstgles \
     "
 
-MACHINE_FEATURES += "hdmicec directfb modspark"
+MACHINE_FEATURES += "hdmicec directfb sh4booster modspark"
 
 DISTRO_FEATURES_append += "gtk-directfb"
