@@ -4,7 +4,7 @@ require conf/license/license-close.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "adb_box|arivalink200|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|hl101|sagemcom88|octagon1008|tf7700|ufc960|ufs910|ufs913|ufs922|vitamin_hd5000"
+COMPATIBLE_MACHINE = "adb_box|arivalink200|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|vip1_v2|pace7241|vip2_v1|hl101|sagemcom88|octagon1008|tf7700|ufc960|ufs910|ufs913|ufs922|vitamin_hd5000"
 
 SRC_URI = "https://raw.githubusercontent.com/OpenVisionE2/linux-firmwares/master/sh4-firmwares.zip"
 
@@ -20,6 +20,11 @@ do_install() {
     install -d ${D}${base_libdir}/firmware
     install -m 0644 ${DVB1FIRMWARE} ${D}${base_libdir}/firmware/
     install -m 0644 ${DVB2FIRMWARE} ${D}${base_libdir}/firmware/
+}
+
+do_install_pace7241() {
+    install -d ${D}${base_libdir}/firmware
+    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
 }
 
 do_install_ufs910() {
