@@ -19,10 +19,3 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stmfb-firmware-stx7111 \
     evremote2 \
 "
-
-#What we need
-#extra/frontcontroller/cn_micom/cn_micom.ko /lib/modules/
-#extra/frontends/lnb/lnb.ko /lib/modules/
-#extra/frontends/*.ko /lib/modules/
-#extra/stgfb/stmfb/stmcore-display-sti7111.ko /lib/modules/
-#keymap_ufs910.xml /usr/local/share/enigma2/keymap.xml

@@ -19,6 +19,3 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     evremote2 \
     stlinux24-sh4-stx7109-fdma-firmware \
 "
-
-#What we need
-#extra/stgfb/stmfb/stmcore-display-stx7109c3.ko /lib/modules/

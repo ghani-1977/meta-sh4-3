@@ -22,9 +22,3 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 "
 
 MACHINE_FEATURES += "modcuberevo"
-
-#What we need
-#extra/stgfb/stmfb/stmcore-display-stx7109c3.ko /lib/modules/
-#extra/frontcontroller/ipbox/micom.ko /lib/modules/
-#extra/frontends/multituner/*.ko /lib/modules/
-#kernel/drivers/media/dvb/frontends/dvb-pll.ko /lib/modules/
