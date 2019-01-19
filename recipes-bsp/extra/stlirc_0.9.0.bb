@@ -11,7 +11,7 @@ RDEPENDS_lirc-exec = "stlirc"
 RRECOMMENDS_${PN} = "stlirc-exec kernel-module-uinput"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "adb_box|arivalink200|vip1_v2|pace7241|vip2_v1|hl101|ipbox55|ipbox99|ipbox9900|sagemcom88|spark|spark7162|ufs910"
+COMPATIBLE_MACHINE = "adb_box|arivalink200|vip1_v2|pace7241|vip2_v1|hl101|ipbox55|ipbox99|ipbox9900|sagemcom88|spark|spark7162|ufs910|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|vitamin_hd5000"
 
 RCONFLICTS_${PN} = "lirc"
 RCONFLICTS_stlirc-exec = "lirc-exec"

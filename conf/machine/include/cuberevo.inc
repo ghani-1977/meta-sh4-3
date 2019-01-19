@@ -19,6 +19,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
 	firmware-sh4-fulan \
 	evremote2 \
+	stlirc \
 "
 
 MACHINE_FEATURES += "modcuberevo"
