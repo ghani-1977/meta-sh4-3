@@ -30,7 +30,7 @@ index 37f875f..907a878 100644
  		if (ioctl(rc[rc_num], EVIOCGNAME(128), tmp) < 0)
  			perror("EVIOCGNAME failed");
 +#if defined(__sh__)
-+		if (!strstr(tmp, "SH4 RC event driver"))
++		if (!strstr(tmp, "TDT RC event driver"))
 +#else
  		if (!strstr(tmp, "remote control") && !strstr(tmp, "key"))
 +#endif
