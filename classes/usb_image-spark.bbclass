@@ -112,7 +112,7 @@ IMAGE_CMD_sparkusbimg () {
 	# Finally show the current image again
 	parted "${SDIMG}" print
 	# Cleanup and compress
-	zip -9 "${SDIMG}".zip "${SDIMG}"
+	zip -j -9 "${SDIMG}".zip "${SDIMG}"
 	rm -f "${SDIMG}"
 	rm -f "${SDIMG_ROOTFS}"
 }
