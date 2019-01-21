@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
-# Linux kernel version: 2.6.32.61
-# Wed Mar  5 09:02:57 2014
+# Linux kernel version: 2.6.32.71
+# Sun Jan 21 10:32:22 2019
 #
 CONFIG_SUPERH=y
 CONFIG_SUPERH32=y
@@ -499,7 +499,8 @@ CONFIG_RFKILL_INPUT=y
 # Generic Driver Options
 #
 CONFIG_UEVENT_HELPER_PATH="/sbin/hotplug"
-# CONFIG_DEVTMPFS is not set
+CONFIG_DEVTMPFS=y
+CONFIG_DEVTMPFS_MOUNT=y
 CONFIG_STANDALONE=y
 CONFIG_PREVENT_FIRMWARE_BUILD=y
 CONFIG_FW_LOADER=y
