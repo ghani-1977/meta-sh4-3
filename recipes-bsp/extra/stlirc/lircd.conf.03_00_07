@@ -1,34 +1,22 @@
-
-# Please make this file available to others
-# by sending it to <lirc@bartelmus.de>
-#
-# this config file was automatically generated
-# using lirc-0.8.6(default) on Tue Feb 16 05:50:33 2010
-#
-# contributed by 
-#
-# brand:                       SpiderBox_HL101
-# model no. of remote control: 
-# devices being controlled by this remote:
-#
-
 begin remote
 
   name  SpiderBox_HL101
   bits           16
   flags SPACE_ENC|CONST_LENGTH
-  eps            30
+  eps            45
   aeps          100
 
-  header       9104  4399
-  one           655  1592
-  zero          655   468
-  ptrail        650
-  repeat       9106  2151
+  header       9110  4414
+  one           644  1607
+  zero          644   481
+  ptrail        639
+  repeat       9011  2171
   pre_data_bits   16
-  pre_data       0xC03F
-  gap          107913
+  pre_data       0x48B7
+  gap          108102
   toggle_bit_mask 0x0
+
+# Golden Interstar / Golden Media GI-S 980 HD PVR 2CR2CI
 
       begin codes
           KEY_0                    0x00FF		# 0BUTTON
@@ -50,7 +38,6 @@ begin remote
           KEY_TV2                  0xD02F		# TV/RADIO
           KEY_FIND                 0xE817		# FIND
           KEY_FAVORITES            0x7A85		# FAV
-          KEY_MENU                 0x50AF		# MENU
           KEY_INFO                 0xDA25		# INFO
           KEY_EPG                  0xB04F		# EPG
           KEY_EXIT                 0x30CF		# EXIT

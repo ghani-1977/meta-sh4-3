@@ -28,14 +28,25 @@ SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar
            file://fix-libusb-config.patch \
            file://${PN}.patch \
            file://lircd_${MACHINE}.conf \
+           file://lircmd.init \
+           file://lircexec.init \
+          "
+SRC_URI_append_hl101 += "\
+           file://lircd_spark.init \
+           file://lircd.conf.03_00_01 \
+           file://lircd.conf.03_00_02 \
+           file://lircd.conf.03_00_07 \
+          "
+SRC_URI_append_spark += "\
+           file://lircd_spark.init \
            file://lircd.conf.09_00_07 \
            file://lircd.conf.09_00_08 \
            file://lircd.conf.09_00_0B \
            file://lircd.conf.09_00_1D \
            file://lircd.conf.09_00_0D \
-           file://lircd.init \
-           file://lircmd.init \
-           file://lircexec.init \
+          "
+SRC_URI_append += "\
+           file://lircd_sh4.init \
           "
 SRC_URI[md5sum] = "b232aef26f23fe33ea8305d276637086"
 SRC_URI[sha256sum] = "6323afae6ad498d4369675f77ec3dbb680fe661bea586aa296e67f2e2daba4ff"
@@ -64,14 +75,21 @@ EXTRA_OEMAKE = 'SUBDIRS="daemons tools"'
 
 do_install_append() {
     install -d ${D}${sysconfdir}/init.d
-    install ${WORKDIR}/lircd.init ${D}${sysconfdir}/init.d/lircd
     install ${WORKDIR}/lircexec.init ${D}${sysconfdir}/init.d/lircexec
     install -d ${D}${datadir}/lirc/
     cp -r ${S}/remotes ${D}${datadir}/lirc/
     rm -rf ${D}/dev
     rm -rf  ${D}/bin/pronto2lirc
-    install -m 0644 ${WORKDIR}/lircd.conf* ${D}${sysconfdir}
-    install -m 0644 ${WORKDIR}/lircd_${MACHINE}.conf* ${D}${sysconfdir}/lircd.conf
+    if [ "${MACHINE}" = "hl101" ]; then
+        install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
+        install -m 0644 ${WORKDIR}/lircd.conf.03_00_* ${D}${sysconfdir}
+    elif [ "${MACHINE}" = "spark" ]; then
+        install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
+        install -m 0644 ${WORKDIR}/lircd.conf.09_00_* ${D}${sysconfdir}
+    else
+        install ${WORKDIR}/lircd_sh4.init ${D}${sysconfdir}/init.d/lircd
+    fi
+    install -m 0644 ${WORKDIR}/lircd_${MACHINE}.conf ${D}${sysconfdir}/lircd.conf
 }
 
 PACKAGES =+ "stlirc-exec stlirc-remotes"
