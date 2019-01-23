@@ -27,7 +27,7 @@ PROVIDES += "lirc lirc-exec lirc-remotes"
 SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar.bz2 \
            file://fix-libusb-config.patch \
            file://${PN}.patch \
-           file://lircd_${MACHINE}.conf \
+           file://lircd_${STLIRCFILE}.conf \
            file://lircmd.init \
            file://lircexec.init \
           "
@@ -38,6 +38,14 @@ SRC_URI_append_hl101 += "\
            file://lircd.conf.03_00_07 \
           "
 SRC_URI_append_spark += "\
+           file://lircd_spark.init \
+           file://lircd.conf.09_00_07 \
+           file://lircd.conf.09_00_08 \
+           file://lircd.conf.09_00_0B \
+           file://lircd.conf.09_00_1D \
+           file://lircd.conf.09_00_0D \
+          "
+SRC_URI_append_spark7162 += "\
            file://lircd_spark.init \
            file://lircd.conf.09_00_07 \
            file://lircd.conf.09_00_08 \
@@ -83,7 +91,7 @@ do_install_append() {
     if [ "${MACHINE}" = "hl101" ]; then
         install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
         install -m 0644 ${WORKDIR}/lircd.conf.03_00_* ${D}${sysconfdir}
-    elif [ "${MACHINE}" = "spark" ]; then
+    elif [ "${MACHINE}" = "spark" -o "${MACHINE}" = "spark7162" ]; then
         install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
         install -m 0644 ${WORKDIR}/lircd.conf.09_00_* ${D}${sysconfdir}
     else

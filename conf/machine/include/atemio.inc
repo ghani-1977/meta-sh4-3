@@ -12,6 +12,8 @@ IMAGE_FSTYPES += "tar.gz"
 AUDIOELF = "audio_7111.elf"
 VIDEOELF = "video_7111.elf"
 
+STLIRCFILE = "atemio"
+
 SOC_FAMILY = "sti7111"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
