@@ -11,8 +11,6 @@ IMAGE_FSTYPES += "tar.gz"
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7109.elf"
 
-STLIRCFILE = "ipbox"
-
 SOC_FAMILY = "sti7109"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\

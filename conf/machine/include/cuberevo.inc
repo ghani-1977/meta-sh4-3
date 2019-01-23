@@ -10,8 +10,6 @@ IMAGE_FSTYPES += "tar.gz"
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7109.elf"
 
-STLIRCFILE = "cuberevo"
-
 SOC_FAMILY = "sti7109"
 
 DVB1FIRMWARE = "dvb-fe-cx24116.fw"
