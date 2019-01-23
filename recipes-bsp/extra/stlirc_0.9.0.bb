@@ -97,7 +97,7 @@ do_install_append() {
     else
         install ${WORKDIR}/lircd_sh4.init ${D}${sysconfdir}/init.d/lircd
     fi
-    install -m 0644 ${WORKDIR}/lircd_${STLIRCFILE}.conf ${D}${sysconfdir}/lircd.conf
+    install -m 0644 ${WORKDIR}/lircd_${MACHINE}.conf ${D}${sysconfdir}/lircd.conf
 }
 
 PACKAGES =+ "stlirc-exec stlirc-remotes"
