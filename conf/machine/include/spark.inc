@@ -14,7 +14,6 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    stlirc \
     flash-tools \
     mountspark \
 "

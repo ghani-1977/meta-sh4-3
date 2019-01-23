@@ -76,6 +76,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stinit \
     fulan-dvb-modules \
     mtd-utils-jffs2 \
+    stlirc \
     "
 
 EXTRA_IMAGEDEPENDS += "\

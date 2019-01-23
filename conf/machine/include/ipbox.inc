@@ -15,5 +15,4 @@ SOC_FAMILY = "sti7109"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
-	stlirc \
 "
