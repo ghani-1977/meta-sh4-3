@@ -92,6 +92,7 @@ SRC_URI_append_vip1_v2 += "\
            file://lircd_sh4.init \
           "
 SRC_URI_append_vip2_v1 += "\
+           file://${PN}_sh4.patch \
            file://lircd_sh4.init \
           "
 SRC_URI[md5sum] = "b232aef26f23fe33ea8305d276637086"
