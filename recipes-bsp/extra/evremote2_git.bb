@@ -1,4 +1,4 @@
-require ddt-apps.inc
+require sh4-apps.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

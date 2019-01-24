@@ -1,6 +1,6 @@
 DESCRIPTION = "MME image library"
 
-require ddt-apps.inc
+require sh4-apps.inc
 
 DEPENDS += " jpeg"
 
