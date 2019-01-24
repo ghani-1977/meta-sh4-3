@@ -11,7 +11,7 @@ RDEPENDS_lirc-exec = "stlirc"
 RRECOMMENDS_${PN} = "stlirc-exec kernel-module-uinput"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "adb_box|arivalink200|vip1_v2|pace7241|vip2_v1|hl101|ipbox55|ipbox99|ipbox9900|sagemcom88|spark|spark7162|ufs910|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|vitamin_hd5000"
+COMPATIBLE_MACHINE = "adb_box|arivalink200|hl101|ipbox55|ipbox99|ipbox9900|pace7241|sagemcom88|spark|spark7162|ufs910|vip1_v2|vip2_v1"
 
 RCONFLICTS_${PN} = "lirc"
 RCONFLICTS_stlirc-exec = "lirc-exec"
@@ -26,18 +26,47 @@ PROVIDES += "lirc lirc-exec lirc-remotes"
 
 SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar.bz2 \
            file://fix-libusb-config.patch \
-           file://${PN}.patch \
            file://lircd_${MACHINE}.conf \
            file://lircmd.init \
            file://lircexec.init \
           "
+SRC_URI_append_adb_box += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
+SRC_URI_append_arivalink200 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
+SRC_URI_append_ipbox55 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
+SRC_URI_append_ipbox99 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
+SRC_URI_append_ipbox9900 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
 SRC_URI_append_hl101 += "\
+           file://${PN}_hl101.patch \
            file://lircd_spark.init \
            file://lircd.conf.03_00_01 \
            file://lircd.conf.03_00_02 \
            file://lircd.conf.03_00_07 \
           "
+SRC_URI_append_pace7241 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
+SRC_URI_append_sagemcom88 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
 SRC_URI_append_spark += "\
+           file://${PN}_spark.patch \
            file://lircd_spark.init \
            file://lircd.conf.09_00_07 \
            file://lircd.conf.09_00_08 \
@@ -45,7 +74,24 @@ SRC_URI_append_spark += "\
            file://lircd.conf.09_00_1D \
            file://lircd.conf.09_00_0D \
           "
-SRC_URI_append += "\
+SRC_URI_append_spark7162 += "\
+           file://${PN}_spark.patch \
+           file://lircd_spark.init \
+           file://lircd.conf.09_00_07 \
+           file://lircd.conf.09_00_08 \
+           file://lircd.conf.09_00_0B \
+           file://lircd.conf.09_00_1D \
+           file://lircd.conf.09_00_0D \
+          "
+SRC_URI_append_ufs910 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
+SRC_URI_append_vip1_v2 += "\
+           file://${PN}_sh4.patch \
+           file://lircd_sh4.init \
+          "
+SRC_URI_append_vip2_v1 += "\
            file://lircd_sh4.init \
           "
 SRC_URI[md5sum] = "b232aef26f23fe33ea8305d276637086"
@@ -83,7 +129,7 @@ do_install_append() {
     if [ "${MACHINE}" = "hl101" ]; then
         install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
         install -m 0644 ${WORKDIR}/lircd.conf.03_00_* ${D}${sysconfdir}
-    elif [ "${MACHINE}" = "spark" ]; then
+    elif [ "${MACHINE}" = "spark" -o "${MACHINE}" = "spark7162"]; then
         install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
         install -m 0644 ${WORKDIR}/lircd.conf.09_00_* ${D}${sysconfdir}
     else
