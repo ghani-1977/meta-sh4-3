@@ -18,3 +18,5 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	evremote2 \
 	stlirc \
 "
+
+MACHINE_FEATURES += "ci"

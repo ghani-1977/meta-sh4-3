@@ -21,4 +21,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	evremote2 \
 "
 
-MACHINE_FEATURES += "modcuberevo"
+MACHINE_FEATURES += "ci modcuberevo"
