@@ -1,6 +1,7 @@
 require conf/machine/include/oem-fulan.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-cuberevo"
+PREFERRED_PROVIDER_lirc = "stlirc-cuberevo"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
@@ -19,6 +20,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
 	firmware-sh4-fulan \
 	evremote2 \
+	stlirc-cuberevo \
 "
 
 MACHINE_FEATURES += "ci modcuberevo"
