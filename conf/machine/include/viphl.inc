@@ -1,6 +1,5 @@
 require conf/machine/include/oem-fulan.inc
 require conf/machine/include/wifi-fulan.inc
-require conf/machine/include/modsh4.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-viphl"
 
@@ -17,3 +16,5 @@ SOC_FAMILY = "sti7109"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stx7109-fdma-firmware \
 "
+
+MACHINE_FEATURES += "modviphl"
