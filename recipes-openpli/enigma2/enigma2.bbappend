@@ -10,7 +10,7 @@ RDEPENDS_${PN}_append_sh4 += "\
 	libmme-host \
 	"
 
-EXTRA_OECONF = "\
+EXTRA_OECONF_sh4 = "\
 	--enable-${MACHINE} --with-lcd \
 	--with-libsdl=no --with-boxtype=${MACHINE} \
 	--enable-dependency-tracking \
