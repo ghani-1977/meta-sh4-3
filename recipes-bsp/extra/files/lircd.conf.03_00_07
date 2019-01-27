@@ -38,6 +38,7 @@ begin remote
           KEY_TV2                  0xD02F		# TV/RADIO
           KEY_FIND                 0xE817		# FIND
           KEY_FAVORITES            0x7A85		# FAV
+          KEY_MENU                 0x50AF		# MENU
           KEY_INFO                 0xDA25		# INFO
           KEY_EPG                  0xB04F		# EPG
           KEY_EXIT                 0x30CF		# EXIT
