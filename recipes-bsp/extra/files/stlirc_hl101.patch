@@ -293,21 +293,21 @@
  		}
  		remote->toggle_mask_state = 0;
  		remote = remote->next;
---- a/daemons/input_map.inc.orig	2014-09-23 22:26:38.725458302 +0300
-+++ b/daemons/input_map.inc	2014-09-23 22:28:00.513863863 +0300
-@@ -287,6 +287,7 @@
- {"KEY_QUESTION", 214},
- {"KEY_R", 19},
- {"KEY_RADIO", 0x181},
-+{"KEY_RECALL", 517},
- {"KEY_RECORD", 167},
- {"KEY_RED", 0x18e},
- {"KEY_REDO", 182},
-@@ -349,6 +350,7 @@
- {"KEY_UNDO", 131},
- {"KEY_UNKNOWN", 240},
- {"KEY_UP", 103},
-+{"KEY_USB", 518},
- {"KEY_UWB", 239},
- {"KEY_V", 47},
- {"KEY_VCR", 0x17b},
+--- a/daemons/input_map.inc.old	2011-03-26 00:29:41.000000000 +0200
++++ b/daemons/input_map.inc	2019-01-29 12:03:16.666905866 +0300
+@@ -332,7 +332,7 @@
+ {"KEY_STOPCD", 166},
+ {"KEY_SUBTITLE", 0x172},
+ {"KEY_SUSPEND", 205},
+-{"KEY_SWITCHVIDEOMODE", 227},
++{"KEY_VMODE", 227},
+ {"KEY_SYSRQ", 99},
+ {"KEY_T", 20},
+ {"KEY_TAB", 15},
+@@ -446,3 +446,6 @@
+ {"BTN_X", 0x133},
+ {"BTN_Y", 0x134},
+ {"BTN_Z", 0x135},
++{"KEY_RECALL", 512},
++{"KEY_USB", 513},
++{"KEY_PLAYMODE", 514},
