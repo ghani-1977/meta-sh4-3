@@ -8,10 +8,12 @@
  	done
  }
  
-@@ -49,4 +50,15 @@
+@@ -49,4 +50,17 @@
  done
  [ "$VERBOSE" != no ] && echo
  
++echo "1" > /proc/sys/kernel/printk #for more log change level or remake line
++ 
 +NUM=`grep SwapTotal /proc/meminfo | sed 's/[^0-9]//g'`
 +if [ "$NUM" = 0 ]; then
 +	echo "Wait 1m." > /dev/vfd
