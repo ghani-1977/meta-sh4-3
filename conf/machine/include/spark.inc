@@ -2,7 +2,6 @@ require conf/machine/include/oem-fulan.inc
 require conf/machine/include/wifi-fulan.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
-PREFERRED_PROVIDER_lirc = "stlirc-spark"
 
 ROOTFS_FILE = "e2jffs2.img"
 KERNEL_FILE = "uImage"
@@ -15,7 +14,7 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    stlirc-spark \
+    stlirc \
     flash-tools \
     mountspark \
 "
