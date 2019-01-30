@@ -11,7 +11,7 @@ RDEPENDS_lirc-exec = "stlirc"
 RRECOMMENDS_${PN} = "stlirc-exec kernel-module-uinput"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "adb_box|arivalink200|hl101|ipbox55|ipbox99|ipbox9900|pace7241|sagemcom88|spark|spark7162|ufs910|vip1_v2|vip2_v1"
+COMPATIBLE_MACHINE = "adb_box|arivalink200|ipbox55|ipbox99|ipbox9900|hl101|pace7241|sagemcom88|spark|spark7162|ufs910|vip1_v2|vip2_v1"
 
 RCONFLICTS_${PN} = "lirc"
 RCONFLICTS_stlirc-exec = "lirc-exec"
@@ -130,7 +130,7 @@ do_install_append() {
     if [ "${MACHINE}" = "hl101" ]; then
         install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
         install -m 0644 ${WORKDIR}/lircd.conf.03_00_* ${D}${sysconfdir}
-    elif [ "${MACHINE}" = "spark" -o "${MACHINE}" = "spark7162"]; then
+    elif [ "${MACHINE}" = "spark" -o "${MACHINE}" = "spark7162" ]; then
         install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
         install -m 0644 ${WORKDIR}/lircd.conf.09_00_* ${D}${sysconfdir}
     else
