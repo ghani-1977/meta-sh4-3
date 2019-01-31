@@ -18,52 +18,27 @@ FILES_${PN} += "${base_libdir}/firmware"
 
 do_install() {
     install -d ${D}${base_libdir}/firmware
-    install -m 0644 ${DVB1FIRMWARE} ${D}${base_libdir}/firmware/
-    install -m 0644 ${DVB2FIRMWARE} ${D}${base_libdir}/firmware/
+    if [ "${MACHINE}" = "adb_box" ]; then
+        install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+        install -m 0644 as102_data1_st.hex ${D}${base_libdir}/firmware/
+        install -m 0644 as102_data2_st.hex ${D}${base_libdir}/firmware/
+    elif [ "${MACHINE}" = "pace7241" ]; then
+        install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+    elif [ "${MACHINE}" = "tf7700" ]; then
+        install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
+    elif [ "${MACHINE}" = "ufs910" ]; then
+        install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/dvb-fe-cx24116.fw
+    elif [ "${MACHINE}" = "sagemcom88" -o "${MACHINE}" = "ufs913" -o "${MACHINE}" = "vitamin_hd5000" ]; then
+        install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+    elif [ "${MACHINE}" = "ufs922" ]; then
+        install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+    else
+        install -m 0644 ${DVB1FIRMWARE} ${D}${base_libdir}/firmware/
+        install -m 0644 ${DVB2FIRMWARE} ${D}${base_libdir}/firmware/
+    fi
 }
 
-do_install_pace7241() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_ufs910() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/dvb-fe-cx24116.fw
-}
-
-do_install_ufs913() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_ufs922() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_adb_box() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
-    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-    install -m 0644 as102_data1_st.hex ${D}${base_libdir}/firmware/
-    install -m 0644 as102_data2_st.hex ${D}${base_libdir}/firmware/
-}
-
-do_install_tf7700() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_vitamin_hd5000() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-}
-
-do_install_sagemcom88() {
-    install -d ${D}${base_libdir}/firmware
-    install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-}

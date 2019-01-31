@@ -29,26 +29,7 @@ SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar
            file://lircd_${MACHINE}.conf \
            file://lircmd.init \
            file://lircexec.init \
-          "
-SRC_URI_append_adb_box += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
-          "
-SRC_URI_append_arivalink200 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
-          "
-SRC_URI_append_ipbox55 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
-          "
-SRC_URI_append_ipbox99 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
-          "
-SRC_URI_append_ipbox9900 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
+           ${@bb.utils.contains_any("MACHINE", "adb_box arivalink200 ipbox55 ipbox99 ipbox9900 pace7241 sagemcom88 ufs910 vip1_v2 vip2_v1", "file://${PN}_sh4.patch file://lircd_sh4.init", "", d)} \
           "
 SRC_URI_append_hl101 += "\
            file://${PN}_hl101.patch \
@@ -56,14 +37,6 @@ SRC_URI_append_hl101 += "\
            file://lircd.conf.03_00_01 \
            file://lircd.conf.03_00_02 \
            file://lircd.conf.03_00_07 \
-          "
-SRC_URI_append_pace7241 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
-          "
-SRC_URI_append_sagemcom88 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
           "
 SRC_URI_append_spark += "\
            file://${PN}_spark.patch \
@@ -82,18 +55,6 @@ SRC_URI_append_spark7162 += "\
            file://lircd.conf.09_00_0B \
            file://lircd.conf.09_00_1D \
            file://lircd.conf.09_00_0D \
-          "
-SRC_URI_append_ufs910 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
-          "
-SRC_URI_append_vip1_v2 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
-          "
-SRC_URI_append_vip2_v1 += "\
-           file://${PN}_sh4.patch \
-           file://lircd_sh4.init \
           "
 SRC_URI[md5sum] = "b232aef26f23fe33ea8305d276637086"
 SRC_URI[sha256sum] = "6323afae6ad498d4369675f77ec3dbb680fe661bea586aa296e67f2e2daba4ff"
