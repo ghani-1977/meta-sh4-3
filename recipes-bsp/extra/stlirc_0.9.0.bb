@@ -30,32 +30,11 @@ SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar
            file://lircmd.init \
            file://lircexec.init \
            ${@bb.utils.contains_any("MACHINE", "adb_box arivalink200 ipbox55 ipbox99 ipbox9900 pace7241 sagemcom88 ufs910 vip1_v2 vip2_v1", "file://${PN}_sh4.patch file://lircd_sh4.init", "", d)} \
+           ${@bb.utils.contains_any("MACHINE", "hl101 spark spark7162", "file://lircd_spark.init", "", d)} \
+           ${@bb.utils.contains_any("MACHINE", "hl101", "file://${PN}_hl101.patch file://lircd.conf.03_00_01 file://lircd.conf.03_00_02 file://lircd.conf.03_00_07", "", d)} \
+           ${@bb.utils.contains_any("MACHINE", "spark spark7162", "file://${PN}_spark.patch file://lircd.conf.09_00_07 file://lircd.conf.09_00_08 file://lircd.conf.09_00_0B file://lircd.conf.09_00_1D file://lircd.conf.09_00_0D", "", d)} \
           "
-SRC_URI_append_hl101 += "\
-           file://${PN}_hl101.patch \
-           file://lircd_spark.init \
-           file://lircd.conf.03_00_01 \
-           file://lircd.conf.03_00_02 \
-           file://lircd.conf.03_00_07 \
-          "
-SRC_URI_append_spark += "\
-           file://${PN}_spark.patch \
-           file://lircd_spark.init \
-           file://lircd.conf.09_00_07 \
-           file://lircd.conf.09_00_08 \
-           file://lircd.conf.09_00_0B \
-           file://lircd.conf.09_00_1D \
-           file://lircd.conf.09_00_0D \
-          "
-SRC_URI_append_spark7162 += "\
-           file://${PN}_spark.patch \
-           file://lircd_spark.init \
-           file://lircd.conf.09_00_07 \
-           file://lircd.conf.09_00_08 \
-           file://lircd.conf.09_00_0B \
-           file://lircd.conf.09_00_1D \
-           file://lircd.conf.09_00_0D \
-          "
+
 SRC_URI[md5sum] = "b232aef26f23fe33ea8305d276637086"
 SRC_URI[sha256sum] = "6323afae6ad498d4369675f77ec3dbb680fe661bea586aa296e67f2e2daba4ff"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
