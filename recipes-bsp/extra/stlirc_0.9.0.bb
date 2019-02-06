@@ -24,6 +24,8 @@ RPROVIDES_${PN}-exec += "lirc-exec"
 RPROVIDES_${PN}-remotes += "lirc-remotes"
 PROVIDES += "lirc lirc-exec lirc-remotes"
 
+PR = "r1"
+
 SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar.bz2 \
            file://fix-libusb-config.patch \
            file://lircd_${MACHINE}.conf \
