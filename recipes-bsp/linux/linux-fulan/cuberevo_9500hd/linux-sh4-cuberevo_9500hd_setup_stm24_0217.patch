@@ -135,7 +135,7 @@ diff -urN linux-2.6.17.14_stm22_0040_cuberevo-9500hd/arch/sh/boards/dgstation/cu
 +	{
 +		.name  = "LMI_SYS",
 +		.start = 0,
-+		.size  = 0x01600000,
++		.size  = 0x02000000,
 +		.flags = 0,
 +		.aka   = LMI_SYS_partalias
 +	}
