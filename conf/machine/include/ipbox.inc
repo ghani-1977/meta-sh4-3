@@ -1,7 +1,7 @@
 require conf/machine/include/oem-fulan.inc
 require conf/machine/include/modsh4.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
+PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-ipbox"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
