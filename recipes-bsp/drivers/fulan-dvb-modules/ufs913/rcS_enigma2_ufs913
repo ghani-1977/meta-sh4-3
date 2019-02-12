@@ -1,7 +1,5 @@
 #!/usr/bin/sh
-
-MODDIR=/lib/modules
-insmod $MODDIR/micom.ko paramDebug=0
+modprobe micom paramDebug=0
 
 if [ -e /var/etc/.firstboot ]; then
    #fp_control does not work here
@@ -11,19 +9,26 @@ if [ -e /var/etc/.firstboot ]; then
    touch /dev/.devfsd
 fi
 
-/etc/init.d/mountvirtfs start
+if [ -e /etc/init.d/mountvirtfs ]; then
+   /etc/init.d/mountvirtfs start
+fi
 
-/etc/init.d/portmap start
+if [ -e /etc/init.d/portmap ]; then
+   /etc/init.d/portmap start
+fi
 
-insmod $MODDIR/e2_proc.ko
+modprobe e2_proc
 
-/etc/init.d/autofs start
+if [ -e /etc/init.d/autofs ]; then
+   /etc/init.d/autofs start
+fi
 
 if [ ! -e /var/etc/.firstboot ]; then
 
    echo "Starting DEBUG Interface"
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
-   /etc/init.d/hostname start
+fi
 
    NFS=`grep -c nfs /proc/cmdline`
    if [ "$NFS" -eq "1" ]; then
@@ -43,33 +48,26 @@ if [ ! -e /var/etc/.firstboot ]; then
    #led brightness
    fp_control -led 80
 
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/autologin
-
    echo "init stmfb"
-   insmod $MODDIR/stmcore-display-sti7105.ko
-   insmod $MODDIR/stmfb.ko display0=1280x720-32@50:15m:pal:yuv:yuv;# display1=720x576-16@50:1m:pal:cvbs;
+   modprobe stmcore-display-sti7105
+   modprobe stmfb display0=1280x720-32@50:15m:pal:yuv:yuv;# display1=720x576-16@50:1m:pal:cvbs;
 
    echo "LOADING MODULES"   
    fp_control -t "LOADING MODULES"
 
-   if [ ! -e /boot/audio.elf ]; then
-      fp_control -t "FW MISSING!!!"
-   fi
-
    echo "load a firmware"
-   /bin/ustslave /dev/st231-1 /boot/audio.elf
+   /usr/bin/ustslave /dev/st231-1 /boot/audio.elf
    echo "load v firmware"
-   /bin/ustslave /dev/st231-0 /boot/video.elf
+   /usr/bin/ustslave /dev/st231-0 /boot/video.elf
 
    echo "init embx"
-   insmod $MODDIR/embxshell.ko
-   insmod $MODDIR/embxmailbox.ko mailbox0=0xfe211000:136:set2 mailbox1=0xfe212000:0 ;
-   insmod $MODDIR/embxshm.ko mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0x40000000:0x10000000 ;
-   insmod $MODDIR/mme_host.ko transport0=shm
+   modprobe embxshell
+   modprobe embxmailbox mailbox0=0xfe211000:136:set2 mailbox1=0xfe212000:0 ;
+   modprobe embxshm mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0x40000000:0x10000000 ;
+   modprobe mme_host transport0=shm
 
    echo "init AVS"
-   insmod $MODDIR/avs.ko type=stv6417
+   modprobe avs type=stv6417
 
    player=`cat /proc/stb/player/version`
    if [ $player=='player191' ]; then
@@ -79,73 +77,73 @@ if [ ! -e /var/etc/.firstboot ]; then
    else
       echo "init player 131"
    fi
-   insmod $MODDIR/mmelog.ko
-   insmod $MODDIR/ksound.ko
-   insmod $MODDIR/p2div64.ko
-   insmod $MODDIR/stm_v4l2.ko
-   insmod $MODDIR/pseudocard.ko
+   modprobe mmelog
+   modprobe ksound
+   modprobe p2div64
+   modprobe stm_v4l2
+   modprobe pseudocard
 
-   insmod $MODDIR/frontend_platform.ko
-   insmod $MODDIR/socket.ko
-   insmod $MODDIR/lnbh221.ko
-   insmod $MODDIR/lnb_pio.ko
-   insmod $MODDIR/lnb_a8293.ko
-   insmod $MODDIR/avl6222.ko
-   insmod $MODDIR/ufs913_cic.ko
+   modprobe frontend_platform
+   modprobe socket
+   modprobe lnbh221
+   modprobe lnb_pio
+   modprobe lnb_a8293
+   modprobe avl6222
+   modprobe ufs913_cic
    if [ $player=='player191' ]; then
       # Full feature pti
-      insmod $MODDIR/pti.ko waitMS=20 videoMem=4096
+      modprobe pti waitMS=20 videoMem=4096
       if [ $?=='2' ]; then
          # Simple pti
-         insmod $MODDIR/pti.ko
+         modprobe pti
       fi
-      insmod $MODDIR/stm_monitor.ko
-      insmod $MODDIR/stmsysfs.ko
-      insmod $MODDIR/stmdvb.ko
+      modprobe stm_monitor
+      modprobe stmsysfs
+      modprobe stmdvb
    elif [ $player=='player179' ]; then
       # Full feature pti
-      insmod $MODDIR/pti.ko waitMS=20 videoMem=4096
+      modprobe pti waitMS=20 videoMem=4096
       if [ $?=='2' ]; then
          # Simple pti
-         insmod $MODDIR/pti.ko
+         modprobe pti
       fi
-      insmod $MODDIR/stm_monitor.ko
-      insmod $MODDIR/stmsysfs.ko
-      insmod $MODDIR/stmdvb.ko
+      modprobe stm_monitor
+      modprobe stmsysfs
+      modprobe stmdvb
    else
-      insmod $MODDIR/pti.ko
-      insmod $MODDIR/stmdvb.ko
-      insmod $MODDIR/stm_monitor.ko
+      modprobe pti
+      modprobe stmdvb
+      modprobe stm_monitor
    fi
-   insmod $MODDIR/player2.ko
-   insmod $MODDIR/sth264pp.ko
-   insmod $MODDIR/stmalloc.ko
-   insmod $MODDIR/platform.ko
-   insmod $MODDIR/silencegen.ko
+   modprobe player2
+   modprobe sth264pp
+   modprobe stmalloc
+   modprobe platform
+   modprobe silencegen
 
-   insmod $MODDIR/bpamem.ko
+   modprobe bpamem
 
-   showiframe -p /var/boot/bootlogo.mvi &
+   showiframe -p /usr/share/bootlogo.mvi &
    stfbcontrol a 0
 
    echo "init frontpanel"
-   insmod $MODDIR/simu_button.ko
+   modprobe simu_button
 
    #params:
    #period
    #delay
-   /bin/evremote2 10 120 &
+   /usr/bin/evremote2 10 120 &
 
    # timefix e2
    # date -s "121220001970"
 
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
+fi
 
-   /etc/init.d/hostname start
-
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/autologin
+if [ -e /etc/init.d/vsftpd ]; then
    /etc/init.d/vsftpd start
+fi
    /usr/sbin/inetd
 
    /etc/init.d/network start &
@@ -158,7 +156,7 @@ if [ ! -e /var/etc/.firstboot ]; then
    until false
    do
       echo "starting e2->"
-      /usr/local/bin/enigma2
+      /usr/bin/enigma2
       rtv=$?
       echo "e2 ended <- RTV: " $rtv
       case "$rtv" in
@@ -174,13 +172,10 @@ if [ ! -e /var/etc/.firstboot ]; then
 		3) echo "3"
 		   echo "E2 RESTART"
 		   echo "0" > /proc/progress
-		   showiframe -p /var/boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
 		*) echo "*"
 		   echo "ERROR"
            init 6;;
       esac
    done 
 fi
-
-#never reached
-

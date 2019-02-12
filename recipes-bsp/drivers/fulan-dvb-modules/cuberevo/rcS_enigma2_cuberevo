@@ -1,8 +1,6 @@
 #!/usr/bin/sh
 
-MODDIR=/lib/modules
-
-insmod $MODDIR/micom.ko paramDebug=50
+modprobe micom paramDebug=50
 
 if [ -e /var/etc/.firstboot ]; then
    rm /var/etc/.firstboot
@@ -12,159 +10,147 @@ if [ -e /var/etc/.firstboot ]; then
    touch /dev/.devfsd
 fi
 
-/etc/init.d/mountvirtfs start
+if [ -e /etc/init.d/mountvirtfs ]; then
+   /etc/init.d/mountvirtfs start
+fi
 
 if [ -e /dev/ttyAS1 ]; then 
    rm -f /dev/ttyAS1 
 fi 
 
-/etc/init.d/portmap start
+if [ -e /etc/init.d/portmap ]; then
+   /etc/init.d/portmap start
+fi
 
-insmod $MODDIR/e2_proc.ko
+modprobe e2_proc
 
-/etc/init.d/autofs start
+if [ -e /etc/init.d/autofs ]; then
+   /etc/init.d/autofs start
+fi
 
 if [ ! -e /var/etc/.firstboot ]; then
    echo "LOADING MODULES" > /dev/vfd
    echo "LOADING MODULES"   
 
    echo "Starting DEBUG Interface"
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
-   /etc/init.d/hostname start
+fi
 
    fp_control -c
 
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/autologin
-
    echo "init stmfb"
-   insmod $MODDIR/stmcore-display-stx7109c3.ko
-   /bin/eeprom tvmode
+   modprobe stmcore-display-stx7109c3
+   /usr/bin/eeprom tvmode
    TVMODE=$?
    case "$TVMODE" in
 	0) echo "SD-PAL"
-  	   insmod $MODDIR/stmfb.ko display0=720x576-32@50:12m:pal:yuv:yuv;;
+  	   modprobe stmfb display0=720x576-32@50:12m:pal:yuv:yuv;;
 	1) echo "SD-NTSC"
-	   insmod $MODDIR/stmfb.ko display0=720x480-32@60:12m:ntsc-m:yuv:yuv;;
+	   modprobe stmfb display0=720x480-32@60:12m:ntsc-m:yuv:yuv;;
 	2) echo "720P-50"
-	   insmod $MODDIR/stmfb.ko display0=1280x720-32@50:12m:pal:yuv:yuv;;
+	   modprobe stmfb display0=1280x720-32@50:12m:pal:yuv:yuv;;
 	3) echo "720P-60"
-	   insmod $MODDIR/stmfb.ko display0=1280x720-32@60:12m:ntsc-m:yuv:yuv;;
+	   modprobe stmfb display0=1280x720-32@60:12m:ntsc-m:yuv:yuv;;
 	4) echo "1080I-50"
-	   insmod $MODDIR/stmfb.ko display0=1920x1080-32@50i:12m:pal:yuv:yuv;;
+	   modprobe stmfb display0=1920x1080-32@50i:12m:pal:yuv:yuv;;
 	5) echo "1080I-60"
-	   insmod $MODDIR/stmfb.ko display0=1920x1080-32@60i:12m:ntsc-m:yuv:yuv;;
+	   modprobe stmfb display0=1920x1080-32@60i:12m:ntsc-m:yuv:yuv;;
 	*) echo "Use default SD-PAL"
-	   insmod $MODDIR/stmfb.ko display0=720x576-32@50:12m:pal:yuv:yuv;;
+	   modprobe stmfb display0=720x576-32@50:12m:pal:yuv:yuv;;
    esac
 
    echo "init AVS"
-   insmod $MODDIR/avs.ko type=stv6412
+   modprobe avs type=stv6412
 
    echo "load a/v firmware"
-   /bin/ustslave /dev/st231-1 /boot/audio.elf
-   /bin/ustslave /dev/st231-0 /boot/video.elf
+   /usr/bin/ustslave /dev/st231-1 /boot/audio.elf
+   /usr/bin/ustslave /dev/st231-0 /boot/video.elf
 
    echo "init embx"
-   insmod $MODDIR/embxshell.ko
-   insmod $MODDIR/embxmailbox.ko mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0 ;
-   insmod $MODDIR/embxshm.ko mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0xa4000000:0x10000000 ;
-   insmod $MODDIR/mme_host.ko transport0=shm
+   modprobe embxshell
+   modprobe embxmailbox mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0 ;
+   modprobe embxshm mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0xa4000000:0x10000000 ;
+   modprobe mme_host transport0=shm
 
    echo "init player"
-   insmod $MODDIR/mmelog.ko
-   insmod $MODDIR/mpeg2hw.ko mmeName=MPEG2_TRANSFORMER1;
-   insmod $MODDIR/ksound.ko
-   insmod $MODDIR/p2div64.ko
-   insmod $MODDIR/stm_v4l2.ko
-   insmod $MODDIR/pseudocard.ko
+   modprobe mmelog
+   modprobe mpeg2hw mmeName=MPEG2_TRANSFORMER1;
+   modprobe ksound
+   modprobe p2div64
+   modprobe stm_v4l2
+   modprobe pseudocard
 
-   insmod $MODDIR/frontend_platform.ko
-   insmod $MODDIR/socket.ko
-   insmod $MODDIR/lnbh221.ko
-   insmod $MODDIR/lnb_pio.ko
+   modprobe frontend_platform
+   modprobe socket
+   modprobe lnbh221
+   modprobe lnb_pio
 
-   if [ -f $MODDIR/dvb-pll.ko ]; then
-       insmod $MODDIR/dvb-pll.ko
+   if [ -f /lib/modules/2.6.32.71_stm24_0217/extra/dvb-pll ]; then
+       modprobe dvb-pll
    fi
 
-   if [ -f $MODDIR/cx24116.ko ]; then
-       insmod $MODDIR/cx24116.ko
+   if [ -f /lib/modules/2.6.32.71_stm24_0217/extra/cx24116 ]; then
+       modprobe cx24116
    fi
 
-   if [ -f $MODDIR/tda10023.ko ]; then
-       insmod $MODDIR/tda10023.ko
+   if [ -f /lib/modules/2.6.32.71_stm24_0217/extra/tda10023 ]; then
+       modprobe tda10023
    fi
 
-   if [ -f $MODDIR/zl10353.ko ]; then
-       insmod $MODDIR/zl10353.ko
+   if [ -f /lib/modules/2.6.32.71_stm24_0217/extra/zl10353 ]; then
+       modprobe zl10353
    fi
 
-   if [ -f $MODDIR/stv090x.ko ]; then
-       insmod $MODDIR/stv090x.ko
+   if [ -f /lib/modules/2.6.32.71_stm24_0217/extra/stv090x ]; then
+       modprobe stv090x
    fi
 
-   if [ -f $MODDIR/stv0288.ko ]; then
-       insmod $MODDIR/stv0288.ko
+   if [ -f /lib/modules/2.6.32.71_stm24_0217/extra/stv0288 ]; then
+       modprobe stv0288
    fi
 
-   insmod $MODDIR/starci.ko
+   modprobe starci
 
    # Full feature pti
-   insmod $MODDIR/pti.ko waitMS=20 videoMem=4096
+   modprobe pti waitMS=20 videoMem=4096
    if [ $?=='2' ]; then
       # Simple pti
-      insmod $MODDIR/pti.ko
+      modprobe pti
    fi
-   insmod $MODDIR/stm_monitor.ko
-   insmod $MODDIR/stmsysfs.ko
-   insmod $MODDIR/stmdvb.ko
+   modprobe stm_monitor
+   modprobe stmsysfs
+   modprobe stmdvb
 
-   insmod $MODDIR/player2.ko
-   insmod $MODDIR/sth264pp.ko
-   insmod $MODDIR/stmalloc.ko
-   insmod $MODDIR/platform.ko
-   insmod $MODDIR/silencegen.ko 
+   modprobe player2
+   modprobe sth264pp
+   modprobe stmalloc
+   modprobe platform
+   modprobe silencegen 
 
-   showiframe -p /var/boot/bootlogo.mvi &
+   showiframe -p /usr/share/bootlogo.mvi &
    stfbcontrol a 0
 
    echo "init frontpanel"
-   insmod $MODDIR/simu_button.ko
+   modprobe simu_button
 
    mknod /dev/rc c 147 1 
 
    #params:
    #period
    #delay
-   /bin/evremote2 10 140 &
+   /usr/bin/evremote2 10 140 &
 
    stfbcontrol a 255
 
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
+fi
 
-   /etc/init.d/hostname start
-
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/autologin
+if [ -e /etc/init.d/vsftpd ]; then
    /etc/init.d/vsftpd start
+fi
    /usr/sbin/inetd
-
-   NFS=`grep -c nfs /proc/cmdline`
-   if [ "$NFS" -eq "1" ]; then 
-      echo "Booting from nfs, don't set network" 
-   else 
-      if [ -e /etc/network/interfaces ]; then 
-	 ip addr flush eth0 
-	 /etc/init.d/networking stop 
-	 DHCP=`grep -c dhcp /etc/network/interfaces`
-	 if [ "$DHCP" -eq "1" ]; then 
-	    echo "Starting dhcp"
-            /etc/init.d/udhcpc start 
-	 fi 
-	 /etc/init.d/networking start 
-      fi 
-   fi
 
    echo "LOADING e2" > /dev/vfd
    echo "LOADING e2"
@@ -172,7 +158,7 @@ if [ ! -e /var/etc/.firstboot ]; then
    until false
    do
       echo "starting e2->"
-      /usr/local/bin/enigma2
+      /usr/bin/enigma2
       rtv=$?
       echo "e2 ended <- RTV: " $rtv
       case "$rtv" in
@@ -188,13 +174,10 @@ if [ ! -e /var/etc/.firstboot ]; then
 		3) echo "3"
 		   echo "E2 RESTART"
 		   echo "0" > /proc/progress
-		   showiframe -p /var/boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
 		*) echo "*"
 		   echo "ERROR"
 		   fp_control -r 00:00:00 01.01.1980;;
       esac
    done 
 fi
-
-#never reached
-

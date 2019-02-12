@@ -1,9 +1,7 @@
 #!/usr/bin/sh
-
-MODDIR=/lib/modules
 echo "init frontpanel"
-insmod $MODDIR/cn_micom.ko paramDebug=0
-insmod $MODDIR/simu_button.ko
+modprobe cn_micom paramDebug=0
+modprobe simu_button
 
 if [ -e /var/etc/.firstboot ]; then
    echo "WAIT 1 min"
@@ -11,123 +9,107 @@ if [ -e /var/etc/.firstboot ]; then
    touch /dev/.devfsd
 fi
 
-/etc/init.d/mountvirtfs start
-/etc/init.d/portmap start
+if [ -e /etc/init.d/mountvirtfs ]; then
+   /etc/init.d/mountvirtfs start
+fi
+if [ -e /etc/init.d/portmap ]; then
+   /etc/init.d/portmap start
+fi
 
-insmod $MODDIR/e2_proc.ko
+modprobe e2_proc
 
-/etc/init.d/autofs start
+if [ -e /etc/init.d/autofs ]; then
+   /etc/init.d/autofs start
+fi
 
 if [ ! -e /var/etc/.firstboot ]; then
 
    echo "Starting DEBUG Interface"
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
-   /etc/init.d/hostname start
-
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/autologin
+fi
 
    echo "init stmfb"
-   insmod $MODDIR/stmcore-display-sti7111.ko
-   insmod $MODDIR/stmfb.ko display0=1280x720-32@50:15m:pal:yuv:yuv
+   modprobe stmcore-display-sti7111
+   modprobe stmfb display0=1280x720-32@50:15m:pal:yuv:yuv
 
    echo "LOADING MODULES"   
 
-   if [ ! -e /boot/audio.elf ]; then
-      echo "FW MISSING!!!"
-   fi
-
    echo "load a firmware"
-   /bin/ustslave /dev/st231-1 /boot/audio.elf
+   /usr/bin/ustslave /dev/st231-1 /boot/audio.elf
    echo "load v firmware"
-   /bin/ustslave /dev/st231-0 /boot/video.elf
+   /usr/bin/ustslave /dev/st231-0 /boot/video.elf
 
    echo "init embx"
-   insmod $MODDIR/embxshell.ko
-   insmod $MODDIR/embxmailbox.ko mailbox0=0xfe211000:136:set2 mailbox1=0xfe212000:0 ;
-   insmod $MODDIR/embxshm.ko mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0x40000000:0x10000000 ;
-   insmod $MODDIR/mme_host.ko transport0=shm
+   modprobe embxshell
+   modprobe embxmailbox mailbox0=0xfe211000:136:set2 mailbox1=0xfe212000:0 ;
+   modprobe embxshm mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0x40000000:0x10000000 ;
+   modprobe mme_host transport0=shm
 
    echo "init AVS"
-   insmod $MODDIR/avs.ko type=avs_none
+   modprobe avs type=avs_none
 
    player=`cat /proc/stb/player/version | awk '{ print substr( $0, length($0) - 2, length($0) ) }'`
    echo "init player $player"
 
-   insmod $MODDIR/mmelog.ko
-   insmod $MODDIR/ksound.ko
-   insmod $MODDIR/p2div64.ko
-   insmod $MODDIR/stm_v4l2.ko
+   modprobe mmelog
+   modprobe ksound
+   modprobe p2div64
+   modprobe stm_v4l2
    if [ $player -gt 131 ]; then
-	insmod $MODDIR/stmvout.ko
-	insmod $MODDIR/stmvbi.ko
+	modprobe stmvout
+	modprobe stmvbi
    fi
-   insmod $MODDIR/pseudocard.ko
+   modprobe pseudocard
 
-   insmod $MODDIR/lnb.ko type=pio
-   insmod $MODDIR/stv090x.ko paramDebug=0
-   insmod $MODDIR/cnbox_cic.ko
+   modprobe lnb type=pio
+   modprobe stv090x paramDebug=0
+   modprobe cnbox_cic
    if [ $player -gt 131 ]; then
-	insmod $MODDIR/pti.ko
-	insmod $MODDIR/stm_monitor.ko
-	insmod $MODDIR/stmsysfs.ko
-    	insmod $MODDIR/stmdvb.ko
+	modprobe pti
+	modprobe stm_monitor
+	modprobe stmsysfs
+    	modprobe stmdvb
    else
-	insmod $MODDIR/pti.ko
-	insmod $MODDIR/stmdvb.ko
-	insmod $MODDIR/stm_monitor.ko
+	modprobe pti
+	modprobe stmdvb
+	modprobe stm_monitor
    fi	
-   insmod $MODDIR/player2.ko
-   insmod $MODDIR/sth264pp.ko
-   insmod $MODDIR/stmalloc.ko
-   insmod $MODDIR/platform.ko
-   insmod $MODDIR/silencegen.ko
-   insmod $MODDIR/smartcard.ko
+   modprobe player2
+   modprobe sth264pp
+   modprobe stmalloc
+   modprobe platform
+   modprobe silencegen
+   modprobe smartcard
 
-   insmod $MODDIR/bpamem.ko
+   modprobe bpamem
    mknod /dev/bpamem c 153 0 
 
-   showiframe -p /boot/bootlogo.mvi &
+   showiframe -p /usr/share/bootlogo.mvi &
    stfbcontrol a 0
 
    mknod /dev/rc c 147 1 
    mknod /dev/lnb c 149 0
    mknod /dev/sci0 c 169 0
 
-   /bin/evremote2 10 140 &
+   /usr/bin/evremote2 10 140 &
 
    stfbcontrol a 255
 
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
-   /etc/init.d/hostname start
-
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/autologin
+fi
+if [ -e /etc/init.d/vsftpd ]; then
    /etc/init.d/vsftpd start
+fi
    /usr/sbin/inetd
-
-   NFS=`grep -c nfs /proc/cmdline`
-   if [ "$NFS" -eq "1" ]; then 
-      echo "Booting from nfs, don't set network" 
-   else 
-      if [ -e /etc/network/interfaces ]; then 
-	 ip addr flush eth0 
-	 /etc/init.d/networking stop 
-	 DHCP=`grep -c dhcp /etc/network/interfaces`
-	 if [ "$DHCP" -eq "1" ]; then 
-	    echo "Starting dhcp"
-            /etc/init.d/udhcpc start 
-	 fi 
-	 /etc/init.d/networking start 
-      fi 
-   fi
 
    echo "LOADING E2"
 
    until false
    do
       echo "starting e2->"
-      /usr/local/bin/enigma2
+      /usr/bin/enigma2
       rtv=$?
       echo "e2 ended <- RTV: " $rtv
       case "$rtv" in
@@ -143,15 +125,10 @@ if [ ! -e /var/etc/.firstboot ]; then
 		3) echo "3"
 		   echo "E2 RESTART"
 		   echo "0" > /proc/progress
-		   showiframe -p /boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
 		*) echo "*"
 		   echo "ERROR"
            init 6;;
       esac
    done 
 fi
-
-#never reached
-echo "REBOOT ATEMIO520"
-reboot -f
-

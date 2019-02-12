@@ -1,16 +1,13 @@
 #!/usr/bin/sh
-
-MODDIR=/lib/modules
 boxtype=`cat /etc/boxtype`
 
 if [ $boxtype == 'bska' ]; then
   echo "Init VFD bialy"
-  insmod $MODDIR/vfd.ko rec=0
+  modprobe vfd rec=0
 else
   echo "Init VFD czarny"
-  insmod $MODDIR/vfd.ko rec=1
+  modprobe vfd rec=1
 fi
-
 
 if [ -e /var/etc/.firstboot ]; then
    echo "WAIT 1st start" >/dev/vfd
@@ -19,35 +16,39 @@ if [ -e /var/etc/.firstboot ]; then
    touch /dev/.devfsd
 fi
 
+   if [ -e /etc/init.d/mountvirtfs ]; then
    /etc/init.d/mountvirtfs start
+fi
+   if [ -e /etc/init.d/portmap ]; then
    /etc/init.d/portmap start
+fi
 
-/etc/init.d/autofs start
+if [ -e /etc/init.d/autofs ]; then
+   /etc/init.d/autofs start
+fi
 
 if [ ! -e /var/etc/.firstboot ]; then
 
-    insmod $MODDIR/boxtype.ko
+    modprobe boxtype
     boxtype=`cat /proc/boxtype`
     echo "boxtype $boxtype"
     echo "$boxtype" > /etc/boxtype
 
-   insmod $MODDIR/e2_proc.ko
+   modprobe e2_proc
 
    echo "Starting DEBUG Interface"
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
-   /etc/init.d/hostname start
-
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/login
+fi
 
    echo "init stmfb"
-   insmod $MODDIR/stmcore-display-stx7100.ko
+   modprobe stmcore-display-stx7100
     if grep -q "config.av.videoport=Scart" /etc/enigma2/settings; then
-        insmod $MODDIR/stmfb.ko display0=720x576-32@50i:12m:pal:yuv:rgb;
+        modprobe stmfb display0=720x576-32@50i:12m:pal:yuv:rgb;
         echo "VIDEO:scart"
         VIDEO=scart
    else
-        insmod $MODDIR/stmfb.ko display0=1280x720-32@50:12m:pal:yuv:yuv;
+        modprobe stmfb display0=1280x720-32@50:12m:pal:yuv:yuv;
         echo "VIDEO:hdmi_component"
         VIDEO=hdmi_component
     fi
@@ -55,79 +56,76 @@ if [ ! -e /var/etc/.firstboot ]; then
    echo "LOADING MODULES"   
    echo "LOADING MODULES" >/dev/vfd
 
-   if [ ! -e /boot/audio.elf ]; then
-      echo "FW MISSING!!!"
-   fi
    echo "load a firmware"
-   /bin/ustslave /dev/st231-1 /boot/audio.elf
+   /usr/bin/ustslave /dev/st231-1 /boot/audio.elf
    echo "load v firmware"
-   /bin/ustslave /dev/st231-0 /boot/video.elf
+   /usr/bin/ustslave /dev/st231-0 /boot/video.elf
 
    echo "init embx"
-   insmod $MODDIR/embxshell.ko
-   insmod $MODDIR/embxmailbox.ko mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0 ;
-   insmod $MODDIR/embxshm.ko mailbox0=shm:0:7:0x60000000:0:16:16:0:1024:0xa4000000:0x10000000 ;
-   insmod $MODDIR/mme_host.ko transport0=shm
+   modprobe embxshell
+   modprobe embxmailbox mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0 ;
+   modprobe embxshm mailbox0=shm:0:7:0x60000000:0:16:16:0:1024:0xa4000000:0x10000000 ;
+   modprobe mme_host transport0=shm
    
    if [ $boxtype == 'bsla' ]; then
     echo "init Cooler"
-    insmod $MODDIR/cooler.ko
+    modprobe cooler
    fi
 
    echo "init AVS"
    if [ $boxtype == 'bxzb' ]; then
-      insmod $MODDIR/avs.ko type=fake_avs
+      modprobe avs type=fake_avs
    else
-      insmod $MODDIR/avs.ko type=stv6412
+      modprobe avs type=stv6412
 
    echo "init player"
    player=`cat /proc/stb/player/version`
    player=`cat /proc/stb/player/version | awk '{ print substr( $0, length($0) - 2, length($0) ) }'`
    echo "init player $player"
-   insmod $MODDIR/mmelog.ko
-   insmod $MODDIR/mpeg2hw.ko mmeName=MPEG2_TRANSFORMER0;
-   insmod $MODDIR/ksound.ko
-   insmod $MODDIR/p2div64.ko
-   insmod $MODDIR/stm_v4l2.ko
-   insmod $MODDIR/pseudocard.ko
-   insmod $MODDIR/cec_ctrl.ko
+   modprobe mmelog
+   modprobe mpeg2hw mmeName=MPEG2_TRANSFORMER0;
+   modprobe ksound
+   modprobe p2div64
+   modprobe stm_v4l2
+   modprobe pseudocard
+   modprobe cec_ctrl
   
     if [ $boxtype == 'bska' ] || [ $boxtype == 'bxzb' ]; then
          echo "init frontends bialy"
-         insmod $MODDIR/fe-core.ko
+         modprobe fe-core
     elif [ $boxtype == 'bsla' ]; then
          echo "init frontends czarny"
-	 insmod $MODDIR/fe-core-twin1.ko
+	 modprobe fe-core-twin1
     else
-	 insmod $MODDIR/fe-core-twin2.ko
+	 modprobe fe-core-twin2
     fi
 
    echo "init drivers"
    if [ $player -gt 131 ]; then
-	insmod $MODDIR/pti.ko
-	insmod $MODDIR/stm_monitor.ko
-	insmod $MODDIR/stmsysfs.ko
+	modprobe pti
+	modprobe stm_monitor
+	modprobe stmsysfs
 	if [ $boxtype == 'bzzb' ]; then
-	  insmod $MODDIR/stmdvb.ko TSIS_mode=serial NIMS=twin ;
+	  modprobe stmdvb TSIS_mode=serial NIMS=twin ;
 	elif [ $boxtype == 'bsla' ]; then
-	  insmod $MODDIR/stmdvb.ko TSIS_mode=parallel NIMS=twin ;
+	  modprobe stmdvb TSIS_mode=parallel NIMS=twin ;
 	else
-	  insmod $MODDIR/stmdvb.ko TSIS_mode=parallel NIMS=single ;
+	  modprobe stmdvb TSIS_mode=parallel NIMS=single ;
 	fi
    else
-	insmod $MODDIR/pti.ko
-	insmod $MODDIR/stmdvb.ko
-	insmod $MODDIR/stm_monitor.ko
+	modprobe pti
+	modprobe stmdvb
+	modprobe stm_monitor
    fi	
-   insmod $MODDIR/player2.ko
-   insmod $MODDIR/sth264pp.ko
-   insmod $MODDIR/stmalloc.ko
-   insmod $MODDIR/platform.ko
-   insmod $MODDIR/smartcard.ko
+   modprobe player2
+   modprobe sth264pp
+   modprobe stmalloc
+   modprobe platform
+   modprobe smartcard
 
 #       echo "init dvb-t as102"
 #       /var/config/dvbt &
-#       insmod $MODDIR/dvb-as102.ko
+#       modprobe dvb-as102
 
   if [ $boxtype == 'bxzb' ]; then
       echo "bxzb" > /proc/stb/video/switch_type
@@ -143,26 +141,28 @@ if [ ! -e /var/etc/.firstboot ]; then
       echo "component720p" > /proc/stb/video/switch
   fi
 
-   showiframe -p /var/boot/bootlogo.mvi &
+   showiframe -p /usr/share/bootlogo.mvi &
    stfbcontrol a 0
 
    echo "init frontpanel"
-   insmod $MODDIR/simu_button.ko
+   modprobe simu_button
 
    echo "init lircd"
    mkdir -p /var/run/lirc
    /usr/bin/lircd
 
-   /bin/evremote2 &
+   /usr/bin/evremote2 &
 
    echo "starting vsftpd"
+if [ -e /etc/init.d/vsftpd ]; then
    /etc/init.d/vsftpd start
+fi
    /usr/sbin/inetd
 
    until false
    do
       echo "starting e2->"
-      /usr/local/bin/enigma2
+      /usr/bin/enigma2
       rtv=$?
       echo "e2 ended <- RTV: " $rtv
       case "$rtv" in
@@ -182,19 +182,13 @@ if [ ! -e /var/etc/.firstboot ]; then
 		3) echo "3"
 		   echo "E2 RESTART" > /dev/vfd
 		   echo "0" > /proc/progress
-		   showiframe -p /var/boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
 		*) echo "*"
 		   echo "ERROR" > /dev/vfd
 		   sync
 		   echo "0" > /proc/progress
-		   showiframe -p /var/boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
       esac
    done 
  fi
 fi
-
-#never reached
-echo "REBOOT" > /dev/vfd
-echo "REBOOT"
-sync
-reboot

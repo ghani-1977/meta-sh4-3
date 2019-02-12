@@ -111,8 +111,8 @@ do_install() {
     install -m 644 ${WORKDIR}/modules-conf.conf ${D}/${sysconfdir}/modprobe.d/_${MACHINE}.conf
     install -d ${D}/${sysconfdir}/init.d
     install -d ${D}/${sysconfdir}/rcS.d
-    install -m 0755 ${S}/bootup ${D}${sysconfdir}/init.d
-    ln -sf ../init.d/bootup ${D}${sysconfdir}/rcS.d/S01bootup
+    install -m 0755 ${S}/ddbootup ${D}${sysconfdir}/init.d
+    ln -sf ../init.d/ddbootup ${D}${sysconfdir}/rcS.d/S01ddbootup
     install -m 0755 ${S}/rcS_enigma2_${MACHINE} ${D}${sysconfdir}/init.d
     ln -sf ../init.d/rcS_enigma2_${MACHINE} ${D}${sysconfdir}/rcS.d/S02rcS_enigma2_${MACHINE}
     install -d ${D}/bin

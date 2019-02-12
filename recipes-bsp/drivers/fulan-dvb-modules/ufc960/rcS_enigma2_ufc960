@@ -1,8 +1,6 @@
 #!/usr/bin/sh
 
-MODDIR=/lib/modules
-
-insmod $MODDIR/micom.ko paramDebug=0
+modprobe micom paramDebug=0
 
 if [ -e /var/etc/.firstboot ]; then
    echo "WAIT 3 min" > /dev/vfd
@@ -11,39 +9,39 @@ if [ -e /var/etc/.firstboot ]; then
    touch /dev/.devfsd
 fi
 
-/etc/init.d/mountvirtfs start
+if [ -e /etc/init.d/mountvirtfs ]; then
+   /etc/init.d/mountvirtfs start
+fi
 
-insmod $MODDIR/e2_proc.ko
+modprobe e2_proc
 
 if [ ! -e /var/etc/.firstboot ]; then
 
    echo "Starting DEBUG Interface"
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
-   /etc/init.d/hostname start
-
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/login
+fi
 
    echo "init stmfb"
-   insmod $MODDIR/stmcore-display-stx7109c3.ko
-   insmod $MODDIR/stmfb.ko display0=720x576-32@60:10m:pal:yuv:yuv;# display1=720x576-16@50:1m:pal:cvbs;
+   modprobe stmcore-display-stx7109c3
+   modprobe stmfb display0=720x576-32@60:10m:pal:yuv:yuv;# display1=720x576-16@50:1m:pal:cvbs;
 
    echo "LOADING MODULES"   
    fp_control -c
    fp_control -t "LOADING MODULES"
 
    echo "load a/v firmware"
-   /bin/ustslave /dev/st231-1 /boot/audio.elf
-   /bin/ustslave /dev/st231-0 /boot/video.elf
+   /usr/bin/ustslave /dev/st231-1 /boot/audio.elf
+   /usr/bin/ustslave /dev/st231-0 /boot/video.elf
 
    echo "init embx"
-   insmod $MODDIR/embxshell.ko
-   insmod $MODDIR/embxmailbox.ko mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0 ;
-   insmod $MODDIR/embxshm.ko mailbox0=shm:0:7:0x60000000:0:256:256:0:1024:0xa4000000:0x10000000 ;
-   insmod $MODDIR/mme_host.ko transport0=shm
+   modprobe embxshell
+   modprobe embxmailbox mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0 ;
+   modprobe embxshm mailbox0=shm:0:7:0x60000000:0:256:256:0:1024:0xa4000000:0x10000000 ;
+   modprobe mme_host transport0=shm
 
    echo "init AVS"
-   insmod $MODDIR/avs.ko type=stv6412
+   modprobe avs type=stv6412
 
    player=`cat /proc/stb/player/version`
    if [ $player=='player179' ]; then
@@ -51,41 +49,41 @@ if [ ! -e /var/etc/.firstboot ]; then
    else
      echo "init player 131"
    fi
-   insmod $MODDIR/mmelog.ko
-   insmod $MODDIR/mpeg2hw.ko mmeName=MPEG2_TRANSFORMER0;
-   insmod $MODDIR/ksound.ko
-   insmod $MODDIR/p2div64.ko
-   insmod $MODDIR/stm_v4l2.ko
+   modprobe mmelog
+   modprobe mpeg2hw mmeName=MPEG2_TRANSFORMER0;
+   modprobe ksound
+   modprobe p2div64
+   modprobe stm_v4l2
    if [ $player=='player179' ]; then
-     insmod $MODDIR/stmvout.ko
-     insmod $MODDIR/stmvbi.ko
+     modprobe stmvout
+     modprobe stmvbi
    fi
-   insmod $MODDIR/pseudocard.ko
+   modprobe pseudocard
 
-   insmod $MODDIR/cx21143.ko
-   insmod $MODDIR/ufc960_cic.ko
+   modprobe cx21143
+   modprobe ufc960_cic
    if [ $player=='player179' ]; then
-     insmod $MODDIR/pti.ko
-     insmod $MODDIR/stm_monitor.ko
-     insmod $MODDIR/stmsysfs.ko
-     insmod $MODDIR/stmdvb.ko
+     modprobe pti
+     modprobe stm_monitor
+     modprobe stmsysfs
+     modprobe stmdvb
    else
-     insmod $MODDIR/pti.ko
-     insmod $MODDIR/stmdvb.ko
-     insmod $MODDIR/stm_monitor.ko
+     modprobe pti
+     modprobe stmdvb
+     modprobe stm_monitor
    fi
-   insmod $MODDIR/player2.ko
-   insmod $MODDIR/sth264pp.ko
-   insmod $MODDIR/stmalloc.ko
-   insmod $MODDIR/platform.ko
-   insmod $MODDIR/silencegen.ko
+   modprobe player2
+   modprobe sth264pp
+   modprobe stmalloc
+   modprobe platform
+   modprobe silencegen
 
-   showiframe -p /boot/bootlogo.mvi &
+   showiframe -p /usr/share/bootlogo.mvi &
    stfbcontrol a 0
 
    echo "init frontpanel"
-   insmod $MODDIR/boxtype.ko
-   insmod $MODDIR/simu_button.ko
+   modprobe boxtype
+   modprobe simu_button
 
    mknod /dev/rc c 147 1 
 
@@ -94,15 +92,17 @@ if [ ! -e /var/etc/.firstboot ]; then
    #disableFeed
    #period
    #delay
-   /bin/evremote2 0 0 10 120 &
+   /usr/bin/evremote2 0 0 10 120 &
 
-   #DVD-PLAYER EXIT-TASTE LOAD OR EJECT DVD
-   #mount /dev/sr0 /media/dvd
    #fix this later if we got to manage a marusys raw device driver
    mount /dev/sda5 /hdd/
 
+   if [ -e /etc/init.d/portmap ]; then
    /etc/init.d/portmap start
+fi
+if [ -e /etc/init.d/vsftpd ]; then
    /etc/init.d/vsftpd start
+fi
    /usr/sbin/inetd
 
    #timefix e2
@@ -116,7 +116,7 @@ if [ ! -e /var/etc/.firstboot ]; then
    until false
    do
       echo "starting e2->"
-      /usr/local/bin/enigma2
+      /usr/bin/enigma2
       rtv=$?
       echo "e2 ended <- RTV: " $rtv
      case "$rtv" in
@@ -132,15 +132,10 @@ if [ ! -e /var/etc/.firstboot ]; then
 		3) echo "3"
 		   echo "E2 RESTART"
 		   echo "0" > /proc/progress
-		   showiframe -p /boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
 		*) echo "*"
 		   echo "ERROR"
            init 6;;
       esac
    done 
 fi
-
-#never reached
-echo "REBOOT UFC960" > /dev/vfd
-echo "REBOOT UFC960"
-reboot

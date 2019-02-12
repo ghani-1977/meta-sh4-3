@@ -1,8 +1,6 @@
 #!/usr/bin/sh
 
-MODDIR=/lib/modules
-
-insmod $MODDIR/front_vfd.ko
+modprobe front_vfd
 
 if [ -e /var/etc/.firstboot ]; then
    echo "WAIT 1st start" >/dev/vfd
@@ -12,89 +10,89 @@ if [ -e /var/etc/.firstboot ]; then
    touch /dev/.devfsd
 fi
 
-/etc/init.d/mountvirtfs start
-/etc/init.d/portmap start
+if [ -e /etc/init.d/mountvirtfs ]; then
+   /etc/init.d/mountvirtfs start
+fi
+if [ -e /etc/init.d/portmap ]; then
+   /etc/init.d/portmap start
+fi
 
 # start automounter with umount timeout of 5 seconds
-if [ -e $MODDIR/autofs4.ko ]; then
-	insmod $MODDIR/autofs4.ko
+if [ -e /lib/modules/2.6.32.71_stm24_0217/extra/autofs4 ]; then
+	modprobe autofs4
 	/usr/sbin/automount --timeout=5 /autofs file /etc/auto.usb
 fi
 
 if [ ! -e /var/etc/.firstboot ]; then
    
-   insmod $MODDIR/e2_proc.ko
+   modprobe e2_proc
 
    echo "Starting DEBUG Interface"
+if [ -e /etc/init.d/mountall ]; then
    /etc/init.d/mountall start
-   /etc/init.d/hostname start
-
-   echo "starting telnetd"
-   /usr/sbin/telnetd -l /bin/login
+fi
 
    echo "init stmfb"
-   insmod $MODDIR/stmcore-display-sti7105.ko
-   insmod $MODDIR/stmfb.ko display0=1280x720-32@50:16m:pal:yuv:yuv;
+   modprobe stmcore-display-sti7105
+   modprobe stmfb display0=1280x720-32@50:16m:pal:yuv:yuv;
 
    echo "LOADING MODULES"   
    echo "LOADING MODULES" >/dev/vfd
 
-   if [ ! -e /boot/audio.elf ]; then
-      echo "FW MISSING!!!"
-   fi
-
    echo "load a firmware"
-   /bin/ustslave /dev/st231-1 /boot/audio.elf
+   /usr/bin/ustslave /dev/st231-1 /boot/audio.elf
 
    echo "load v firmware"
-   /bin/ustslave /dev/st231-0 /boot/video.elf
+   /usr/bin/ustslave /dev/st231-0 /boot/video.elf
 
    echo "init embx"
-   insmod $MODDIR/embxshell.ko
-   insmod $MODDIR/embxmailbox.ko mailbox0=0xfe211000:136:set2 mailbox1=0xfe212000:0 ;
-   insmod $MODDIR/embxshm.ko mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0x40000000:0x10000000 ;
-   insmod $MODDIR/mme_host.ko transport0=shm
+   modprobe embxshell
+   modprobe embxmailbox mailbox0=0xfe211000:136:set2 mailbox1=0xfe212000:0 ;
+   modprobe embxshm mailbox0=shm:0:7:0x60000000:0:256:256:0:512:0x40000000:0x10000000 ;
+   modprobe mme_host transport0=shm
 
 	echo "init AVS"
-	insmod $MODDIR/avs.ko type=stv6417
+	modprobe avs type=stv6417
 
 	echo "init player 191"
-	insmod $MODDIR/mmelog.ko
-	insmod $MODDIR/ksound.ko
-	insmod $MODDIR/p2div64.ko
-	insmod $MODDIR/stm_v4l2.ko
-	insmod $MODDIR/pseudocard.ko
+	modprobe mmelog
+	modprobe ksound
+	modprobe p2div64
+	modprobe stm_v4l2
+	modprobe pseudocard
     
 	echo "init drivers"
-	insmod $MODDIR/pti.ko
-	insmod $MODDIR/stm_monitor.ko
-	insmod $MODDIR/stmsysfs.ko
-	insmod $MODDIR/stmdvb.ko
-    insmod $MODDIR/player2.ko discardlateframe=0
-	insmod $MODDIR/sth264pp.ko
-	insmod $MODDIR/stmalloc.ko
-	insmod $MODDIR/platform.ko
+	modprobe pti
+	modprobe stm_monitor
+	modprobe stmsysfs
+	modprobe stmdvb
+    modprobe player2 discardlateframe=0
+	modprobe sth264pp
+	modprobe stmalloc
+	modprobe platform
 
-   if [ -e $MODDIR/bpamem.ko ]; then
-        insmod $MODDIR/bpamem.ko
+   if [ -e /lib/modules/2.6.32.71_stm24_0217/extra/bpamem ]; then
+        modprobe bpamem
         mknod /dev/bpamem0 c 153 0
    fi
 
-   showiframe -p /boot/bootlogo.mvi &
+   showiframe -p /usr/share/bootlogo.mvi &
    stfbcontrol a 0
 
    echo "init frontpanel"
-   insmod $MODDIR/simu_button.ko
+   modprobe simu_button
 
    echo "init lircd"
       /usr/bin/lircd
 
    mknod /dev/rc c 147 1
 
-      /bin/evremote2 &
+      /usr/bin/evremote2 &
 
    echo "starting vsftpd"
+if [ -e /etc/init.d/vsftpd ]; then
    /etc/init.d/vsftpd start
+fi
    /usr/sbin/inetd
 
    #timefix e2 in format MMDDhhmmYYYYY.ss
@@ -105,7 +103,7 @@ if [ ! -e /var/etc/.firstboot ]; then
    until false
    do
       echo "starting e2->"
-      /usr/local/bin/enigma2
+      /usr/bin/enigma2
       rtv=$?
       echo "e2 ended <- RTV: " $rtv
       case "$rtv" in
@@ -125,21 +123,14 @@ if [ ! -e /var/etc/.firstboot ]; then
 		3) echo "3"
 		   echo "E2 RESTART" > /dev/vfd
 		   echo "0" > /proc/progress
-		   showiframe -p /boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
 		*) echo "*"
 		   echo "ERROR" > /dev/vfd
 		   sync
 		   echo "0" > /proc/progress
-		   showiframe -p /boot/bootlogo.mvi &;;
+		   showiframe -p /usr/share/bootlogo.mvi &;;
       esac
    done
   fi
  fi
 fi
-
-#never reached
-echo "REBOOT" > /dev/vfd
-echo "REBOOT"
-sync
-reboot
-
