@@ -28,7 +28,6 @@ SRC_URI = "\
     git://github.com/OpenVisionE2/sh4-driver.git;protocol=git \
     file://modules.conf \
     file://modules-conf.conf \
-    file://rcS_enigma2_${MACHINE} \
 " 
 
 FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin"
@@ -113,8 +112,6 @@ do_install() {
     install -d ${D}/${sysconfdir}/rcS.d
     install -m 0755 ${S}/ddbootup ${D}${sysconfdir}/init.d
     ln -sf ../init.d/ddbootup ${D}${sysconfdir}/rcS.d/S01ddbootup
-    install -m 0755 ${S}/rcS_enigma2_${MACHINE} ${D}${sysconfdir}/init.d
-    ln -sf ../init.d/rcS_enigma2_${MACHINE} ${D}${sysconfdir}/rcS.d/S02rcS_enigma2_${MACHINE}
     install -d ${D}/bin
     install -m 755 ${S}/vdstandby ${D}/bin
     install -m 0755 ${S}/sh4booster ${D}${sysconfdir}/init.d
