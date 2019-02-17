@@ -6,7 +6,7 @@ echo "Kathrein UFS912 Enigma2"
 modprobe e2_proc
 
 echo "[rcS] Init frontpanel"
-modprobe micom paramDebug=0
+modprobe kathrein_micom paramDebug=0
 
 if [ -e /var/etc/.firstboot ]; then
    #fp_control does not work here

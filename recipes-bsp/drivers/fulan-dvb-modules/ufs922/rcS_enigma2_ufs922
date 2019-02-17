@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-modprobe micom paramDebug=0
+modprobe kathrein_micom paramDebug=0
 
 if [ -e /var/etc/.firstboot ]; then
    echo "WAIT 3 min" > /dev/vfd
