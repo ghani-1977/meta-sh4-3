@@ -11,7 +11,6 @@ IMAGE_FSTYPES += "sparkusbimg"
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \
     enigma2-plugin-systemplugins-serviceapp \
-    enigma2-plugin-systemplugins-sparkvfdcontrol \
     "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
@@ -24,6 +23,6 @@ EXTRA_IMAGEDEPENDS += "\
     libstgles \
     "
 
-MACHINE_FEATURES += "hdmicec ci directfb sh4booster modspark textlcd"
+MACHINE_FEATURES += "hdmicec ci directfb sh4booster modspark textlcd 7segment"
 
 DISTRO_FEATURES_append += "gtk-directfb"
