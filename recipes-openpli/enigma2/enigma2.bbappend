@@ -1,4 +1,4 @@
-CXXFLAGS_append += " -std=c++11 -fPIC -fno-strict-aliasing "
+CXXFLAGS_append_sh4 += " -std=c++11 -fPIC -fno-strict-aliasing "
 
 DEPENDS_append_sh4 += "\
 	libmme-image libmme-host \
