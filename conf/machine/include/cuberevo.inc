@@ -1,4 +1,5 @@
 require conf/machine/include/oem-fulan.inc
+require conf/machine/include/smallflash.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-cuberevo"
 
