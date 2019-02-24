@@ -1,54 +1,35 @@
---- a/drivers/i2c/busses/i2c-stm.c
-+++ b/drivers/i2c/busses/i2c-stm.c
-@@ -48,19 +48,10 @@
-  *     can help with spurious noise glitches on the SCK line and in the
-  *     case where SCK rise times are marginal due to capacitance on the
-  *     bus.
-- * Version 2.6 (1 Apr 2010) Francesco Virlinzi <francesco.virlinzi@st.com>
-- *   + Added the new state (IDLE) in the i2c fsm.
-- *		Now each transaction completed with a STOP condition
-- *		leaves the SSC in I2C-Slave more. In this state the SSC
-- *		seems less sensible to the noise on the bus.
-- * Version 2.7  (01 Jun 2010) Bruno Strudel <bruno.strudel@st.com>
-- *   + Fixed the IIC_FSM_REPSTART_ADDR to wait in case of clock stretching
-- * Version 2.8  (28 Oct 2011) Francesco Virlinzi <francesco.virlinzi@st.com>
-- *   + Fixed Idle state to avoid glitch on SDA
-  *
-  * --------------------------------------------------------------------
-  *
-- *  Copyright (C) 2006 - 2010 STMicroelectronics
-+ *  Copyright (C) 2006 - 2008 STMicroelectronics
-  *  Author: Francesco Virlinzi     <francesco.virlinzi@st.com>
-  *
-  * May be copied or modified under the terms of the GNU General Public
-@@ -81,6 +72,7 @@
+diff -Naur linux-sh4-2.6.32.71/drivers/i2c/busses/i2c-stm.c linux-sh4-2.6.32.71-PersianPrince/drivers/i2c/busses/i2c-stm.c
+--- linux-sh4-2.6.32.71/drivers/i2c/busses/i2c-stm.c	2019-02-24 10:06:46.290635738 +0330
++++ linux-sh4-2.6.32.71-PersianPrince/drivers/i2c/busses/i2c-stm.c	2019-02-24 10:21:00.508463123 +0330
+@@ -81,7 +81,7 @@
  #include <linux/errno.h>
  #include <linux/stm/platform.h>
  #include <linux/stm/ssc.h>
+-
 +#include "i2c-stm.h"
- 
  #undef dbg_print
  
-@@ -141,15 +133,10 @@
+ #ifdef CONFIG_I2C_DEBUG_BUS
+@@ -141,15 +141,10 @@
  #endif
  
  #ifdef CONFIG_I2C_STM_HW_GLITCH
 -#if CONFIG_HW_GLITCH_CLK_WIDTH > 0
 -#define HW_GLITCH_CLK_WIDTH			CONFIG_HW_GLITCH_CLK_WIDTH
-+#if CONFIG_HW_GLITCH_WIDTH > 0
-+#define HW_GLITCH_WIDTH			CONFIG_HW_GLITCH_WIDTH
- #else
+-#else
 -#define HW_GLITCH_CLK_WIDTH			0	/* in microseconds */
 -#endif
 -#if CONFIG_HW_GLITCH_DATA_WIDTH > 0
 -#define HW_GLITCH_DATA_WIDTH			CONFIG_HW_GLITCH_DATA_WIDTH
--#else
++#if CONFIG_HW_GLITCH_WIDTH > 0
++#define HW_GLITCH_WIDTH			CONFIG_HW_GLITCH_WIDTH
+ #else
 -#define HW_GLITCH_DATA_WIDTH			5	/* in microseconds */
 +#define HW_GLITCH_WIDTH			1	/* in microseconds */
  #endif
  #endif
  
-@@ -161,7 +148,6 @@
+@@ -161,7 +156,6 @@
  
  enum iic_state_machine {
  	IIC_FSM_VOID = 0,
@@ -56,7 +37,7 @@
  	IIC_FSM_PREPARE,
  	IIC_FSM_NOREPSTART,
  	IIC_FSM_START,
-@@ -210,7 +196,6 @@
+@@ -210,7 +204,6 @@
  
  struct iic_ssc {
  	void __iomem *base;
@@ -64,7 +45,7 @@
  	struct iic_transaction *trns;
  	struct i2c_adapter adapter;
  	unsigned long config;
-@@ -237,7 +222,7 @@
+@@ -237,7 +230,7 @@
  
  #define clear_ready_fastmode(adap) ((adap)->config &= ~IIC_STM_READY_SPEED_FAST)
  
@@ -73,7 +54,7 @@
  
  static irqreturn_t iic_state_machine(int this_irq, void *data)
  {
-@@ -257,7 +242,6 @@
+@@ -257,7 +250,6 @@
  	} tmp;
  	unsigned short txbuff[SSC_TXFIFO_SIZE];
  	unsigned int txbuffcount;
@@ -81,7 +62,7 @@
  
  	fast_mode = check_fastmode(adap);
  	pmsg = trsc->msgs_queue + trsc->current_msg;
-@@ -314,7 +298,9 @@
+@@ -314,7 +306,9 @@
  		 */
  		if ((check_fastmode(adap) && !check_ready_fastmode(adap)) ||
  		    (!check_fastmode(adap) && check_ready_fastmode(adap)))
@@ -92,7 +73,7 @@
  
  		trsc->start_state = IIC_FSM_START;
  
-@@ -408,14 +394,6 @@
+@@ -409,14 +403,6 @@
  	case IIC_FSM_REPSTART_ADDR:
  		dbg_print2("-Rep Start addr 0x%x\n", pmsg->addr);
  
@@ -107,7 +88,7 @@
  		/* Clear NACK */
  		ssc_store32(adap, SSC_CLR, 0xdc0);
  
-@@ -555,7 +533,7 @@
+@@ -558,7 +544,7 @@
  		trsc->status_error |= IIC_E_NOTACK;
  
  		ssc_store32(adap, SSC_CLR, 0xdc0);
@@ -115,8 +96,8 @@
 +		trsc->next_state = IIC_FSM_COMPLETE;
  
  		ssc_store32(adap, SSC_IEN, SSC_IEN_STOPEN | SSC_IEN_ARBLEN);
- 		ssc_store32(adap, SSC_I2C, SSC_I2C_I2CM | SSC_I2C_STOPG);
-@@ -591,7 +569,7 @@
+ 		ssc_store32(adap, SSC_I2C, SSC_I2C_I2CM | SSC_I2C_STOPG |
+@@ -596,7 +582,7 @@
  		} else {
  			/* stop */
  			dbg_print2(" STOP - STOP\n");
@@ -124,8 +105,8 @@
 +			trsc->next_state = IIC_FSM_COMPLETE;
  			ssc_store32(adap, SSC_I2C,
  				    SSC_I2C_I2CM | SSC_I2C_TXENB |
- 				    SSC_I2C_STOPG);
-@@ -600,20 +578,7 @@
+ 				    SSC_I2C_STOPG | SSC_I2C_I2CFSMODE);
+@@ -605,20 +591,6 @@
  		}
  
  		break;
@@ -139,15 +120,14 @@
 -		dbg_print2("-Idle\n");
 -		/* push the data line high */
 -		ssc_store32(adap, SSC_TBUF, 0x1ff);
--		ssc_store32(adap, SSC_I2C, SSC_I2C_I2CM);
+-		ssc_store32(adap, SSC_I2C, SSC_I2C_I2CM | SSC_I2C_I2CFSMODE);
 -		ssc_store32(adap, SSC_CTL, SSC_CTL_EN |
 -			    SSC_CTL_PO | SSC_CTL_PH | SSC_CTL_HB | 0x8);
 -		/* No break here! */
-+
  	case IIC_FSM_COMPLETE:
  		dbg_print2("-Complete\n");
  
-@@ -969,7 +934,7 @@
+@@ -975,7 +947,7 @@
  }
  #endif
  
@@ -156,7 +136,7 @@
  {
  	unsigned long iic_baudrate;
  	unsigned short iic_rep_start_hold;
-@@ -985,11 +950,11 @@
+@@ -991,11 +963,11 @@
  	unsigned char iic_prescaler;
  	unsigned short iic_prescaler_dataout;
  #endif
@@ -170,15 +150,9 @@
  	ns_per_clk = NANOSEC_PER_SEC / clock;
  
  	if (check_fastmode(adap)) {
-@@ -1050,20 +1015,21 @@
- 	ssc_store32(adap, SSC_STOP_SETUP, iic_stop_setup);
+@@ -1057,12 +1029,10 @@
  	ssc_store32(adap, SSC_BUS_FREE, iic_bus_free);
  
--	/*
--	 * Set Slave Address to allow 'General Call'
--	 */
--	ssc_store32(adap, SSC_SLAD, 0x7f);
--
  #ifdef CONFIG_I2C_STM_HW_GLITCH
 -	/* Apply I2C settings for glitch filter as suggested by Validation team
 -	   Refer to Bugzilla 14906 */
@@ -192,18 +166,8 @@
 +	iic_glitch_width_dataout = 1;
  	iic_prescaler_dataout = clock / 10000000;
  
-+/*  This should work, but causes lock-up after repstart
-+    iic_prescaler = clock / 10000000;
-+    iic_glitch_width = HW_GLITCH_WIDTH;
-+    iic_glitch_width_dataout = 1;
-+    iic_prescaler_dataout = clock / 10000000;
-+    printk("*** iic_prescaler = %d *** \n", iic_prescaler);
-+*/
-+
  	ssc_store32(adap, SSC_PRSCALER, iic_prescaler);
- 	ssc_store32(adap, SSC_NOISE_SUPP_WIDTH, iic_glitch_width);
- 	ssc_store32(adap, SSC_NOISE_SUPP_WIDTH_DATAOUT,
-@@ -1080,6 +1046,26 @@
+@@ -1081,6 +1051,26 @@
  	return;
  }
  
@@ -230,15 +194,7 @@
  static u32 iic_stm_func(struct i2c_adapter *adap)
  {
  	return I2C_FUNC_I2C | I2C_FUNC_SMBUS_EMUL;
-@@ -1088,6 +1074,7 @@
- static struct i2c_algorithm iic_stm_algo = {
- 	.master_xfer = iic_stm_xfer,
- 	.functionality = iic_stm_func,
-+/*	.algo_control = iic_stm_control */
- };
- 
- static ssize_t iic_bus_show_fastmode(struct device *dev,
-@@ -1106,19 +1093,9 @@
+@@ -1107,19 +1097,10 @@
  {
  	struct i2c_adapter *adapter =
  	    container_of(dev, struct i2c_adapter, dev);
@@ -246,7 +202,6 @@
 -	    container_of(adapter, struct iic_ssc, adapter);
 -	unsigned long val;
 -	int ret;
-+	unsigned long val = strict_strtoul(buf, 10, NULL);
  
 -	ret = strict_strtoul(buf, 10, &val);
 -	if (ret)
@@ -256,11 +211,13 @@
 -		iic_adap->config |= IIC_STM_CONFIG_SPEED_FAST;
 -	else
 -		iic_adap->config &= ~IIC_STM_CONFIG_SPEED_MASK;
++	unsigned long val = strict_strtoul(buf, 10, NULL);
++
 +	iic_stm_control(adapter, I2C_STM_IOCTL_FAST, val);
  
  	return count;
  }
-@@ -1185,17 +1162,7 @@
+@@ -1186,17 +1167,7 @@
  	i2c_stm->adapter.nr = pdev->id;
  	i2c_stm->adapter.algo = &iic_stm_algo;
  	i2c_stm->adapter.dev.parent = &(pdev->dev);
@@ -279,7 +236,7 @@
  	init_waitqueue_head(&(i2c_stm->wait_queue));
  	if (i2c_add_numbered_adapter(&(i2c_stm->adapter)) < 0) {
  		dev_err(&pdev->dev, "I2C core refuses the i2c/stm adapter\n");
-@@ -1221,8 +1188,6 @@
+@@ -1222,8 +1193,6 @@
  	struct resource *res;
  	struct iic_ssc *iic_stm = platform_get_drvdata(pdev);
  
@@ -288,7 +245,7 @@
  	i2c_del_adapter(&iic_stm->adapter);
  	/* irq */
  	res = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
-@@ -1235,6 +1200,7 @@
+@@ -1236,6 +1205,7 @@
  }
  
  #ifdef CONFIG_PM
@@ -296,7 +253,7 @@
  static int iic_stm_suspend(struct device *dev)
  {
  	struct platform_device *pdev =
-@@ -1250,7 +1216,6 @@
+@@ -1251,7 +1221,6 @@
  #endif
  	ssc_store32(i2c_bus, SSC_IEN, 0);
  	ssc_store32(i2c_bus, SSC_CTL, 0);
@@ -304,7 +261,7 @@
  
  	return 0;
  }
-@@ -1270,12 +1235,11 @@
+@@ -1271,12 +1240,11 @@
  		stpio_configure_pin(pio_info->sdout, STPIO_ALT_BIDIR);
  	}
  #endif
@@ -312,15 +269,15 @@
  	/* enable RX, TX FIFOs - clear SR bit */
  	ssc_store32(i2c_bus, SSC_CTL, SSC_CTL_EN |
  		    SSC_CTL_PO | SSC_CTL_PH | SSC_CTL_HB | 0x8);
- 	ssc_store32(i2c_bus, SSC_I2C, SSC_I2C_I2CM);
+ 	ssc_store32(i2c_bus, SSC_I2C, SSC_I2C_I2CM | SSC_I2C_I2CFSMODE);
 -	iic_stm_setup_timing(i2c_bus);
 +	iic_stm_setup_timing(i2c_bus, clk_get_rate(clk_get(NULL, "comms_clk")));
  	return 0;
  }
  #else
-
---- linux-sh4/drivers/i2c/busses/i2c-stm.h.org	2013-04-07 02:13:52.000000000 +0200
-+++ linux-sh4/drivers/i2c/busses/i2c-stm.h	2012-10-20 18:48:53.000000000 +0200
+diff -Naur linux-sh4-2.6.32.71/drivers/i2c/busses/i2c-stm.h linux-sh4-2.6.32.71-PersianPrince/drivers/i2c/busses/i2c-stm.h
+--- linux-sh4-2.6.32.71/drivers/i2c/busses/i2c-stm.h	1970-01-01 03:30:00.000000000 +0330
++++ linux-sh4-2.6.32.71-PersianPrince/drivers/i2c/busses/i2c-stm.h	2019-02-24 10:22:13.792297048 +0330
 @@ -0,0 +1,6 @@
 +#ifndef I2C_STM
 +#define I2C_STM
