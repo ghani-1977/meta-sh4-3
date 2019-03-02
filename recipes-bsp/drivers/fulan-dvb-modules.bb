@@ -30,7 +30,7 @@ SRC_URI = "\
     file://modules-conf.conf \
 " 
 
-FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin"
+FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin /etc"
 FILES = ""
 
 S = "${WORKDIR}/git"
@@ -114,6 +114,8 @@ do_install() {
     ln -sf ../init.d/ddbootup ${D}${sysconfdir}/rcS.d/S01ddbootup
     install -d ${D}/bin
     install -m 755 ${S}/vdstandby ${D}/bin
+    install -d ${D}/etc
+    install -m 644 ${S}/vdstandby.cfg ${D}/etc
     install -m 0755 ${S}/sh4booster ${D}${sysconfdir}/init.d
     ln -sf ../init.d/sh4booster ${D}${sysconfdir}/rcS.d/S05sh4booster
 
