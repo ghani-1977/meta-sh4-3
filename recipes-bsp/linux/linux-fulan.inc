@@ -27,14 +27,10 @@ RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
 STM_PATCH_STR = "0217"
 LINUX_VERSION = "2.6.32.71"
 
-SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-2.6.32.71/archive/stmicro.tar.gz \
+SRC_URI = "\
     file://defconfig \
     file://st-coprocessor.h \
 "
-
-SRC_URI[md5sum] = "3bc5f1e12a413e9426fe6d5824225b46"
-SRC_URI[sha256sum] = "d28ae0df471c29e8d13e992420ef035eb9ef2ec3443048b650e54a962c3bdd71"
-
 S = "${WORKDIR}/linux-sh4-2.6.32.71-stmicro"
 B = "${WORKDIR}/build"
 
