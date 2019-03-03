@@ -24,6 +24,7 @@ SRC_URI = "https://github.com/Duckbox-Developers/linux-sh4-2.6.32.71/archive/stm
     file://linux-sh4-mmap_stm24.patch;patch=1  \
     file://linux-defined_is_deprecated_timeconst.pl_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-patch_swap_notify_core_support_stm24_${STM_PATCH_STR}.patch;patch=1 \
+    file://linux-sh4-add_missing_eid.patch \
     file://linux-sh4-cpuinfo.patch;patch=1 \
     file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-usbwait123_stm24.patch;patch=1 \
@@ -34,4 +35,4 @@ SRC_URI = "https://github.com/Duckbox-Developers/linux-sh4-2.6.32.71/archive/stm
 SRC_URI[md5sum] = "0223fefb97c690d08e9e548872d6daff"
 SRC_URI[sha256sum] = "5d82e7906e5c1f42c8d97bf9e7f774138d7f52ac9923dcc10f9bf9a8d038f519"
 
-MACHINE_KERNEL_PR_append = ".2"
+MACHINE_KERNEL_PR_append = ".3"

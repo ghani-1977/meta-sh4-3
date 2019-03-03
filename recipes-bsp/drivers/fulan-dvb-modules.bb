@@ -25,8 +25,8 @@ PTI_NP_PATH ?= "/data/pti_np"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "\
-    ${@bb.utils.contains_any("MACHINE", "adb_box arivalink200 atemio520 atemio530 atevio7500 cuberevo cuberevo_250hd cuberevo_2000hd cuberevo_3000hd cuberevo_mini cuberevo_mini2 cuberevo_9500hd pace7241 fortis_hdbox hs7110 hs7119 hs7420 hs7429 hs7810a hs7819 ipbox55 ipbox99 ipbox9900 sagemcom88 octagon1008 spark spark7162 tf7700 ufc960 ufs910 ufs912 ufs913 ufs922 vitamin_hd5000", "git://github.com/OpenVisionE2/sh4-driver.git;protocol=git", "", d)} \
-    ${@bb.utils.contains_any("MACHINE", "hl101 vip1_v2 vip2_v1", "git://github.com/Duckbox-Developers/driver.git;protocol=git", "", d)} \
+    ${@bb.utils.contains_any("MACHINE", "arivalink200 atemio520 atemio530 atevio7500 cuberevo cuberevo_250hd cuberevo_2000hd cuberevo_3000hd cuberevo_mini cuberevo_mini2 cuberevo_9500hd pace7241 fortis_hdbox hs7110 hs7119 hs7420 hs7429 hs7810a hs7819 ipbox55 ipbox99 ipbox9900 sagemcom88 octagon1008 spark spark7162 tf7700 ufc960 ufs910 ufs912 ufs913 ufs922 vitamin_hd5000", "git://github.com/OpenVisionE2/sh4-driver.git;protocol=git", "", d)} \
+    ${@bb.utils.contains_any("MACHINE", "adb_box hl101 vip1_v2 vip2_v1", "git://github.com/Duckbox-Developers/driver.git;protocol=git", "", d)} \
     file://COPYING \
     file://ddbootup \
     file://modules.conf \
@@ -34,7 +34,7 @@ SRC_URI = "\
     file://sh4booster \
     file://vdstandby \
     file://vdstandby.cfg \
-    ${@bb.utils.contains_any("MACHINE", "hl101 vip1_v2 vip2_v1", "file://makefile_stmfb.patch file://pti_np.patch", "", d)} \
+    ${@bb.utils.contains_any("MACHINE", "adb_box hl101 vip1_v2 vip2_v1", "file://makefile_stmfb.patch file://pti_np.patch", "", d)} \
 "
 
 FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin /etc"
