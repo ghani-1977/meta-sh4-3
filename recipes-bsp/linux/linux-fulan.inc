@@ -27,7 +27,7 @@ RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
 STM_PATCH_STR = "0217"
 LINUX_VERSION = "2.6.32.71"
 
-SRC_URI = "\
+SRC_URI_append += "\
     file://defconfig \
     file://st-coprocessor.h \
 "
