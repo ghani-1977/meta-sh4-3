@@ -1,4 +1,4 @@
-SUMMARY = "Firmware files for sh4 fulan"
+SUMMARY = "Firmware files for sh4"
 LICENSE = "CLOSED"
 require conf/license/license-close.inc
 

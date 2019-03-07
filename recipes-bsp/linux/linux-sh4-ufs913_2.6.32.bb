@@ -1,6 +1,6 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "pace7241"
+COMPATIBLE_MACHINE = "ufs913"
 
 STXNUMBER = "stx7105"
 

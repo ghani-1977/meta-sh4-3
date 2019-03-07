@@ -1,4 +1,4 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
 COMPATIBLE_MACHINE = "ipbox55|ipbox99|ipbox9900"
 

@@ -1,7 +1,7 @@
-require conf/machine/include/oem-fulan.inc
-require conf/machine/include/wifi-fulan.inc
+require conf/machine/include/oem-sh4.inc
+require conf/machine/include/wifi-sh4.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-viphl"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-viphl"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"

@@ -1,6 +1,6 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "vitamin_hd5000"
+COMPATIBLE_MACHINE = "atemio520|atemio530"
 
 STXNUMBER = "stx7111"
 

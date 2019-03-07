@@ -1,6 +1,6 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "octagon1008"
+COMPATIBLE_MACHINE = "hl101|vip1_v2|vip2_v1"
 
 STXNUMBER = "stx7109"
 

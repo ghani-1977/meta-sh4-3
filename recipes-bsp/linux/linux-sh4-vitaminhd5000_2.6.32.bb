@@ -1,8 +1,8 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "spark7162"
+COMPATIBLE_MACHINE = "vitamin_hd5000"
 
-STXNUMBER = "stx7105"
+STXNUMBER = "stx7111"
 
 SRC_URI_append += "\
     file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1 \

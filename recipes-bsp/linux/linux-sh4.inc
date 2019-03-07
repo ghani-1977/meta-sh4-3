@@ -14,7 +14,7 @@ DEPENDS_append += "\
     stlinux24-sh4-${STXNUMBER}-fdma-firmware \
 "
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/linux-fulan:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/linux-sh4:"
 
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned

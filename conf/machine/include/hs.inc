@@ -1,7 +1,7 @@
-require conf/machine/include/oem-fulan.inc
+require conf/machine/include/oem-sh4.inc
 require conf/machine/include/modsh4.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-hs"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-hs"
 
 ROOTFS_FILE = "root.img"
 

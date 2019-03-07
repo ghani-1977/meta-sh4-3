@@ -1,7 +1,7 @@
-require conf/machine/include/oem-fulan.inc
-require conf/machine/include/wifi-fulan.inc
+require conf/machine/include/oem-sh4.inc
+require conf/machine/include/wifi-sh4.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-${MACHINE}"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE}"
 
 ROOTFS_FILE = "e2jffs2.img"
 KERNEL_FILE = "uImage"

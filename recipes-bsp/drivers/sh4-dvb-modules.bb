@@ -133,8 +133,8 @@ do_install() {
 PACKAGESPLITFUNCS_append = " handle_driver_rename "
 
 python handle_driver_rename () {
-    d.setVar("RPROVIDES_fulan-dvb-modules", "fulan-dvb-modules")
-    d.setVar("RREPLACES_fulan-dvb-modules", "fulan-dvb-modules")
-    d.setVar("RCONFLICTS_fulan-dvb-modules", "fulan-dvb-modules")
+    d.setVar("RPROVIDES_sh4-dvb-modules", "sh4-dvb-modules")
+    d.setVar("RREPLACES_sh4-dvb-modules", "sh4-dvb-modules")
+    d.setVar("RCONFLICTS_sh4-dvb-modules", "sh4-dvb-modules")
 }
 FILES_${PN}-dev += "${includedir}"

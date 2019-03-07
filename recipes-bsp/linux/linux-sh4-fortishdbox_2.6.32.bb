@@ -1,6 +1,6 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "hl101|vip1_v2|vip2_v1"
+COMPATIBLE_MACHINE = "fortis_hdbox"
 
 STXNUMBER = "stx7109"
 

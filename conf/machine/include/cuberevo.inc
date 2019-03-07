@@ -1,7 +1,7 @@
-require conf/machine/include/oem-fulan.inc
+require conf/machine/include/oem-sh4.inc
 require conf/machine/include/smallflash.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-fulan-cuberevo"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-cuberevo"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
@@ -18,7 +18,7 @@ DVB2FIRMWARE = "dvb-fe-stv6306.fw"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
-	firmware-sh4-fulan \
+	firmware-sh4 \
 	evremote2 \
         enigma2-plugin-extensions-cuberevovfd \
 "

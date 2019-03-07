@@ -1,4 +1,4 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
 COMPATIBLE_MACHINE = "ufs910"
 

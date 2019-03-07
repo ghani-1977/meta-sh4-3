@@ -1,6 +1,6 @@
-require linux-fulan.inc
+require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "tf7700"
+COMPATIBLE_MACHINE = "octagon1008"
 
 STXNUMBER = "stx7109"
 

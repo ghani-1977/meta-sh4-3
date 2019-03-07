@@ -76,7 +76,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stfbcontrol \
     fp-control \
     stinit \
-    fulan-dvb-modules \
+    sh4-dvb-modules \
     mtd-utils-jffs2 \
     "
 

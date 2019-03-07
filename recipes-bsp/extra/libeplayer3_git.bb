@@ -3,7 +3,7 @@ HOMEPAGE = "https://github/Taapat/libeplayer3"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING.GPLv2;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS = "ffmpeg ${@bb.utils.contains('TARGET_ARCH', 'sh4', 'fulan-dvb-modules', '', d)}"
+DEPENDS = "ffmpeg ${@bb.utils.contains('TARGET_ARCH', 'sh4', 'sh4-dvb-modules', '', d)}"
 RDEPENDS_${PN} = "ffmpeg"
 RPROVIDES_${PN} += "libeplayer"
 
