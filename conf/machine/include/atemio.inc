@@ -2,7 +2,8 @@ require conf/machine/include/oem-sh4.inc
 require conf/machine/include/smallflash.inc
 require conf/machine/include/modutils-sh4.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-atemio"
+MACHINE_BRAND = "atemio"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE_BRAND}"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
