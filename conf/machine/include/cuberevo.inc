@@ -23,4 +23,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
         enigma2-plugin-extensions-cuberevovfd \
 "
 
-MACHINE_FEATURES += "ci modcuberevo"
+MACHINE_FEATURES += "ci modutils-cuberevo"

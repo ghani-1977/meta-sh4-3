@@ -1,7 +1,8 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/wifi-sh4.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-viphl"
+MACHINE_BRAND = "edisionargus"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE_BRAND}"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
@@ -18,4 +19,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stx7109-fdma-firmware \
 "
 
-MACHINE_FEATURES += "modviphl"
+MACHINE_FEATURES += "modutils-${MACHINE_BRAND}"

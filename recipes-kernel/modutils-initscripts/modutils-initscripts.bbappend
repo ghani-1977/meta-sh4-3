@@ -1,10 +1,11 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append += "\
-	${@bb.utils.contains("MACHINE_FEATURES", "modcuberevo", "file://cuberevo_modutils.patch", "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "modoctagon1008", "file://octagon1008_modutils.patch", "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "modsh4", "file://sh4_modutils.patch", "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "modspark", "file://spark_modutils.patch", "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "modufs910", "file://ufs910_modutils.patch", "", d)} \
-	${@bb.utils.contains("MACHINE_FEATURES", "modviphl", "file://viphl_modutils.patch", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modutils-cuberevo", "file://modutils-cuberevo.patch", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modutils-edisionargus", "file://modutils-edisionargus.patch", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modutils-octagon1008", "file://modutils-octagon1008.patch", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modutils-sh4", "file://modutils-sh4.patch", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modutils-spark", "file://modutils-spark.patch", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modutils-spiderbox", "file://modutils-spiderbox", "", d)} \
+	${@bb.utils.contains("MACHINE_FEATURES", "modutils-ufs910", "file://modutils-ufs910.patch", "", d)} \
 	"

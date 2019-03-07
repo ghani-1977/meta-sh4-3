@@ -4,7 +4,7 @@
  		[ "$VERBOSE" != no ] && echo -n "$module "
  		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
  		loaded_modules="${loaded_modules}${module} "
-+		[ "$module" == "stmfb" ] && echo "LOAD" > /dev/vfd
++		[ "$module" == "aotom" ] && echo "LOAD" > /dev/vfd
  	done
  }
  
