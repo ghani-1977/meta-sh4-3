@@ -28,7 +28,7 @@ SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-MACHINE_FEATURES += "alsa ext2 serial dvb-c 3dtv switchoff textlcd sh4 singlecore legacykernel usbconsole"
+MACHINE_FEATURES += "alsa ext2 serial dvb-c 3dtv switchoff textlcd singlecore legacykernel usbconsole"
 DISTRO_FEATURES_append += "libsigc2"
 
 KERNEL_IMAGETYPE = "uImage"
