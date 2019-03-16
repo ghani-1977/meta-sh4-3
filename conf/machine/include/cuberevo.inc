@@ -25,3 +25,5 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 "
 
 MACHINE_FEATURES += "ci modutils-cuberevo"
+
+EXTRA_OECONF_append_pn-enigma2 += " --with-cuberevostb"
