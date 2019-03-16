@@ -1071,9 +1071,9 @@ diff -Naur sh4-apps/tools/fp_control/configure.ac taapat-apps/tools/fp_control/c
  AC_OUTPUT([
  Makefile
 diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cuberevo.c
---- sh4-apps/tools/fp_control/Cuberevo.c	2019-02-20 16:00:47.073955598 +0100
+--- sh4-apps/tools/fp_control/Cuberevo.c	2019-03-09 07:59:43.000000000 +0200
 +++ taapat-apps/tools/fp_control/Cuberevo.c	1970-01-01 01:00:00.000000000 +0100
-@@ -1,989 +0,0 @@
+@@ -1,998 +0,0 @@
 -/*
 - * Cuberevo.c
 - *
@@ -1167,7 +1167,7 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -	{ "-p", "  --sleep            * ", "Args: time date   Format: HH:MM:SS dd-mm-YYYY" },
 -	{ "", "                         ", "      Reboot receiver via fp at given time" },
 -	{ "-t", "  --settext            ", "Args: text        Set text to frontpanel" },
--	{ "-l", "  --setLed             ", "Args: LED# int    LED#: int=brightness (0..31)" },
+-	{ "-l", "  --setLed             ", "Args: LED# int    LED#: int=on,off,blink (0,1,2,3)" },
 -	{ "-i", "  --setIcon            ", "Args: icon# 1|0   Set an icon on or off" },
 -	{ "-b", "  --setBrightness      ", "Arg : 0..7        Set display brightness" },
 -	{ "-led", "--setBrightness      ", "Arg : 0..255      Set LED brightness" },
@@ -1273,11 +1273,20 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -	the_tm.tm_min  = min;
 -	the_tm.tm_sec  = sec;
 -	the_tm.tm_isdst = -1; // struct tm in local time, convert to UTC
+-//	printf("Converted time: %02d:%02d:%02d %02d-%02d-20%02d (seconds ignored)\n", the_tm.tm_hour, the_tm.tm_min, the_tm.tm_sec, the_tm.tm_mday,
+-//		the_tm.tm_mon + 1, the_tm.tm_year - 100);
 -	convertedTime = mktime(&the_tm); // twice local due to mktime...
 -	tz_time_local_tm = localtime(&convertedTime);
 -	hour = tz_time_local_tm->tm_hour;
+-	if (hour == 0)
+-	{
+-		hour = 24;
+-	}
 -	tz_time_utc_tm = gmtime(&convertedTime);
+-//	printf("Converted time2: %02d:%02d:%02d %02d-%02d-20%02d (seconds ignored)\n", tz_time_utc_tm->tm_hour, tz_time_utc_tm->tm_min, tz_time_utc_tm->tm_sec, tz_time_utc_tm->tm_mday,
+-//		tz_time_utc_tm->tm_mon + 1, tz_time_utc_tm->tm_year - 100);
 -	convertedTime += ((hour - tz_time_utc_tm->tm_hour) * 3600); 
+-//	printf("Addition: %d\n",  ((hour - tz_time_utc_tm->tm_hour) * 3600));
 -	return convertedTime;
 -}
 -
@@ -1364,8 +1373,8 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -	time_t curTimeFP;
 -	struct tm *ts_gmt;
 -	int gmt_offset;
--//	int proc_fs;
--//	FILE *proc_fs_file;
+-	int proc_fs;
+-	FILE *proc_fs_file;
 -
 -	time(&curTime); // get system time in UTC
 -	ts_gmt = gmtime(&curTime);
@@ -1389,7 +1398,6 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -	printf("Front panel time set to: %02d:%02d:%02d %02d-%02d-%04d (local)\n", ts_gmt->tm_hour, ts_gmt->tm_min, ts_gmt->tm_sec,
 -		ts_gmt->tm_mday, ts_gmt->tm_mon + 1, ts_gmt->tm_year + 1900);
 -
--#if 0 // No proc_fs yet
 -	// write UTC offset to /proc/stb/fp/rtc_offset
 -	proc_fs_file = fopen(cRTC_OFFSET_FILE, "w");
 -	if (proc_fs_file == NULL)
@@ -1405,7 +1413,6 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -	}
 -	fclose(proc_fs_file);
 -	printf("Note: /proc/stb/fp/rtc_offset set to: %+d seconds.\n", gmt_offset);
--#endif
 -	return 0; // ?? -> segmentation fault
 -}
 -
@@ -1449,7 +1456,8 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -	{
 -		/* shut down immedately */
 -		printf("No timers set or 1st timer more than 300 days ahead,\nor all timer(s) in the past.\n");
--		wakeupTime = LONG_MAX;
+-//		wakeupTime = 946684800u; // 00:00:00 01-01-2000 -> timer icon off
+-		vData.u.wakeup_time.time[0] = '\0';
 -	}
 -	else // wake up time valid and in the coming 300 days
 -	{
@@ -1498,7 +1506,7 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -	setMicomTime(wakeupTime, vData.u.wakeup_time.time, 0); // ignore seconds
 -	fflush(stdout);
 -	fflush(stderr);
--	sleep(1);
+-	sleep(2);
 -	if (ioctl(context->fd, VFDSTANDBY, &vData) < 0)
 -	{
 -		perror("Shut down");
@@ -1531,7 +1539,7 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -
 -	if (ioctl(context->fd, VFDSETWAKEUPTIME_CUB, &vData) < 0)
 -	{
--		perror("Set wake up time time");
+-		perror("Set wake up time");
 -		return -1;
 -	}
 -	return 0;
@@ -1979,23 +1987,24 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -}
 -
 -#if defined MODEL_SPECIFIC
--static int modelSpecific(Context_t *context, char len, char *data)
+-static int modelSpecific(Context_t *context, char len, unsigned char *data)
 -{
 -	//-ms command, not tested
 -	int i, res;
--	char testdata[18];
+-	unsigned char testdata[18];
 -
--	testdata[0] = len; // set length
+-	memset(testdata, 0, sizeof(testdata));
+-	testdata[0] = 5; // set length (always 5)
 -	
--	printf("nuvoton ioctl: VFDTEST (0x%08x) CMD=", VFDTEST);
--	for (i = 0; i < len; i++)
+-	printf("micom ioctl: VFDTEST (0x%08x) CMD=", VFDTEST);
+-	for (i = 1; i <= len; i++)
 -	{
--		testdata[i + 1] = data[i];
--		printf("0x%02x ", data[i] & 0xff);
+-		testdata[i] = data[i - 1] & 0xff;
+-		printf("0x%02x ", testdata[i]);
 -	}
--	printf("EOP\n");
+-	printf("\n");
 -
--	memset(data, 0, 9);
+-	memset(data, 0, 18);
 -
 -//	setMode(context->fd); //set mode 1
 -
@@ -2063,6 +2072,7 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.c taapat-apps/tools/fp_control/Cub
 -#endif
 -	.Exit             = Exit
 -};
+
 diff -Naur sh4-apps/tools/fp_control/Cuberevo.h taapat-apps/tools/fp_control/Cuberevo.h
 --- sh4-apps/tools/fp_control/Cuberevo.h	2019-02-20 16:00:47.073955598 +0100
 +++ taapat-apps/tools/fp_control/Cuberevo.h	1970-01-01 01:00:00.000000000 +0100
@@ -2205,9 +2215,9 @@ diff -Naur sh4-apps/tools/fp_control/Cuberevo.h taapat-apps/tools/fp_control/Cub
 -#endif
 -// vim:ts=4
 diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Fortis.c
---- sh4-apps/tools/fp_control/Fortis.c	2019-02-20 16:00:47.073955598 +0100
+--- sh4-apps/tools/fp_control/Fortis.c	2019-03-11 00:22:35.921225046 +0200
 +++ taapat-apps/tools/fp_control/Fortis.c	1970-01-01 01:00:00.000000000 +0100
-@@ -1,838 +0,0 @@
+@@ -1,837 +0,0 @@
 -/*
 - * Fortis.c
 - *
@@ -2268,7 +2278,6 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Forti
 -#define cEVENT_DEVICE "/dev/input/event0"
 -
 -#define cMAXCharsFortis 12
--//#define VFDGETWAKEUPTIME 0xc0425b03 // added by audioniek /* moved to global.h */
 -
 -typedef struct
 -{
@@ -2290,7 +2299,7 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Forti
 -	{ "-r", "  --reboot           * ", "Args: None" },
 -	{ "", "                         ", "      No arg: Reboot immediately" },
 -	{ "", "                         ", "      Arg time date: Reboot at given time/date" },
--	{ "-g", "  --getTime          *  ", "Args: None        Display currently set frontprocessor time" },
+-	{ "-g", "  --getTime          * ", "Args: None        Display currently set frontprocessor time" },
 -	{ "-gs", " --getTimeAndSet    * ", "Args: None" },
 -	{ "", "                         ", "      Set system time to current frontprocessor time" },
 -	{ "", "                         ", "      WARNING: system date will be 01-01-1970!" },
@@ -2310,7 +2319,7 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Forti
 -	{ "-L", "  --setLight           ", "Arg : 0|1         Set display on/off" },
 -	{ "-c", "  --clear              ", "Args: None        Clear display, all icons and LEDs off" },
 -	{ "-v", "  --version            ", "Args: None        Get version info from frontprocessor" },
--	{ "-tm", " --time_mode          ", "Args: 0/1         Set time mode" },
+-	{ "-tm", " --time_mode          ", "Arg : 0/1         Set time mode" },
 -#if defined MODEL_SPECIFIC
 -	{ "-ms", " --model_specific     ", "Args: int1 [int2] [int3] ... [int16]   (note: input in hex)" },
 -	{ "", "                         ", "                  Model specific test function" },
@@ -2426,6 +2435,29 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Forti
 -	return 0;
 -}
 -
+-static int getTime(Context_t *context, time_t *theGMTTime)
+-{
+-	// -g command
+-	char fp_time[8];
+-
+-	if (ioctl(context->fd, VFDGETTIME, &fp_time) < 0)
+-	{
+-		perror("Get time");
+-		return -1;
+-	}
+-	/* if we get the fp time */
+-	if (fp_time[0] != '\0')
+-	{
+-		*theGMTTime = (time_t)calcGetNuvotonTime(fp_time);
+-	}
+-	else
+-	{
+-		fprintf(stderr, "Error reading time from fp\n");
+-		*theGMTTime = 0;
+-	}
+-	return 0;
+-}
+-
 -static int setSTime(Context_t *context, time_t *theGMTTime)
 -{
 -	// -sst command
@@ -2472,29 +2504,6 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Forti
 -	fclose(proc_fs_file);
 -	printf("Note: /proc/stb/fp/rtc_offset set to: %+d seconds.\n", gmt_offset);
 -
--	return 0;
--}
--
--static int getTime(Context_t *context, time_t *theGMTTime)
--{
--	// -g command
--	char fp_time[8];
--
--	if (ioctl(context->fd, VFDGETTIME, &fp_time) < 0)
--	{
--		perror("Get time");
--		return -1;
--	}
--	/* if we get the fp time */
--	if (fp_time[0] != '\0')
--	{
--		*theGMTTime = (time_t)calcGetNuvotonTime(fp_time);
--	}
--	else
--	{
--		fprintf(stderr, "Error reading time from fp\n");
--		*theGMTTime = 0;
--	}
 -	return 0;
 -}
 -
@@ -2962,7 +2971,7 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Forti
 -}
 -
 -#if defined MODEL_SPECIFIC
--static int modelSpecific(Context_t *context, char len, char *data)
+-static int modelSpecific(Context_t *context, char len, unsigned char *data)
 -{
 -	//-ms command
 -	int i, res;
@@ -2978,7 +2987,7 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.c taapat-apps/tools/fp_control/Forti
 -	}
 -	printf("EOP\n");
 -
--	memset(data, 0, 9);
+-	memset(data, 0, 18);
 -
 -//	setMode(context->fd); //set mode 1
 -
@@ -3132,8 +3141,8 @@ diff -Naur sh4-apps/tools/fp_control/Fortis.h taapat-apps/tools/fp_control/Forti
 -};
 -#endif
 diff -Naur sh4-apps/tools/fp_control/fp_control.c taapat-apps/tools/fp_control/fp_control.c
---- sh4-apps/tools/fp_control/fp_control.c	2019-02-20 16:00:47.075955549 +0100
-+++ taapat-apps/tools/fp_control/fp_control.c	2019-02-20 15:59:37.638646134 +0100
+--- sh4-apps/tools/fp_control/fp_control.c	2019-03-09 07:59:43.000000000 +02000
++++ taapat-apps/tools/fp_control/fp_control.c	2019-03-16 15:21:58.000000000 +0200
 @@ -10,7 +10,7 @@
   *
   * This program is distributed in the hope that it will be useful,
@@ -3161,7 +3170,7 @@ diff -Naur sh4-apps/tools/fp_control/fp_control.c taapat-apps/tools/fp_control/f
  ////////////////////////////////////////////////////////////////////////////////////////////////////
  
 -/* Software version of fp_control, please increase on every change */
--static const char *sw_version = "1.10Audioniek 20190212.1";
+-static const char *sw_version = "1.10Audioniek 20190308.1";
 -static eWakeupReason reason = 0;
 +/* software version of fp_control. please increas on every change */
 +static const char* sw_version = "1.03";
@@ -3957,7 +3966,7 @@ diff -Naur sh4-apps/tools/fp_control/fp_control.c taapat-apps/tools/fp_control/f
 -			{
 -				int j;
 -				char len;
--				char testdata[16];
+-				unsigned char testdata[16];
 -
 -				len = argc - 2;
 -
@@ -3965,7 +3974,7 @@ diff -Naur sh4-apps/tools/fp_control/fp_control.c taapat-apps/tools/fp_control/f
 -				{
 -					if (i + len <= argc)
 -					{
--						memset(testdata, 0, 18);						
+-						memset(testdata, 0, sizeof(testdata));						
  
 -						for (j = 1; j <= len; j++)
 -						{
@@ -4790,9 +4799,9 @@ diff -Naur sh4-apps/tools/fp_control/global.c taapat-apps/tools/fp_control/globa
  	return 0;
  }
 diff -Naur sh4-apps/tools/fp_control/global.h taapat-apps/tools/fp_control/global.h
---- sh4-apps/tools/fp_control/global.h	2019-02-20 16:00:47.075955549 +0100
-+++ taapat-apps/tools/fp_control/global.h	2019-02-20 15:59:37.638646134 +0100
-@@ -7,123 +7,73 @@
+--- sh4-apps/tools/fp_control/global.h	2019-03-16 15:46:28.000000000 +0200
++++ taapat-apps/tools/fp_control/global.h	2019-03-16 15:57:12.000000000 +0200
+@@ -7,123 +7,71 @@
  #define false 0
  #endif
  
@@ -4838,8 +4847,8 @@ diff -Naur sh4-apps/tools/fp_control/global.h taapat-apps/tools/fp_control/globa
 +#define VFDGETSTARTUPSTATE	0xc0425af8
  
 -//Comment next line if you do not want the -ms option
--//#define MODEL_SPECIFIC 1
- 
+-#define MODEL_SPECIFIC 1
+-
 -struct vfd_ioctl_data
 -{
 +struct vfd_ioctl_data {
@@ -4853,16 +4862,15 @@ diff -Naur sh4-apps/tools/fp_control/global.h taapat-apps/tools/fp_control/globa
  
 -typedef enum {Unknown, Ufs910_1W, Ufs910_14W, Ufs922, Ufc960, Tf7700, Hl101, Vip2, Fortis, Hs5101, Ufs912, Spark, Cuberevo, Adb_Box, CNBox} eBoxType;
 +typedef enum {Unknown, Spark} eBoxType;
-+
-+typedef struct Context_s {
-+	void* /* Model_t */  *m; /* instance data */
-+	int                  fd; /* filedescriptor of fd */
  
 -typedef struct Context_s
 -{
 -	/* Model_t */
 -	void *m; /* instance data */
 -	int fd; /* filedescriptor of fd */
++typedef struct Context_s {
++	void* /* Model_t */  *m; /* instance data */
++	int                  fd; /* filedescriptor of fd */
  } Context_t;
  
 -typedef struct Model_s
@@ -4899,7 +4907,7 @@ diff -Naur sh4-apps/tools/fp_control/global.h taapat-apps/tools/fp_control/globa
 -	int	(*SetDisplayTime)   (Context_t *context, int on);
 -	int	(*SetTimeMode)      (Context_t *context, int twentyFour);
 -#if defined MODEL_SPECIFIC
--	int	(*ModelSpecific)    (Context_t *context, char len, char *testdata); /* added by audioniek */
+-	int	(*ModelSpecific)    (Context_t *context, char len, unsigned char *testdata); /* added by audioniek */
 -#endif
 -	void	*private;
 +	int     (* Init)           (Context_t* context);
@@ -4924,31 +4932,31 @@ diff -Naur sh4-apps/tools/fp_control/global.h taapat-apps/tools/fp_control/globa
 +    void* private;
  } Model_t;
  
--extern Model_t Ufs910_1W_model;
--extern Model_t Ufs910_14W_model;
--extern Model_t UFS912_model;
--extern Model_t UFS922_model;
--extern Model_t UFC960_model;
--extern Model_t Fortis_model;
--extern Model_t HL101_model;
--extern Model_t VIP2_model;
--extern Model_t Hs5101_model;
- extern Model_t Spark_model;
--extern Model_t Adb_Box_model;
--extern Model_t Cuberevo_model;
--extern Model_t CNBOX_model;
+-extern	Model_t Ufs910_1W_model;
+-extern	Model_t Ufs910_14W_model;
+-extern	Model_t UFS912_model;
+-extern	Model_t UFS922_model;
+-extern	Model_t UFC960_model;
+-extern	Model_t Fortis_model;
+-extern	Model_t HL101_model;
+-extern	Model_t VIP2_model;
+-extern	Model_t Hs5101_model;
+ extern	Model_t Spark_model;
+-extern	Model_t Adb_Box_model;
+-extern	Model_t Cuberevo_model;
+-extern	Model_t CNBOX_model;
 +
 +static Model_t * AvailableModels[] = {
 +	&Spark_model,
 +	NULL
 +};
  
- double modJulianDate(struct tm *theTime);
--int get_GMT_offset(struct tm theTime);
- time_t read_timers_utc(time_t curTime);
- time_t read_fake_timer_utc(time_t curTime);
--int searchModel(Context_t *context, eBoxType type);
--int checkConfig(int *display, int *display_custom, char **timeFormat, int *wakeup);
+ double	modJulianDate(struct tm *theTime);
+-int	get_GMT_offset(struct tm theTime);
+ time_t	read_timers_utc(time_t curTime);
+ time_t	read_fake_timer_utc(time_t curTime);
+-int	searchModel(Context_t *context, eBoxType type);
+-int	checkConfig(int *display, int *display_custom, char **timeFormat, int *wakeup);
 +int searchModel(Context_t  *context, eBoxType type);
 +int checkConfig(int* display, int* display_custom, char** timeFormat, int* wakeup);
  
