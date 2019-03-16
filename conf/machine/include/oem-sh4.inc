@@ -92,4 +92,4 @@ include conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/tune-sh4.inc
 require conf/machine/include/soc-family.inc
 
-EXTRA_OECONF_append_pn-enigma2 += " --with-sh4"
+EXTRA_OECONF_append_pn-enigma2 += " --with-sh4stb"
