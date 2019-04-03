@@ -1,0 +1,100 @@
+--- a/modutils.sh	2019-03-15 06:38:14.047744000 +0300
++++ b/modutils.sh	2019-04-03 21:54:57.149448903 +0300
+@@ -36,6 +36,83 @@
+ 		[ "$VERBOSE" != no ] && echo -n "$module "
+ 		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
+ 		loaded_modules="${loaded_modules}${module} "
++		if [ "$module" == "boxtype" ]; then
++			boxtype=`cat /proc/boxtype`
++
++			if [ $boxtype == 'bska' ]; then
++				modprobe vfd rec=0
++			else
++				modprobe vfd rec=1
++			fi
++
++			mknod -m 644 /dev/vfd c 147 0
++			echo "LOAD" >/dev/vfd
++			mknod -m 666 /dev/sci1 c 169 0
++			mknod -m 666 /dev/sci1 c 169 1
++
++			modprobe simu_button
++			modprobe e2_proc
++			modprobe stmcore-display-stx7100
++			modprobe stmfb display0=1280x720-32@50:16m:pal:yuv:yuv
++			modprobe embxshell
++			modprobe embxmailbox mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0
++			modprobe mailbox0=shm:0:7:0x60000000:0:16:16:0:1024:0xa4000000:0x10000000
++			modprobe transport0=shm
++
++			if [ $boxtype == 'bsla' ] || [ $boxtype == 'bzzb' ]; then
++				modprobe cooler
++			fi
++
++			if [ $boxtype == 'bxzb' ]; then
++				modprobe avs type=fake_avs
++			else
++				modprobe avs type=stv6412
++			fi
++
++			player=`cat /proc/stb/player/version`
++			player=`cat /proc/stb/player/version | awk '{ print substr( $0, length($0) - 2, length($0) ) }'`
++			echo "init player $player"
++			modprobe mmelog
++			modprobe mpeg2hw mmeName=MPEG2_TRANSFORMER0
++			modprobe ksound
++			modprobe p2div64
++			modprobe stm_v4l2
++			modprobe pseudocard
++			modprobe cec_ctrl
++
++			if [ $boxtype == 'bska' ] || [ $boxtype == 'bxzb' ]; then
++				modprobe fe-core
++			elif [ $boxtype == 'bzzb' ]; then
++				modprobe fe-core-twin1
++			else
++				modprobe fe-core-twin2
++			fi
++
++			if [ $player -gt 131 ]; then
++			modprobe pti
++			modprobe stm_monitor
++			modprobe stmsysfs
++				if [ $boxtype == 'bzzb' ]; then
++					modprobe stmdvb TSIS_mode=serial NIMS=twin
++				elif [ $boxtype == 'bsla' ]; then
++					modprobe stmdvb TSIS_mode=parallel NIMS=twin
++				else
++					modprobe stmdvb TSIS_mode=parallel NIMS=single
++				fi	
++			else
++				modprobe pti
++				modprobe stmdvb
++				modprobe player2 discardlateframe=0
++			fi
++
++			modprobe sth264pp
++			modprobe stmalloc
++			modprobe platform
++			modprobe smartcard
++			modprobe bpamem
++			mknod /dev/bpamem0 c 153 0
++		fi
++		[ "$module" == "zram" ] && echo "16777216" > /sys/block/zram0/disksize # Use 16Mb for swap in ram
+ 	done
+ }
+ 
+@@ -49,4 +126,13 @@
+ done
+ [ "$VERBOSE" != no ] && echo
+ 
++echo "1" > /proc/sys/kernel/printk #for more log change level or remake line
++
++# Enable swap in ram
++if [ -e /dev/zram0 ]; then
++	[ "$VERBOSE" != no ] && echo "Enable swap in ram"
++	mkswap /dev/zram0
++	swapon -p 100 /dev/zram0
++fi
++
+ exit 0
