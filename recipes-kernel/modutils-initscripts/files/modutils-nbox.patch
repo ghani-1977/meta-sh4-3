@@ -1,6 +1,6 @@
---- a/modutils.sh	2019-03-15 06:38:14.047744000 +0300
-+++ b/modutils.sh	2019-04-06 07:49:15.945124008 +0300
-@@ -36,6 +36,97 @@
+--- a/modutils.sh.old	2019-03-15 06:38:14.047744000 +0300
++++ b/modutils.sh	2019-04-06 19:55:39.811633227 +0300
+@@ -36,6 +36,104 @@
  		[ "$VERBOSE" != no ] && echo -n "$module "
  		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
  		loaded_modules="${loaded_modules}${module} "
@@ -83,7 +83,14 @@
 +			modprobe sth264pp
 +			modprobe stmalloc
 +			modprobe platform
-+			modprobe smartcard
++
++			#smartcard parametry: type=bxzb, type=bska, type=bsla, mode_sci1=nbox, mode_sci1=tda8004
++			if [ $boxtype == 'bxzb' ]; then
++				modprobe smartcard type=bxzb mode_sci1=nbox
++			else
++				modprobe smartcard type=bska mode_sci1=nbox
++			fi
++
 +			modprobe bpamem
 +			mknod /dev/bpamem0 c 153 0
 +
@@ -98,7 +105,7 @@
  	done
  }
  
-@@ -49,4 +140,13 @@
+@@ -49,4 +147,13 @@
  done
  [ "$VERBOSE" != no ] && echo
  
