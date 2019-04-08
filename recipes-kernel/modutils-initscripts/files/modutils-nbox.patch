@@ -1,6 +1,6 @@
 --- a/modutils.sh	2019-03-15 06:38:14.047744000 +0300
-+++ b/modutils.sh	2019-04-07 14:48:01.066422323 +0300
-@@ -36,6 +36,116 @@
++++ b/modutils.sh	2019-04-08 11:52:57.088717152 +0300
+@@ -36,6 +36,117 @@
  		[ "$VERBOSE" != no ] && echo -n "$module "
  		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
  		loaded_modules="${loaded_modules}${module} "
@@ -58,6 +58,8 @@
 +			modprobe ksound
 +			modprobe p2div64
 +			modprobe stm_v4l2
++			modprobe stmvout
++			modprobe stmvbi
 +			modprobe pseudocard
 +
 +			if [ $boxtype == 'bska' ]; then
@@ -66,13 +68,13 @@
 +				modprobe fe-core
 +			elif [ $boxtype == 'bsla' ]; then
 +				modprobe fe-core-twin1
-+			elif [ $boxtype == 'bzzb' ]; then
-+				modprobe fe-core-twin2
 +			else
-+				modprobe fe-mmp
++				modprobe fe-core-twin2
 +			fi
 +
 +			modprobe pti waitMS=20 videoMem=4096
++			modprobe stm_monitor
++			modprobe stmsysfs
 +
 +			if [ $boxtype == 'bzzb' ]; then
 +				modprobe stmdvb TSIS_mode=serial NIMS=twin
@@ -82,7 +84,6 @@
 +				modprobe stmdvb TSIS_mode=parallel NIMS=single
 +			fi
 +
-+			modprobe stm_monitor
 +			modprobe player2 discardlateframe=0
 +			modprobe sth264pp
 +			modprobe stmalloc
@@ -117,7 +118,7 @@
  	done
  }
  
-@@ -49,4 +159,13 @@
+@@ -49,4 +160,13 @@
  done
  [ "$VERBOSE" != no ] && echo
  
