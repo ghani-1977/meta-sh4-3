@@ -1,6 +1,6 @@
---- a/modutils.sh	2019-03-15 06:38:14.047744000 +0300
-+++ b/modutils.sh	2019-04-08 11:52:57.088717152 +0300
-@@ -36,6 +36,117 @@
+--- a/modutils.sh	2019-04-10 07:06:59.431408000 +0300
++++ b/modutils.sh	2019-04-10 22:20:37.453354878 +0300
+@@ -36,6 +36,87 @@
  		[ "$VERBOSE" != no ] && echo -n "$module "
  		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
  		loaded_modules="${loaded_modules}${module} "
@@ -23,20 +23,9 @@
 +
 +			modprobe simu_button
 +			mknod /dev/rc c 147 1
-+
 +			modprobe e2_proc
 +			modprobe stmcore-display-stx7100
-+
-+			if grep -q "config.av.videoport=Scart" /etc/enigma2/settings; then
-+				modprobe stmfb display0=720x576-32@50i:16m:pal:yuv:rgb
-+				echo "VIDEO:scart"
-+				VIDEO=scart
-+			else
-+				modprobe stmfb display0=1280x720-32@50:16m:pal:yuv:yuv
-+				echo "VIDEO:hdmi_component"
-+				VIDEO=hdmi_component
-+			fi
-+
++			modprobe stmfb display0=1280x720-32@50:16m:pal:yuv:yuv
 +			modprobe embxshell
 +			modprobe embxmailbox mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0
 +			modprobe embxshm mailbox0=shm:0:7:0x60000000:0:16:16:0:1024:0xa4000000:0x10000000
@@ -52,8 +41,6 @@
 +				modprobe avs type=stv6412
 +			fi
 +
-+			player=`cat /proc/stb/player/version | awk '{ print substr( $0, length($0) - 2, length($0) ) }'`
-+			echo "init player $player"
 +			modprobe mmelog
 +			modprobe ksound
 +			modprobe p2div64
@@ -62,9 +49,7 @@
 +			modprobe stmvbi
 +			modprobe pseudocard
 +
-+			if [ $boxtype == 'bska' ]; then
-+				modprobe fe-core
-+			elif [ $boxtype == 'bxzb' ]
++			if [ $boxtype == 'bska' ] || [ $boxtype == 'bxzb' ]; then
 +				modprobe fe-core
 +			elif [ $boxtype == 'bsla' ]; then
 +				modprobe fe-core-twin1
@@ -95,30 +80,15 @@
 +			else
 +				modprobe smartcard type=bska mode_sci1=nbox
 +			fi
++
 +			modprobe bpamem
-+			mknod /dev/bpamem0 c 153 0
 +			modprobe cec_ctrl
-+
-+			if [ $boxtype == 'bxzb' ]; then
-+				echo "bxzb" > /proc/stb/video/switch_type
-+			else
-+				echo "bska" > /proc/stb/video/switch_type
-+			fi
-+
-+			if [ "$VIDEO" = "scart" ]; then
-+				echo "VIDEO:scart"
-+				echo "scart" > /proc/stb/video/switch
-+			else
-+				echo "VIDEO:hdmi_component"
-+				echo "component720p" > /proc/stb/video/switch
-+			fi
-+
 +		fi
 +		[ "$module" == "zram" ] && echo "16777216" > /sys/block/zram0/disksize # Use 16Mb for swap in ram
  	done
  }
  
-@@ -49,4 +160,13 @@
+@@ -49,4 +130,13 @@
  done
  [ "$VERBOSE" != no ] && echo
  
