@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-modprobe cuberevo_micom paramDebug=50
+modprobe micom paramDebug=50
 
 if [ -e /var/etc/.firstboot ]; then
    rm /var/etc/.firstboot

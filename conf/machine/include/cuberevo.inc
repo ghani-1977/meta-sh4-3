@@ -21,7 +21,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
 	firmware-sh4 \
 	evremote2 \
-        enigma2-plugin-extensions-cuberevovfd \
+	enigma2-plugin-extensions-cuberevovfd \
 "
 
 MACHINE_FEATURES += "ci modutils-cuberevo"
