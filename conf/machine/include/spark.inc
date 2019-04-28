@@ -1,6 +1,8 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/wifi-sh4.inc
 
+BOX_BRAND = "fulan"
+
 PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE}"
 
 ROOTFS_FILE = "e2jffs2.img"

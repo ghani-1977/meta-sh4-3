@@ -1,8 +1,9 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/smallflash.inc
 
-MACHINE_BRAND = "cuberevo"
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE_BRAND}"
+BOX_BRAND = "cuberevo"
+
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"

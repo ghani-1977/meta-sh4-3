@@ -1,8 +1,9 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/wifi-sh4.inc
 
-MACHINE_BRAND = "edisionargus"
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE_BRAND}"
+BOX_BRAND = "edisionargus"
+
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
@@ -19,4 +20,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stx7109-fdma-firmware \
 "
 
-MACHINE_FEATURES += "modutils-${MACHINE_BRAND}"
+MACHINE_FEATURES += "modutils-${BOX_BRAND}"
