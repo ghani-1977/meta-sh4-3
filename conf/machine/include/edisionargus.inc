@@ -17,7 +17,10 @@ SOC_FAMILY = "sti7109"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlirc \
+    evremote2 \
     stlinux24-sh4-stx7109-fdma-firmware \
 "
 
-MACHINE_FEATURES += "modutils-${BOX_BRAND}"
+MACHINE_FEATURES += "ci directfb modutils-${BOX_BRAND}"
+
+DISTRO_FEATURES_append += "gtk-directfb"
