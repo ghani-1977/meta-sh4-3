@@ -29,6 +29,7 @@ SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar
            file://lircd_${MACHINE}.conf \
            file://lircmd.init \
            file://lircexec.init \
+           file://fix_irrecord_deps.patch;patch=1 \
            ${@bb.utils.contains_any("MACHINE", "adb_box arivalink200 ipbox55 ipbox99 ipbox9900 pace7241 sagemcom88 ufs910 vip1_v2 vip2_v1 qboxhd qboxhd_mini", "file://${PN}_sh4.patch file://lircd_sh4.init", "", d)} \
            ${@bb.utils.contains_any("MACHINE", "hl101 spark spark7162", "file://lircd_spark.init", "", d)} \
            ${@bb.utils.contains_any("MACHINE", "hl101", "file://${PN}_hl101.patch file://lircd.conf.03_00_01 file://lircd.conf.03_00_02 file://lircd.conf.03_00_07", "", d)} \
