@@ -28,8 +28,6 @@ target devices (slaves from now on) and different slaves of the same type"
 DEPENDS = "binutils"
 SECTION = "console/utils"
 
-PR = "r1"
-
 S = "${WORKDIR}/stslave"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${S}/main.c;beginline=4;endline=6;md5=42efebf7b210788356068c5ce3c011a4"

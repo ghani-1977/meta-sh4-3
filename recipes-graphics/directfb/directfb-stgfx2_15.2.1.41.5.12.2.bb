@@ -21,7 +21,6 @@ do_configure_append() {
 #	make -C "${STAGING_KERNEL_DIR}" M="${B}/linux/kernel" STM_BLITTER_TOPDIR="${B}/linux/kernel" modules
 # }
 
-# MACHINE_KERNEL_PR_append = ".1"
 # EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR}"
 
 FILES_${PN} += "\

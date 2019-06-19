@@ -3,7 +3,6 @@ require gcc-common.inc
 # Third digit in PV should be incremented after a minor release
 
 PV = "4.9.4"
-PR = "r0"
 
 # BINV should be incremented to a revision after a minor gcc release
 
