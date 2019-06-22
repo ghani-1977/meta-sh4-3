@@ -1,5 +1,5 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/smallflash.inc
+require conf/machine/include/wifi-sh4.inc
 
 BOX_BRAND = "cuberevo"
 
@@ -9,6 +9,11 @@ ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
+
+MACHINE_EXTRA_RRECOMMENDS += "\
+    ntfs-3g \
+    enigma2-plugin-systemplugins-serviceapp \
+"
 
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7109.elf"

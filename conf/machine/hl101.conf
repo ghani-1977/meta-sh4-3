@@ -10,6 +10,11 @@ KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
 
+MACHINE_EXTRA_RRECOMMENDS += "\
+    ntfs-3g \
+    enigma2-plugin-systemplugins-serviceapp \
+"
+
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7109.elf"
 
