@@ -21,12 +21,12 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	kernel-module-rt2x00usb \
 	kernel-module-rt2x00lib \
 	kernel-module-mt7601usta \
-	kernel-module-rt2870sta \
-	kernel-module-rt3070sta \
-	kernel-module-rt5370sta \
 	kernel-module-8188eu \
 	kernel-module-8192cu \
 	kernel-module-8712u \
+	rt2870sta \
+	rt3070sta \
+	rt5370sta \
 	rtl8723a \
 	rtl8723bs \
 	rt8812au \
