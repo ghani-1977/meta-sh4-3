@@ -12,7 +12,6 @@ IMAGE_FSTYPES += "sparkusbimg"
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \
-    enigma2-plugin-systemplugins-serviceapp \
     "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
