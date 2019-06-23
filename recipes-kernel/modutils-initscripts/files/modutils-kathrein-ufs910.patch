@@ -4,8 +4,8 @@
  		[ "$VERBOSE" != no ] && echo -n "$module "
  		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
  		loaded_modules="${loaded_modules}${module} "
-+		[ "$module" == "vfd" ] && echo "LOAD" > /dev/vfd
-+		[ "$module" == "boxtype" ] && echo "load fp_control" > /usr/bin/fp_control -c # Used by fp_control! otherwise crash
++		[ "$module" == "vfd" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
++		# [ "$module" == "boxtype" ] && echo "load fp_control" > /usr/bin/fp_control -c # Used by fp_control! otherwise crash
 +		[ "$module" == "zram" ] && echo "16777216" > /sys/block/zram0/disksize # Use 16Mb for swap in ram
  	done
  }
