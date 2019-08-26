@@ -18,11 +18,11 @@ FILES_${PN} += "/boot"
 
 do_install () {
     # Remove stuff from old packages if present
-    if [ -e /etc/init.d/stslave.sh ] ; then
-        rm /etc/init.d/stslave.sh
+    if [ -e ${sysconfdir}/init.d/stslave.sh ] ; then
+        rm ${sysconfdir}/init.d/stslave.sh
     fi
-    if [ -e /etc/rcS.d/S03stslave ] ; then
-        rm /etc/rcS.d/S03stslave
+    if [ -e ${sysconfdir}/rcS.d/S03stslave ] ; then
+        rm ${sysconfdir}/rcS.d/S03stslave
     fi
     install -d ${D}/boot
     install -m 644 ${WORKDIR}/${AUDIOELF}  ${D}/boot/audio.elf

@@ -42,7 +42,7 @@ do_install() {
 	install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless/mediatek
 	install -m 0644 ${S}/mt7601Usta.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless/mediatek
 	install -d ${D}${sysconfdir}/Wireless/MT7601U
-	install -m 0644 ${WORKDIR}/RT2870STA.dat ${D}/etc/Wireless/MT7601U/RT2870STA.dat
+	install -m 0644 ${WORKDIR}/RT2870STA.dat ${D}${sysconfdir}/Wireless/MT7601U/RT2870STA.dat
 }
 
 FILES_${PN}_append = "${sysconfdir}/Wireless"
