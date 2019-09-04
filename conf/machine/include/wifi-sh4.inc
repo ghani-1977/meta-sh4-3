@@ -29,6 +29,6 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	\
 	rt7777-legacy \
 	rt8812au \
-	rtl8723a \
-	rtl8723bs \
+	rt8723a \
+	rt8723bs \
 "
