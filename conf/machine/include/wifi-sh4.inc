@@ -17,18 +17,15 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	kernel-module-rtl8187 \
 	kernel-module-zd1211rw \
 	\
-	kernel-module-mt7601u \
-	kernel-module-rt2870sta \
-	kernel-module-rt3070sta \
-	kernel-module-rt5370sta \
-	kernel-module-rtl8188eu \
-	kernel-module-rtl8192cu \
-	kernel-module-rtl8192du \
-	kernel-module-rtl8192eu \
-	kernel-module-rtl871x \
-	\
+	mt7601u \
+	rt3070 \
 	rt7777-legacy \
-	rt8812au \
+	rt8188fu \
 	rt8723a \
 	rt8723bs \
-"
+	rt8812au \
+	rtl8188eu \
+	rtl8192cu \
+	rtl8192eu \
+	rtl871x \
+	"
