@@ -13,6 +13,7 @@ EXTRA_OECONF_sh4 = "\
 	--enable-${MACHINE} --with-lcd \
 	--with-libsdl=no --with-boxtype=${MACHINE} \
 	--with-boxbrand="${BOX_BRAND}" \
+	--with-oever="${VISIONVERSION}" \
 	--enable-dependency-tracking \
 	ac_cv_prog_c_openmp=-fopenmp \
 	${@get_crashaddr(d)} \
