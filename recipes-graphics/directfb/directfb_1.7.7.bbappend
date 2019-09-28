@@ -13,7 +13,7 @@ EXTRA_OECONF = " \
   --enable-zlib \
   --disable-vnc \
   --disable-x11 \
-  ${@bb.utils.contains("TARGET_ARCH", "sh4", "--disable-devmem --enable-stmfbdev=yes --enable-mme=yes --enable-hwjpeg --enable-rle --enable-hwpng", "", d)} \
+  ${@bb.utils.contains("TARGET_ARCH", "sh4", "--enable-stmfbdev=yes --enable-mme=yes --enable-hwjpeg --enable-rle --enable-hwpng", "", d)} \
 "
 
 RRECOMMENDS_${PN}_append_sh4 += " directfb-stgfx2 "
