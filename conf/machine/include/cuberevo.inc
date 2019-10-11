@@ -27,6 +27,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	enigma2-plugin-extensions-cuberevovfd \
 "
 
-MACHINE_FEATURES += "ci modutils-cuberevo"
+MACHINE_FEATURES += "ci"
 
 EXTRA_OECONF_append_pn-enigma2 += " --with-cuberevostb"
+
+CAN_USE_ENIGMA2_IN_FLASH = "0"

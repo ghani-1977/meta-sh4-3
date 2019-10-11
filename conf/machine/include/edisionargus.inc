@@ -23,6 +23,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stx7109-fdma-firmware \
 "
 
-MACHINE_FEATURES += "ci directfb modutils-${BOX_BRAND}"
+MACHINE_FEATURES += "ci directfb"
 
 DISTRO_FEATURES_append += "gtk-directfb"
+
+CAN_USE_ENIGMA2_IN_FLASH = "1"
