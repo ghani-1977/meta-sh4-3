@@ -82,6 +82,10 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 
 EXTRA_IMAGEDEPENDS += "\
     libpcre \
+    sh4-fup \
+    sh4-mkdnimg \
+    sh4-mup \
+    sh4-pad \
     "
 
 MACHINE_EXTRA_RDEPENDS += "\
