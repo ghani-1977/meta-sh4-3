@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "pace7241"
+COMPATIBLE_MACHINE = "^(pace7241)$"
 
 STXNUMBER = "stx7105"
 

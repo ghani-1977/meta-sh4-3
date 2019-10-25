@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819"
+COMPATIBLE_MACHINE = "^(hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819)$"
 
 STXNUMBER = "stx7111"
 

@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "ipbox55|ipbox99|ipbox9900"
+COMPATIBLE_MACHINE = "^(ipbox55|ipbox99|ipbox9900)$"
 
 STXNUMBER = "stx7109"
 

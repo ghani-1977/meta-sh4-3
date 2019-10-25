@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "arivalink200"
+COMPATIBLE_MACHINE = "^(arivalink200)$"
 
 STXNUMBER = "stx7109"
 

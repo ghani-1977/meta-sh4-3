@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "sagemcom88"
+COMPATIBLE_MACHINE = "^(sagemcom88)$"
 
 STXNUMBER = "stx7105"
 

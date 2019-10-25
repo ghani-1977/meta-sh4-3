@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "fortis_hdbox"
+COMPATIBLE_MACHINE = "^(fortis_hdbox)$"
 
 STXNUMBER = "stx7109"
 

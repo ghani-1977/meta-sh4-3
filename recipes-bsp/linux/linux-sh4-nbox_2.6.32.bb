@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "adb_box"
+COMPATIBLE_MACHINE = "^(adb_box)$"
 
 STXNUMBER = "stx7100"
 

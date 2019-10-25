@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "hl101"
+COMPATIBLE_MACHINE = "^(hl101)$"
 
 STXNUMBER = "stx7109"
 

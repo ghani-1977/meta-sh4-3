@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "tf7700"
+COMPATIBLE_MACHINE = "^(tf7700)$"
 
 STXNUMBER = "stx7109"
 

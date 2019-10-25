@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "atevio7500"
+COMPATIBLE_MACHINE = "^(atevio7500)$"
 
 STXNUMBER = "stx7105"
 

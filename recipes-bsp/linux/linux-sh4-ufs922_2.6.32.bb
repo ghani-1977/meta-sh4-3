@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "ufs922"
+COMPATIBLE_MACHINE = "^(ufs922)$"
 
 STXNUMBER = "stx7109"
 

@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "vitamin_hd5000"
+COMPATIBLE_MACHINE = "^(vitamin_hd5000)$"
 
 STXNUMBER = "stx7111"
 

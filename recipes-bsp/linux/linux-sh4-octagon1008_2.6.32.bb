@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "octagon1008"
+COMPATIBLE_MACHINE = "^(octagon1008)$"
 
 STXNUMBER = "stx7109"
 

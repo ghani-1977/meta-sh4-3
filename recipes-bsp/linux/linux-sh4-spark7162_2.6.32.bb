@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "spark7162"
+COMPATIBLE_MACHINE = "^(spark7162)$"
 
 STXNUMBER = "stx7105"
 

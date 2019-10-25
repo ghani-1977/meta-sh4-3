@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "atemio520|atemio530"
+COMPATIBLE_MACHINE = "^(atemio520|atemio530)$"
 
 STXNUMBER = "stx7111"
 
