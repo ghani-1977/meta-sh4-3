@@ -1,0 +1,194 @@
+#!/usr/bin/sh
+boxtype=`cat /etc/boxtype`
+
+if [ $boxtype == 'bska' ]; then
+  echo "Init VFD bialy"
+  modprobe vfd rec=0
+else
+  echo "Init VFD czarny"
+  modprobe vfd rec=1
+fi
+
+if [ -e /var/etc/.firstboot ]; then
+   echo "WAIT 1st start" >/dev/vfd
+   echo "WAIT 1st start"
+   rm /var/etc/.firstboot
+   touch /dev/.devfsd
+fi
+
+   if [ -e /etc/init.d/mountvirtfs ]; then
+   /etc/init.d/mountvirtfs start
+fi
+   if [ -e /etc/init.d/portmap ]; then
+   /etc/init.d/portmap start
+fi
+
+if [ -e /etc/init.d/autofs ]; then
+   /etc/init.d/autofs start
+fi
+
+if [ ! -e /var/etc/.firstboot ]; then
+
+    modprobe boxtype
+    boxtype=`cat /proc/boxtype`
+    echo "boxtype $boxtype"
+    echo "$boxtype" > /etc/boxtype
+
+   modprobe e2_proc
+
+   echo "Starting DEBUG Interface"
+if [ -e /etc/init.d/mountall ]; then
+   /etc/init.d/mountall start
+fi
+
+   echo "init stmfb"
+   modprobe stmcore-display-stx7100
+    if grep -q "config.av.videoport=Scart" /etc/enigma2/settings; then
+        modprobe stmfb display0=720x576-32@50i:12m:pal:yuv:rgb;
+        echo "VIDEO:scart"
+        VIDEO=scart
+   else
+        modprobe stmfb display0=1280x720-32@50:12m:pal:yuv:yuv;
+        echo "VIDEO:hdmi_component"
+        VIDEO=hdmi_component
+    fi
+
+   echo "LOADING MODULES"   
+   echo "LOADING MODULES" >/dev/vfd
+
+   echo "load a firmware"
+   /usr/bin/ustslave /dev/st231-1 /boot/audio.elf
+   echo "load v firmware"
+   /usr/bin/ustslave /dev/st231-0 /boot/video.elf
+
+   echo "init embx"
+   modprobe embxshell
+   modprobe embxmailbox mailbox0=0xb9211000:136:set2 mailbox1=0xb9212000:0 ;
+   modprobe embxshm mailbox0=shm:0:7:0x60000000:0:16:16:0:1024:0xa4000000:0x10000000 ;
+   modprobe mme_host transport0=shm
+   
+   if [ $boxtype == 'bsla' ]; then
+    echo "init Cooler"
+    modprobe cooler
+   fi
+
+   echo "init AVS"
+   if [ $boxtype == 'bxzb' ]; then
+      modprobe avs type=fake_avs
+   else
+      modprobe avs type=stv6412
+
+   echo "init player"
+   player=`cat /proc/stb/player/version`
+   player=`cat /proc/stb/player/version | awk '{ print substr( $0, length($0) - 2, length($0) ) }'`
+   echo "init player $player"
+   modprobe mmelog
+   modprobe mpeg2hw mmeName=MPEG2_TRANSFORMER0;
+   modprobe ksound
+   modprobe p2div64
+   modprobe stm_v4l2
+   modprobe pseudocard
+   modprobe cec_ctrl
+  
+    if [ $boxtype == 'bska' ] || [ $boxtype == 'bxzb' ]; then
+         echo "init frontends bialy"
+         modprobe fe-core
+    elif [ $boxtype == 'bsla' ]; then
+         echo "init frontends czarny"
+	 modprobe fe-core-twin1
+    else
+	 modprobe fe-core-twin2
+    fi
+
+   echo "init drivers"
+   if [ $player -gt 131 ]; then
+	modprobe pti
+	modprobe stm_monitor
+	modprobe stmsysfs
+	if [ $boxtype == 'bzzb' ]; then
+	  modprobe stmdvb TSIS_mode=serial NIMS=twin ;
+	elif [ $boxtype == 'bsla' ]; then
+	  modprobe stmdvb TSIS_mode=parallel NIMS=twin ;
+	else
+	  modprobe stmdvb TSIS_mode=parallel NIMS=single ;
+	fi
+   else
+	modprobe pti
+	modprobe stmdvb
+	modprobe stm_monitor
+   fi	
+   modprobe player2
+   modprobe sth264pp
+   modprobe stmalloc
+   modprobe platform
+   modprobe smartcard
+
+#       echo "init dvb-t as102"
+#       /var/config/dvbt &
+#       modprobe dvb-as102
+
+  if [ $boxtype == 'bxzb' ]; then
+      echo "bxzb" > /proc/stb/video/switch_type
+  else
+      echo "bska" > /proc/stb/video/switch_type
+  fi
+
+  if [ "$VIDEO" = "scart" ]; then
+      echo "VIDEO:scart"
+      echo "scart" > /proc/stb/video/switch
+  else
+      echo "VIDEO:hdmi_component"
+      echo "component720p" > /proc/stb/video/switch
+  fi
+
+   showiframe -p /usr/share/bootlogo.mvi &
+   stfbcontrol a 0
+
+   echo "init frontpanel"
+   modprobe simu_button
+
+   echo "init lircd"
+   mkdir -p /var/run/lirc
+   /usr/bin/lircd
+
+   /usr/bin/evremote2 &
+
+   echo "starting vsftpd"
+if [ -e /etc/init.d/vsftpd ]; then
+   /etc/init.d/vsftpd start
+fi
+   /usr/sbin/inetd
+
+   until false
+   do
+      echo "starting e2->"
+      /usr/bin/enigma2
+      rtv=$?
+      echo "e2 ended <- RTV: " $rtv
+      case "$rtv" in
+		0) echo "0"
+		   echo "E2 ERROR" > /dev/vfd
+		   sync
+		   init 6;;
+		1) echo "1"
+		   echo "SHUTDOWN" > /dev/vfd
+		   sync
+		   init 6
+		   umount -a;;
+		2) echo "2"
+		   echo "REBOOT" > /dev/vfd
+		   sync
+		   init 6;;
+		3) echo "3"
+		   echo "E2 RESTART" > /dev/vfd
+		   echo "0" > /proc/progress
+		   showiframe -p /usr/share/bootlogo.mvi &;;
+		*) echo "*"
+		   echo "ERROR" > /dev/vfd
+		   sync
+		   echo "0" > /proc/progress
+		   showiframe -p /usr/share/bootlogo.mvi &;;
+      esac
+   done 
+ fi
+fi

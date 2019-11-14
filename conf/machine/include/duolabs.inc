@@ -1,16 +1,16 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/smallflash.inc
 
-BOX_BRAND = "kathrein"
+BOX_BRAND = "duolabs"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE}"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
 
-MACHINE_FEATURES += "ufs910"
+MACHINE_FEATURES += "ci"
 
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7100.elf"
