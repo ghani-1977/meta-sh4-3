@@ -13,29 +13,29 @@ SRC_URI[sha256sum] = "869b07c99b77a54449ed766bdcd6ea219d1860129fe801f2d92d5d515b
 S = "${WORKDIR}"
 
 PACKAGES = "${PN}"
-FILES_${PN} += "${base_libdir}/firmware"
+FILES_${PN} += "${nonarch_base_libdir}/firmware"
 
 do_install() {
-    install -d ${D}${base_libdir}/firmware
+    install -d ${D}${nonarch_base_libdir}/firmware
     if [ "${MACHINE}" = "adb_box" ]; then
-        install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
-        install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-        install -m 0644 as102_data1_st.hex ${D}${base_libdir}/firmware/
-        install -m 0644 as102_data2_st.hex ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl2108.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl6222.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 as102_data1_st.hex ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 as102_data2_st.hex ${D}${nonarch_base_libdir}/firmware/
     elif [ "${MACHINE}" = "tf7700" ]; then
-        install -m 0644 dvb-fe-cx24116.fw ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-cx24116.fw ${D}${nonarch_base_libdir}/firmware/
     elif [ "${MACHINE}" = "ufs910" ]; then
-        install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/dvb-fe-cx24116.fw
+        install -m 0644 dvb-fe-cx21143.fw ${D}${nonarch_base_libdir}/firmware/dvb-fe-cx24116.fw
     elif [ "${MACHINE}" = "pace7241" -o "${MACHINE}" = "sagemcom88" -o "${MACHINE}" = "ufs913" -o "${MACHINE}" = "vitamin_hd5000" ]; then
-        install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl6222.fw ${D}${nonarch_base_libdir}/firmware/
     elif [ "${MACHINE}" = "ufs922" ]; then
-        install -m 0644 dvb-fe-avl2108.fw ${D}${base_libdir}/firmware/
-        install -m 0644 dvb-fe-avl6222.fw ${D}${base_libdir}/firmware/
-        install -m 0644 dvb-fe-cx21143.fw ${D}${base_libdir}/firmware/
-        install -m 0644 dvb-fe-stv6306.fw ${D}${base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl2108.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl6222.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-cx21143.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-stv6306.fw ${D}${nonarch_base_libdir}/firmware/
     else
-        install -m 0644 ${DVB1FIRMWARE} ${D}${base_libdir}/firmware/
-        install -m 0644 ${DVB2FIRMWARE} ${D}${base_libdir}/firmware/
+        install -m 0644 ${DVB1FIRMWARE} ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 ${DVB2FIRMWARE} ${D}${nonarch_base_libdir}/firmware/
     fi
 }
 
