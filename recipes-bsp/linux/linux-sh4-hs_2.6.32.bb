@@ -8,5 +8,5 @@ SRC_URI_append += "\
     file://linux-sh4-lmb_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1 \
-    file://linux-sh4-i2c-stm-downgrade_stm24_${STM_PATCH_STR}.patch;patch=1 \
+    file://linux-sh4-i2c-stm-downgrade-old_stm24_${STM_PATCH_STR}.patch;patch=1 \
 "
