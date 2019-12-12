@@ -2,7 +2,7 @@ require sh4-apps.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "^(adb_box|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|fortis_hdbox|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|octagon1008|pace7241|sagemcom88|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vip1_v2|vip2_v1|vitamin_hd5000|qboxhd|qboxhd_mini|forever_2424hd|forever_3434hd|forever_9898hd|forever_smart)$"
+COMPATIBLE_MACHINE = "^(adb_box|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|fortis_hdbox|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|octagon1008|pace7241|sagemcom88|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vip1_v2|vip2_v1|vitamin_hd5000|qboxhd|qboxhd_mini|forever_2424hd|forever_3434hd|forever_9898hd|forever_nanosmart)$"
 
 DESCRIPTION = "A tool for SH4 remotes"
 
