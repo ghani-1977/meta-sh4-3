@@ -5,10 +5,7 @@ BOX_BRAND = "forever"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 
-ROOTFS_FILE = "e2jffs2.img"
-KERNEL_FILE = "uImage"
-
-IMAGE_FSTYPES += "sparkusbimg"
+ROOTFS_FILE = "root.img"
 
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_h205.elf"
