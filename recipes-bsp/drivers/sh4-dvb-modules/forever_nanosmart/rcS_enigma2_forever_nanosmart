@@ -1,0 +1,102 @@
+#!/usr/bin/sh
+
+echo "[rcS] Init frontpanel"
+if [ ! -e /dev/vfd ]; then
+   mknod -m 0660 /dev/vfd c 147 0
+fi
+
+modprobe fortis_4g_fp paramDebug=10
+modprobe simu_button
+
+if [ -e /var/etc/.firstboot ]; then
+   echo "1min." > /dev/vfd
+   echo "[rcS] WAIT 1 minute"
+   rm /var/etc/.firstboot
+   sleep 1
+   touch /dev/.devfsd
+else
+   echo "LD.10" > /dev/vfd
+   echo "[rcS] LOAD 10"
+fi
+
+/etc/init.d/mountvirtfs start
+
+modprobe e2_proc
+
+echo "[rcS] Init stmfb (LOAD 9)"
+echo "LD 9" > /dev/vfd
+modprobe stmcore-display-stih205
+
+modprobe stmfb display0=1280x720-32@50:12m:pal:rgb:rgb display1=720x576-16@50:1m:pal:cvbs
+
+echo "[rcS] Loading modules"
+
+echo "[rcS] Init embx (LOAD 6)"
+echo "LD 6" > /dev/vfd
+
+echo "[rcS] Init AVS (LOAD 5)"
+echo "LD 5" > /dev/vfd
+modprobe avs type=avs_none
+
+echo "[rcS] Init player (LOAD 4)"
+echo "LD 4" > /dev/vfd
+
+echo "[rcS] Init frontend"
+modprobe lnb type=lnbh25p paramDebug=20
+modprobe stv090x paramDebug=20
+mknod /dev/lnb c 149 0
+
+echo "[rcS] Init player2 (LOAD 3)"
+echo "LD 3" > /dev/vfd
+
+modprobe bpamem
+mknod /dev/bpamem c 153 0
+
+echo "[rcS] Init HDMI-CEC"
+modprobe cec activemode=1
+
+echo "[rcS] Init lirc remote control (LOAD 2)"
+echo "LD 2" > /dev/vfd
+/usr/bin/lircd
+rm -rf /dev/rc
+mknod /dev/rc c 147 1 #VFD
+/bin/evremote2 10 120 &
+
+stfbcontrol a 255
+
+echo "[rcS] Loading Enigma2"
+echo "LD.E2" > /dev/vfd
+
+until false
+do
+   echo "[rcS] Entering e2 main loop"
+   if [ -e /usr/local/share/enigma2/backdrop.mvi ]; then
+      showiframe -p /usr/local/share/enigma2/backdrop.mvi
+   fi
+   /usr/local/bin/enigma2
+   rtv=$?
+   echo "[rcS] e2 ended <- return value: " $rtv
+   case "$rtv" in
+      0) echo "E2 ERROR"
+         echo "E2ER" > /dev/vfd
+         init 6;;
+      1) echo "SHUTDOWN"
+         echo "Shdn" > /dev/vfd
+         init 0;;
+      2) echo "REBOOT"
+         echo "rebt" > /dev/vfd
+         init 6;;
+      3) echo "RESTART GUI"
+         echo "E2rS" > /dev/vfd
+         echo "0" > /proc/progress
+         if [ -e /usr/local/share/enigma2/backdrop.mvi ]; then
+            showiframe -p /usr/local/share/enigma2/backdrop.mvi &
+         else
+            showiframe -p /boot/bootlogo.mvi &
+         fi
+         echo -n " ";;
+      *) echo "ERROR"
+         echo "Err " > /dev/vfd
+         init 6;;
+   esac
+done
