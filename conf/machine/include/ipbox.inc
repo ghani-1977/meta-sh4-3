@@ -1,6 +1,4 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/smallflash.inc
-require conf/machine/include/modutils-sh4.inc
 
 BOX_BRAND = "ipbox"
 
@@ -22,6 +20,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlirc \
 "
 
-MACHINE_FEATURES += "ci"
+MACHINE_FEATURES += "ci smallflash modutils-sh4"
 
 CAN_USE_ENIGMA2_IN_FLASH = "0"

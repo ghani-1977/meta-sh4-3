@@ -1,6 +1,4 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/smallflash.inc
-require conf/machine/include/modutils-sh4.inc
 
 BOX_BRAND = "atemio"
 
@@ -22,6 +20,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     evremote2 \
 "
 
-MACHINE_FEATURES += "hdmicec ci"
+MACHINE_FEATURES += "hdmicec ci smallflash modutils-sh4"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"

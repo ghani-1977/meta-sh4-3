@@ -1,1 +1,0 @@
-MACHINE_FEATURES += "modutils-sh4"

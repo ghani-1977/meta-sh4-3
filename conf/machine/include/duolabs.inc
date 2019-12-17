@@ -1,5 +1,4 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/smallflash.inc
 
 BOX_BRAND = "duolabs"
 
@@ -10,7 +9,7 @@ KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
 
-MACHINE_FEATURES += "ci"
+MACHINE_FEATURES += "ci smallflash"
 
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7100.elf"

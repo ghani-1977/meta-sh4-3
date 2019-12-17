@@ -1,6 +1,4 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/smallflash.inc
-require conf/machine/include/modutils-sh4.inc
 
 BOX_BRAND = "hs"
 
@@ -21,6 +19,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     flash-tools \
 "
 
-MACHINE_FEATURES += "hdmicec ci"
-
-CAN_USE_ENIGMA2_IN_FLASH = "0"
+MACHINE_FEATURES += "hdmicec ci smallflash modutils-sh4"
