@@ -18,8 +18,6 @@ UPDATEIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sparkupdt"
 # Additional files and/or directories to be copied into the vfat partition from the IMAGE_ROOTFS.
 FATPAYLOAD ?= ""
 
-IMAGEDATESTAMP = "${@time.strftime('%Y.%m.%d',time.gmtime())}"
-
 IMAGE_CMD_sparkupdt  () {
     # Initialize sdcard image file
     dd if=/dev/zero of="${UPDATEIMG}" bs=1 count=0 seek=$(expr 1000 \* 1000 \* ${UPDATEIMG_SIZE})
@@ -43,7 +41,7 @@ IMAGE_CMD_sparkupdt  () {
     fi
 
     # Add stamp file
-    echo "${IMAGE_NAME}-${IMAGEDATESTAMP}" > "${WORKDIR}/image-version-info"
+    echo "${IMAGE_NAME}" > "${WORKDIR}/image-version-info"
     mcopy -i "${WORKDIR}/boot.img" -v "${WORKDIR}/image-version-info" ::
 
     # Burn Partitions
