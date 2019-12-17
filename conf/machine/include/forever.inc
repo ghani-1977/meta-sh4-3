@@ -7,6 +7,8 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 
 ROOTFS_FILE = "root.img"
 
+IMAGE_FSTYPES += "tar.gz"
+
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_h205.elf"
 

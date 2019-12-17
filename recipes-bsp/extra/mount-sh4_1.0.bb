@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://${OPENPLI_BASE}/LICENSE;md5=eb723b61539feef013de476e6
 
 RDEPENDS_${PN} = "kernel-module-yaffs"
 
+COMPATIBLE_MACHINE = "^(spark|spark7162)$"
+
 SRC_URI = "file://mountsh4"
 
 FILES_${PN} = "${sysconfdir}"

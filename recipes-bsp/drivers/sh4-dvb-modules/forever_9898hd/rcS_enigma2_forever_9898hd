@@ -24,9 +24,9 @@ modprobe e2_proc
 
 echo "[rcS] Init stmfb (LOAD 9)"
 echo "LD 9" > /dev/vfd
-modprobe stmcore-display-sti7111
+modprobe stmcore-display-stih205
 
-modprobe stmfb display0=1280x720-32@50:12m:pal:rgb:rgb; #HDMI
+modprobe stmfb display0=1280x720-32@50:12m:pal:rgb:rgb display1=720x576-16@50:1m:pal:cvbs
 
 echo "[rcS] Loading modules"
 

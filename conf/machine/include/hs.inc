@@ -7,6 +7,7 @@ BOX_BRAND = "hs"
 PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-hs"
 
 ROOTFS_FILE = "root.img"
+KERNEL_FILE = "uImage"
 
 AUDIOELF = "audio_7111.elf"
 VIDEOELF = "video_7111.elf"
