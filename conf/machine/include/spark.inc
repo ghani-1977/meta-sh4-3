@@ -1,7 +1,11 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/wifi-sh4.inc
+require conf/machine/include/normal-sh4-image.inc
 
 BOX_BRAND = "fulan"
+
+MTD_KERNEL = "mtd5"
+MTD_ROOTFS = "mtd6"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE}"
 

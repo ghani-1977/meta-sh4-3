@@ -1,6 +1,10 @@
 require conf/machine/include/oem-sh4.inc
+require conf/machine/include/normal-sh4-image.inc
 
 BOX_BRAND = "cuberevo"
+
+MTD_KERNEL = "mtd3"
+MTD_ROOTFS = "mtd4"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 

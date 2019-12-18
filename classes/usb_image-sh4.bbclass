@@ -114,4 +114,3 @@ IMAGE_CMD_sh4usbimg () {
 	rm -f "${SDIMG}"
 	rm -f "${SDIMG_ROOTFS}"
 }
-
