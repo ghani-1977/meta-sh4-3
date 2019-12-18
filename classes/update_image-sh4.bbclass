@@ -1,4 +1,4 @@
-# Default to 1 GB images
+# Default to 256 MB images
 UPDATEIMG_SIZE ?= "256"
 
 # Boot partition volume id
@@ -9,16 +9,16 @@ UPDATEIMG_ROOTFS_TYPE ?= "ext2.gz"
 UPDATEIMG_ROOTFS = "${IMAGE_NAME}.${UPDATEIMG_ROOTFS_TYPE}"
 UPDATEIMG_KERNEL_NAME = "${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin"
 
-do_image_sparkupdt[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
+do_image_sh4updt[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
 
 # USB-pendrive image name
-UPDATEIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sparkupdt"
+UPDATEIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sh4updt"
 
 
 # Additional files and/or directories to be copied into the vfat partition from the IMAGE_ROOTFS.
 FATPAYLOAD ?= ""
 
-IMAGE_CMD_sparkupdt  () {
+IMAGE_CMD_sh4updt  () {
     # Initialize sdcard image file
     dd if=/dev/zero of="${UPDATEIMG}" bs=1 count=0 seek=$(expr 1000 \* 1000 \* ${UPDATEIMG_SIZE})
 

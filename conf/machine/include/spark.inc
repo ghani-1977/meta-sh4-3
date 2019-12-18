@@ -8,7 +8,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE}"
 ROOTFS_FILE = "e2jffs2.img"
 KERNEL_FILE = "uImage"
 
-IMAGE_FSTYPES += "sparkusbimg"
+IMAGE_FSTYPES += "sh4usbimg"
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     ntfs-3g \
