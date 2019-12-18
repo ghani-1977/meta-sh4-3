@@ -19,4 +19,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     flash-tools \
 "
 
-MACHINE_FEATURES += "hdmicec ci smallflash modutils-sh4"
+MACHINE_FEATURES += "hdmicec ci modutils-sh4"
