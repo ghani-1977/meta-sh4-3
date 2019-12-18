@@ -12,12 +12,10 @@ PKGV = "1.1+git${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/sh4-native-tools.git;protocol=git"
 
-S = "${WORKDIR}/git/tools/${@d.getVar('PN',1).replace('-', '_')}"
+S = "${WORKDIR}/git/tools/${@d.getVar('PN',1).replace('-native', '')}"
 
 EXTRA_OECONF = "--enable-silent-rules --prefix="
 LDFLAGS += "-lpthread -lrt"
-EXTRA_OEMAKE = " DRIVER_TOPDIR=${STAGING_KERNEL_DIR}"
-CFLAGS_append = " -I${STAGING_KERNEL_DIR}/multicom/include"
 
 do_configure_prepend() {
     touch ${S}/NEWS
@@ -26,3 +24,5 @@ do_configure_prepend() {
     touch ${S}/COPYING
     touch ${S}/ChangeLog
 }
+
+BBCLASSEXTEND = "native"
