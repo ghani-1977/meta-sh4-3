@@ -9,7 +9,7 @@ UPDATEIMG_ROOTFS_TYPE ?= "ext2.gz"
 UPDATEIMG_ROOTFS = "${IMAGE_NAME}.${UPDATEIMG_ROOTFS_TYPE}"
 UPDATEIMG_KERNEL_NAME = "${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin"
 
-do_image_sh4updt[depends] += "fup-native:do_populate_sysroot mup-native:do_populate_sysroot pad-native:do_populate_sysroot parted-native:do_populate_sysroot mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
+do_image_sh4updt[depends] += "fup-native:do_populate_sysroot parted-native:do_populate_sysroot mtools-native:do_populate_sysroot dosfstools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot virtual/kernel:do_populate_sysroot"
 
 # USB-pendrive image name
 UPDATEIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sh4updt"

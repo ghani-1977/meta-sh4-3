@@ -1,8 +1,5 @@
 IMAGE_DEPENDS_jffs2_append += "\
     fup-native \
-    mup-native \
-    pad-native \
-    tfpacker-native \
     "
 
 IMAGE_CMD_jffs2_append = "\
