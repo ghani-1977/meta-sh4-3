@@ -1,6 +1,7 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/wifi-sh4.inc
 require conf/machine/include/ird-sh4-image.inc
+require conf/machine/include/sh4-ubi.inc
 
 BOX_BRAND = "forever"
 
@@ -20,6 +21,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     evremote2 \
 "
 
-MACHINE_FEATURES += "hdmicec"
+MACHINE_FEATURES += "hdmicec 4thgsh4"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"

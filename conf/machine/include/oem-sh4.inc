@@ -32,21 +32,10 @@ DISTRO_FEATURES_append += "libsigc2"
 KERNEL_IMAGETYPE = "uImage"
 #KERNEL_OUTPUT = "${KERNEL_IMAGETYPE}"
 
-JFFS2_ERASEBLOCK = "0x20000"
-JFFS2_ENDIANNESS = "${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--little-endian', '--big-endian', d)}"
-EXTRA_IMAGECMD_jffs2 = "--pad ${JFFS2_ENDIANNESS} --eraseblock=${JFFS2_ERASEBLOCK} --no-cleanmarkers"
-MKUBIFS_ARGS = "--pad ${JFFS2_ENDIANNESS} --eraseblock=${JFFS2_ERASEBLOCK} --no-cleanmarkers"
 DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix --with-eac3"
-
-IMAGE_FSTYPES ?= "jffs2"
-# For debugging.. but lets enable anyways..
 
 IMAGE_CLASSES += "usb_image-sh4"
 INITRAMFS_FSTYPES =  "ext2.gz sh4updt"
-
-IMAGE_CMD_jffs2_prepend = "\
-    rm -rf ${IMAGE_ROOTFS}/tmp/*; \
-    "
 
 # Add uImage in tar image boot directory
 IMAGE_CMD_tar_prepend = "\
@@ -60,7 +49,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     fp-control \
     stinit \
     sh4-dvb-modules \
-    mtd-utils-jffs2 \
     "
 
 EXTRA_IMAGEDEPENDS += "\
