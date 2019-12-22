@@ -11,8 +11,9 @@ ROOTFS_FILE = "root.img"
 
 IMAGE_FSTYPES += "tar.gz"
 
-AUDIOELF = "audio_7100.elf"
-VIDEOELF = "video_h205.elf"
+AUDIOELF = "companion_h205_audio.bin"
+VIDEOELF = "companion_h205_video_Ax.bin"
+VIDEOELF2 = "companion_h205_video_Bx.bin"
 
 SOC_FAMILY = "stih205"
 

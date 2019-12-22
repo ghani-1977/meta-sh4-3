@@ -7,4 +7,8 @@ STXNUMBER = "stxh205"
 SRC_URI_append += "\
     file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
     ${@bb.utils.contains_any("MACHINE", "forever_2424hd", "file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1", "", d)} \
+    file://generic_104_stxH271_control-pciemp.patch;patch=1 \
+    file://generic_106_stxh205_wol_hom_liege.patch;patch=1 \
+    file://generic_125_sbc-clock-id-for-H205.patch;patch=1 \
+    file://generic_127_ddr_deep_standby.patch;patch=1 \
 "
