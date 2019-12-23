@@ -10,6 +10,7 @@ INSANE_SKIP_${PN} = "arch"
 
 SRC_URI = "file://${AUDIOELF} \
 	file://${VIDEOELF} \
+	${@bb.utils.contains("BOX_BRAND", "forever", "file://${VIDEOELF2}", "", d)} \
 "
 
 # For audio_7109.elf just use audio_7100.elf
