@@ -1,10 +1,6 @@
-IMAGE_DEPENDS_jffs2_append += "\
-    fup-native \
-    "
+do_image_jffs2[depends] += "fup-native:do_populate_sysroot"
 
-IMAGE_DEPENDS_ubi_append += "\
-    fup-native \
-    "
+do_image_ubi[depends] += "fup-native:do_populate_sysroot"
 
 IMAGE_CMD_jffs2_append = "\
     ; \
