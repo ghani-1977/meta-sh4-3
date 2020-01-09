@@ -19,10 +19,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/linux-sh4:"
 # By default, kernel.bbclass modifies package names to allow multiple kernels
 # to be installed in parallel. We revert this change and rprovide the versioned
 # package names instead, to allow only one kernel to be installed.
-PKG_${KERNEL_PACKAGE_NAME}-base = "kernel-base"
-PKG_${KERNEL_PACKAGE_NAME}-image = "kernel-image"
-RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "kernel-${KERNEL_VERSION}"
-RPROVIDES_kernel-image = "kernel-image-${KERNEL_VERSION}"
+PKG_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-base"
+PKG_${KERNEL_PACKAGE_NAME}-image = "${KERNEL_PACKAGE_NAME}-image"
+RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-${KERNEL_VERSION}"
+RPROVIDES_${KERNEL_PACKAGE_NAME}-image = "${KERNEL_PACKAGE_NAME}-image-${KERNEL_VERSION}"
 
 STM_PATCH_STR = "0217"
 LINUX_VERSION = "2.6.32.71"
@@ -49,13 +49,14 @@ PARALLEL_MAKEINST = ""
 # So explicitly enable it for that in here
 EXTRA_OEMAKE_prepend = " ${PARALLEL_MAKE} "
 
-PACKAGES =+ "kernel-headers"
+PACKAGES =+ "${KERNEL_PACKAGE_NAME}-headers"
 INSANE_SKIP_${PN} += "installed-vs-shipped"
-FILES_kernel-headers = "${exec_prefix}/src/linux*"
+FILES_${KERNEL_PACKAGE_NAME}-headers = "${exec_prefix}/src/linux*"
 FILES_${KERNEL_PACKAGE_NAME}-dev += "${includedir}/linux"
 FILES_${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}"
 
 KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} oldconfig"
+
 do_configure_prepend() {
     oe_machinstall -m 0644 ${WORKDIR}/defconfig ${B}/.config
     sed -i "s#^\(CONFIG_EXTRA_FIRMWARE_DIR=\).*#\1\"${STAGING_DIR_HOST}/lib/firmware\"#" ${B}/.config;
