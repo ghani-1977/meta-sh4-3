@@ -1,5 +1,4 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/wifi-sh4.inc
 require conf/machine/include/ird-sh4-image.inc
 require conf/machine/include/sh4-ubi.inc
 
