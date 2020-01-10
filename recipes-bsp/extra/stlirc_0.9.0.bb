@@ -11,7 +11,7 @@ RDEPENDS_lirc-exec = "stlirc"
 RRECOMMENDS_${PN} = "stlirc-exec kernel-module-uinput"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "^(adb_box|arivalink200|ipbox55|ipbox99|ipbox9900|hl101|pace7241|sagemcom88|spark|spark7162|ufs910|vip1_v2|vip2_v1|qboxhd|qboxhd_mini)$"
+COMPATIBLE_MACHINE = "^(adb_box|arivalink200|ipbox55|ipbox99|ipbox9900|hl101|pace7241|sagemcom88|spark|spark7162|ufs910|vip1_v2|vip2_v1|qboxhd|qboxhd_mini|forever_2424hd|forever_3434hd|forever_9898hd|forever_nanosmart)$"
 
 RCONFLICTS_${PN} = "lirc"
 RCONFLICTS_stlirc-exec = "lirc-exec"
@@ -32,7 +32,7 @@ SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar
            file://fix_irrecord_deps.patch;patch=1 \
            ${@bb.utils.contains_any("MACHINE", "adb_box arivalink200 ipbox55 ipbox99 ipbox9900 pace7241 sagemcom88 ufs910 vip1_v2 vip2_v1 qboxhd qboxhd_mini", "file://${PN}_sh4.patch file://lircd_sh4.init", "", d)} \
            ${@bb.utils.contains_any("MACHINE", "hl101 spark spark7162", "file://lircd_spark.init", "", d)} \
-           ${@bb.utils.contains_any("MACHINE", "hl101", "file://${PN}_hl101.patch file://lircd.conf.03_00_01 file://lircd.conf.03_00_02 file://lircd.conf.03_00_07", "", d)} \
+           ${@bb.utils.contains("MACHINE", "hl101", "file://${PN}_hl101.patch file://lircd.conf.03_00_01 file://lircd.conf.03_00_02 file://lircd.conf.03_00_07", "", d)} \
            ${@bb.utils.contains_any("MACHINE", "spark spark7162", "file://${PN}_spark.patch file://lircd.conf.09_00_07 file://lircd.conf.09_00_08 file://lircd.conf.09_00_0B file://lircd.conf.09_00_1D file://lircd.conf.09_00_0D", "", d)} \
           "
 

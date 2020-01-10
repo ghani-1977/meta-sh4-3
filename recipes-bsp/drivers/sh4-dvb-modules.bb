@@ -31,6 +31,7 @@ SRC_URI = "\
 " 
 
 FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin ${sysconfdir}"
+
 FILES = ""
 
 S = "${WORKDIR}/git"
@@ -127,7 +128,7 @@ do_install() {
         fi
     fi
 	
-	find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
+    find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
 }
 
 PACKAGESPLITFUNCS_append = " handle_driver_rename "
@@ -137,4 +138,5 @@ python handle_driver_rename () {
     d.setVar("RREPLACES_sh4-dvb-modules", "sh4-dvb-modules")
     d.setVar("RCONFLICTS_sh4-dvb-modules", "sh4-dvb-modules")
 }
+
 FILES_${PN}-dev += "${includedir}"
