@@ -1,6 +1,6 @@
-diff -Naur sh4-apps-master/tools/fp_control/autogen.sh sh4-apps-prince/tools/fp_control/autogen.sh
---- sh4-apps-master/tools/fp_control/autogen.sh	2019-08-27 22:19:07.000000000 +0430
-+++ sh4-apps-prince/tools/fp_control/autogen.sh	2019-08-28 01:52:14.765292442 +0430
+diff -Naur sh4-apps/tools/fp_control/autogen.sh sh4-apps-PersianPrince/tools/fp_control/autogen.sh
+--- sh4-apps/tools/fp_control/autogen.sh	2019-12-18 01:23:17.000000000 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/autogen.sh	2020-01-11 00:57:27.514779170 +0330
 @@ -1,15 +1,62 @@
  #!/bin/sh
  
@@ -70,9 +70,9 @@ diff -Naur sh4-apps-master/tools/fp_control/autogen.sh sh4-apps-prince/tools/fp_
 +echo "  automake --add-missing"
 +automake --add-missing 
 +
-diff -Naur sh4-apps-master/tools/fp_control/configure.ac sh4-apps-prince/tools/fp_control/configure.ac
---- sh4-apps-master/tools/fp_control/configure.ac	2019-08-27 22:19:07.000000000 +0430
-+++ sh4-apps-prince/tools/fp_control/configure.ac	2019-08-28 01:52:14.765292442 +0430
+diff -Naur sh4-apps/tools/fp_control/configure.ac sh4-apps-PersianPrince/tools/fp_control/configure.ac
+--- sh4-apps/tools/fp_control/configure.ac	2019-12-18 01:23:17.000000000 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/configure.ac	2020-01-11 00:57:27.514779170 +0330
 @@ -1,16 +1,33 @@
 -AC_INIT([fp_control],[1.0],[],[fp_control])
 -AC_PREREQ(2.53)
@@ -114,9 +114,9 @@ diff -Naur sh4-apps-master/tools/fp_control/configure.ac sh4-apps-prince/tools/f
  
  AC_OUTPUT([
  Makefile
-diff -Naur sh4-apps-master/tools/fp_control/fp_control.c sh4-apps-prince/tools/fp_control/fp_control.c
---- sh4-apps-master/tools/fp_control/fp_control.c	2019-08-28 01:52:38.550464674 +0430
-+++ sh4-apps-prince/tools/fp_control/fp_control.c	2019-08-28 01:52:14.765292442 +0430
+diff -Naur sh4-apps/tools/fp_control/fp_control.c sh4-apps-PersianPrince/tools/fp_control/fp_control.c
+--- sh4-apps/tools/fp_control/fp_control.c	2020-01-11 00:59:27.009045353 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/fp_control.c	2020-01-11 00:58:33.373823278 +0330
 @@ -10,7 +10,7 @@
   *
   * This program is distributed in the hope that it will be useful,
@@ -1020,7 +1020,7 @@ diff -Naur sh4-apps-master/tools/fp_control/fp_control.c sh4-apps-prince/tools/f
 +	int         vLen            = -1;
 +	eBoxType    vBoxType        = Unknown;
  
- 	vFd = open("/proc/stb/info/model", O_RDONLY);
+ 	vFd = open("/etc/model", O_RDONLY);
 -	vLen = read(vFd, vName, cSize);
 +	vLen = read (vFd, vName, cSize);
  	close(vFd);
@@ -1065,7 +1065,7 @@ diff -Naur sh4-apps-master/tools/fp_control/fp_control.c sh4-apps-prince/tools/f
 -		{
 -			vBoxType = Ufs912;
 -		}
--		else if (!strncasecmp(vName, "tf7700hdpvr", 11))
+-		else if (!strncasecmp(vName, "tf7700", 11))
 -		{
 -			vBoxType = Tf7700;
 -		}
@@ -1073,15 +1073,15 @@ diff -Naur sh4-apps-master/tools/fp_control/fp_control.c sh4-apps-prince/tools/f
 -		{
 -			vBoxType = Hl101;
 -		}
--		else if (!strncasecmp(vName, "vip1-v2", 7))
+-		else if (!strncasecmp(vName, "vip1_v2", 7))
 -		{
 -			vBoxType = Vip2;
 -		}
--		else if (!strncasecmp(vName, "vip2-v1", 7))
+-		else if (!strncasecmp(vName, "vip2_v1", 7))
 -		{
 -			vBoxType = Vip2;
 -		}
--		else if ((!strncasecmp(vName, "hdbox", 5)) || (!strncasecmp(vName, "octagon1008", 11)) || (!strncasecmp(vName, "atevio7500", 10)) || (!strncasecmp(vName, "hs7110", 6)) || (!strncasecmp(vName, "hs7420", 6)) || (!strncasecmp(vName, "hs7810a", 7)) || (!strncasecmp(vName, "hs7119", 6)) || (!strncasecmp(vName, "hs7429", 6)) || (!strncasecmp(vName, "hs7819", 6)))
+-		else if ((!strncasecmp(vName, "fortis_hdbox", 5)) || (!strncasecmp(vName, "octagon1008", 11)) || (!strncasecmp(vName, "atevio7500", 10)) || (!strncasecmp(vName, "hs7110", 6)) || (!strncasecmp(vName, "hs7420", 6)) || (!strncasecmp(vName, "hs7810a", 7)) || (!strncasecmp(vName, "hs7119", 6)) || (!strncasecmp(vName, "hs7429", 6)) || (!strncasecmp(vName, "hs7819", 6)))
 -		{
 -			vBoxType = Fortis;
 -		}
@@ -1109,7 +1109,7 @@ diff -Naur sh4-apps-master/tools/fp_control/fp_control.c sh4-apps-prince/tools/f
 -		{
 -			vBoxType = Adb_Box;
 -		}
--		else if ((!strncasecmp(vName, "cuberevo", 8)) || (!strncasecmp(vName, "cuberevo-mini", 13)) || (!strncasecmp(vName, "cuberevo-mini2", 14)) || (!strncasecmp(vName, "cuberevo-mini-fta", 17)) || (!strncasecmp(vName, "cuberevo-250hd", 14)) || (!strncasecmp(vName, "cuberevo-2000hd", 15)) || (!strncasecmp(vName, "cuberevo-9500hd", 15)) || (!strncasecmp(vName, "cuberevo-3000hd", 14)))
+-		else if ((!strncasecmp(vName, "cuberevo", 8)) || (!strncasecmp(vName, "cuberevo_mini", 13)) || (!strncasecmp(vName, "cuberevo_mini2", 14)) || (!strncasecmp(vName, "cuberevo_mini_fta", 17)) || (!strncasecmp(vName, "cuberevo_250hd", 14)) || (!strncasecmp(vName, "cuberevo_2000hd", 15)) || (!strncasecmp(vName, "cuberevo_9500hd", 15)) || (!strncasecmp(vName, "cuberevo_3000hd", 14)))
 -		{
 -			vBoxType = Cuberevo;
 -		}
@@ -1180,9 +1180,9 @@ diff -Naur sh4-apps-master/tools/fp_control/fp_control.c sh4-apps-prince/tools/f
 +	return 0;
  }
  // vim:ts=4
-diff -Naur sh4-apps-master/tools/fp_control/global.c sh4-apps-prince/tools/fp_control/global.c
---- sh4-apps-master/tools/fp_control/global.c	2019-08-27 22:19:07.000000000 +0430
-+++ sh4-apps-prince/tools/fp_control/global.c	2019-08-28 01:52:14.765292442 +0430
+diff -Naur sh4-apps/tools/fp_control/global.c sh4-apps-PersianPrince/tools/fp_control/global.c
+--- sh4-apps/tools/fp_control/global.c	2019-12-18 01:23:17.000000000 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/global.c	2020-01-11 00:57:27.514779170 +0330
 @@ -1,18 +1,18 @@
  /*
   * global.c
@@ -1731,9 +1731,9 @@ diff -Naur sh4-apps-master/tools/fp_control/global.c sh4-apps-prince/tools/fp_co
 +	
  	return 0;
  }
-diff -Naur sh4-apps-master/tools/fp_control/global.h sh4-apps-prince/tools/fp_control/global.h
---- sh4-apps-master/tools/fp_control/global.h	2019-08-27 22:19:07.000000000 +0430
-+++ sh4-apps-prince/tools/fp_control/global.h	2019-08-28 01:52:14.765292442 +0430
+diff -Naur sh4-apps/tools/fp_control/global.h sh4-apps-PersianPrince/tools/fp_control/global.h
+--- sh4-apps/tools/fp_control/global.h	2019-12-18 01:23:17.000000000 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/global.h	2020-01-11 00:57:27.514779170 +0330
 @@ -7,141 +7,71 @@
  #define false 0
  #endif
@@ -1929,9 +1929,9 @@ diff -Naur sh4-apps-master/tools/fp_control/global.h sh4-apps-prince/tools/fp_co
 +int syncWasTimerWakeup(eWakeupReason reason);
  
  #endif
-diff -Naur sh4-apps-master/tools/fp_control/Makefile.am sh4-apps-prince/tools/fp_control/Makefile.am
---- sh4-apps-master/tools/fp_control/Makefile.am	2019-08-27 22:19:07.000000000 +0430
-+++ sh4-apps-prince/tools/fp_control/Makefile.am	2019-08-28 01:52:14.769292635 +0430
+diff -Naur sh4-apps/tools/fp_control/Makefile.am sh4-apps-PersianPrince/tools/fp_control/Makefile.am
+--- sh4-apps/tools/fp_control/Makefile.am	2019-12-18 01:23:17.000000000 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/Makefile.am	2020-01-11 00:57:27.514779170 +0330
 @@ -1,24 +1,5 @@
  bin_PROGRAMS = fp_control
  
@@ -1958,9 +1958,9 @@ diff -Naur sh4-apps-master/tools/fp_control/Makefile.am sh4-apps-prince/tools/fp
  AM_LDFLAGS = -lrt
 -ACLOCAL_AMFLAGS = -I m4
 -
-diff -Naur sh4-apps-master/tools/fp_control/Spark.c sh4-apps-prince/tools/fp_control/Spark.c
---- sh4-apps-master/tools/fp_control/Spark.c	2019-08-27 22:19:07.000000000 +0430
-+++ sh4-apps-prince/tools/fp_control/Spark.c	2019-08-28 01:52:14.769292635 +0430
+diff -Naur sh4-apps/tools/fp_control/Spark.c sh4-apps-PersianPrince/tools/fp_control/Spark.c
+--- sh4-apps/tools/fp_control/Spark.c	2019-12-18 01:23:17.000000000 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/Spark.c	2020-01-11 00:57:27.518779113 +0330
 @@ -10,30 +10,16 @@
   *
   * This program is distributed in the hope that it will be useful,
@@ -3251,9 +3251,9 @@ diff -Naur sh4-apps-master/tools/fp_control/Spark.c sh4-apps-prince/tools/fp_con
 +	.GetWakeupReason	= Spark_getWakeupReason,
 +	.private		= NULL,
  };
-diff -Naur sh4-apps-master/tools/fp_control/Spark.h sh4-apps-prince/tools/fp_control/Spark.h
---- sh4-apps-master/tools/fp_control/Spark.h	2019-08-27 22:19:07.000000000 +0430
-+++ sh4-apps-prince/tools/fp_control/Spark.h	2019-08-28 01:52:14.769292635 +0430
+diff -Naur sh4-apps/tools/fp_control/Spark.h sh4-apps-PersianPrince/tools/fp_control/Spark.h
+--- sh4-apps/tools/fp_control/Spark.h	2019-12-18 01:23:17.000000000 +0330
++++ sh4-apps-PersianPrince/tools/fp_control/Spark.h	2020-01-11 00:57:27.518779113 +0330
 @@ -1,107 +1,51 @@
  #ifndef __Spark__
  #define __Spark__
