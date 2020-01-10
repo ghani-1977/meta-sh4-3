@@ -1,6 +1,5 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/normal-sh4-image.inc
-require conf/machine/include/sh4-jffs2.inc
+require conf/machine/include/wifi-sh4.inc
 
 BOX_BRAND = "cuberevo"
 
@@ -30,7 +29,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	enigma2-plugin-extensions-cuberevovfd \
 "
 
-MACHINE_FEATURES += "ci smallflash"
+MACHINE_FEATURES += "ci"
 
 EXTRA_OECONF_append_pn-enigma2 += " --with-cuberevostb"
 
