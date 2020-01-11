@@ -13,7 +13,7 @@ IMAGE_CMD_jffs2_append = "\
     rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ird; \
     cd ${DEPLOY_DIR_IMAGE}; \
-    fup -c ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird -r ${IMAGEDIR}/${ROOTFS_FILE} -k ${IMAGEDIR}/${KERNEL_FILE}; \
+    fup -c ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
     fup -r ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird ${RESELLERID}; \
     zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird; \
     rm -f ${IMAGEDIR}/*.ird; \
@@ -33,7 +33,7 @@ IMAGE_CMD_ubi_append = "\
     rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ird; \
     cd ${DEPLOY_DIR_IMAGE}; \
-    fup -c ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird -r ${IMAGEDIR}/${ROOTFS_FILE} -k ${IMAGEDIR}/${KERNEL_FILE}; \
+    fup -c ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
     fup -r ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird ${RESELLERID}; \
     zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird; \
     rm -f ${IMAGEDIR}/*.ird; \
