@@ -50,7 +50,6 @@ PARALLEL_MAKEINST = ""
 EXTRA_OEMAKE_prepend = " ${PARALLEL_MAKE} "
 
 PACKAGES =+ "${KERNEL_PACKAGE_NAME}-headers"
-INSANE_SKIP_${PN} += "installed-vs-shipped"
 FILES_${KERNEL_PACKAGE_NAME}-headers = "${exec_prefix}/src/linux*"
 FILES_${KERNEL_PACKAGE_NAME}-dev += "${includedir}/linux"
 FILES_${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}"

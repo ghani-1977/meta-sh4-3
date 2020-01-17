@@ -12,5 +12,4 @@ do_install_append () {
 FILES_${PN} += "${libdir}/libmmeimage.so"
 FILES_${PN}-dev += "${includedir}/mmeimage ${includedir}/libmmeimage  ${libdir}/libmmeimage.la"
 
-INSANE_SKIP_${PN} += "dev-so"
 

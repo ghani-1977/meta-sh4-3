@@ -9,4 +9,3 @@ PROVIDES = "virtual/libgles1 virtual/egl"
 
 S = "${WORKDIR}/git/libs/libstgles"
 
-INSANE_SKIP_${PN} += "dev-so"
