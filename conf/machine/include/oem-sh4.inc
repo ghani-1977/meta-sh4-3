@@ -24,8 +24,6 @@ PREFERRED_PROVIDER_lirc = "stlirc"
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
 PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
 PREFERRED_PROVIDER_virtual/enigma2-mediaservice ?= "enigma2-plugin-systemplugins-servicemp3epl"
-# temporary fix
-PREFERRED_VERSION_cross-localedef-native = "2.3%"
 
 SERIAL_CONSOLE = "115200 ttyAS0"
 
