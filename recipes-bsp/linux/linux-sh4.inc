@@ -29,6 +29,7 @@ LINUX_VERSION = "2.6.32.71"
 
 SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-2.6.32.71/archive/stmicro.tar.gz \
     file://defconfig \
+    file://${OPENVISION_BASE}/meta-openvision/recipes-linux/kernel-patches/kernel-add-support-for-gcc9.patch \
     file://st-coprocessor.h \
 "
 
