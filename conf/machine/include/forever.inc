@@ -7,6 +7,7 @@ BOX_BRAND = "forever"
 PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 
 ROOTFS_FILE = "root.img"
+KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
 
