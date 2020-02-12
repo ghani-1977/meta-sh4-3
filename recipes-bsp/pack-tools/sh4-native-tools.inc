@@ -26,3 +26,5 @@ do_configure_prepend() {
 }
 
 BBCLASSEXTEND = "native"
+
+do_configure[nostamp] = "1"
