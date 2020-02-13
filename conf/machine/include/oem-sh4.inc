@@ -1,6 +1,8 @@
 # We know about rtc
 include conf/machine/include/build-extras.inc
 
+include conf/machine/include/libeplayer-sh4-condition.inc
+
 IMAGEDIR ?= "enigma2"
 
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
@@ -23,30 +25,22 @@ PREFERRED_VERSION_libssh = "0.7.3"
 PREFERRED_PROVIDER_lirc = "stlirc"
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
 PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
-
-# activate/disable your preferred mediaservice
-# servicemp3epl = mixed Solution gst/exteplayer3
-# servicesh4 = pure libeplayer3 (ffmpeg without gst)
 PREFERRED_PROVIDER_virtual/enigma2-mediaservice ?= "enigma2-plugin-systemplugins-servicemp3epl"
-# PREFERRED_PROVIDER_virtual/enigma2-mediaservice ?= "enigma2-plugin-systemplugins-servicesh4"
 
 SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-# activate MACHINE_FEATURES with libeplayer if mediaservice is servicesh4
-# activate MACHINE_FEATURES without libeplayer if mediaservice is servicemp3epl
 MACHINE_FEATURES += "alsa ext2 serial dvb-c 3dtv switchoff textlcd singlecore legacykernel usbconsole"
-# MACHINE_FEATURES += "alsa ext2 serial dvb-c 3dtv switchoff textlcd singlecore legacykernel usbconsole libeplayer"
 
 DISTRO_FEATURES_append += "libsigc2"
 
 KERNEL_IMAGETYPE = "uImage"
-#KERNEL_OUTPUT = "${KERNEL_IMAGETYPE}"
 
 DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix --with-eac3"
 
 IMAGE_CLASSES += "usb_image-sh4"
+
 INITRAMFS_FSTYPES =  "ext2.gz sh4updt"
 
 # Add uImage in tar image boot directory
@@ -62,11 +56,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stinit \
     sh4-dvb-modules \
     "
-# activate this MACHINE_EXTRA_PRECOMMENDS if mediaservice is servicesh4
-# disable this MACHINE_EXTRA_PRECOMMENDS if mediaservice is servicemp3epl
-# MACHINE_EXTRA_RRECOMMENDS += "\
-#     enigma2-plugin-systemplugins-servicesh4 \
-#     "
 
 EXTRA_IMAGEDEPENDS += "\
     libpcre \
