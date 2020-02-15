@@ -23,13 +23,14 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlirc \
     flash-tools \
     mount-sh4 \
+    enigma2-plugin-systemplugins-sparkvfdcontrol \
 "
 
 EXTRA_IMAGEDEPENDS += "\
     libstgles \
     "
 
-MACHINE_FEATURES += "hdmicec ci directfb sh4booster textlcd 7segment"
+MACHINE_FEATURES += "hdmicec ci directfb sh4booster textlcd"
 
 DISTRO_FEATURES_append += "gtk-directfb"
 
