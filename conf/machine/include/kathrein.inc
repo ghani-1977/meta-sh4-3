@@ -9,7 +9,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE}"
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
 
-IMAGE_FSTYPES += "tar.gz"
+IMAGE_FSTYPES = "tar.gz"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     evremote2 \
