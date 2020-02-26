@@ -22,6 +22,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     evremote2 \
 "
 
-MACHINE_FEATURES += "hdmicec 4thgsh4"
+MACHINE_FEATURES += "hdmicec 4thgsh4 directfb"
+
+DISTRO_FEATURES_append += "gtk-directfb"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"

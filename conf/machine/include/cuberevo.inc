@@ -9,7 +9,7 @@ MTD_ROOTFS = "mtd4"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
 
-IMAGE_FSTYPES += "tar.gz"
+IMAGE_FSTYPES = "tar.gz"
 
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7109.elf"
