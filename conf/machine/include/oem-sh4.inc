@@ -1,7 +1,7 @@
 # We know about rtc
-include conf/machine/include/build-extras.inc
+require conf/machine/include/build-extras.inc
 
-include conf/machine/include/libeplayer-sh4-condition.inc
+require conf/machine/include/libeplayer-sh4-condition.inc
 
 IMAGEDIR ?= "enigma2"
 
@@ -65,7 +65,7 @@ MACHINE_EXTRA_RDEPENDS += "\
     libpcre \
     "
 
-include conf/machine/include/autoload-filesystems.inc
+require conf/machine/include/autoload-filesystems.inc
 require conf/machine/include/tune-sh4.inc
 require conf/machine/include/soc-family.inc
 
