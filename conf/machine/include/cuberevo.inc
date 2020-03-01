@@ -26,7 +26,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	enigma2-plugin-extensions-cuberevovfd \
 "
 
-MACHINE_FEATURES += "ci smallflash"
+MACHINE_FEATURES += "ci middleflash"
 
 EXTRA_OECONF_append_pn-enigma2 += " --with-cuberevostb"
 
