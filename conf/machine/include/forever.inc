@@ -19,6 +19,7 @@ SOC_FAMILY = "stih205"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     stlinux24-sh4-stxh205-fdma-firmware \
+    stlinux24-sh4-stxh205-fdma-firmware-extra \
     evremote2 \
 "
 
