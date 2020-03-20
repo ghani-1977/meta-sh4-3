@@ -12,6 +12,7 @@ inherit kernel machine_kernel_pr
 
 DEPENDS_append += "\
     stlinux24-sh4-${STXNUMBER}-fdma-firmware \
+    ${@bb.utils.contains("BOX_BRAND", "forever", "stlinux24-sh4-${STXNUMBER}-fdma-firmware-extra", "", d)} \
 "
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-sh4:"
