@@ -1,4 +1,4 @@
-MACHINE_FEATURES += "middleflash"
+MACHINE_FEATURES += "smallflash"
 
 do_image_jffs2[depends] += "fup-native:do_populate_sysroot"
 
