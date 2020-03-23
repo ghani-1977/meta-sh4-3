@@ -1,122 +1,6 @@
-diff -Naur sh4-apps/tools/fp_control/autogen.sh sh4-apps-PersianPrince/tools/fp_control/autogen.sh
---- sh4-apps/tools/fp_control/autogen.sh	2019-12-18 01:23:17.000000000 +0330
-+++ sh4-apps-PersianPrince/tools/fp_control/autogen.sh	2020-01-11 00:57:27.514779170 +0330
-@@ -1,15 +1,62 @@
- #!/bin/sh
- 
--package="tools-fp_control"
-+package="tuxbox-apps-misc-tools"
- 
- srcdir=`dirname $0`
- test -z "$srcdir" && srcdir=.
- 
- cd "$srcdir"
-+DIE=0
-+
-+(autoconf --version) < /dev/null > /dev/null 2>&1 || {
-+	echo
-+	echo "You must have autoconf installed to compile $package."
-+	echo "Download the appropriate package for your system,"
-+	echo "or get the source from one of the GNU ftp sites"
-+	echo "listed in http://www.gnu.org/order/ftp.html"
-+	DIE=1
-+}
-+
-+(automake --version) < /dev/null > /dev/null 2>&1 || {
-+	echo
-+	echo "You must have automake installed to compile $package."
-+	echo "Download the appropriate package for your system,"
-+	echo "or get the source from one of the GNU ftp sites"
-+	echo "listed in http://www.gnu.org/order/ftp.html"
-+	DIE=1
-+}
-+
-+(libtool --version) < /dev/null > /dev/null 2>&1 || {
-+	echo
-+	echo "You must have libtool installed to compile $package."
-+	echo "Download the appropriate package for your system,"
-+	echo "or get the source from one of the GNU ftp sites"
-+	echo "listed in http://www.gnu.org/order/ftp.html"
-+	DIE=1
-+}
-+
-+if test "$DIE" -eq 1; then
-+	exit 1
-+fi
-+
-+if [ ! -e acinclude.m4 ]; then
-+	for i in .. ../.. ../../..; do
-+		if [ -e `pwd`/$i/acinclude.m4 ]; then
-+			ln -s `pwd`/$i/acinclude.m4 .
-+		fi
-+	done
-+fi
-+
- echo "Generating configuration files for $package, please wait...."
- 
--aclocal --force
--libtoolize --force
--autoconf --force
--autoheader  --force
--automake --add-missing --force-missing --foreign
-+echo "  aclocal $ACLOCAL_FLAGS"
-+aclocal $ACLOCAL_FLAGS
-+echo "  libtoolize --automake"
-+libtoolize --automake
-+echo "  autoconf"
-+autoconf
-+echo "  autoheader"
-+autoheader
-+echo "  automake --add-missing"
-+automake --add-missing 
-+
-diff -Naur sh4-apps/tools/fp_control/configure.ac sh4-apps-PersianPrince/tools/fp_control/configure.ac
---- sh4-apps/tools/fp_control/configure.ac	2019-12-18 01:23:17.000000000 +0330
-+++ sh4-apps-PersianPrince/tools/fp_control/configure.ac	2020-01-11 00:57:27.514779170 +0330
-@@ -1,16 +1,33 @@
--AC_INIT([fp_control],[1.0],[],[fp_control])
--AC_PREREQ(2.53)
-+AC_INIT(tuxbox-apps-misc-tools,0.0.1,,tuxbox-misc-tools)
-+AM_INIT_AUTOMAKE(tuxbox-misc-tools,0.0.1)
- 
--AM_INIT_AUTOMAKE
-+TUXBOX_APPS
- 
- AC_PROG_CC
- AC_PROG_CXX
-+AM_PROG_LIBTOOL
-+
-+AC_ARG_ENABLE([multicom406], 
-+        [AS_HELP_STRING(--enable-multicom406,    enable multicom406 stuff)], 
-+        [case "${enableval}" in 
-+                yes) enable_multicom406=true ;; 
-+                no) enable_multicom406=false ;; 
-+                *) AC_MSG_ERROR([bad value ${enableval} for --enable-multicom406]) ;; 
-+        esac]) 
-+AM_CONDITIONAL([ENABLE_MULTICOM406], [test x$enable_multicom406 = xtrue])
-+AC_SUBST(MULTICOM406)
-+
-+AC_ARG_ENABLE([multicom324], 
-+        [AS_HELP_STRING(--enable-multicom324,    enable multicom324 stuff)], 
-+        [case "${enableval}" in 
-+                yes) enable_multicom324=true ;; 
-+                no) enable_multicom324=false ;; 
-+                *) AC_MSG_ERROR([bad value ${enableval} for --enable-multicom324]) ;; 
-+        esac]) 
-+AM_CONDITIONAL([ENABLE_MULTICOM324], [test x$enable_multicom324 = xtrue])
-+AC_SUBST(MULTICOM324)
- 
--m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
--m4_ifdef([LT_INIT], [LT_INIT], [AC_PROG_LIBTOOL])
--AC_CONFIG_MACRO_DIR([m4])
- 
--AC_CHECK_LIB(pthread, pthread_create, [LIBS="$LIBS -lpthread"])
- 
- AC_OUTPUT([
- Makefile
 diff -Naur sh4-apps/tools/fp_control/fp_control.c sh4-apps-PersianPrince/tools/fp_control/fp_control.c
---- sh4-apps/tools/fp_control/fp_control.c	2020-01-11 00:59:27.009045353 +0330
-+++ sh4-apps-PersianPrince/tools/fp_control/fp_control.c	2020-01-11 00:58:33.373823278 +0330
+--- sh4-apps/tools/fp_control/fp_control.c	2020-03-23 14:17:06.124201628 +0430
++++ sh4-apps-PersianPrince/tools/fp_control/fp_control.c	2020-03-23 14:15:27.356832064 +0430
 @@ -10,7 +10,7 @@
   *
   * This program is distributed in the hope that it will be useful,
@@ -144,7 +28,7 @@ diff -Naur sh4-apps/tools/fp_control/fp_control.c sh4-apps-PersianPrince/tools/f
  ////////////////////////////////////////////////////////////////////////////////////////////////////
  
 -/* Software version of fp_control, please increase on every change */
--static const char *sw_version = "1.11Audioniek 20190814.1";
+-static const char *sw_version = "1.11Audioniek 20200317.1";
 -static eWakeupReason reason = 0;
 +/* software version of fp_control. please increas on every change */
 +static const char* sw_version = "1.03";
@@ -1081,7 +965,7 @@ diff -Naur sh4-apps/tools/fp_control/fp_control.c sh4-apps-PersianPrince/tools/f
 -		{
 -			vBoxType = Vip2;
 -		}
--		else if ((!strncasecmp(vName, "fortis_hdbox", 5)) || (!strncasecmp(vName, "octagon1008", 11)) || (!strncasecmp(vName, "atevio7500", 10)) || (!strncasecmp(vName, "hs7110", 6)) || (!strncasecmp(vName, "hs7420", 6)) || (!strncasecmp(vName, "hs7810a", 7)) || (!strncasecmp(vName, "hs7119", 6)) || (!strncasecmp(vName, "hs7429", 6)) || (!strncasecmp(vName, "hs7819", 6)))
+-		else if ((!strncasecmp(vName, "fortis_hdbox", 5)) || (!strncasecmp(vName, "octagon1008", 11)) || (!strncasecmp(vName, "atevio7500", 10)) || (!strncasecmp(vName, "hs7110", 6)) || (!strncasecmp(vName, "hs7420", 6)) || (!strncasecmp(vName, "hs7810a", 7)) || (!strncasecmp(vName, "hs7119", 6)) || (!strncasecmp(vName, "hs7429", 6)) || (!strncasecmp(vName, "hs7819", 6)) || (!strncasecmp(vName, "forever_3434hd", 6)) || (!strncasecmp(vName, "forever_nanosmart", 6)) || (!strncasecmp(vName, "fx6010", 6)) || (!strncasecmp(vName, "forever_9898hd", 6)) || (!strncasecmp(vName, "dp7001", 6)) || (!strncasecmp(vName, "forever_2424hd", 6)) || (!strncasecmp(vName, "ep8000", 6)) || (!strncasecmp(vName, "epp8000", 7)) || (!strncasecmp(vName, "gpv8000", 7)))
 -		{
 -			vBoxType = Fortis;
 -		}
