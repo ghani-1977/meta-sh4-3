@@ -1,6 +1,5 @@
 require conf/machine/include/oem-sh4.inc
 require conf/machine/include/normal-sh4-image.inc
-require conf/machine/include/wifi-sh4.inc
 
 BOX_BRAND = "cuberevo"
 
