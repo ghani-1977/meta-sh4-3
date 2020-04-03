@@ -28,9 +28,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 EXTRA_IMAGEDEPENDS += "\
     libstgles \
     "
-MACHINE_EXTRA_RDEPENDS += "\
-    enigma2-plugin-extensions-${MACHINE}vfd \
-    "
+
 MACHINE_FEATURES += "hdmicec ci directfb sh4booster textlcd"
 
 DISTRO_FEATURES_append += "gtk-directfb"
