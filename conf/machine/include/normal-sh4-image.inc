@@ -10,7 +10,6 @@ IMAGE_CMD_jffs2_append = "\
     cd ${DEPLOY_DIR_IMAGE}; \
     zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.jffs2; \
-    rm -f ${DEPLOY_DIR_IMAGE}/*.manifest; \
     rm -rf ${IMAGEDIR}; \
     "
 
@@ -25,6 +24,5 @@ IMAGE_CMD_ubi_append = "\
     cd ${DEPLOY_DIR_IMAGE}; \
     zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ubi; \
-    rm -f ${DEPLOY_DIR_IMAGE}/*.manifest; \
     rm -rf ${IMAGEDIR}; \
 "
