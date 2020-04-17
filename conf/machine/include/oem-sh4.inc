@@ -1,5 +1,5 @@
 # We know about rtc
-require conf/machine/include/build-extras.inc
+MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
 
 require conf/machine/include/libeplayer-sh4-condition.inc
 
@@ -65,7 +65,8 @@ MACHINE_EXTRA_RDEPENDS += "\
     libpcre \
     "
 
-require conf/machine/include/autoload-filesystems.inc
+KERNEL_MODULE_AUTOLOAD += "xfs"
+
 require conf/machine/include/tune-sh4.inc
 require conf/machine/include/soc-family.inc
 
