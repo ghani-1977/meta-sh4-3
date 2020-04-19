@@ -8,11 +8,11 @@ SRC_URI = "file://fw_env.config \
            file://flash_erase \
           "
 
-FILES_${PN} = "/var/* /bin/* /sbin/*"
+FILES_${PN} = "${localstatedir}/* /bin/* /sbin/*"
 
 do_install () {
-    install -d ${D}/var
-    install -m 644 ${WORKDIR}/fw_env.config ${D}/var/
+    install -d ${D}${localstatedir}
+    install -m 644 ${WORKDIR}/fw_env.config ${D}${localstatedir}/
     install -d ${D}/bin
     install -m 755 ${WORKDIR}/fw_printenv ${D}/bin/
     install -m 755 ${WORKDIR}/fw_setenv ${D}/bin/

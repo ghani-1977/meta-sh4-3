@@ -84,6 +84,6 @@ PACKAGES =+ "stlirc-exec stlirc-remotes"
 
 FILES_${PN}-dbg += "${bindir}/.debug ${sbindir}/.debug"
 FILES_${PN}-dev += "${libdir}/liblirc_client.so"
-FILES_${PN} = "${bindir} ${sbindir} ${libdir}/lib*.so.* ${sysconfdir} ${exec_prefix}/var"
+FILES_${PN} = "${bindir} ${sbindir} ${libdir}/lib*.so.* ${sysconfdir} ${exec_prefix}${localstatedir}"
 FILES_stlirc-exec = "${bindir}/irexec ${sysconfdir}/init.d/lircexec"
 FILES_stlirc-remotes = "${datadir}/lirc/remotes"
