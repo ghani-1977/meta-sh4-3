@@ -49,18 +49,17 @@
  	seq_printf(m, "cpu family\t: %s\n", init_utsname()->machine);
  	seq_printf(m, "cpu variant\t: %s\n", get_cpu_variant(c));
  	seq_printf(m, "cpu type\t: %s\n", get_cpu_subtype(c));
-+	seq_printf(m, "cpu MHz\t\t: 450\n");
++	seq_printf(m, "cpu MHz\t: 450\n");
  	if (c->cut_major == -1)
  		seq_printf(m, "cut\t\t: unknown\n");
  	else if (c->cut_minor == -1)
 --- linux-sh4/arch/sh/boards/mach-hdk7111/setup.c	2012-03-31 15:26:54.000000000 +0200
 +++ linux-sh4/arch/sh/boards/mach-hdk7111/setup.c.patched	2012-07-08 20:51:17.000000000 +0200
-@@ -27,125 +27,154 @@
+@@ -27,125 +27,140 @@
  #include <linux/stm/pci-glue.h>
  #include <linux/mtd/mtd.h>
  #include <linux/mtd/nand.h>
 -#include <linux/mtd/physmap.h>
-+#include <linux/i2c.h>
  #include <linux/mtd/partitions.h>
 -#include <linux/spi/spi.h>
 -#include <linux/spi/flash.h>
@@ -232,19 +231,6 @@
 +
 +	bpa2_init(bpa2_parts_table, ARRAY_SIZE(bpa2_parts_table));
 +}
-+
-+/* Allegro A8293 LNB power controller & STV0903 tuner */
-+static struct i2c_board_info hs7x1x_a8293[] __initdata = {
-+	{
-+		I2C_BOARD_INFO("hs7x1x_a8293", 0x08),
-+	},
-+};
-+
-+static struct i2c_board_info hs7x1x_stv0903 [] __initdata = {
-+	{
-+		I2C_BOARD_INFO("hs7x1x_stv0903", 0x68),
-+	},
-+};
  
  struct stm_nand_bank_data hdk7111_nand_flash = {
  	.csn		= 1,
@@ -308,7 +294,7 @@
  	},
  	.timing_data	= &(struct stm_nand_timing_data) {
  		.sig_setup	= 50,		/* times in ns */
-@@ -160,30 +189,6 @@
+@@ -160,30 +175,6 @@
  	},
  };
  
@@ -339,7 +325,7 @@
  static int hdk7111_phy_reset(void *bus)
  {
  	gpio_set_value(HDK7111_PIO_PHY_RESET, 0);
-@@ -203,27 +208,6 @@
+@@ -203,27 +194,6 @@
  #define HDK7111_PCI_IDSEL stm_gpio(4, 4)
  #define HDK7111_PCI_SERR_IRQ ILC_EXT_IRQ(1)
  
@@ -367,17 +353,18 @@
  int pcibios_map_platform_irq(struct pci_dev *dev, u8 slot, u8 pin)
  {
  	int ret = -EINVAL;
-@@ -240,9 +221,6 @@
+@@ -240,9 +210,7 @@
  }
  
  static struct platform_device *hdk7111_devices[] __initdata = {
 -	&hdk7111_leds,
 -	&hdk7111_button_device,
 -	&hdk7111_nor_flash,
++//	&hdk7111_nand_flash_device,
  };
  
  static int __init hdk7111_devices_init(void)
-@@ -254,24 +237,9 @@
+@@ -254,24 +222,9 @@
  	/* Configure Flash according to boot-device */
  	sc = sysconf_claim(SYS_STA, 1, 16, 17, "boot_device");
  	switch (sysconf_read(sc)) {
@@ -402,7 +389,7 @@
  		nor_bank_base = emi_bank_base(1);
  		nor_bank_size = emi_bank_base(2) - nor_bank_base;
  		hdk7111_nand_flash.csn = 0;
-@@ -282,41 +250,13 @@
+@@ -282,41 +235,13 @@
  	}
  	sysconf_release(sc);
  
@@ -445,15 +432,6 @@
  	stx7111_configure_ssc_i2c(1, NULL);
  	stx7111_configure_ssc_i2c(2, NULL);
  	stx7111_configure_ssc_i2c(3, NULL);
-@@ -342,6 +282,8 @@
- 				.tx_od_enabled = 0,
- 				});
- 
-+	i2c_register_board_info(0, hs7x1x_a8293, ARRAY_SIZE(hs7x1x_a8293));
-+	i2c_register_board_info(0, hs7x1x_stv0903, ARRAY_SIZE(hs7x1x_stv0903));
- 
- 	return platform_add_devices(hdk7111_devices,
- 				    ARRAY_SIZE(hdk7111_devices));
 --- linux-sh4/arch/sh/include/asm/irq-ilc.h	2012-03-31 15:26:54.634523363 +0200
 +++ linux-sh4/arch/sh/include/asm/irq-ilc.h.patched	2012-03-31 15:26:54.084558439 +0200
 @@ -44,7 +44,7 @@
@@ -488,8 +466,8 @@
  		.resource	= (struct resource[]) {
 -			STM_PLAT_RESOURCE_MEM(0xfd033000, 0x2c),
 -			STM_PLAT_RESOURCE_IRQ(evt2irq(0x1100), -1),
-+			STM_PLAT_RESOURCE_MEM(0xfd031000, 0x2c), //stasc1
-+			STM_PLAT_RESOURCE_IRQ(evt2irq(0x2440), -1), //IRQ 274 (0x112) -> IRQ 122 (stasc)
++			STM_PLAT_RESOURCE_MEM(0xfd034000, 0x2c),
++			STM_PLAT_RESOURCE_IRQ(evt2irq(0x2440), -1),
  			STM_PLAT_RESOURCE_DMA_NAMED("rx_half_full", 14),
  			STM_PLAT_RESOURCE_DMA_NAMED("tx_half_empty", 18),
  		},
