@@ -57,20 +57,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     sh4-dvb-modules \
     "
 
-# Adding for sh4 receivers the most popular Wi-Fi chips for usb devices
-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
-    mt7601u \
-    firmware-mt7601u \
-    rt3070 \
-    firmware-rt2870 \
-    rtl8188eu \
-    firmware-rtl8188eu \
-    rtl8192cu \
-    firmware-rtl8192cu \
-    rtl8192eu \
-    firmware-rtl8192eu \
-    "
-
 EXTRA_IMAGEDEPENDS += "\
     libpcre \
     "

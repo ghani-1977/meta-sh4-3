@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-modprobe front_vfd
+modprobe pace_7241_fp
 
 if [ -e /var/etc/.firstboot ]; then
    echo "WAIT 1st start" >/dev/vfd
