@@ -72,7 +72,7 @@ do_compile() {
         CONFIG_KERNEL_BUILD="${STAGING_KERNEL_BUILDDIR}" \
         CONFIG_KERNEL_PATH="${STAGING_KERNEL_DIR}" \
         CONFIG_MODULES_PATH="${D}" \
-        CCFLAGSY="-I${STAGING_DIR_HOST}/usr/include" \
+        CCFLAGSY="-I${STAGING_DIR_HOST}${incdir}" \
         modules 
 }
 
@@ -91,7 +91,7 @@ do_install() {
         CONFIG_KERNEL_BUILD="${STAGING_KERNEL_BUILDDIR}" \
         CONFIG_KERNEL_PATH="${STAGING_KERNEL_DIR}" \
         CONFIG_MODULES_PATH="${D}" \
-        CCFLAGSY="-I${STAGING_DIR_HOST}/usr/include" \
+        CCFLAGSY="-I${STAGING_DIR_HOST}${incdir}" \
         INSTALL_MOD_PATH=${D} modules_install
 
     # install header files
