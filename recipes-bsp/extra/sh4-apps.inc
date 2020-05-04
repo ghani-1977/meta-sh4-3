@@ -11,8 +11,8 @@ COMPATIBLE_MACHINE = "^(adb_box|adb_2850|arivalink200|atemio520|atemio530|atevio
 
 SRCREV = "${AUTOREV}"
 
-PV = "1.1+git${SRCPV}"
-PKGV = "1.1+git${GITPKGV}"
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/sh4-apps.git;protocol=git"
 

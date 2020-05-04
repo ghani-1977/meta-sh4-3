@@ -7,8 +7,8 @@ UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
 EXTRA_IMAGECMD_COMPAT = " --eraseblock=0x20000 -n -l "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    mtd-utils-ubifs \
-    "
+	mtd-utils-ubifs \
+	"
 
 IMAGE_CMD_ubi_prepend = " \
     rm -rf ${IMAGE_ROOTFS}/tmp/*; \

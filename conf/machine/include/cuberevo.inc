@@ -23,7 +23,9 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	firmware-sh4 \
 	evremote2 \
 	enigma2-plugin-extensions-cuberevovfd \
-"
+	ipbox-eeprom \
+	fp-control \
+	"
 
 MACHINE_FEATURES += "ci middleflash"
 

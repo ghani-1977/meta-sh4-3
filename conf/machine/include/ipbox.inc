@@ -20,7 +20,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
 	evremote2 \
 	stlirc \
-"
+	ipbox-eeprom \
+	"
 
 MACHINE_FEATURES += "ci smallflash modutils-sh4"
 

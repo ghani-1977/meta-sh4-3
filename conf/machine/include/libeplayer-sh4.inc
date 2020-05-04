@@ -10,5 +10,5 @@ MACHINE_FEATURES += "libeplayer"
 # add this MACHINE_EXTRA_PRECOMMENDS if mediaservice is servicesh4
 # delete this MACHINE_EXTRA_PRECOMMENDS if mediaservice is servicemp3epl
 MACHINE_EXTRA_RRECOMMENDS += "\
-    enigma2-plugin-systemplugins-servicesh4 \
-"
+	enigma2-plugin-systemplugins-servicesh4 \
+	"

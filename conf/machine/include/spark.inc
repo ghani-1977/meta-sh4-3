@@ -15,19 +15,20 @@ KERNEL_FILE = "uImage"
 IMAGE_FSTYPES += "tar.gz"
 
 MACHINE_EXTRA_RRECOMMENDS += "\
-    ntfs-3g \
-    "
+	ntfs-3g \
+	"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    stlirc \
-    flash-tools \
-    mount-sh4 \
-    enigma2-plugin-extensions-${MACHINE}vfd \
-    "
+	stlirc \
+	flash-tools \
+	mount-sh4 \
+	enigma2-plugin-extensions-${MACHINE}vfd \
+	fp-control \
+	"
 
 EXTRA_IMAGEDEPENDS += "\
-    libstgles \
-    "
+	libstgles \
+	"
 
 MACHINE_FEATURES += "hdmicec ci directfb sh4booster textlcd"
 

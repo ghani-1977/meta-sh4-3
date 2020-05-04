@@ -19,10 +19,10 @@ VIDEOELF = "video_7100.elf"
 SOC_FAMILY = "sti7100"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    stlirc \
-    evremote2 \
-    stlinux24-sh4-stx7100-fdma-firmware \
-    firmware-sh4 \
-"
+	stlirc \
+	evremote2 \
+	stlinux24-sh4-stx7100-fdma-firmware \
+	firmware-sh4 \
+	"
 
 CAN_USE_ENIGMA2_IN_FLASH = "0"

@@ -13,10 +13,11 @@ VIDEOELF = "video_7109.elf"
 SOC_FAMILY = "sti7109"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    stlirc \
-    evremote2 \
-    stlinux24-sh4-stx7109-fdma-firmware \
-"
+	stlirc \
+	evremote2 \
+	stlinux24-sh4-stx7109-fdma-firmware \
+	fp-control \
+	"
 
 MACHINE_FEATURES += "ci middleflash"
 

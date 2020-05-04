@@ -49,21 +49,22 @@ IMAGE_CMD_tar_prepend = "\
     "
 	
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    stslave-fw \
-    ustslave \
-    stfbcontrol \
-    fp-control \
-    stinit \
-    sh4-dvb-modules \
-    "
+	stslave-fw \
+	ustslave \
+	stfbcontrol \
+	stinit \
+	sh4-dvb-modules \
+	wait4button \
+	streamproxy \
+	"
 
 EXTRA_IMAGEDEPENDS += "\
-    libpcre \
-    "
+	libpcre \
+	"
 
 MACHINE_EXTRA_RDEPENDS += "\
-    libpcre \
-    "
+	libpcre \
+	"
 
 KERNEL_MODULE_AUTOLOAD += "xfs"
 
