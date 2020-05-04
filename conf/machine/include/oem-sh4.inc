@@ -52,7 +52,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stslave-fw \
 	ustslave \
 	stfbcontrol \
-	stinit \
+	devinit \
 	sh4-dvb-modules \
 	wait4button \
 	streamproxy \
