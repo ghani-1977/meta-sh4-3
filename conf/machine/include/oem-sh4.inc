@@ -55,7 +55,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	devinit \
 	sh4-dvb-modules \
 	wait4button \
-	streamproxy \
 	"
 
 EXTRA_IMAGEDEPENDS += "\
