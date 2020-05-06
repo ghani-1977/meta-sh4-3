@@ -5,7 +5,7 @@ if [ ! -e /dev/vfd ]; then
    mknod -m 0660 /dev/vfd c 147 0
 fi
 
-modprobe fortis_4g_fp paramDebug=10
+modprobe fortis_4g_fp paramDebug=50
 modprobe simu_button
 
 if [ -e /var/etc/.firstboot ]; then

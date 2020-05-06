@@ -4,7 +4,7 @@ echo "[rcS] Init frontpanel"
 if [ ! -e /dev/vfd ]; then
    mknod -m 0660 /dev/vfd c 147 0
 fi
-modprobe nuvoton paramDebug=0
+modprobe fortis_4g_fp paramDebug=50
 modprobe simu_button
 
 if [ -e /var/etc/.firstboot ]; then
