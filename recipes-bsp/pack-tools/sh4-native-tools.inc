@@ -7,8 +7,8 @@ inherit autotools gitpkgv native
 
 SRCREV = "${AUTOREV}"
 
-PV = "1.1+git${SRCPV}"
-PKGV = "1.1+git${GITPKGV}"
+PV = "git${SRCPV}"
+PKGV = "git${GITPKGV}"
 
 SRC_URI = "git://github.com/OpenVisionE2/sh4-native-tools.git;protocol=git"
 
