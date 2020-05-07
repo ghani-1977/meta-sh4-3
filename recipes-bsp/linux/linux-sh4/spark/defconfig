@@ -428,7 +428,7 @@ CONFIG_DEFAULT_TCP_CONG="cubic"
 #
 # IPv6 by TheChip @ SpaceRat
 #
-CONFIG_IPV6=y
+CONFIG_IPV6=m
 # CONFIG_IPV6_PRIVACY is not set
 # CONFIG_IPV6_ROUTER_PREF is not set
 # CONFIG_IPV6_OPTIMISTIC_DAD is not set
