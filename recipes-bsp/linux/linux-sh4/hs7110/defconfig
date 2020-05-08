@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.32.71
-# Sun Jan 21 10:32:22 2019
+# Fri May 8 12:01:01 2020
 #
 CONFIG_SUPERH=y
 CONFIG_SUPERH32=y
@@ -293,8 +293,8 @@ CONFIG_CPU_HAS_FPU=y
 # CONFIG_SH_ST_STPM_HD_V2 is not set
 # CONFIG_SH_ST_STPM_SD is not set
 # CONFIG_SH_ST_B2069 is not set
-# CONFIG_SH_ST_HDK7111 is not set
-CONFIG_SH_ST_SAT7111=y
+CONFIG_SH_ST_HDK7111=y
+# CONFIG_SH_ST_SAT7111 is not set
 # CONFIG_SH_ST_MB618 is not set
 
 #
