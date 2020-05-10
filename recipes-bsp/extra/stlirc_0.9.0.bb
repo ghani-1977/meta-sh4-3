@@ -80,7 +80,7 @@ do_install_append() {
     install -m 0644 ${WORKDIR}/lircd_${MACHINE}.conf ${D}${sysconfdir}/lircd.conf
 }
 
-PACKAGES =+ "stlirc-exec stlirc-remotes"
+PACKAGES += "stlirc-exec stlirc-remotes"
 
 FILES_${PN}-dbg += "${bindir}/.debug ${sbindir}/.debug"
 FILES_${PN}-dev += "${libdir}/liblirc_client.so"
