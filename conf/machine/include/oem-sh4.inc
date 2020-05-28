@@ -19,8 +19,6 @@ OLDEST_KERNEL = "2.6.32"
 
 PREFERRED_VERSION_directfb = "1.7.7"
 PREFERRED_VERSION_rt8812au = "4.3.14"
-PREFERRED_VERSION_samba = "3.%"
-# PREFERRED_VERSION_ffmpeg = "3.%"
 PREFERRED_VERSION_libssh = "0.7.3"
 PREFERRED_PROVIDER_lirc = "stlirc"
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
@@ -31,7 +29,7 @@ SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-MACHINE_FEATURES += "alsa ext2 serial dvb-c 3dtv switchoff textlcd singlecore legacykernel usbconsole"
+MACHINE_FEATURES += "alsa ext2 serial dvb-c 3dtv switchoff textlcd singlecore legacykernel usbconsole sh4stb"
 
 DISTRO_FEATURES_append += "libsigc2"
 
