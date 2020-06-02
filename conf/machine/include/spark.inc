@@ -14,10 +14,6 @@ KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-	ntfs-3g \
-	"
-
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlirc \
 	flash-tools \
