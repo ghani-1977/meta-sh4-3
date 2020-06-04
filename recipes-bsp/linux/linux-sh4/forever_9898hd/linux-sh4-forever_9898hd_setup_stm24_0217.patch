@@ -1,0 +1,131 @@
+diff -Naur linux-sh4-2.6.32.71-stmicro/arch/sh/boards/mach-dp7000/setup.c linux-sh4-2.6.32.71-stmicro-PersianPrince/arch/sh/boards/mach-dp7000/setup.c
+--- linux-sh4-2.6.32.71-stmicro/arch/sh/boards/mach-dp7000/setup.c	2020-03-20 14:13:04.088645000 +0330
++++ linux-sh4-2.6.32.71-stmicro-PersianPrince/arch/sh/boards/mach-dp7000/setup.c	2020-03-20 14:16:13.776534648 +0330
+@@ -82,23 +82,23 @@
+ /*
+ 0x40000000 - 0x403fffff - video companion (4mb) 
+ 0x40400000 - 0x407fffff - audio companion (4mb) 
+-0x40800000 - 0x40fd1fff - kernel   (120mb) 
+-0x40fd2000 - 0x60fd1fff - bigphys ( 128mb)
+-0x4A000000 - 0x4FBFFFFF - lmi_io  ( 30mb)
++0x40800000 - 0x4e7fffff - kernel  ( 232mb)
++0x4c800000 - 0x4e7fffff - bigphys (  32mb)
++0x4e800000 - 0x507fffff - lmi_io  (  32mb)
+ */
+ static struct bpa2_partition_desc bpa2_parts_table[] =
+ {
+ 	{
+ 		.name  = "bigphysarea",
+-		.start = 0x42600000,
+-		.size  = 0x04200000,  /* 66 Mb */
++		.start = 0x4a000000,
++		.size  = 0x06000000,  /* 96 Mb */
+ 		.flags = 0,
+ 		.aka   = NULL
+ 	},
+ 	{
+ 		.name  = "LMI_IO",
+-		.start = 0x40800000,
+-		.size  = 0x01e00000,  /* 30 Mb */
++		.start = 0x50000000,
++		.size  = 0x02000000,  /* 32 Mb */
+ 		.flags = 0,
+ 		.aka   = LMI_IO_partalias
+ 	},
+diff -Naur linux-sh4-2.6.32.71-stmicro/arch/sh/kernel/setup.c linux-sh4-2.6.32.71-stmicro-PersianPrince/arch/sh/kernel/setup.c
+--- linux-sh4-2.6.32.71-stmicro/arch/sh/kernel/setup.c	2020-03-20 06:08:03.580612871 +0330
++++ linux-sh4-2.6.32.71-stmicro-PersianPrince/arch/sh/kernel/setup.c	2020-03-20 14:06:51.493735070 +0330
+@@ -420,6 +420,66 @@
+ #endif
+ #endif
+ 
++	{
++		int command_line_len = strlen(command_line);
++		char flash_org_command_line[] = "console=ttyAS0,115200 root=/dev/mtdblock2 ubi.mtd=2";
++		char flash_new_command_line[] = "console=ttyAS0,115200 root=/dev/mtdblock2 ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw init=/bin/devinit printk=1 console_loglevel=7 stmmaceth=ethaddr:";
++		int flash_org_command_line_len = strlen(flash_org_command_line);
++		char usb_org_command_line[] = "console=ttyAS0,115200 root=/dev/root rw";
++		char usb_new_command_line[] = "console=ttyAS0,115200 root=/dev/sda2/root.img rootfstype=jffs2 rw nwhwconf=$nwhwnet init=/bin/devinit printk=1 console_loglevel=7 rootdelay=5 stmmaceth=ethaddr:";
++		int usb_org_command_line_len = strlen(usb_org_command_line);
++		char mac[] = "00:00:00:00:00:00";
++		int i;
++
++		// retrieve MAC from command line
++		for (i = 0; i < (command_line_len - 7); i++)
++		{
++			if (!strncmp(command_line + i, "ethaddr", 7))
++			{
++				strlcpy(mac, command_line + i + 8, sizeof(mac));
++				break;
++			}
++			if (!strncmp(command_line + i, "hwaddr", 6))
++			{
++				strlcpy(mac, command_line + i + 7, sizeof(mac));
++				break;
++			}
++		}
++ 		for (i = 0; i < (command_line_len - 11); i++) //remove bigphysarea part from command line
++ 		{
++ 			if (!strncmp(command_line + i + 1, "bigphysarea", 11))
++ 			{
++ 				// search for next pos
++ 				int k;
++ 				int pos = command_line_len;
++ 				for (k = i + 1; k < command_line_len; k++)
++				{
++ 					if (command_line[k] == ' ')
++					{
++ 						pos = k;
++ 						break;
++ 					}
++				}
++ 				memmove(command_line + i, command_line + pos, command_line_len - pos);
++ 				memset(&command_line[command_line_len -(pos -i)], '\0', pos-i);
++ 				break;
++ 			}
++ 		}
++
++		/* boot from flash */
++		if (command_line_len >= flash_org_command_line_len && !strncmp(command_line, flash_org_command_line, flash_org_command_line_len))
++		{
++			strlcpy(command_line, flash_new_command_line, sizeof(command_line));
++			strlcat(command_line, mac, sizeof(command_line));
++		}
++		/* boot from USB */
++		if (command_line_len >= usb_org_command_line_len && !strncmp(command_line, usb_org_command_line, usb_org_command_line_len))
++		{
++			strlcpy(command_line, usb_new_command_line, sizeof(command_line));
++//			strlcat(command_line, mac, sizeof(command_line));
++		}
++	}
++
+ 	/* Save unparsed command line copy for /proc/cmdline */
+ 	memcpy(boot_command_line, command_line, COMMAND_LINE_SIZE);
+ 	*cmdline_p = command_line;
+diff -Naur linux-sh4-2.6.32.71-stmicro/mm/bpa2.c linux-sh4-2.6.32.71-stmicro-PersianPrince/mm/bpa2.c
+--- linux-sh4-2.6.32.71-stmicro/mm/bpa2.c	2020-03-20 06:08:04.788593949 +0330
++++ linux-sh4-2.6.32.71-stmicro-PersianPrince/mm/bpa2.c	2020-03-20 14:23:25.587858236 +0330
+@@ -232,11 +232,20 @@
+ 	/* Allocate/reserve/initialize requested memory area */
+ 	start_pfn = PFN_DOWN(start);
+ 	end_pfn = PFN_DOWN(start + size);
+-	if (start == 0) {
++	printk(KERN_ERR "bpa2 - %s: allocate requested area start = 0x%x, size = 0x%08x, end = 0x%x\n", *names, start_pfn, size >> 12, end_pfn);
++	if (start == 0)
++	{
++		printk(KERN_ERR "bpa2: allocate requested area %s in low memory\n", *names);
+ 		result = bpa2_alloc_low(part, size, &start);
+-	} else if ((start_pfn >= min_low_pfn) && (end_pfn <= max_low_pfn)) {
++	}
++	else if ((start_pfn >= min_low_pfn) && (end_pfn <= max_low_pfn))
++	{
++		printk(KERN_ERR "bpa2: allocate requested area %s in low memory\n", *names);
+ 		result = bpa2_reserve_low(part, start, size);
+-	} else if ((start_pfn > max_low_pfn) || (end_pfn < min_low_pfn)) {
++	}
++	else if ((start_pfn > max_low_pfn) || (end_pfn < min_low_pfn))
++	{
++		printk(KERN_ERR "bpa2: allocate requested area %s in high memoryx\n", *names);
+ 		result = bpa2_init_high(part, start, size);
+ 	} else {
+ 		printk(KERN_ERR "bpa2: partition spans low memory boundary\n");

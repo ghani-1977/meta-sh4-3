@@ -1,0 +1,48 @@
+diff -Naur linux-sh4-2.6.32.71-stmicro/arch/sh/kernel/setup.c linux-sh4-2.6.32.71-stmicro-PersianPrince/arch/sh/kernel/setup.c
+--- linux-sh4-2.6.32.71-stmicro/arch/sh/kernel/setup.c	2019-12-10 20:01:29.000000000 +0330
++++ linux-sh4-2.6.32.71-stmicro-PersianPrince/arch/sh/kernel/setup.c	2020-02-13 02:15:56.253805515 +0330
+@@ -420,6 +420,44 @@
+ #endif
+ #endif
+ 
++	{
++		int command_line_len = strlen(command_line);
++		char flash_org_command_line[] = "console=ttyAS0,115200 root=/dev/mtdblock2 ubi.mtd=2";
++		char flash_new_command_line[] = "console=ttyAS0,115200 root=/dev/mtdblock2 ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs rw init=/bin/devinit printk=1 console_loglevel=7 stmmaceth=ethaddr:";
++		int flash_org_command_line_len = strlen(flash_org_command_line);
++		char usb_org_command_line[] = "console=ttyAS0,115200 root=/dev/root rw";
++		char usb_new_command_line[] = "console=ttyAS0,115200 root=/dev/sda2/root.img rootfstype=jffs2 rw nwhwconf=$nwhwnet init=/bin/devinit printk=1 console_loglevel=7 rootdelay=5 stmmaceth=ethaddr:";
++		int usb_org_command_line_len = strlen(usb_org_command_line);
++		char mac[] = "00:00:00:00:00:00";
++		int i;
++
++		for(i = 0; i < (command_line_len - 7); i++)
++		{
++			if (!strncmp(command_line + i, "ethaddr", 7))
++			{
++				strlcpy(mac, command_line + i + 8, sizeof(mac));
++				break;
++			}
++			if (!strncmp(command_line + i, "hwaddr", 6))
++			{
++				strlcpy(mac, command_line + i + 7, sizeof(mac));
++				break;
++			}
++		}
++		/* boot from flash */
++		if (command_line_len >= flash_org_command_line_len && !strncmp(command_line, flash_org_command_line, flash_org_command_line_len))
++		{
++			strlcpy(command_line, flash_new_command_line, sizeof(command_line));
++			strlcat(command_line, mac, sizeof(command_line));
++		}
++		/* boot from USB */
++		if (command_line_len >= usb_org_command_line_len && !strncmp(command_line, usb_org_command_line, usb_org_command_line_len))
++		{
++			strlcpy(command_line, usb_new_command_line, sizeof(command_line));
++//			strlcat(command_line, mac, sizeof(command_line));
++		}
++	}
++
+ 	/* Save unparsed command line copy for /proc/cmdline */
+ 	memcpy(boot_command_line, command_line, COMMAND_LINE_SIZE);
+ 	*cmdline_p = command_line;
