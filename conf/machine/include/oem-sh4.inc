@@ -16,7 +16,7 @@ GLIBCVERSION = "2.25"
 HOSTTOOLS_NONFATAL += "whoami"
 
 OLDEST_KERNEL = "2.6.32"
-
+PREFERRED_VERSION_kernel-module-extrawlan-rt8812au = "4.3.14"
 PREFERRED_VERSION_directfb = "1.7.7"
 PREFERRED_PROVIDER_lirc = "stlirc"
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
@@ -52,6 +52,20 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	sh4-dvb-modules \
 	wait4button \
 	"
+
+# Adding for sh4 receivers the most popular Wi-Fi chips for usb devices
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
+    kernel-module-extrawlan-mt7601u \
+    firmware-mt7601u \
+    kernel-module-extrawlan-rt3070 \
+    firmware-rt2870 \
+    kernel-module-extrawlan-rtl8188eu \
+    firmware-rtl8188eu \
+    kernel-module-extrawlan-rtl8192cu \
+    firmware-rtl8192cu \
+    kernel-module-extrawlan-rtl8192eu \
+    firmware-rtl8192eu \
+    "
 
 EXTRA_IMAGEDEPENDS += "\
 	libpcre \
