@@ -55,6 +55,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 
 # Adding for sh4 receivers the most popular Wi-Fi chips for usb devices
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
+    ${@bb.utils.contains_any("MACHINE_FEATURES", "smallflash middleflash", "", " \
     kernel-module-extrawlan-mt7601u \
     firmware-mt7601u \
     kernel-module-extrawlan-rt3070 \
@@ -64,7 +65,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
     kernel-module-extrawlan-rtl8192cu \
     firmware-rtl8192cu \
     kernel-module-extrawlan-rtl8192eu \
-    firmware-rtl8192eu \
+    firmware-rtl8192eu", d)} \
     "
 
 EXTRA_IMAGEDEPENDS += "\
