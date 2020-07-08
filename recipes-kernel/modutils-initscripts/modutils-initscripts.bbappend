@@ -1,8 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append_sh4 += "\
-	${@bb.utils.contains_any("MACHINE", "cuberevo cuberevo_mini cuberevo_mini2 cuberevo_2000hd cuberevo_3000hd", "file://modutils-cuberevo.patch", "", d)} \
-	${@bb.utils.contains_any("MACHINE", "cuberevo_250hd cuberevo_9500hd", "file://modutils-ipbox.patch", "", d)} \
+	${@bb.utils.contains("BOX_BRAND", "cuberevo", "file://modutils-cuberevo.patch", "", d)} \
 	${@bb.utils.contains("BOX_BRAND", "edisionargus", "file://modutils-edisionargus.patch", "", d)} \
 	${@bb.utils.contains_any("MACHINE", "ufc960 ufs912 ufs913 ufs922", "file://modutils-kathrein.patch", "", d)} \
 	${@bb.utils.contains("MACHINE", "ufs910", "file://modutils-kathrein-ufs910.patch", "", d)} \
