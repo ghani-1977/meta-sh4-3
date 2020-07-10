@@ -3,7 +3,7 @@ MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
 
 require conf/machine/include/libeplayer-sh4-condition.inc
 
-IMAGEDIR ?= "enigma2"
+IMAGEDIR = "enigma2"
 
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
 
@@ -55,18 +55,18 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 
 # Adding for sh4 receivers the most popular Wi-Fi chips for usb devices
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
-    ${@bb.utils.contains_any("MACHINE_FEATURES", "smallflash middleflash", "", " \
-    kernel-module-extrawlan-mt7601u \
-    firmware-mt7601u \
-    kernel-module-extrawlan-rt3070 \
-    firmware-rt2870 \
-    kernel-module-extrawlan-rtl8188eu \
-    firmware-rtl8188eu \
-    kernel-module-extrawlan-rtl8192cu \
-    firmware-rtl8192cu \
-    kernel-module-extrawlan-rtl8192eu \
-    firmware-rtl8192eu", d)} \
-    "
+	${@bb.utils.contains_any("MACHINE_FEATURES", "smallflash middleflash", "", " \
+	kernel-module-extrawlan-mt7601u \
+	firmware-mt7601u \
+	kernel-module-extrawlan-rt3070 \
+	firmware-rt2870 \
+	kernel-module-extrawlan-rtl8188eu \
+	firmware-rtl8188eu \
+	kernel-module-extrawlan-rtl8192cu \
+	firmware-rtl8192cu \
+	kernel-module-extrawlan-rtl8192eu \
+	firmware-rtl8192eu", d)} \
+	"
 
 EXTRA_IMAGEDEPENDS += "\
 	libpcre \
