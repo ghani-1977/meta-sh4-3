@@ -2,9 +2,10 @@ SUMMARY = "SH4 driver modules"
 DESCRIPTION = "SH4 driver modules"
 SECTION = "base"
 PRIORITY = "required"
-PACKAGE_ARCH = "${MACHINE_ARCH}"
 LICENSE = " GPLv2"
 LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=751419260aa954499f7abaabaa882bbe"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "^(adb_box|adb_2850|arivalink200|atemio520|atemio530|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|vip1_v2|pace7241|vip2_v1|fortis_hdbox|hl101|hs7110|hs7119|hs7420|hs7429|hs7810a|hs7819|ipbox55|ipbox99|ipbox9900|sagemcom88|octagon1008|spark|spark7162|tf7700|ufc960|ufs910|ufs912|ufs913|ufs922|vitamin_hd5000|qboxhd|qboxhd_mini|forever_2424hd|forever_3434hd|forever_9898hd|forever_nanosmart)$"
 
@@ -122,7 +123,7 @@ do_install() {
     if [ ! -e ${PTI_NP_PATH}/Makefile ]; then
         if [ -e ${PTI_NP_PATH}/pti.ko ]; then
             echo "Found custom pti binary.." 
-            install -m 644 ${PTI_NP_PATH}/pti.ko ${D}/lib/modules/${KERNEL_VERSION}/extra/pti/pti.ko
+            install -m 644 ${PTI_NP_PATH}/pti.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra/pti/pti.ko
         fi
     fi
 	
