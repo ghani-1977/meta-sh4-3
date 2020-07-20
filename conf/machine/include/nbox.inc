@@ -9,7 +9,7 @@ KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES += "tar.gz"
 
-MACHINE_FEATURES += "hdmicec ci twintuner smallflash"
+MACHINE_FEATURES += "hdmicec ci twintuner smallflash YUV"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlirc \

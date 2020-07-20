@@ -26,6 +26,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	fp-control \
 	"
 
-MACHINE_FEATURES += "hdmicec ci smallflash modutils-sh4"
+MACHINE_FEATURES += "hdmicec ci smallflash modutils-sh4 SCART RCA YUV"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"

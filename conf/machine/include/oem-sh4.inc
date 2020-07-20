@@ -27,7 +27,7 @@ SERIAL_CONSOLE = "115200 ttyAS0"
 
 DVBPROVIDER = "kernel"
 
-MACHINE_FEATURES += "alsa ext2 serial dvb-c switchoff textlcd usbconsole sh4stb"
+MACHINE_FEATURES += "alsa ext2 usbhost serial dvb-c switchoff textlcd usbconsole sh4stb ${MACHINE} HDMI"
 
 DISTRO_FEATURES_append += "libsigc2"
 

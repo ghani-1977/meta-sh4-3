@@ -15,3 +15,5 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	evremote2 \
 	fp-control \
 	"
+
+MACHINE_FEATURES += "RCA YUV SCAR"

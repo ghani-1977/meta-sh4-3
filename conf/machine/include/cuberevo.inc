@@ -27,7 +27,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	fp-control \
 	"
 
-MACHINE_FEATURES += "ci middleflash"
+MACHINE_FEATURES += "ci middleflash SCART"
 
 EXTRA_OECONF_append_pn-enigma2 += " --with-cuberevostb"
 

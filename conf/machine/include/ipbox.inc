@@ -23,6 +23,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	ipbox-eeprom \
 	"
 
-MACHINE_FEATURES += "ci smallflash modutils-sh4"
+MACHINE_FEATURES += "ci smallflash modutils-sh4 SCART"
 
 CAN_USE_ENIGMA2_IN_FLASH = "0"
