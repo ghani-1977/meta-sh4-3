@@ -19,6 +19,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	fp-control \
 	"
 
-MACHINE_FEATURES += "ci middleflash RCA YUV SCAR"
+MACHINE_FEATURES += "ci middleflash RCA YUV SCART"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"
