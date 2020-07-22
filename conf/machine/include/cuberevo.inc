@@ -32,3 +32,5 @@ MACHINE_FEATURES += "ci middleflash SCART"
 EXTRA_OECONF_append_pn-enigma2 += " --with-cuberevostb"
 
 CAN_USE_ENIGMA2_IN_FLASH = "0"
+
+RCTYPE = "13"
