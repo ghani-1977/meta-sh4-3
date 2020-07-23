@@ -99,7 +99,7 @@ do_uboot_mkimage() {
     :
 }
 
-pkg_postinst_kernel-image() {
+pkg_postinst_${KERNEL_PACKAGE_NAME}-image() {
     if [ "x$D" == "x" ]; then
         if [ -f /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ] ; then
             if grep -q root=/dev/mtdblock6 /proc/cmdline; then
