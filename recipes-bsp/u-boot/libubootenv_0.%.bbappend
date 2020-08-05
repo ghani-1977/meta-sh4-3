@@ -1,8 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/${MACHINE}:"
 
-SRC_URI_append_sh4 = " \
-     file://fw_env.config \
-"
+SRC_URI_append_sh4 = " file://fw_env.config"
 
 do_install_append_sh4() {
         install -d ${D}${sysconfdir}
