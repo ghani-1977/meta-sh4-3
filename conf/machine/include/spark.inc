@@ -28,7 +28,7 @@ EXTRA_IMAGEDEPENDS += "\
 
 MACHINE_FEATURES += "hdmicec ci directfb sh4booster SCART RCA"
 
-DISTRO_FEATURES_append += "gtk-directfb"
+DISTRO_FEATURES_append = " gtk-directfb"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"
 

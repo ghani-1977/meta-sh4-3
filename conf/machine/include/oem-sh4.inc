@@ -21,7 +21,7 @@ PREFERRED_VERSION_directfb = "1.7.7"
 PREFERRED_PROVIDER_lirc = "stlirc"
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
 PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
-PREFERRED_PROVIDER_virtual/enigma2-mediaservice ?= "enigma2-plugin-systemplugins-servicemp3epl"
+PREFERRED_PROVIDER_virtual/enigma2-mediaservice = "enigma2-plugin-systemplugins-servicemp3epl"
 
 SERIAL_CONSOLE = "115200 ttyAS0"
 
@@ -29,7 +29,7 @@ DVBPROVIDER = "kernel"
 
 MACHINE_FEATURES += "alsa ext2 usbhost serial dvb-c switchoff textlcd usbconsole sh4stb ${MACHINE} HDMI"
 
-DISTRO_FEATURES_append += "libsigc2"
+DISTRO_FEATURES_append = " libsigc2"
 
 KERNEL_IMAGETYPE = "uImage"
 
@@ -80,4 +80,4 @@ MACHINE_EXTRA_RDEPENDS += "\
 require conf/machine/include/tune-sh4.inc
 require conf/machine/include/soc-family.inc
 
-EXTRA_OECONF_append_pn-enigma2 += " --with-sh4stb"
+EXTRA_OECONF_append_pn-enigma2 = " --with-sh4stb"

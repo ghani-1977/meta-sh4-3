@@ -4,7 +4,7 @@ COMPATIBLE_MACHINE = "^(fortis_hdbox)$"
 
 STXNUMBER = "stx7109"
 
-SRC_URI_append += "\
+SRC_URI_append = " \
     file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-usbwait123_stm24.patch;patch=1 \
     file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1 \

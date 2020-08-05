@@ -2,7 +2,7 @@ DESCRIPTION = "MME image library"
 
 require sh4-apps.inc
 
-DEPENDS += " jpeg"
+DEPENDS += "jpeg"
 
 do_install_append () {
 	install -d ${D}${includedir}/mmeimage

@@ -4,7 +4,7 @@ COMPATIBLE_MACHINE = "^(ufc960)$"
 
 STXNUMBER = "stx7109"
 
-SRC_URI_append += "\
+SRC_URI_append = " \
     file://linux-sh4-ufs922_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-sh4-stmmac_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-sh4-i2c-st40-pio_stm24_${STM_PATCH_STR}.patch;patch=1 \

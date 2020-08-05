@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 inherit kernel machine_kernel_pr samba_change_dialect
 
-DEPENDS_append += "\
+DEPENDS_append = " \
     stlinux24-sh4-${STXNUMBER}-fdma-firmware \
     ${@bb.utils.contains("BOX_BRAND", "forever", "stlinux24-sh4-${STXNUMBER}-fdma-firmware-extra", "", d)} \
 "

@@ -4,7 +4,7 @@ COMPATIBLE_MACHINE = "^(adb_box)$"
 
 STXNUMBER = "stx7100"
 
-SRC_URI_append += "\
+SRC_URI_append = " \
     file://linux-sh4-stx7100_fdma_fix_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-sh4-sata_32bit_fix_stm24_${STM_PATCH_STR}.patch;patch=1 \
     file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \

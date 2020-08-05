@@ -6,7 +6,7 @@ DEPENDS = "ffmpeg ${@bb.utils.contains('TARGET_ARCH', 'sh4', 'sh4-dvb-modules', 
 RDEPENDS_${PN} = "ffmpeg"
 RPROVIDES_${PN} += "libeplayer"
 
-CXXFLAGS_append += " -std=c++11"
+CXXFLAGS_append = " -std=c++11"
 
 inherit gitpkgv autotools
 
