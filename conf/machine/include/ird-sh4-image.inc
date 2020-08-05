@@ -17,8 +17,11 @@ IMAGE_CMD_jffs2_append = "\
     cd ${DEPLOY_DIR_IMAGE}; \
     fup -c ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
     fup -r ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird ${RESELLERID}; \
-    zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird; \
+    fup -n ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird 100100; \
+    fup -i ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird > ${IMAGEDIR}/R${RESELLERID}-info.txt; \
+    zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird ${IMAGEDIR}/R${RESELLERID}-info.txt; \
     rm -f ${IMAGEDIR}/*.ird; \
+    rm -f ${IMAGEDIR}/*.txt; \
     zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.jffs2; \
     rm -rf ${IMAGEDIR}; \
@@ -36,8 +39,11 @@ IMAGE_CMD_ubi_append = "\
     cd ${DEPLOY_DIR_IMAGE}; \
     fup -c ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
     fup -r ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird ${RESELLERID}; \
-    zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird; \
+    fup -n ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird 100100; \
+    fup -i ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird > ${IMAGEDIR}/R${RESELLERID}-info.txt; \
+    zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/${IMAGE_NAME}-R${RESELLERID}.ird ${IMAGEDIR}/R${RESELLERID}-info.txt; \
     rm -f ${IMAGEDIR}/*.ird; \
+    rm -f ${IMAGEDIR}/*.txt; \
     zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ubi; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ubifs; \
