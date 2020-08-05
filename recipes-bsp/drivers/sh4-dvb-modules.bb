@@ -3,7 +3,7 @@ DESCRIPTION = "SH4 driver modules"
 SECTION = "base"
 PRIORITY = "required"
 LICENSE = " GPLv2"
-LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=751419260aa954499f7abaabaa882bbe"
+require conf/license/license-gplv2.inc
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
