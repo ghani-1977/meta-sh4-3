@@ -33,3 +33,7 @@ DISTRO_FEATURES_append = " gtk-directfb"
 CAN_USE_ENIGMA2_IN_FLASH = "1"
 
 RCTYPE = "10"
+
+IMAGE_CLASSES += "usb_image-sh4"
+
+INITRAMFS_FSTYPES =  "ext2.gz sh4updt"

@@ -26,4 +26,4 @@ IMAGE_CMD_ubi_append = " \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ubi; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ubifs; \
     rm -rf ${IMAGEDIR}; \
-"
+    "

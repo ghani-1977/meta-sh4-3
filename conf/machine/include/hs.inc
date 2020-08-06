@@ -1,5 +1,4 @@
 require conf/machine/include/oem-sh4.inc
-require conf/machine/include/sh4-ubi.inc
 
 BOX_BRAND = "hs"
 
