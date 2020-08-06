@@ -21,4 +21,4 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	fp-control \
 	"
 
-MACHINE_FEATURES += "hdmicec ci"
+MACHINE_FEATURES += "hdmicec ci resellerid"

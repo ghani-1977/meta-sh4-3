@@ -22,6 +22,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	evremote2 \
 	"
 
-MACHINE_FEATURES += "hdmicec 4thgsh4"
+MACHINE_FEATURES += "hdmicec 4thgsh4 resellerid"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"
