@@ -3,6 +3,8 @@ MACHINE_FEATURES_BACKFILL_CONSIDERED += "rtc"
 
 require conf/machine/include/libeplayer-sh4-condition.inc
 
+KERNELVERSION = "2.6.32"
+
 IMAGEDIR = "enigma2"
 
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
@@ -15,7 +17,7 @@ GLIBCVERSION = "2.25"
 
 HOSTTOOLS_NONFATAL += "whoami"
 
-OLDEST_KERNEL = "2.6.32"
+OLDEST_KERNEL = "${KERNELVERSION}"
 PREFERRED_VERSION_kernel-module-extrawlan-rt8812au = "4.3.14"
 PREFERRED_VERSION_directfb = "1.7.7"
 PREFERRED_PROVIDER_lirc = "stlirc"
