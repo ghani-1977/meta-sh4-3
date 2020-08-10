@@ -51,9 +51,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	wait4button \
 	"
 
-# Adding for sh4 receivers the most popular Wi-Fi chips for usb devices
 MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
-	${@bb.utils.contains_any("MACHINE_FEATURES", "smallflash middleflash", "", " \
+	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", " \
 	kernel-module-extrawlan-mt7601u \
 	firmware-mt7601u \
 	kernel-module-extrawlan-rt3070 \
