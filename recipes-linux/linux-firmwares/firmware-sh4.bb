@@ -33,9 +33,14 @@ do_install() {
         install -m 0644 dvb-fe-avl6222.fw ${D}${nonarch_base_libdir}/firmware/
         install -m 0644 dvb-fe-cx21143.fw ${D}${nonarch_base_libdir}/firmware/
         install -m 0644 dvb-fe-stv6306.fw ${D}${nonarch_base_libdir}/firmware/
+    elif [ "${MACHINE}" = "hl101" ]; then
+        install -m 0644 dvb-fe-avl2108.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-avl6222.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-cx21143.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-stv6306.fw ${D}${nonarch_base_libdir}/firmware/
+        install -m 0644 dvb-fe-cx24116.fw ${D}${nonarch_base_libdir}/firmware/
     else
         install -m 0644 ${DVB1FIRMWARE} ${D}${nonarch_base_libdir}/firmware/
         install -m 0644 ${DVB2FIRMWARE} ${D}${nonarch_base_libdir}/firmware/
     fi
 }
-
