@@ -165,7 +165,7 @@
  			{
 -				.name = "NOR Flash 1",
 -				.size = 0x00080000,
-+				.name   = "Boot firmware", 	//  (512K)
++				.name   = "boot", 	//  (512K)
 +				.size   = 0x00080000,
  				.offset = 0x00000000,
 -			}, {

@@ -96,7 +96,7 @@
 +
 +static struct mtd_partition mtd_parts_table[7] = {
 +    {
-+	.name = "Boot firmware",
++	.name = "boot",
 +	.size = 0x00020000,
 +	.offset = 0x00000000
 +    },

@@ -51,7 +51,7 @@
 +static struct mtd_partition mtd_parts_table[] =
 +{
 +        {
-+                .name = "Boot Firmware",
++                .name = "boot",
 +                .size = 0x00040000,        //u-boot 0x00000000-0xa003ffff 256k
 +                .offset = 0x00000000,
 +                mask_flags: 0

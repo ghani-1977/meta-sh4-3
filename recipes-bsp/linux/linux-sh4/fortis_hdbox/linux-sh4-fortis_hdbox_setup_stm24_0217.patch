@@ -63,7 +63,7 @@
 +//enable this part if you want to build usb/mtd flash image:
 +#if 1
 +	{
-+		.name = "Boot Firmware",
++		.name = "boot",
 +		.size =   0x00020000,	//u-boot 0x00000000-0xa001ffff  128k
 +		.offset = 0x00000000,
 +		mask_flags: 0

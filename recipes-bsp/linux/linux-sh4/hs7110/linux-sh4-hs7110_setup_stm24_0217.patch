@@ -148,7 +148,7 @@
 -				.name = "NOR Flash 3",
 -				.size = MTDPART_SIZ_FULL,
 -				.offset = MTDPART_OFS_NXTBLK,
-+				.name   = "Boot firmware",      //mtd0
++				.name   = "boot",      //mtd0
 +				.size   = 0x00100000,           // 1M
 +				.offset = 0x00000000,
 +			},
