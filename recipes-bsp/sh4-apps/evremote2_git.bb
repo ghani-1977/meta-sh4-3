@@ -11,6 +11,8 @@ SRC_URI_append = " file://evremote2.sh"
 LDFLAGS += "-lpthread -lrt"
 
 do_install_append () {
+        install -d ${D}${base_bindir}
+        install -m 0755 ${WORKDIR}/build/${PN} ${D}${base_bindir}/
         install -d ${D}/${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/evremote2.sh ${D}${sysconfdir}/init.d
         if [ "${MACHINE}" = "adb_box" -o "${MACHINE}" = "adb_2850" ]; then
@@ -21,3 +23,5 @@ do_install_append () {
             ln -sf ../init.d/evremote2.sh ${D}${sysconfdir}/rcS.d/S40evremote2
         fi
 }
+
+FILES_${PN} = "${base_bindir} ${sysconfdir}"
