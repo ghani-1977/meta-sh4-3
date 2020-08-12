@@ -63,6 +63,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	firmware-rtl8192cu \
 	kernel-module-extrawlan-rtl8192eu \
 	firmware-rtl8192eu", d)} \
+	forever-logo-cfe \
 	"
 
 EXTRA_IMAGEDEPENDS += "\

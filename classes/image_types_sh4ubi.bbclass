@@ -24,7 +24,11 @@ IMAGE_CMD_ubifs_prepend = " \
 	rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
 	rm -f ${DEPLOY_DIR_IMAGE}/*.ird; \
 	cd ${DEPLOY_DIR_IMAGE}; \
-	fup -c ${IMAGEDIR}/e2-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
+	if [ -e bootloader.gz ]; then \
+			fup -c ${IMAGEDIR}/e2-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE} -9 bootloader.gz; \
+	else \
+			fup -c ${IMAGEDIR}/e2-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
+	fi; \
 	fup -r ${IMAGEDIR}/e2-R${RESELLERID}.ird ${RESELLERID}; \
 	fup -n ${IMAGEDIR}/e2-R${RESELLERID}.ird 100100; \
 	fup -i ${IMAGEDIR}/e2-R${RESELLERID}.ird > ${IMAGEDIR}/e2-R${RESELLERID}-info.txt; \
