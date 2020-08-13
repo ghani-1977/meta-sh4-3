@@ -13,12 +13,12 @@ FILES_${PN} = "${localstatedir}/* /bin/* /sbin/*"
 do_install () {
     install -d ${D}${localstatedir}
     install -m 644 ${WORKDIR}/fw_env.config ${D}${localstatedir}/
-    install -d ${D}/bin
-    install -m 755 ${WORKDIR}/fw_printenv ${D}/bin/
-    install -m 755 ${WORKDIR}/fw_setenv ${D}/bin/
+    install -d ${D}${base_bindir}
+    install -m 755 ${WORKDIR}/fw_printenv ${D}${base_bindir}/
+    install -m 755 ${WORKDIR}/fw_setenv ${D}${base_bindir}/
     if [ "${MACHINE}" = "spark" -o "${MACHINE}" = "spark7162" ]; then
-        install -m 755 ${WORKDIR}/setspark.sh ${D}/bin/
+        install -m 755 ${WORKDIR}/setspark.sh ${D}${base_bindir}/
     fi
-    install -d ${D}/sbin
-    install -m 755 ${WORKDIR}/flash_erase ${D}/sbin/
+    install -d ${D}${base_sbindir}
+    install -m 755 ${WORKDIR}/flash_erase ${D}${base_sbindir}/
 }

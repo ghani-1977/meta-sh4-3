@@ -13,13 +13,13 @@ LDFLAGS += "-lpthread -lrt"
 do_install_append () {
         install -d ${D}${base_bindir}
         install -m 0755 ${WORKDIR}/build/${PN} ${D}${base_bindir}/
-        install -d ${D}/${sysconfdir}/init.d
+        install -d ${D}${sysconfdir}/init.d
         install -m 0755 ${WORKDIR}/evremote2.sh ${D}${sysconfdir}/init.d
         if [ "${MACHINE}" = "adb_box" -o "${MACHINE}" = "adb_2850" ]; then
-            install -d ${D}/${sysconfdir}/rc3.d
+            install -d ${D}${sysconfdir}/rc3.d
             ln -sf ../init.d/evremote2.sh ${D}${sysconfdir}/rc3.d/S22evremote2
         else
-            install -d ${D}/${sysconfdir}/rcS.d
+            install -d ${D}${sysconfdir}/rcS.d
             ln -sf ../init.d/evremote2.sh ${D}${sysconfdir}/rcS.d/S40evremote2
         fi
 }

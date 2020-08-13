@@ -94,26 +94,26 @@ do_install() {
         INSTALL_MOD_PATH=${D} modules_install
 
     # install header files
-    install -d ${D}/${includedir}/
-    install -m 644 multicom/include/mme.h ${D}/${includedir}
-    install -m 644 include/player2/JPEG_VideoTransformerTypes.h ${D}/${includedir}
-    install -m 644 include/player2/JPEGDECHW_VideoTransformerTypes.h ${D}/${includedir}
-    install -m 644 include/player2/PNGDecode_interface.h ${D}/${includedir}
-    install -m 644 include/player2/RLEDecode_interface.h ${D}/${includedir}
-    install -m 644 frontcontroller/aotom_spark/aotom_main.h ${D}/${includedir}
-    install -m 644 player2/components/include/stddefs.h ${D}/${includedir}
+    install -d ${D}${includedir}/
+    install -m 644 multicom/include/mme.h ${D}${includedir}
+    install -m 644 include/player2/JPEG_VideoTransformerTypes.h ${D}${includedir}
+    install -m 644 include/player2/JPEGDECHW_VideoTransformerTypes.h ${D}${includedir}
+    install -m 644 include/player2/PNGDecode_interface.h ${D}${includedir}
+    install -m 644 include/player2/RLEDecode_interface.h ${D}${includedir}
+    install -m 644 frontcontroller/aotom_spark/aotom_main.h ${D}${includedir}
+    install -m 644 player2/components/include/stddefs.h ${D}${includedir}
 
     #install modutils config
-    install -d ${D}/${sysconfdir}/modules-load.d
-    install -m 644 ${WORKDIR}/modules.conf ${D}/${sysconfdir}/modules-load.d/_${MACHINE}.conf
-    install -d ${D}/${sysconfdir}/modprobe.d
-    install -m 644 ${WORKDIR}/modules-conf.conf ${D}/${sysconfdir}/modprobe.d/_${MACHINE}.conf
-    install -d ${D}/${sysconfdir}/init.d
-    install -d ${D}/${sysconfdir}/rcS.d
+    install -d ${D}${sysconfdir}/modules-load.d
+    install -m 644 ${WORKDIR}/modules.conf ${D}${sysconfdir}/modules-load.d/_${MACHINE}.conf
+    install -d ${D}${sysconfdir}/modprobe.d
+    install -m 644 ${WORKDIR}/modules-conf.conf ${D}${sysconfdir}/modprobe.d/_${MACHINE}.conf
+    install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${sysconfdir}/rcS.d
     install -m 0755 ${S}/ddbootup ${D}${sysconfdir}/init.d
     ln -sf ../init.d/ddbootup ${D}${sysconfdir}/rcS.d/S01ddbootup
-    install -d ${D}/bin
-    install -m 755 ${S}/vdstandby ${D}/bin
+    install -d ${D}${base_bindir}
+    install -m 755 ${S}/vdstandby ${D}${base_bindir}
     install -d ${D}${sysconfdir}
     install -m 644 ${S}/vdstandby.cfg ${D}${sysconfdir}
     install -m 0755 ${S}/sh4booster ${D}${sysconfdir}/init.d

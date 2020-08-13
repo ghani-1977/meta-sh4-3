@@ -67,7 +67,7 @@ do_install_append() {
     install -d ${D}${datadir}/lirc/
     cp -r ${S}/remotes ${D}${datadir}/lirc/
     rm -rf ${D}/dev
-    rm -rf  ${D}/bin/pronto2lirc
+    rm -rf  ${D}${base_bindir}/pronto2lirc
     if [ "${MACHINE}" = "hl101" ]; then
         install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
         install -m 0644 ${WORKDIR}/lircd.conf.03_00_* ${D}${sysconfdir}
