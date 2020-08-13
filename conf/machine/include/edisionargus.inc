@@ -24,3 +24,5 @@ MACHINE_FEATURES += "ci middleflash RCA YUV SCART"
 CAN_USE_ENIGMA2_IN_FLASH = "1"
 
 RCTYPE = "17"
+
+RCNAME = "vip2_1"

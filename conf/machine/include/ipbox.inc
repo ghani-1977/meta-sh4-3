@@ -26,3 +26,5 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 MACHINE_FEATURES += "ci smallflash modutils-sh4 SCART"
 
 CAN_USE_ENIGMA2_IN_FLASH = "0"
+
+RCNAME = "cuberevo_uni"

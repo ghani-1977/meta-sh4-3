@@ -22,3 +22,5 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	"
 
 MACHINE_FEATURES += "hdmicec ci resellerid"
+
+RCNAME ?= "hs9510"
