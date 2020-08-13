@@ -123,7 +123,7 @@ do_install() {
     if [ ! -e ${PTI_NP_PATH}/Makefile ]; then
         if [ -e ${PTI_NP_PATH}/pti.ko ]; then
             echo "Found custom pti binary.." 
-            install -m 644 ${PTI_NP_PATH}/pti.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra/pti/pti.ko
+            install -m 644 ${PTI_NP_PATH}/pti.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/pti/pti.ko
         fi
     fi
 	
