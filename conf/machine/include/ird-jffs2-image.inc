@@ -13,8 +13,8 @@ IMAGE_CMD_jffs2_append = " \
     rm -f ${DEPLOY_DIR_IMAGE}/*.zip; \
     rm -f ${DEPLOY_DIR_IMAGE}/*.ird; \
     cd ${DEPLOY_DIR_IMAGE}; \
-    if [ -e ${DEPLOY_DIR_IMAGE}/bootloader.gz ]; then \
-        fup -c ${IMAGEDIR}/e2-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE} -9 bootloader.gz; \
+    if [ -e ${DEPLOY_DIR_IMAGE}/bootscreen.gz ]; then \
+        fup -c ${IMAGEDIR}/e2-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE} -9 bootscreen.gz; \
     else \
         fup -c ${IMAGEDIR}/e2-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
     fi; \
