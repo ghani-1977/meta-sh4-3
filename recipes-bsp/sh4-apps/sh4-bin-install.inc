@@ -1,4 +1,4 @@
-SH4APPBIN ?= ${PN}
+SH4APPBIN ?= "${PN}"
 
 do_install_append() {
 	install -d ${D}${base_bindir}
