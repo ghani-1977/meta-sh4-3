@@ -1,5 +1,9 @@
 MACHINE_FEATURES += "smallflash"
 
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
+	forever-logo-cfe \
+	"
+
 do_image_jffs2[depends] += "fup-native:do_populate_sysroot"
 
 IMAGE_CMD_jffs2_append = " \
