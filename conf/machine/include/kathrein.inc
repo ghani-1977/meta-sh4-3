@@ -12,7 +12,6 @@ KERNEL_FILE = "uImage"
 IMAGE_FSTYPES = "tar.gz"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	evremote2 \
 	fp-control \
 	"
 

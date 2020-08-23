@@ -19,12 +19,11 @@ DVB1FIRMWARE = "dvb-fe-cx24116.fw"
 DVB2FIRMWARE = "dvb-fe-stv6306.fw"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	stlinux24-sh4-stx7109-fdma-firmware \
-	firmware-sh4 \
-	evremote2 \
 	enigma2-plugin-extensions-cuberevovfd \
-	ipbox-eeprom \
+	firmware-sh4 \
 	fp-control \
+	ipbox-eeprom \
+	stlinux24-sh4-stx7109-fdma-firmware \
 	"
 
 MACHINE_FEATURES += "ci middleflash SCART"

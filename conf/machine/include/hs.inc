@@ -13,12 +13,11 @@ VIDEOELF = "video_7111.elf"
 SOC_FAMILY = "sti7111"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	stlinux24-sh4-stx7111-fdma-firmware \
-	stlinux24-sh4-stmfb-firmware-stx7111 \
-	evremote2 \
 	flash-tools \
 	fortis-eeprom \
 	fp-control \
+	stlinux24-sh4-stmfb-firmware-stx7111 \
+	stlinux24-sh4-stx7111-fdma-firmware \
 	"
 
 MACHINE_FEATURES += "hdmicec ci resellerid"

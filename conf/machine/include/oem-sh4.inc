@@ -20,7 +20,6 @@ HOSTTOOLS_NONFATAL += "whoami"
 OLDEST_KERNEL = "${KERNELVERSION}"
 PREFERRED_VERSION_kernel-module-extrawlan-rt8812au = "4.3.14"
 PREFERRED_VERSION_directfb = "1.7.7"
-PREFERRED_PROVIDER_lirc = "stlirc"
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
 PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
 PREFERRED_PROVIDER_virtual/enigma2-mediaservice = "enigma2-plugin-systemplugins-servicemp3epl"
@@ -43,11 +42,12 @@ IMAGE_CMD_tar_prepend = "\
     "
 	
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	devinit \
+	evremote2 \
+	sh4-dvb-modules \
+	stfbcontrol \
 	stslave-fw \
 	ustslave \
-	stfbcontrol \
-	devinit \
-	sh4-dvb-modules \
 	wait4button \
 	"
 

@@ -17,10 +17,9 @@ VIDEOELF = "video_7109.elf"
 SOC_FAMILY = "sti7109"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	stlinux24-sh4-stx7109-fdma-firmware \
-	evremote2 \
-	stlirc \
 	ipbox-eeprom \
+	stlinux24-sh4-stx7109-fdma-firmware \
+	stlirc \
 	"
 
 MACHINE_FEATURES += "ci smallflash modutils-sh4 SCART"

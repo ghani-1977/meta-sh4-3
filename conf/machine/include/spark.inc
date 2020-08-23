@@ -15,11 +15,11 @@ KERNEL_FILE = "uImage"
 IMAGE_FSTYPES += "tar.gz"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	stlirc \
-	flash-tools \
-	mount-sh4 \
 	enigma2-plugin-extensions-${MACHINE}vfd \
+	flash-tools \
 	fp-control \
+	mount-sh4 \
+	stlirc \
 	"
 
 EXTRA_IMAGEDEPENDS += "\
