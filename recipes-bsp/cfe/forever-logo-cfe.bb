@@ -13,7 +13,8 @@ SRC_URI = "file://bootscreen.gz;unpack=0"
 ALLOW_EMPTY_${PN} = "1"
 
 do_deploy() {
-    install -m 0644 bootscreen.gz ${DEPLOY_DIR_IMAGE}/
+	mkdir -p ${DEPLOY_DIR_IMAGE}
+	install -m 0644 bootscreen.gz ${DEPLOY_DIR_IMAGE}/
 }
 
 addtask deploy before do_build after do_install
