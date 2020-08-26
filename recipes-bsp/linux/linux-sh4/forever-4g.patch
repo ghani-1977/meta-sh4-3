@@ -313,3 +313,20 @@ diff -Naur linux-sh4-2.6.32.71/drivers/stm/gpio.c linux-sh4-2.6.32.71-PersianPri
  	ret = platform_driver_register(&stm_gpio_driver);
  	if (ret)
  		return ret;
+diff -Naur linux-sh4-2.6.32.71/arch/sh/mm/kmap.c linux-sh4-2.6.32.71-PersianPrince/arch/sh/mm/kmap.c
+--- linux-sh4-2.6.32.71/arch/sh/mm/kmap.c	2020-08-12 04:14:39.211130380 +0430
++++ linux-sh4-2.6.32.71-PersianPrince/arch/sh/mm/kmap.c	2020-08-12 04:14:10.583878000 +0430
+@@ -36,6 +36,7 @@
+ 
+ 	BUG_ON(test_bit(PG_dcache_dirty, &page->flags));
+ 
++	preempt_disable();
+ 	pagefault_disable();
+ 
+ 	idx = FIX_CMAP_END -
+@@ -62,4 +63,5 @@
+ 	}
+ 
+ 	pagefault_enable();
++	preempt_enable();
+ }
