@@ -17,6 +17,7 @@ VIDEOELF2 = "companion_h205_video_Bx.bin"
 SOC_FAMILY = "stih205"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	kernel-module-zram \
 	stlinux24-sh4-stxh205-fdma-firmware \
 	stlinux24-sh4-stxh205-fdma-firmware-extra \
 	stlirc \

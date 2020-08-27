@@ -13,6 +13,7 @@ IMAGE_FSTYPES = "tar.gz"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	fp-control \
+	kernel-module-zram \
 	"
 
 MACHINE_FEATURES += "RCA YUV SCAR"

@@ -16,6 +16,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	flash-tools \
 	fortis-eeprom \
 	fp-control \
+	kernel-module-zram \
 	stlinux24-sh4-stmfb-firmware-stx7111 \
 	stlinux24-sh4-stx7111-fdma-firmware \
 	"

@@ -14,6 +14,7 @@ MACHINE_FEATURES += "hdmicec ci twintuner smallflash YUV"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	enigma2-plugin-extensions-adbvfd \
 	firmware-sh4 \
+	kernel-module-zram \
 	stlirc \
 	"
 

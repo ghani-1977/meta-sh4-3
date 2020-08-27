@@ -20,6 +20,7 @@ SOC_FAMILY = "sti7100"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	firmware-sh4 \
+	kernel-module-zram \
 	stlinux24-sh4-stx7100-fdma-firmware \
 	stlirc \
 	"
