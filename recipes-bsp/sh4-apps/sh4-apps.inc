@@ -24,9 +24,9 @@ EXTRA_OEMAKE = " DRIVER_TOPDIR=${STAGING_KERNEL_DIR}"
 CFLAGS_append = " -I${STAGING_KERNEL_DIR}/multicom/include"
 
 do_configure_prepend() {
-    touch ${S}/NEWS
-    touch ${S}/README
-    touch ${S}/AUTHORS
-    touch ${S}/COPYING
-    touch ${S}/ChangeLog
+	touch ${S}/NEWS
+	touch ${S}/README
+	touch ${S}/AUTHORS
+	touch ${S}/COPYING
+	touch ${S}/ChangeLog
 }

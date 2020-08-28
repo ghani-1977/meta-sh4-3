@@ -26,6 +26,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7111-fdma-firmware \
 	"
 
-MACHINE_FEATURES += "hdmicec ci smallflash modutils-sh4 SCART RCA YUV"
+MACHINE_FEATURES += "hdmicec ci smallflash SCART RCA YUV"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"

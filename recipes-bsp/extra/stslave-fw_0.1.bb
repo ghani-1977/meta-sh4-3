@@ -11,27 +11,27 @@ INSANE_SKIP_${PN} = "arch"
 SRC_URI = "file://${AUDIOELF} \
 	file://${VIDEOELF} \
 	${@bb.utils.contains("BOX_BRAND", "forever", "file://companion_h205_video_Bx.bin", "", d)} \
-"
+	"
 
 # For audio_7109.elf just use audio_7100.elf
 
 FILES_${PN} += "/boot"
 
 do_install () {
-    # Remove stuff from old packages if present
-    if [ -e ${sysconfdir}/init.d/stslave.sh ] ; then
-        rm ${sysconfdir}/init.d/stslave.sh
-    fi
-    if [ -e ${sysconfdir}/rcS.d/S03stslave ] ; then
-        rm ${sysconfdir}/rcS.d/S03stslave
-    fi
-    install -d ${D}/boot
-    if [ "${BOX_BRAND}" = "forever" ]; then
-        install -m 644 ${WORKDIR}/${AUDIOELF}  ${D}/boot/
-        install -m 644 ${WORKDIR}/${VIDEOELF}  ${D}/boot/
-        install -m 644 ${WORKDIR}/${VIDEOELF2}  ${D}/boot/
-    else
-        install -m 644 ${WORKDIR}/${AUDIOELF}  ${D}/boot/audio.elf
-        install -m 644 ${WORKDIR}/${VIDEOELF}  ${D}/boot/video.elf
-    fi
+	# Remove stuff from old packages if present
+	if [ -e ${sysconfdir}/init.d/stslave.sh ] ; then
+		rm ${sysconfdir}/init.d/stslave.sh
+	fi
+	if [ -e ${sysconfdir}/rcS.d/S03stslave ] ; then
+		rm ${sysconfdir}/rcS.d/S03stslave
+	fi
+	install -d ${D}/boot
+	if [ "${BOX_BRAND}" = "forever" ]; then
+		install -m 644 ${WORKDIR}/${AUDIOELF}  ${D}/boot/
+		install -m 644 ${WORKDIR}/${VIDEOELF}  ${D}/boot/
+		install -m 644 ${WORKDIR}/${VIDEOELF2}  ${D}/boot/
+	else
+		install -m 644 ${WORKDIR}/${AUDIOELF}  ${D}/boot/audio.elf
+		install -m 644 ${WORKDIR}/${VIDEOELF}  ${D}/boot/video.elf
+	fi
 }

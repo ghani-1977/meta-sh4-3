@@ -10,9 +10,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 inherit kernel machine_kernel_pr samba_change_dialect
 
 DEPENDS_append = " \
-    stlinux24-sh4-${STXNUMBER}-fdma-firmware \
-    ${@bb.utils.contains("BOX_BRAND", "forever", "stlinux24-sh4-${STXNUMBER}-fdma-firmware-extra", "", d)} \
-"
+	stlinux24-sh4-${STXNUMBER}-fdma-firmware \
+	${@bb.utils.contains("BOX_BRAND", "forever", "stlinux24-sh4-${STXNUMBER}-fdma-firmware-extra", "", d)} \
+	"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-sh4:"
 
@@ -28,10 +28,10 @@ STM_PATCH_STR = "0217"
 LINUX_VERSION = "${KERNELVERSION}.71"
 
 SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.71/archive/stmicro.tar.gz \
-    file://defconfig \
-    file://${OPENVISION_BASE}/meta-openvision/recipes-linux/kernel-patches/kernel-add-support-for-gcc${VISIONGCCVERSION}.patch \
-    file://st-coprocessor.h \
-"
+	file://defconfig \
+	file://${OPENVISION_BASE}/meta-openvision/recipes-linux/kernel-patches/kernel-add-support-for-gcc${VISIONGCCVERSION}.patch \
+	file://st-coprocessor.h \
+	"
 
 SRC_URI[md5sum] = "5384b2a96dbfa04c93a74720581d1276"
 SRC_URI[sha256sum] = "5a93a98cc466c6b5f3c1b65c9db7f2b6bb75f79b796c7dfe4f970457e8de8297"
@@ -58,38 +58,38 @@ FILES_${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}"
 KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} oldconfig"
 
 do_configure_prepend() {
-    oe_machinstall -m 0644 ${WORKDIR}/defconfig ${B}/.config
-    sed -i "s#^\(CONFIG_EXTRA_FIRMWARE_DIR=\).*#\1\"${STAGING_DIR_HOST}/lib/firmware\"#" ${B}/.config;
+	oe_machinstall -m 0644 ${WORKDIR}/defconfig ${B}/.config
+	sed -i "s#^\(CONFIG_EXTRA_FIRMWARE_DIR=\).*#\1\"${STAGING_DIR_HOST}/lib/firmware\"#" ${B}/.config;
 }
 
 do_shared_workdir_prepend() {
-    # Workaround for missing dir required in latest oe
-    mkdir -p ${B}/include/generated
-    touch ${B}/include/generated/null
+	# Workaround for missing dir required in latest oe
+	mkdir -p ${B}/include/generated
+	touch ${B}/include/generated/null
 }
 
 do_shared_workdir_append() {
-    kerneldir=${STAGING_KERNEL_BUILDDIR}
-    if [ -f include/linux/bounds.h ]; then
-        mkdir -p $kerneldir/include/linux
-        cp -f include/linux/bounds.h $kerneldir/include/linux/bounds.h
-    fi
-    if [ -f include/asm-sh/machtypes.h ]; then
-        mkdir -p $kerneldir/include/asm-sh
-        # ln -sf $kerneldir/include/asm-sh $kerneldir/include/asm
-        cp -f include/asm-sh/machtypes.h $kerneldir/include/asm-sh
-    fi
-    if [ -e include/linux/utsrelease.h ]; then
-        mkdir -p $kerneldir/include/linux
-        cp -f include/linux/utsrelease.h $kerneldir/include/linux/utsrelease.h
-    fi
+	kerneldir=${STAGING_KERNEL_BUILDDIR}
+	if [ -f include/linux/bounds.h ]; then
+		mkdir -p $kerneldir/include/linux
+		cp -f include/linux/bounds.h $kerneldir/include/linux/bounds.h
+	fi
+	if [ -f include/asm-sh/machtypes.h ]; then
+		mkdir -p $kerneldir/include/asm-sh
+		# ln -sf $kerneldir/include/asm-sh $kerneldir/include/asm
+		cp -f include/asm-sh/machtypes.h $kerneldir/include/asm-sh
+	fi
+	if [ -e include/linux/utsrelease.h ]; then
+		mkdir -p $kerneldir/include/linux
+		cp -f include/linux/utsrelease.h $kerneldir/include/linux/utsrelease.h
+	fi
 }
 
 do_install_append() {
-    install -d ${D}${includedir}/linux
-    install -m 644 ${WORKDIR}/st-coprocessor.h ${D}${includedir}/linux
-    oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
-    mv ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}
+	install -d ${D}${includedir}/linux
+	install -m 644 ${WORKDIR}/st-coprocessor.h ${D}${includedir}/linux
+	oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix}/src/linux-${KERNEL_VERSION} ARCH=$ARCH
+	mv ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${D}/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}
 }
 
 # hack to override kernel.bbclass...

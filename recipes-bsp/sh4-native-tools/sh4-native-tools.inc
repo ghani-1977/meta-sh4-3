@@ -18,11 +18,11 @@ EXTRA_OECONF = "--enable-silent-rules --prefix="
 LDFLAGS += "-lpthread -lrt"
 
 do_configure_prepend() {
-    touch ${S}/NEWS
-    touch ${S}/README
-    touch ${S}/AUTHORS
-    touch ${S}/COPYING
-    touch ${S}/ChangeLog
+	touch ${S}/NEWS
+	touch ${S}/README
+	touch ${S}/AUTHORS
+	touch ${S}/COPYING
+	touch ${S}/ChangeLog
 }
 
 BBCLASSEXTEND = "native"
