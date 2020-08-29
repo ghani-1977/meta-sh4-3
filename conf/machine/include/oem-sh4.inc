@@ -49,9 +49,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stslave-fw \
 	ustslave \
 	wait4button \
-	"
-
-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	${@bb.utils.contains("MACHINE_FEATURES", "smallflash", "", " \
 	kernel-module-extrawlan-mt7601u \
 	firmware-mt7601u \
@@ -63,13 +60,10 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
 	firmware-rtl8192cu \
 	kernel-module-extrawlan-rtl8192eu \
 	firmware-rtl8192eu", d)} \
-	"
-
-EXTRA_IMAGEDEPENDS += "\
 	libpcre \
 	"
 
-MACHINE_EXTRA_RDEPENDS += "\
+EXTRA_IMAGEDEPENDS += "\
 	libpcre \
 	"
 

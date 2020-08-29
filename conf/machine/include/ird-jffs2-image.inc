@@ -1,6 +1,6 @@
 MACHINE_FEATURES += "smallflash"
 
-MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "\
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	forever-logo-cfe \
 	"
 
