@@ -18,7 +18,6 @@ SOC_FAMILY = "stih205"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	kernel-module-scsi-wait-scan \
-	kernel-module-zram \
 	stlinux24-sh4-stxh205-fdma-firmware \
 	stlinux24-sh4-stxh205-fdma-firmware-extra \
 	stlirc \

@@ -29,7 +29,7 @@ SRC_URI = "\
 	file://modules-conf.conf \
 	" 
 
-FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d /bin ${sysconfdir}"
+FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d ${base_bindir} ${sysconfdir}"
 
 FILES = ""
 
