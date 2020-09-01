@@ -9,7 +9,6 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 
 DEPENDS = "virtual/kernel"
-RDEPENDS_${PN} = "kernel-module-uinput"
 RRECOMMENDS_${PN} = "stlirc-exec"
 RDEPENDS_lirc-exec = "stlirc"
 
