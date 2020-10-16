@@ -1,6 +1,6 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "^(vip1_v2|vip2_v1)$"
+COMPATIBLE_MACHINE = "^(vip1_v1|vip1_v2|vip2)$"
 
 STXNUMBER = "stx7109"
 

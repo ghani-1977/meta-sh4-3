@@ -3,7 +3,7 @@ LICENSE = "CLOSED"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "^(adb_box|adb_2850|arivalink200|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|vip1_v2|pace7241|vip2_v1|hl101|sagemcom88|octagon1008|tf7700|ufc960|ufs910|ufs913|ufs922|vitamin_hd5000|qboxhd|qboxhd_mini|forever_2424hd|forever_3434hd|forever_9898hd|forever_nanosmart)$"
+COMPATIBLE_MACHINE = "^(adb_box|adb_2850|arivalink200|atevio7500|cuberevo|cuberevo_250hd|cuberevo_2000hd|cuberevo_3000hd|cuberevo_mini|cuberevo_mini2|cuberevo_9500hd|pace7241|vip1_v1|vip1_v2|vip2|hl101|sagemcom88|octagon1008|tf7700|ufc960|ufs910|ufs913|ufs922|vitamin_hd5000|qboxhd|qboxhd_mini|forever_2424hd|forever_3434hd|forever_9898hd|forever_nanosmart)$"
 
 SRC_URI = "https://raw.githubusercontent.com/OpenVisionE2/linux-firmwares/master/sh4-firmwares.zip"
 
@@ -33,7 +33,7 @@ do_install() {
 		install -m 0644 dvb-fe-avl6222.fw ${D}${nonarch_base_libdir}/firmware/
 		install -m 0644 dvb-fe-cx21143.fw ${D}${nonarch_base_libdir}/firmware/
 		install -m 0644 dvb-fe-stv6306.fw ${D}${nonarch_base_libdir}/firmware/
-	elif [ "${MACHINE}" = "hl101" ]; then
+	elif [ "${MACHINE}" = "hl101" -o "${MACHINE}" = "vip1_v1" ]; then
 		install -m 0644 dvb-fe-avl2108.fw ${D}${nonarch_base_libdir}/firmware/
 		install -m 0644 dvb-fe-avl6222.fw ${D}${nonarch_base_libdir}/firmware/
 		install -m 0644 dvb-fe-cx21143.fw ${D}${nonarch_base_libdir}/firmware/
