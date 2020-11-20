@@ -4,7 +4,7 @@ require conf/machine/include/sh4-jffs2.inc
 
 BOX_BRAND = "ipbox"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-cuberevo"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"

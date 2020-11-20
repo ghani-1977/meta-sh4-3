@@ -7,7 +7,7 @@ BOX_BRAND = "atemio"
 MTD_KERNEL = "mtd1"
 MTD_ROOTFS = "mtd2"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
+PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-hs"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"
@@ -26,6 +26,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7111-fdma-firmware \
 	"
 
-MACHINE_FEATURES += "hdmicec ci smallflash SCART RCA YUV"
+MACHINE_FEATURES += "hdmicec ci smallflash SCART RCA YUV nofhdskin"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"

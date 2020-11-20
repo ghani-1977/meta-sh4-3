@@ -27,5 +27,5 @@ MACHINE_FEATURES += "hdmicec 4thgsh4 resellerid"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"
 
-RCTYPE = "21"
+RCTYPE = "22"
 RCNAME = "hs9510"

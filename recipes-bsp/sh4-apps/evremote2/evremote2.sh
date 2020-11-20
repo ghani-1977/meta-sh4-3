@@ -9,7 +9,7 @@ else
 	mknod -m 0660 /dev/rc c 147 1
 fi
 
-if [ $brandcheck == "edisionargus" ] || [ $brandcheck == "fulan" ] || [ $brandcheck == "forever" ] || [ $modelcheck == "hl101" ] || [ $modelcheck == "ufs912" ] || [ $modelcheck == "ufs913" ] || [ $modelcheck == "octagon1008" ]; then
+if [ $brandcheck == "edisionargus" ] || [ $brandcheck == "fulan" ] || [ $brandcheck == "forever" ] || [ $modelcheck == "hl101" ] || [ $modelcheck == "ufs912" ] || [ $modelcheck == "ufs913" ] || [ $modelcheck == "octagon1008" ] || [ $modelcheck == "opt9600" ]; then
 	/bin/evremote2 10 120 &
 elif [ $brandcheck == "atemio" ] || [ $brandcheck == "cuberevo" ] || [ $brandcheck == "hs" ] || [ $modelcheck == "atevio7500" ] || [ $modelcheck == "fortis_hdbox" ]; then
 	/bin/evremote2 10 140 &
