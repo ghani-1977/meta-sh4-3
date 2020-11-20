@@ -1,8 +1,8 @@
 require linux-sh4.inc
 
-COMPATIBLE_MACHINE = "^(vip1_v1|vip1_v2|vip2|hl101|octagon1008|tf7700|fortis_hdbox)$"
+COMPATIBLE_MACHINE = "^(opt9600)$"
 
-STXNUMBER = "stx7109"
+STXNUMBER = "stx7100"
 
 SRC_URI_append = " \
 	file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch;patch=1 \
