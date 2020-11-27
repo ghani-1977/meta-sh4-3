@@ -43,8 +43,10 @@ process_file() {
 			[ "$module" == "micom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "hs" ] || [ $brandcheck == "octagon" ]; then
 			[ "$module" == "nuvoton" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
-		elif [ $brandcheck == "fulan" ] || [ $brandcheck == "edisionargus" ]; then
+		elif [ $brandcheck == "edisionargus" ]; then
 			[ "$module" == "aotom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+		elif [ $brandcheck == "fulan" ]; then
+			[ "$module" == "aotom" ] && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "spiderbox" ]; then
 			[ "$module" == "aotom" ] && echo "LOAD" > /dev/dbox/oled0
 		elif [ $modelcheck == "ufc960" ] || [ $modelcheck == "ufs912" ] || [ $modelcheck == "ufs913" ] || [ $modelcheck == "ufs922" ]; then
