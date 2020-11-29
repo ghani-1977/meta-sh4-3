@@ -9,5 +9,5 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	"
 
 IMAGE_CMD_jffs2_prepend = "\
-    rm -rf ${IMAGE_ROOTFS}/tmp/*; \
-    "
+	rm -rf ${IMAGE_ROOTFS}/tmp/*; \
+	"

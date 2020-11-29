@@ -10,5 +10,5 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	"
 
 IMAGE_CMD_ubi_prepend = " \
-    rm -rf ${IMAGE_ROOTFS}/tmp/*; \
-    "
+	rm -rf ${IMAGE_ROOTFS}/tmp/*; \
+	"
