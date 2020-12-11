@@ -23,10 +23,6 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlirc \
 	"
 
-EXTRA_IMAGEDEPENDS += "\
-	libstgles \
-	"
-
 MACHINE_FEATURES += "hdmicec ci directfb sh4booster SCART RCA"
 
 DISTRO_FEATURES_append = " gtk-directfb"
