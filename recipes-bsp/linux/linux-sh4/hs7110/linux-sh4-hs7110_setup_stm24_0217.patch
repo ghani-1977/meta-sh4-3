@@ -39,7 +39,7 @@
  	seq_printf(m, "cpu family\t: %s\n", init_utsname()->machine);
  	seq_printf(m, "cpu variant\t: %s\n", get_cpu_variant(c));
  	seq_printf(m, "cpu type\t: %s\n", get_cpu_subtype(c));
-+	seq_printf(m, "cpu MHz\t\t: 450\n");
++	seq_printf(m, "cpu MHz\t: 450\n");
  	if (c->cut_major == -1)
  		seq_printf(m, "cut\t\t: unknown\n");
  	else if (c->cut_minor == -1)
@@ -148,54 +148,54 @@
 -				.name = "NOR Flash 3",
 -				.size = MTDPART_SIZ_FULL,
 -				.offset = MTDPART_OFS_NXTBLK,
-+				.name   = "boot",      //mtd0
++				.name   = "boot", // mtd0  WARNING: Loader 5.XX values!
 +				.size   = 0x00100000,           // 1M
-+				.offset = 0x00000000,
++				.offset = 0x00000000
 +			},
 +			{
 +				.name   = "Kernel",             //mtd1
 +				.size   = 0x00200000,           // 2M
-+				.offset = 0x00100000,           // 3M
++				.offset = 0x00100000           // 3M
 +			},
 +			{
 +				.name   = "APP",                //mtd2
 +				.size   = 0x00a00000,           //10M
-+				.offset = 0x00300000,           // 3M
++				.offset = 0x00300000           // 3M
 +			},
 +			{
 +				.name   = "ROOT FS",            //mtd3
 +				.size   = 0x00b00000,           //11M
-+				.offset = 0x00d00000,           //13M
++				.offset = 0x00d00000           //13M
 +			},
 +			{
 +				.name   = "Device",             //mtd4
 +				.size   = 0x00300000,           // 3M
-+				.offset = 0x01800000,           //24M
++				.offset = 0x01800000           //24M
 +			},
 +			{
 +				.name   = "Config",             //mtd5
 +				.size   = 0x00100000,           // 1M
-+				.offset = 0x01b00000,           //27M
++				.offset = 0x01B00000           //27M
 +			},
 +			{
 +				.name   = "User",               //mtd6
-+				.size   = MTDPART_SIZ_FULL,     // 4M
-+				.offset = 0x01c00000,           //28M
++				.size   = 0x00400000,     // 4M
++				.offset = 0x01C00000           //28M
 +			},
 +			{
-+				.name   = "All",
-+				.size   = MTDPART_SIZ_FULL,     //32M
-+				.offset = 0x00000000,
++				.name   = "All",           // mtd7
++				.size   = 0x02000000,     //32M
++				.offset = 0x00000000
 +			},
 +			{
-+				.name   = "APP_ORG",
++				.name   = "APP_ORG",       // mtd8
 +				.size   = 0x00500000,           // 5M
-+				.offset = 0x00300000,           // 3M
++				.offset = 0x00300000           // 3M
 +			},
 +			{
-+				.name   = "APP_BAK",
++				.name   = "APP_BAK",       // mtd9
 +				.size   = 0x00500000,           // 5M
-+				.offset = 0x00800000,           // 8M
++				.offset = 0x00800000           // 8M
 -			},
 -		},
 -
@@ -343,7 +343,7 @@
  
  struct stpio_pin {
  #ifdef CONFIG_STPIO
-+	const char *pin_name;
++	char *pin_name;
  	void (*func)(struct stpio_pin *pin, void *dev);
  	void* dev;
  	unsigned short port_no, pin_no;
@@ -435,7 +435,7 @@
 +			pin = &port->pins[pin_no];
 +			if(!pin) continue;
 +
-+			*name = (char)(pin->stpio.pin_name ? pin->stpio.pin_name : "");
++			name = pin->stpio.pin_name ? pin->stpio.pin_name : "";
 +			len += sprintf(page + len,
 +					"PIO %d.%d [%-10s] [%s] [%s]\n",
 +					port_no, pin_no, name,

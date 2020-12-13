@@ -37,8 +37,8 @@
 +		/* boot from USB */
 +		if (command_line_len >= usb_org_command_line_len && !strncmp(command_line, usb_org_command_line, usb_org_command_line_len))
 +		{
-+			strlcpy(command_line, usb_new_command_line, sizeof(command_line));
-+//			strlcat(command_line, mac, sizeof(command_line));
++			strlcpy(command_line, usb_new_command_line, sizeof(usb_new_command_line));
++			strlcat(command_line, mac, sizeof(mac));
 +		}
 +	}
 +
@@ -49,7 +49,7 @@
  	seq_printf(m, "cpu family\t: %s\n", init_utsname()->machine);
  	seq_printf(m, "cpu variant\t: %s\n", get_cpu_variant(c));
  	seq_printf(m, "cpu type\t: %s\n", get_cpu_subtype(c));
-+	seq_printf(m, "cpu MHz\t\t: 450\n");
++	seq_printf(m, "cpu MHz\t: 450\n");
  	if (c->cut_major == -1)
  		seq_printf(m, "cut\t\t: unknown\n");
  	else if (c->cut_minor == -1)
@@ -487,7 +487,7 @@
  
  struct stpio_pin {
  #ifdef CONFIG_STPIO
-+	const char *pin_name;
++	char *pin_name;
 	void (*func)(struct stpio_pin *pin, void *dev);
 	void* dev;
 	unsigned short port_no, pin_no;
@@ -579,7 +579,7 @@
 +			pin = &port->pins[pin_no];
 +			if (!pin) continue;
 +
-+			char *name = pin->stpio.pin_name ? pin->stpio.pin_name : "";
++			name = pin->stpio.pin_name ? pin->stpio.pin_name : "";
 +			len += sprintf(page + len,
 +					"PIO %d.%d [%-10s] [%s] [%s]\n",
 +					port_no, pin_no, name,
