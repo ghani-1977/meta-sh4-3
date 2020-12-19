@@ -20,10 +20,10 @@ FILES_${PN} += "/boot"
 do_install () {
 	# Remove stuff from old packages if present
 	if [ -e ${sysconfdir}/init.d/stslave.sh ] ; then
-		rm ${sysconfdir}/init.d/stslave.sh
+		rm -f ${sysconfdir}/init.d/stslave.sh
 	fi
 	if [ -e ${sysconfdir}/rcS.d/S03stslave ] ; then
-		rm ${sysconfdir}/rcS.d/S03stslave
+		rm -f ${sysconfdir}/rcS.d/S03stslave
 	fi
 	install -d ${D}/boot
 	if [ "${BOX_BRAND}" = "forever" ]; then

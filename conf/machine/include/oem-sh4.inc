@@ -38,7 +38,7 @@ DVBMEDIASINK_CONFIG = "--with-wma --with-wmv --with-pcm --with-dtsdownmix --with
 
 # Add uImage in tar image boot directory
 IMAGE_CMD_tar_prepend = "\
-    cp ${DEPLOY_DIR_IMAGE}/uImage ${IMAGE_ROOTFS}/boot/${KERNEL_FILE}; \
+    cp -f ${DEPLOY_DIR_IMAGE}/uImage ${IMAGE_ROOTFS}/boot/${KERNEL_FILE}; \
     "
 	
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\

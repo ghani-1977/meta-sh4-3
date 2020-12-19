@@ -67,7 +67,7 @@ do_install_append() {
 	install -d ${D}${sysconfdir}/init.d
 	install ${WORKDIR}/lircexec.init ${D}${sysconfdir}/init.d/lircexec
 	install -d ${D}${datadir}/lirc/
-	cp -r ${S}/remotes ${D}${datadir}/lirc/
+	cp -fr ${S}/remotes ${D}${datadir}/lirc/
 	rm -rf ${D}/dev
 	rm -rf  ${D}${base_bindir}/pronto2lirc
 	if [ "${MACHINE}" = "hl101" ]; then

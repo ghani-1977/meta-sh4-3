@@ -43,17 +43,17 @@ do_configure_prepend () {
     # if a custom pti source is present, add it to the sources
     if [ -e ${PTI_NP_PATH}/Makefile ]; then
         echo "Found custom pti sources.."
-        cp -r ${PTI_NP_PATH} ${S}
+        cp -fr ${PTI_NP_PATH} ${S}
     fi
     if [ -L include/multicom ]; then
-        rm include/multicom
+        rm -rf include/multicom
     fi
     if [ -L multicom ]; then
-        rm multicom 
+        rm -rf multicom 
     fi
     ln -sf ${S}/multicom/include ${S}/include/multicom
     export KERNEL_LOCATION="${STAGING_KERNEL_DIR}"
-    cp -R ${S}/multicom ${STAGING_KERNEL_DIR}/multicom
+    cp -fR ${S}/multicom ${STAGING_KERNEL_DIR}/multicom
 }
 
 do_compile() {
