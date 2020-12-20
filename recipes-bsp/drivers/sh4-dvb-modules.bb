@@ -106,6 +106,7 @@ do_install() {
     #install modutils config
     install -d ${D}${sysconfdir}/modules-load.d
     install -m 644 ${WORKDIR}/modules.conf ${D}${sysconfdir}/modules-load.d/_${MACHINE}.conf
+    echo "e2_proc" > ${D}${sysconfdir}/modules-load.d/zeprocfs.conf
     install -d ${D}${sysconfdir}/modprobe.d
     install -m 644 ${WORKDIR}/modules-conf.conf ${D}${sysconfdir}/modprobe.d/_${MACHINE}.conf
     install -d ${D}${sysconfdir}/init.d
