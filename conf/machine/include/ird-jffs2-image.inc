@@ -25,9 +25,12 @@ IMAGE_CMD_jffs2_append = " \
 	fup -r ${IMAGEDIR}/e2-R${RESELLERID}.ird ${RESELLERID}; \
 	fup -n ${IMAGEDIR}/e2-R${RESELLERID}.ird 100100; \
 	fup -i ${IMAGEDIR}/e2-R${RESELLERID}.ird > ${IMAGEDIR}/e2-R${RESELLERID}-info.txt; \
-	zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/e2-R${RESELLERID}.ird ${IMAGEDIR}/e2-R${RESELLERID}-info.txt; \
+	echo ${IMAGE_NAME} > ${IMAGEDIR}/imageversion; \
+	echo "https://forum.openvision.tech/app.php/donate" > ${IMAGEDIR}/donate.txt; \
+	zip ${IMAGE_NAME}_ird.zip ${IMAGEDIR}/e2-R${RESELLERID}.ird ${IMAGEDIR}/e2-R${RESELLERID}-info.txt ${IMAGEDIR}/imageversion ${IMAGEDIR}/donate.txt; \
 	rm -f ${IMAGEDIR}/*.ird; \
 	rm -f ${IMAGEDIR}/*.txt; \
+	echo "https://forum.openvision.tech/app.php/donate" > ${IMAGEDIR}/donate.txt; \
 	zip ${IMAGE_NAME}_usb.zip ${IMAGEDIR}/*; \
 	rm -f ${DEPLOY_DIR_IMAGE}/*.jffs2; \
 	rm -rf ${IMAGEDIR}; \
