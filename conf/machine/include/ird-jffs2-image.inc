@@ -23,7 +23,7 @@ IMAGE_CMD_jffs2_append = " \
 		fup -c ${IMAGEDIR}/e2-R${RESELLERID}.ird -1 ${IMAGEDIR}/${ROOTFS_FILE} -6 ${IMAGEDIR}/${KERNEL_FILE}; \
 	fi; \
 	fup -r ${IMAGEDIR}/e2-R${RESELLERID}.ird ${RESELLERID}; \
-	fup -n ${IMAGEDIR}/e2-R${RESELLERID}.ird 100100; \
+	fup -n ${IMAGEDIR}/e2-R${RESELLERID}.ird 100200; \
 	fup -i ${IMAGEDIR}/e2-R${RESELLERID}.ird > ${IMAGEDIR}/e2-R${RESELLERID}-info.txt; \
 	echo ${IMAGE_NAME} > ${IMAGEDIR}/imageversion; \
 	echo "https://forum.openvision.tech/app.php/donate" > ${IMAGEDIR}/donate.txt; \
