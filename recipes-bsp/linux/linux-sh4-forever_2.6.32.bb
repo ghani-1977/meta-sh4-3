@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.71/archive
 	file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch \
 	file://linux-sh4-4g-stmmac_stm24_${STM_PATCH_STR}.patch \
 	file://timeconst.patch \
+	file://kmap.patch \
 	"
 
 SRC_URI[md5sum] = "769a5383eadabf82d9d8930f98ffb1fe"
