@@ -14,7 +14,7 @@ SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.71/archive
 	file://kmap.patch \
 	"
 
-SRC_URI[md5sum] = "769a5383eadabf82d9d8930f98ffb1fe"
-SRC_URI[sha256sum] = "310ea67421c35227e8fc1bc847c154758ca0908683c18a8724065ad720d61e33"
+SRC_URI[md5sum] = "9fb7836a0f3967a4711566f126f47cd3"
+SRC_URI[sha256sum] = "3a81d24469f960d7e689741dc452f55cde897b44bc8aa7110b7f00d5f1e0409b"
 
 S = "${WORKDIR}/linux-sh4-${KERNELVERSION}.71-stmicro-4g"
