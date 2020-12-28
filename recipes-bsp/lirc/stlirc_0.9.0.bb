@@ -33,10 +33,11 @@ SRC_URI = "https://sourceforge.net/projects/lirc/files/LIRC/0.9.0/lirc-${PV}.tar
 	file://lircmd.init \
 	file://lircexec.init \
 	file://fix_irrecord_deps.patch;patch=1 \
-	${@bb.utils.contains_any("MACHINE", "adb_box adb_2850 arivalink200 pace7241 vip1_v1 vip1_v2 vip2 ipbox55 ipbox99 ipbox9900 sagemcom88 ufs910 qboxhd qboxhd_mini forever_2424hd forever_3434hd forever_9898hd forever_nanosmart", "file://${PN}_sh4.patch file://lircd_sh4.init", "", d)} \
+	file://${PN}_sh4.patch \
+	${@bb.utils.contains_any("MACHINE", "adb_box adb_2850 arivalink200 pace7241 vip1_v1 vip1_v2 vip2 ipbox55 ipbox99 ipbox9900 sagemcom88 ufs910 qboxhd qboxhd_mini forever_2424hd forever_3434hd forever_9898hd forever_nanosmart", "file://lircd_sh4.init", "", d)} \
 	${@bb.utils.contains_any("MACHINE", "hl101 spark spark7162", "file://lircd_spark.init", "", d)} \
-	${@bb.utils.contains("MACHINE", "hl101", "file://${PN}_hl101.patch file://lircd.conf.03_00_01 file://lircd.conf.03_00_02 file://lircd.conf.03_00_07", "", d)} \
-	${@bb.utils.contains_any("MACHINE", "spark spark7162", "file://${PN}_spark.patch file://lircd.conf.09_00_07 file://lircd.conf.09_00_08 file://lircd.conf.09_00_0B file://lircd.conf.09_00_1D file://lircd.conf.09_00_0D", "", d)} \
+	${@bb.utils.contains("MACHINE", "hl101", "file://lircd.conf.03_00_01 file://lircd.conf.03_00_02 file://lircd.conf.03_00_07", "", d)} \
+	${@bb.utils.contains_any("MACHINE", "spark spark7162", "file://lircd.conf.09_00_07 file://lircd.conf.09_00_08 file://lircd.conf.09_00_0B file://lircd.conf.09_00_1D file://lircd.conf.09_00_0D", "", d)} \
 	"
 
 SRC_URI[md5sum] = "b232aef26f23fe33ea8305d276637086"
