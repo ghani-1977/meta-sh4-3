@@ -11,10 +11,9 @@ SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.71/archive
 	file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch \
 	file://linux-sh4-4g-stmmac_stm24_${STM_PATCH_STR}.patch \
 	file://timeconst.patch \
-	file://kmap.patch \
 	"
 
-SRC_URI[md5sum] = "9fb7836a0f3967a4711566f126f47cd3"
-SRC_URI[sha256sum] = "3a81d24469f960d7e689741dc452f55cde897b44bc8aa7110b7f00d5f1e0409b"
+SRC_URI[md5sum] = "337e05e9dfbdac8629ecdae82985f9cd"
+SRC_URI[sha256sum] = "c61eb055bd73f1d3ca10bd0ba3ada595c3d017deb957cf5f0fdd824852dd0899"
 
 S = "${WORKDIR}/linux-sh4-${KERNELVERSION}.71-stmicro-4g"
