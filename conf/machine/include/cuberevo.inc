@@ -26,7 +26,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlinux24-sh4-stx7109-fdma-firmware \
 	"
 
-MACHINE_FEATURES += "ci middleflash SCART"
+MACHINE_FEATURES += "ci SCART"
 
 EXTRA_OECONF_append_pn-enigma2 = " --with-cuberevostb"
 
