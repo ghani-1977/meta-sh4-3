@@ -130,7 +130,7 @@
 +	struct aotom_ioctl_data vfd_data;
 +	int ioctl_fd = -1;
 +
-+	ioctl_fd = open("/dev/vfd", O_RDONLY);
++	ioctl_fd = open("/dev/dbox/oled0", O_RDONLY);
 +	vfd_data.u.icon.on = iconOn;
 +	vfd_data.u.icon.icon_nr = 35;
 +	ioctl(ioctl_fd, VFDICONDISPLAYONOFF, &vfd_data);
@@ -293,8 +293,8 @@
  		}
  		remote->toggle_mask_state = 0;
  		remote = remote->next;
---- a/daemons/input_map.inc.orig	2014-09-23 22:26:38.725458302 +0300
-+++ b/daemons/input_map.inc	2014-09-23 22:28:00.513863863 +0300
+--- a/daemons/input_map.inc.old	2011-03-26 00:29:41.000000000 +0200
++++ b/daemons/input_map.inc	2019-01-29 12:03:16.666905866 +0300
 @@ -332,7 +332,7 @@
  {"KEY_STOPCD", 166},
  {"KEY_SUBTITLE", 0x172},
@@ -304,17 +304,10 @@
  {"KEY_SYSRQ", 99},
  {"KEY_T", 20},
  {"KEY_TAB", 15},
-@@ -446,3 +446,13 @@
+@@ -446,3 +446,6 @@
  {"BTN_X", 0x133},
  {"BTN_Y", 0x134},
  {"BTN_Z", 0x135},
-+{"KEY_TVSAT", 512},
-+{"KEY_PICASA", 513},
-+{"KEY_SHOUTCAST", 514},
-+{"KEY_YOUTUBE", 515},
-+{"KEY_SPARK", 516},
 +{"KEY_RECALL", 517},
 +{"KEY_PLAYMODE", 518},
 +{"KEY_USB", 519},
-+{"KEY_PORTAL", 520},
-+{"KEY_FAST", 521},
