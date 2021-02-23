@@ -1,6 +1,6 @@
-diff -ur lirc-0.9.0-orig/daemons/ir_remote.c lirc-0.9.0/daemons/ir_remote.c
---- lirc-0.9.0-orig/daemons/ir_remote.c	2011-03-25 23:28:18.000000000 +0100
-+++ lirc-0.9.0/daemons/ir_remote.c	2013-02-09 10:39:35.483626463 +0100
+diff -Naur lirc-0.9.0/daemons/ir_remote.c lirc-0.9.0-sh4/daemons/ir_remote.c
+--- lirc-0.9.0/daemons/ir_remote.c	2011-03-26 02:58:18.000000000 +0430
++++ lirc-0.9.0-sh4/daemons/ir_remote.c	2021-02-22 23:11:55.616669915 +0330
 @@ -37,6 +37,8 @@
  
  extern struct hardware hw;
@@ -46,9 +46,9 @@ diff -ur lirc-0.9.0-orig/daemons/ir_remote.c lirc-0.9.0/daemons/ir_remote.c
  		}
  		remote->toggle_mask_state = 0;
  		remote = remote->next;
-diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
---- lirc-0.9.0-orig/daemons/lircd.c	2011-03-25 23:28:18.000000000 +0100
-+++ lirc-0.9.0/daemons/lircd.c	2013-02-09 10:40:38.853626806 +0100
+diff -Naur lirc-0.9.0/daemons/lircd.c lirc-0.9.0-sh4/daemons/lircd.c
+--- lirc-0.9.0/daemons/lircd.c	2011-03-26 02:58:18.000000000 +0430
++++ lirc-0.9.0-sh4/daemons/lircd.c	2021-02-22 23:14:48.792304439 +0330
 @@ -60,6 +60,15 @@
  #if defined(__linux__)
  #include <linux/input.h>
@@ -60,7 +60,7 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
 +struct semaphore {
 +	int dummy;
 +};
-+#include <aotom_main.h>
++#include "aotom_main.h"
 +#endif
  #include "input_map.h"
  #endif
@@ -247,7 +247,7 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
  int get_command(int fd)
  {
  	int length;
-@@ -1786,18 +1940,41 @@
+@@ -1786,18 +1940,40 @@
  	if (uinputfd != -1) {
  		linux_input_code input_code;
  
@@ -259,7 +259,7 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
  			struct input_event event;
 +#ifdef SPARK
 +			static int aotom_fd = -2;
-+
+ 
 +			if (aotom_fd == -2)
 +				aotom_fd = open("/dev/vfd", O_RDWR);
 +
@@ -270,7 +270,6 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
 +				ioctl(aotom_fd, VFDSETLED, &vfd_data);
 +			}
 +#endif
- 
  			memset(&event, 0, sizeof(event));
  			event.type = EV_KEY;
  			event.code = input_code;
@@ -290,7 +289,7 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
  			/* Need to write sync event */
  			memset(&event, 0, sizeof(event));
  			event.type = EV_SYN;
-@@ -1807,6 +1984,7 @@
+@@ -1807,6 +1983,7 @@
  				logprintf(LOG_ERR, "writing EV_SYN to uinput failed");
  				logperror(LOG_ERR, NULL);
  			}
@@ -298,7 +297,7 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
  		}
  	}
  #endif
-@@ -2233,6 +2411,14 @@
+@@ -2233,6 +2410,14 @@
  
  	signal(SIGPIPE, SIG_IGN);
  
@@ -313,7 +312,7 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
  	start_server(permission, nodaemon);
  
  	act.sa_handler = sigterm;
-@@ -2246,8 +2432,10 @@
+@@ -2246,8 +2431,10 @@
  	act.sa_flags = SA_RESTART;	/* don't fiddle with EINTR */
  	sigaction(SIGALRM, &act, NULL);
  
@@ -324,9 +323,9 @@ diff -ur lirc-0.9.0-orig/daemons/lircd.c lirc-0.9.0/daemons/lircd.c
  
  	act.sa_handler = sighup;
  	sigemptyset(&act.sa_mask);
-diff -ur lirc-0.9.0-orig/daemons/lircd.h lirc-0.9.0/daemons/lircd.h
---- lirc-0.9.0-orig/daemons/lircd.h	2011-03-25 23:28:18.000000000 +0100
-+++ lirc-0.9.0/daemons/lircd.h	2013-02-09 10:39:35.493626463 +0100
+diff -Naur lirc-0.9.0/daemons/lircd.h lirc-0.9.0-sh4/daemons/lircd.h
+--- lirc-0.9.0/daemons/lircd.h	2011-03-26 02:58:18.000000000 +0430
++++ lirc-0.9.0-sh4/daemons/lircd.h	2021-02-22 23:11:55.616669915 +0330
 @@ -74,6 +74,8 @@
  int send_stop(int fd, char *message, char *arguments);
  int send_core(int fd, char *message, char *arguments, int once);
