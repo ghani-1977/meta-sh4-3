@@ -11,7 +11,7 @@ KERNEL_FILE = "uImage"
 
 IMAGE_FSTYPES = "tar.gz"
 
-MACHINE_FEATURES += "ci smallflash RCA SCART"
+MACHINE_FEATURES += "ci RCA SCART"
 
 AUDIOELF = "audio_7100.elf"
 VIDEOELF = "video_7100.elf"
