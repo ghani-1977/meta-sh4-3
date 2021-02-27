@@ -38,7 +38,7 @@ SDIMG_ROOTFS = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.${SDIMG_ROOTFS_TYPE}"
 # SD image filename
 SDIMG = "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.sh4-usb.img"
 
-do_image_sh4usbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot zip-native:do_populate_sysroot ${DISTRO}-enigma2-image:do_rootfs e2fsprogs-native:do_populate_sysroot"
+do_image_sh4usbimg[depends] += "parted-native:do_populate_sysroot mtools-native:do_populate_sysroot u-boot-mkimage-native:do_populate_sysroot dosfstools-native:do_populate_sysroot virtual/kernel:do_populate_sysroot zip-native:do_populate_sysroot ${IMAGE_BASENAME}-image:do_rootfs e2fsprogs-native:do_populate_sysroot"
 
 # Additional files and/or directories to be copied into the vfat partition from the IMAGE_ROOTFS.
 FATPAYLOAD ?= ""

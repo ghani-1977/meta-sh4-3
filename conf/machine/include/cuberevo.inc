@@ -19,7 +19,6 @@ DVB1FIRMWARE = "dvb-fe-cx24116.fw"
 DVB2FIRMWARE = "dvb-fe-stv6306.fw"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	enigma2-plugin-extensions-cuberevovfd \
 	firmware-sh4 \
 	fp-control \
 	ipbox-eeprom \

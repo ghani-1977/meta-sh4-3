@@ -15,7 +15,6 @@ KERNEL_FILE = "uImage"
 IMAGE_FSTYPES += "tar.gz"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	enigma2-plugin-extensions-${MACHINE}vfd \
 	flash-tools \
 	fp-control \
 	kernel-module-zram \
