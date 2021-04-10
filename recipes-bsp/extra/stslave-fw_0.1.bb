@@ -19,8 +19,8 @@ FILES_${PN} += "/boot"
 
 do_install () {
 	# Remove stuff from old packages if present
-	if [ -e ${sysconfdir}/init.d/stslave.sh ] ; then
-		rm -f ${sysconfdir}/init.d/stslave.sh
+	if [ -e ${INIT_D_DIR}/stslave.sh ] ; then
+		rm -f ${INIT_D_DIR}/stslave.sh
 	fi
 	if [ -e ${sysconfdir}/rcS.d/S03stslave ] ; then
 		rm -f ${sysconfdir}/rcS.d/S03stslave

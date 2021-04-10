@@ -29,7 +29,7 @@ SRC_URI = "\
 	file://modules-conf.conf \
 	" 
 
-FILES_${PN} = "${sysconfdir}/init.d ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d ${base_bindir} ${sysconfdir}"
+FILES_${PN} = "${INIT_D_DIR} ${sysconfdir}/rcS.d ${sysconfdir}/modules-load.d ${sysconfdir}/modprobe.d ${base_bindir} ${sysconfdir}"
 
 FILES = ""
 
@@ -109,15 +109,15 @@ do_install() {
     echo "e2_proc" > ${D}${sysconfdir}/modules-load.d/zeprocfs.conf
     install -d ${D}${sysconfdir}/modprobe.d
     install -m 644 ${WORKDIR}/modules-conf.conf ${D}${sysconfdir}/modprobe.d/_${MACHINE}.conf
-    install -d ${D}${sysconfdir}/init.d
+    install -d ${D}${INIT_D_DIR}
     install -d ${D}${sysconfdir}/rcS.d
-    install -m 0755 ${S}/ddbootup ${D}${sysconfdir}/init.d
+    install -m 0755 ${S}/ddbootup ${D}${INIT_D_DIR}
     ln -sf ../init.d/ddbootup ${D}${sysconfdir}/rcS.d/S01ddbootup
     install -d ${D}${base_bindir}
     install -m 755 ${S}/vdstandby ${D}${base_bindir}
     install -d ${D}${sysconfdir}
     install -m 644 ${S}/vdstandby.cfg ${D}${sysconfdir}
-    install -m 0755 ${S}/sh4booster ${D}${sysconfdir}/init.d
+    install -m 0755 ${S}/sh4booster ${D}${INIT_D_DIR}
     ln -sf ../init.d/sh4booster ${D}${sysconfdir}/rcS.d/S05sh4booster
 
     # if no pti_np sources are available and a custom pti.ko is present, overwrite the SH4 one

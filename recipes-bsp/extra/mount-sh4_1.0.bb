@@ -11,8 +11,8 @@ SRC_URI = "file://mountsh4"
 FILES_${PN} = "${sysconfdir}"
 
 do_install () {
-	install -d ${D}${sysconfdir}/init.d
-	install ${WORKDIR}/mountsh4 ${D}${sysconfdir}/init.d
+	install -d ${D}${INIT_D_DIR}
+	install ${WORKDIR}/mountsh4 ${D}${INIT_D_DIR}
 }
 
 INITSCRIPT_NAME = "mountsh4"

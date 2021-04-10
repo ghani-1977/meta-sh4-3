@@ -64,20 +64,20 @@ INITSCRIPT_PARAMS_stlirc-exec = "defaults 21"
 EXTRA_OEMAKE = 'SUBDIRS="daemons tools"'
 
 do_install_append() {
-	install -d ${D}${sysconfdir}/init.d
-	install ${WORKDIR}/lircexec.init ${D}${sysconfdir}/init.d/lircexec
+	install -d ${D}${INIT_D_DIR}
+	install ${WORKDIR}/lircexec.init ${D}${INIT_D_DIR}/lircexec
 	install -d ${D}${datadir}/lirc/
 	cp -fr ${S}/remotes ${D}${datadir}/lirc/
 	rm -rf ${D}/dev
 	rm -rf  ${D}${base_bindir}/pronto2lirc
 	if [ "${MACHINE}" = "hl101" ]; then
-		install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
+		install ${WORKDIR}/lircd_spark.init ${D}${INIT_D_DIR}/lircd
 		install -m 0644 ${WORKDIR}/lircd.conf.03_00_* ${D}${sysconfdir}
 	elif [ "${MACHINE}" = "spark" -o "${MACHINE}" = "spark7162" ]; then
-		install ${WORKDIR}/lircd_spark.init ${D}${sysconfdir}/init.d/lircd
+		install ${WORKDIR}/lircd_spark.init ${D}${INIT_D_DIR}/lircd
 		install -m 0644 ${WORKDIR}/lircd.conf.09_00_* ${D}${sysconfdir}
 	else
-		install ${WORKDIR}/lircd_sh4.init ${D}${sysconfdir}/init.d/lircd
+		install ${WORKDIR}/lircd_sh4.init ${D}${INIT_D_DIR}/lircd
 	fi
 	install -m 0644 ${WORKDIR}/lircd_${MACHINE}.conf ${D}${sysconfdir}/lircd.conf
 }
@@ -87,5 +87,5 @@ PACKAGES += "stlirc-exec stlirc-remotes"
 FILES_${PN}-dbg += "${bindir}/.debug ${sbindir}/.debug"
 FILES_${PN}-dev += "${libdir}/liblirc_client.so"
 FILES_${PN} = "${bindir} ${sbindir} ${libdir}/lib*.so.* ${sysconfdir} ${exec_prefix}${localstatedir}"
-FILES_stlirc-exec = "${bindir}/irexec ${sysconfdir}/init.d/lircexec"
+FILES_stlirc-exec = "${bindir}/irexec ${INIT_D_DIR}/lircexec"
 FILES_stlirc-remotes = "${datadir}/lirc/remotes"

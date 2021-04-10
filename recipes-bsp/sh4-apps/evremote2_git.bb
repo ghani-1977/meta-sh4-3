@@ -11,8 +11,8 @@ LDFLAGS += "-lpthread -lrt"
 do_install_append () {
 	install -d ${D}${base_bindir}
 	install -m 0755 ${WORKDIR}/build/${PN} ${D}${base_bindir}/
-	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${WORKDIR}/evremote2.sh ${D}${sysconfdir}/init.d
+	install -d ${D}${INIT_D_DIR}
+	install -m 0755 ${WORKDIR}/evremote2.sh ${D}${INIT_D_DIR}
 	install -d ${D}${sysconfdir}/rcS.d
 	ln -sf ../init.d/evremote2.sh ${D}${sysconfdir}/rcS.d/S40evremote2
 }
