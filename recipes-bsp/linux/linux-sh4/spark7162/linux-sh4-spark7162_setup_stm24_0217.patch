@@ -108,45 +108,45 @@
  			.size	= MTDPART_SIZ_FULL
  		},
 +#endif
-+    {
++	{
 +		.name	= "uboot",
 +		.offset	= 0,
-+		.size 	= 0x00100000 //1M  //uboot boot mode
++		.size 	= 0x00100000 // 1 Mbyte, uboot boot code
 +	},
 +	{
 +		.name	= "Spark kernel",
 +		.offset	= 0x00100000,
-+		.size 	= 0x00a00000 //10M
++		.size 	= 0x00a00000 // 10 Mbyte
 +	},
 +
 +	{
-+        .name = "Reserve0",
-+        .offset = 0x00b00000,
-+		.size = 0x00700000, //7M
++		.name   = "Reserve0",
++		.offset = 0x00b00000,
++		.size   = 0x00700000,  // 7 Mbyte
 +	},
 +
-+    {
-+        .name = "Reserve1",
++	{
++		.name   = "Reserve1",
 +		.offset = 0x01200000,
-+		.size = 0x00200000, //2M
-+    },
++		.size   = 0x00200000,  // 2 Mbyte
++	},
 +
-+    {
++	{
 +		.name	= "Spark Userfs",
 +		.offset	= 0x01400000,
-+		.size	= 0x16c00000  //364M
++		.size	= 0x16c00000  // 364 Mbyte
 +	},
 +
-+    {
++	{
 +		.name	= "kernel",
 +		.offset	= 0x18000000,
-+		.size	= 0x00800000 //8M
++		.size = 0x00800000 // 8 Mbyte
 +	},
 +
-+    {
++	{
 +		.name	= "rootfs",
 +		.offset	= 0x18800000,
-+		.size	= 0x07700000 //119M	cc changed reserved 1024KB for u-boot bbt
++		.size = 0x07700000 // 119 Mbyte, cc changed; reserved 1024KB for u-boot bbt
 +	},
 +
 +
@@ -369,7 +369,7 @@
 +		strlcpy(final_cmd_line, new_cmd_line, sizeof(new_cmd_line));
 +		strlcat(final_cmd_line, mac, sizeof(mac));
 +
-+#if 1
++//#if 1
 +		// look for STB_ID=
 +		for (i = 0; i < (cmd_line_len - 7); i++)
 +		{
@@ -384,8 +384,8 @@
 +		strlcat(final_cmd_line, stb_id_name, sizeof(stb_id_name));
 +		strlcat(final_cmd_line, stb_id, sizeof(stb_id));
 +		printk("\nLength: %d (%d), Final cmd_line[%s]\n\n", sizeof(new_cmd_line) + sizeof(mac) + sizeof(stb_id_name) + sizeof(stb_id) - 4, strlen(final_cmd_line), final_cmd_line);
-+#endif
-+#if 1
++//#endif
++//#if 1
 +		/* Overwrite the original command line under the following conditions:
 +		 *
 +		 * 1. The test string with console=ttyAS0,115200 is shorter than the
@@ -394,8 +394,8 @@
 +		 *    with console=ttyAS0,115200 or the test string with
 +		 *    console=ttyAS1,115200.
 +		 * The net result of all this is that the STB_ID and MAC are retained,
-+		 * the console tty is always ttyAS0 and the file system for the root
-+		 * is UBI.
++		 * the bigphysarea allocation is removed, the console TTY is always ttyAS0
++		 * and the file system for the root is JFFS2.
 +		 */
 +		if (cmd_line_len >= org_cmd_line_len
 +		&& ((!strncmp(command_line, org_cmd_line, org_cmd_line_len))
@@ -403,7 +403,7 @@
 +		{
 +			strlcpy(command_line, final_cmd_line, strlen(final_cmd_line) + 1);
 +		}
-+#endif
++//#endif
 +	}
 +
  	/* Save unparsed command line copy for /proc/cmdline */
@@ -415,7 +415,7 @@
 +	seq_printf(m, "cpu MHz\t: 540\n");
  	if (c->cut_major == -1)
  		seq_printf(m, "cut\t\t: unknown\n");
- 	else if (c->cut_minor == -1)@@ -555,6 +649,7 @@
+ 	else if (c->cut_minor == -1)
 --- linux-sh4-2.6.32.61_stm24_0212.org/drivers/mtd/devices/m25p80.c	2014-03-05 08:32:56.000000000 +0100
 +++ linux-sh4-2.6.32.61_stm24_0212/drivers/mtd/devices/m25p80.c	2014-03-05 08:53:35.000000000 +0100
 @@ -28,6 +28,14 @@
