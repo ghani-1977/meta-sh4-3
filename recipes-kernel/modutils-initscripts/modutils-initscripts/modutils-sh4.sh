@@ -39,18 +39,20 @@ process_file() {
 		[ "$VERBOSE" != no ] && echo -n "$module "
 		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
 		loaded_modules="${loaded_modules}${module} "
-		if [ $brandcheck == "cuberevo" ] || [ $modelcheck == "ipbox99" ] || [ $modelcheck == "ipbox9900" ]; then
+		if [ $modelcheck == "cuberevo" ] || [ $modelcheck == "cuberevo_2000hd" ] || [ $modelcheck == "cuberevo_3000hd" ] || [ $modelcheck == "cuberevo_mini" ] || [ $modelcheck == "cuberevo_mini2" ]; then
+			[ "$module" == "cuberevo_micom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+		elif [ $modelcheck == "cuberevo_250hd" ] || [ $modelcheck == "cuberevo_9500hd" ] || [ $modelcheck == "ipbox99" ] || [ $modelcheck == "ipbox9900" ]; then
 			[ "$module" == "micom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "hs" ] || [ $brandcheck == "octagon" ]; then
 			[ "$module" == "nuvoton" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
-		elif [ $brandcheck == "edisionargus" ]; then
+		elif [ $modelcheck == "vip1_v2" ] || [ $brandcheck == "vip2" ]; then
 			[ "$module" == "aotom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+		elif [ $modelcheck == "vip1_v1" ] || [ $brandcheck == "hl101" ]; then
+			[ "$module" == "proton" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "fulan" ]; then
 			[ "$module" == "aotom" ] && echo "LOAD" > /dev/vfd
 		elif [ $modelcheck == "spark7162" ]; then
 			mknod -m 0644 /dev/rfmod0 c 150 0
-		elif [ $brandcheck == "spiderbox" ]; then
-			[ "$module" == "aotom" ] && echo "LOAD" > /dev/dbox/oled0
 		elif [ $modelcheck == "ufc960" ] || [ $modelcheck == "ufs912" ] || [ $modelcheck == "ufs913" ] || [ $modelcheck == "ufs922" ]; then
 			[ "$module" == "kathrein_micom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
 		elif [ $modelcheck == "ufs910" ]; then

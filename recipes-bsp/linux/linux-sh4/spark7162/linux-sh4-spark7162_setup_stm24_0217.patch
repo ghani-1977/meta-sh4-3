@@ -108,46 +108,46 @@
  			.size	= MTDPART_SIZ_FULL
  		},
 +#endif
-+	{
-+		.name	= "uboot",
-+		.offset	= 0,
-+		.size 	= 0x00100000 // 1 Mbyte, uboot boot code
-+	},
-+	{
-+		.name	= "Spark kernel",
-+		.offset	= 0x00100000,
-+		.size 	= 0x00a00000 // 10 Mbyte
-+	},
++		{
++			.name	= "uboot",
++			.offset	= 0,
++			.size 	= 0x00100000  // 1 Mbyte, uboot boot code
++		},
++		{
++			.name	= "Spark kernel",
++			.offset	= 0x00100000,
++			.size 	= 0x00a00000  // 10 Mbyte
++		},
 +
-+	{
-+		.name   = "Reserve0",
-+		.offset = 0x00b00000,
-+		.size   = 0x00700000,  // 7 Mbyte
-+	},
++		{
++			.name   = "Reserve0",
++			.offset = 0x00b00000,
++			.size   = 0x00700000,  // 7 Mbyte
++		},
 +
-+	{
-+		.name   = "Reserve1",
-+		.offset = 0x01200000,
-+		.size   = 0x00200000,  // 2 Mbyte
-+	},
++		{
++			.name   = "Reserve1",
++			.offset = 0x01200000,
++			.size   = 0x00200000,  // 2 Mbyte
++		},
 +
-+	{
-+		.name	= "Spark Userfs",
-+		.offset	= 0x01400000,
-+		.size	= 0x16c00000  // 364 Mbyte
-+	},
++		{
++			.name	= "Spark Userfs",
++			.offset	= 0x01400000,
++			.size	= 0x16c00000  // 364 Mbyte
++		},
 +
-+	{
-+		.name	= "kernel",
-+		.offset	= 0x18000000,
-+		.size = 0x00800000 // 8 Mbyte
-+	},
++		{
++			.name	= "E2 kernel",
++			.offset	= 0x18000000,
++			.size	= 0x00800000  // 8 Mbyte
++		},
 +
-+	{
-+		.name	= "rootfs",
-+		.offset	= 0x18800000,
-+		.size = 0x07700000 // 119 Mbyte, cc changed; reserved 1024KB for u-boot bbt
-+	},
++		{
++			.name	= "E2 Userfs",
++			.offset	= 0x18800000,
++			.size	= 0x07700000  // 119 Mbyte,	cc changed; reserved 1024KB for u-boot bbt
++		},
 +
 +
  	},
@@ -803,6 +803,18 @@
  			switch (phydev->irq) {
  			case PHY_POLL:
  				irq_str = "POLL";
+--- a/drivers/spi/spi.c.org
++++ b/drivers/spi/spi.c
+@@ -381,8 +381,7 @@
+  * The board info passed can safely be __initdata ... but be careful of
+  * any embedded pointers (platform_data, etc), they're copied as-is.
+  */
+-int __init
+-spi_register_board_info(struct spi_board_info const *info, unsigned n)
++int spi_register_board_info(struct spi_board_info const *info, unsigned n)
+ {
+ 	struct boardinfo	*bi;
+ 
 --- linux-sh4-2.6.32.61_stm24_0212.org/drivers/spi/spi_stm.c	2014-03-05 08:32:56.000000000 +0100
 +++ linux-sh4-2.6.32.61_stm24_0212/drivers/spi/spi_stm.c	2014-03-05 08:53:35.000000000 +0100
 @@ -338,7 +338,7 @@
@@ -1043,6 +1055,35 @@
  
  	/* Enable macro1 to use rx_lspd  & tx_lspd from link interface */
  	reg_write(0, 0x10, 0x00);
+--- a/drivers/stm/pad.c.org
++++ b/drivers/stm/pad.c
+@@ -790,7 +790,7 @@
+ 	struct stm_pad_config config;
+ };
+ 
+-struct stm_pad_config * __init stm_pad_config_alloc(int gpios_num,
++struct stm_pad_config * stm_pad_config_alloc(int gpios_num,
+ 		int sysconfs_num)
+ {
+ 	struct stm_pad_config *config;
+@@ -825,7 +825,7 @@
+ 	return config;
+ }
+ 
+-int __init stm_pad_config_add_sysconf(struct stm_pad_config *config,
++int stm_pad_config_add_sysconf(struct stm_pad_config *config,
+ 		int regtype, int regnum, int lsb, int msb, int value)
+ {
+ 	int result = -ENOMEM;
+@@ -852,7 +852,7 @@
+ 	return result;
+ }
+ 
+-int __init stm_pad_config_add_gpio_named(struct stm_pad_config *config,
++int stm_pad_config_add_gpio_named(struct stm_pad_config *config,
+ 		unsigned gpio, enum stm_pad_gpio_direction direction,
+ 		int out_value, int function, const char *name)
+ {
 --- linux-sh4-2.6.32.61_stm24_0212.org/drivers/stm/stx7105_comms.c	2014-03-05 08:32:56.000000000 +0100
 +++ linux-sh4-2.6.32.61_stm24_0212/drivers/stm/stx7105_comms.c	2014-03-05 08:53:35.000000000 +0100
 @@ -344,11 +344,27 @@
