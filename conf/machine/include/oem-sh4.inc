@@ -25,7 +25,6 @@ PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
 
 SERIAL_CONSOLE = "115200 ttyAS0"
 
-DVBPROVIDER = "kernel"
 
 MACHINE_FEATURES += "alsa ext2 usbhost serial dvb-c switchoff textlcd usbconsole sh4stb ${MACHINE} HDMI"
 
