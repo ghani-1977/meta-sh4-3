@@ -15,6 +15,7 @@ DEFAULTTUNE = "sh4"
 GCCVERSION_sh4 = "4.9.4"
 GLIBCVERSION_sh4 = "2.23"
 PREFERRED_VERSION_glibc-initial_sh4 = "2.23"
+PREFERRED_VERSION_glib-2.0_sh4 = "2.66.7"
 
 HOSTTOOLS_NONFATAL += "whoami"
 
