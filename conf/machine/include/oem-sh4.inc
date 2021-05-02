@@ -23,6 +23,7 @@ OLDEST_KERNEL = "${KERNELVERSION}"
 PREFERRED_VERSION_kernel-module-extrawlan-rt8812au = "4.3.14"
 PREFERRED_PROVIDER_virtual/egl = "libstgles"
 PREFERRED_PROVIDER_virtual/libgles1 = "libstgles"
+#DISTRO_FEATURES_append = " gtk-directfb"
 
 SERIAL_CONSOLE = "115200 ttyAS0"
 

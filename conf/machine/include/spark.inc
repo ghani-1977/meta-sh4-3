@@ -22,9 +22,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlirc \
 	"
 
-MACHINE_FEATURES += "hdmicec ci directfb SCART RCA"
-
-DISTRO_FEATURES_append = " gtk-directfb"
+MACHINE_FEATURES += "hdmicec ci SCART RCA"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"
 
