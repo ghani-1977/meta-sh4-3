@@ -39,24 +39,25 @@ process_file() {
 		[ "$VERBOSE" != no ] && echo -n "$module "
 		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
 		loaded_modules="${loaded_modules}${module} "
+		mknod -m 0660 /dev/vfd c 147 0
 		if [ $modelcheck == "cuberevo" ] || [ $modelcheck == "cuberevo_2000hd" ] || [ $modelcheck == "cuberevo_3000hd" ] || [ $modelcheck == "cuberevo_mini" ] || [ $modelcheck == "cuberevo_mini2" ]; then
-			[ "$module" == "cuberevo_micom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "cuberevo_micom" ] && echo "LOAD" > /dev/vfd
 		elif [ $modelcheck == "cuberevo_250hd" ] || [ $modelcheck == "cuberevo_9500hd" ] || [ $modelcheck == "ipbox99" ] || [ $modelcheck == "ipbox9900" ]; then
-			[ "$module" == "micom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "micom" ] && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "hs" ] || [ $brandcheck == "octagon" ]; then
-			[ "$module" == "nuvoton" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "nuvoton" ] && echo "LOAD" > /dev/vfd
 		elif [ $modelcheck == "vip1_v2" ] || [ $brandcheck == "vip2" ]; then
-			[ "$module" == "aotom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "aotom" ] && echo "LOAD" > /dev/vfd
 		elif [ $modelcheck == "vip1_v1" ] || [ $brandcheck == "hl101" ]; then
-			[ "$module" == "proton" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "proton" ] && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "fulan" ]; then
-			[ "$module" == "aotom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "aotom" ] && echo "LOAD" > /dev/vfd
 		elif [ $modelcheck == "spark7162" ]; then
 			mknod -m 0644 /dev/rfmod0 c 150 0
 		elif [ $modelcheck == "ufc960" ] || [ $modelcheck == "ufs912" ] || [ $modelcheck == "ufs913" ] || [ $modelcheck == "ufs922" ]; then
-			[ "$module" == "kathrein_micom" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "kathrein_micom" ] && echo "LOAD" > /dev/vfd
 		elif [ $modelcheck == "ufs910" ]; then
-			[ "$module" == "vfd" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "vfd" ] && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "nbox" ]; then
 			if [ "$module" == "boxtype" ]; then
 				boxtype=`cat /proc/boxtype`
@@ -68,7 +69,6 @@ process_file() {
 					echo "Init VFD black"
 					modprobe front_bsla
 				fi
-				mknod -m 0660 /dev/vfd c 147 0
 				echo "LOAD" >/dev/vfd
 				mknod -m 666 /dev/sci1 c 169 0
 				mknod -m 666 /dev/sci1 c 169 1
@@ -127,7 +127,7 @@ process_file() {
 				modprobe cec_ctrl
 			fi
 		else
-			[ "$module" == "stmfb" ] && mknod -m 0660 /dev/vfd c 147 0 && echo "LOAD" > /dev/vfd
+			[ "$module" == "stmfb" ] && echo "LOAD" > /dev/vfd
 		fi
 		# Seems evremote2.sh isn't enough for RC support.
 		if [ $modelcheck == "tf7700" ]; then
