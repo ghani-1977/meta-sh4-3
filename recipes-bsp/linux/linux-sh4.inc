@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 SECTION = "kernel"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PV = "${KV}.71-stm24-0217"
+PV = "${KV}.81-stm24-0217"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
@@ -25,18 +25,18 @@ RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-${KERNEL_VERSION
 RPROVIDES_${KERNEL_PACKAGE_NAME}-image = "${KERNEL_PACKAGE_NAME}-image-${KERNEL_VERSION}"
 
 STM_PATCH_STR = "0217"
-LINUX_VERSION = "${KERNELVERSION}.71"
+LINUX_VERSION = "${KERNELVERSION}.81"
 
-SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.71/archive/stmicro.tar.gz \
+SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.81/archive/stmicro.tar.gz \
 	file://defconfig \
 	file://${OPENVISION_BASE}/meta-openvision/recipes-linux/kernel-patches/kernel-add-support-for-gcc${VISIONGCCVERSION}.patch \
 	file://st-coprocessor.h \
 	"
 
-SRC_URI[md5sum] = "0f41e8b7c9c46b17df03c1203f15d47d"
-SRC_URI[sha256sum] = "c9e860df6dff18777e9109ecf9d28116df6934e574cea11c44cb630789cb59f2"
+SRC_URI[md5sum] = "44d8982b05d4bcf109ef30d29c87f99e"
+SRC_URI[sha256sum] = "a2d9d9fdd27fbcc6d3e89f2f0f85eafc505f4bae2dcd9df641ae026da65b6dba"
 
-S = "${WORKDIR}/linux-sh4-${KERNELVERSION}.71-stmicro"
+S = "${WORKDIR}/linux-sh4-${KERNELVERSION}.81-stmicro"
 B = "${WORKDIR}/build"
 
 export OS = "Linux"
