@@ -76,7 +76,7 @@ do_shared_workdir_append() {
 	fi
 	if [ -f include/asm-sh/machtypes.h ]; then
 		mkdir -p $kerneldir/include/asm-sh
-		# ln -sf $kerneldir/include/asm-sh $kerneldir/include/asm
+		ln -sf $kerneldir/include/asm-sh $kerneldir/include/asm
 		cp -f include/asm-sh/machtypes.h $kerneldir/include/asm-sh
 	fi
 	if [ -e include/linux/utsrelease.h ]; then

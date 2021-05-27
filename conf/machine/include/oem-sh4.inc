@@ -13,9 +13,9 @@ TARGET_ARCH = "sh4"
 DEFAULTTUNE = "sh4"
 
 GCCVERSION_sh4 = "4.9.4"
-GLIBCVERSION_sh4 = "2.23"
-PREFERRED_VERSION_glibc_sh4 = "2.23"
-PREFERRED_VERSION_glibc-initial_sh4 = "2.23"
+#GLIBCVERSION_sh4 = "2.23"
+#PREFERRED_VERSION_glibc_sh4 = "2.23"
+#PREFERRED_VERSION_glibc-initial_sh4 = "2.23"
 
 HOSTTOOLS_NONFATAL += "whoami"
 
@@ -44,17 +44,15 @@ IMAGE_CMD_tar_prepend = "\
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	devinit \
 	evremote2 \
+	libpcre \
 	sh4-dvb-modules \
 	stfbcontrol \
 	stslave-fw \
 	ustslave \
 	wait4button \
-	libpcre \
 	"
 
-EXTRA_IMAGEDEPENDS += "\
-	libpcre \
-	"
+EXTRA_IMAGEDEPENDS += "libpcre"
 
 require conf/machine/include/tune-sh4.inc
 require conf/machine/include/soc-family.inc
@@ -62,3 +60,5 @@ require conf/machine/include/soc-family.inc
 EXTRA_OECONF_append_pn-enigma2 = " --with-sh4stb"
 
 IMAGE_CLASSES += "targz-sh4"
+
+UBOOT_MACHINE = "sh4"
