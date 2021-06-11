@@ -40,9 +40,9 @@ process_file() {
 		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
 		loaded_modules="${loaded_modules}${module} "
 		mknod -m 0660 /dev/vfd c 147 0
-		if [ $modelcheck == "cuberevo" ] || [ $modelcheck == "cuberevo_2000hd" ] || [ $modelcheck == "cuberevo_3000hd" ] || [ $modelcheck == "cuberevo_mini" ] || [ $modelcheck == "cuberevo_mini2" ]; then
+		if [ $modelcheck == "cuberevo" ] || [ $modelcheck == "cuberevo_250hd" ] || [ $modelcheck == "cuberevo_2000hd" ] || [ $modelcheck == "cuberevo_3000hd" ] || [ $modelcheck == "cuberevo_mini" ] || [ $modelcheck == "cuberevo_mini2" ]; then
 			[ "$module" == "cuberevo_micom" ] && echo "LOAD" > /dev/vfd
-		elif [ $modelcheck == "cuberevo_250hd" ] || [ $modelcheck == "cuberevo_9500hd" ] || [ $modelcheck == "ipbox99" ] || [ $modelcheck == "ipbox9900" ]; then
+		elif [ $modelcheck == "cuberevo_9500hd" ] || [ $modelcheck == "ipbox99" ] || [ $modelcheck == "ipbox9900" ]; then
 			[ "$module" == "micom" ] && echo "LOAD" > /dev/vfd
 		elif [ $brandcheck == "hs" ] || [ $brandcheck == "octagon" ]; then
 			[ "$module" == "nuvoton" ] && echo "LOAD" > /dev/vfd
