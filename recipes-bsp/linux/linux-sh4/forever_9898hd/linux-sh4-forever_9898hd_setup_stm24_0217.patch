@@ -1,6 +1,6 @@
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/boards/mach-dp7000/setup.c linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/boards/mach-dp7000/setup.c
---- linux-sh4-2.6.32.71-stmicro-4g/arch/sh/boards/mach-dp7000/setup.c	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/boards/mach-dp7000/setup.c	2020-08-30 17:21:25.951552499 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/arch/sh/boards/mach-dp7000/setup.c linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/boards/mach-dp7000/setup.c
+--- linux-sh4-2.6.32.81-stmicro-4g/arch/sh/boards/mach-dp7000/setup.c	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/boards/mach-dp7000/setup.c	2020-08-30 17:21:25.951552499 +0430
 @@ -50,7 +50,7 @@
  //#define SMARTCARD1_0             stm_gpio(11, 0)  // From Fortis source
  //#define SMARTCARD1_1             stm_gpio(11, 1)
@@ -41,9 +41,9 @@ diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/boards/mach-dp7000/setup.c lin
  		.flags = 0,
  		.aka   = LMI_IO_partalias
  	},
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/include/asm/irq-ilc.h linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/include/asm/irq-ilc.h
---- linux-sh4-2.6.32.71-stmicro-4g/arch/sh/include/asm/irq-ilc.h	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/include/asm/irq-ilc.h	2020-08-30 17:21:25.951552499 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/arch/sh/include/asm/irq-ilc.h linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/include/asm/irq-ilc.h
+--- linux-sh4-2.6.32.81-stmicro-4g/arch/sh/include/asm/irq-ilc.h	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/include/asm/irq-ilc.h	2020-08-30 17:21:25.951552499 +0430
 @@ -44,7 +44,7 @@
  #define ILC_IRQ(x)	(ILC_FIRST_IRQ + (x))
  #elif	defined(CONFIG_CPU_SUBTYPE_STX7111)
@@ -53,9 +53,9 @@ diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/include/asm/irq-ilc.h linux-sh
  #define ILC_INT_IRQ(x)	(ILC_FIRST_IRQ + (x))
  #define ILC_EXT_IRQ(x)	(ILC_FIRST_IRQ + 64 + (x))
  #define ILC_IRQ(x)	ILC_INT_IRQ(x)
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/kernel/cpu/sh4/setup-stxh205.c linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/kernel/cpu/sh4/setup-stxh205.c
---- linux-sh4-2.6.32.71-stmicro-4g/arch/sh/kernel/cpu/sh4/setup-stxh205.c	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/kernel/cpu/sh4/setup-stxh205.c	2020-08-30 17:21:25.951552499 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/arch/sh/kernel/cpu/sh4/setup-stxh205.c linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/kernel/cpu/sh4/setup-stxh205.c
+--- linux-sh4-2.6.32.81-stmicro-4g/arch/sh/kernel/cpu/sh4/setup-stxh205.c	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/kernel/cpu/sh4/setup-stxh205.c	2020-08-30 17:21:25.951552499 +0430
 @@ -11,17 +11,15 @@
  #include <linux/init.h>
  #include <linux/platform_device.h>
@@ -145,9 +145,9 @@ diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/kernel/cpu/sh4/setup-stxh205.c
  
  /* Interrupt initialisation ----------------------------------------------- */
  
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/kernel/setup.c linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/kernel/setup.c
---- linux-sh4-2.6.32.71-stmicro-4g/arch/sh/kernel/setup.c	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/arch/sh/kernel/setup.c	2020-08-30 17:21:25.951552499 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/arch/sh/kernel/setup.c linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/kernel/setup.c
+--- linux-sh4-2.6.32.81-stmicro-4g/arch/sh/kernel/setup.c	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/arch/sh/kernel/setup.c	2020-08-30 17:21:25.951552499 +0430
 @@ -420,6 +420,66 @@
  #endif
  #endif
@@ -215,9 +215,9 @@ diff -Naur linux-sh4-2.6.32.71-stmicro-4g/arch/sh/kernel/setup.c linux-sh4-2.6.3
  	/* Save unparsed command line copy for /proc/cmdline */
  	memcpy(boot_command_line, command_line, COMMAND_LINE_SIZE);
  	*cmdline_p = command_line;
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/drivers/net/phy/phy_device.c linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/drivers/net/phy/phy_device.c
---- linux-sh4-2.6.32.71-stmicro-4g/drivers/net/phy/phy_device.c	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/drivers/net/phy/phy_device.c	2020-08-30 17:21:25.951552499 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/drivers/net/phy/phy_device.c linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/drivers/net/phy/phy_device.c
+--- linux-sh4-2.6.32.81-stmicro-4g/drivers/net/phy/phy_device.c	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/drivers/net/phy/phy_device.c	2020-08-30 17:21:25.951552499 +0430
 @@ -1104,7 +1104,7 @@
  		return retval;
  	}
@@ -227,9 +227,9 @@ diff -Naur linux-sh4-2.6.32.71-stmicro-4g/drivers/net/phy/phy_device.c linux-sh4
  
  	return 0;
  }
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/drivers/net/stmmac/stmmac_mdio.c linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/drivers/net/stmmac/stmmac_mdio.c
---- linux-sh4-2.6.32.71-stmicro-4g/drivers/net/stmmac/stmmac_mdio.c	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/drivers/net/stmmac/stmmac_mdio.c	2020-08-30 17:17:13.464259043 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/drivers/net/stmmac/stmmac_mdio.c linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/drivers/net/stmmac/stmmac_mdio.c
+--- linux-sh4-2.6.32.81-stmicro-4g/drivers/net/stmmac/stmmac_mdio.c	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/drivers/net/stmmac/stmmac_mdio.c	2020-08-30 17:17:13.464259043 +0430
 @@ -170,6 +170,7 @@
  	priv->mii = new_bus;
  
@@ -269,9 +269,9 @@ diff -Naur linux-sh4-2.6.32.71-stmicro-4g/drivers/net/stmmac/stmmac_mdio.c linux
  			switch (phydev->irq) {
  			case PHY_POLL:
  				irq_str = "POLL";
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/drivers/stm/gpio.c linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/drivers/stm/gpio.c
---- linux-sh4-2.6.32.71-stmicro-4g/drivers/stm/gpio.c	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/drivers/stm/gpio.c	2020-08-30 17:21:25.951552499 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/drivers/stm/gpio.c linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/drivers/stm/gpio.c
+--- linux-sh4-2.6.32.81-stmicro-4g/drivers/stm/gpio.c	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/drivers/stm/gpio.c	2020-08-30 17:21:25.951552499 +0430
 @@ -28,13 +28,19 @@
  #include <linux/stm/pad.h>
  #include <linux/stm/pio.h>
@@ -439,9 +439,9 @@ diff -Naur linux-sh4-2.6.32.71-stmicro-4g/drivers/stm/gpio.c linux-sh4-2.6.32.71
  	ret = platform_driver_register(&stm_gpio_driver);
  	if (ret)
  		return ret;
-diff -Naur linux-sh4-2.6.32.71-stmicro-4g/mm/bpa2.c linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/mm/bpa2.c
---- linux-sh4-2.6.32.71-stmicro-4g/mm/bpa2.c	2020-08-30 13:30:04.000000000 +0430
-+++ linux-sh4-2.6.32.71-stmicro-4g-PersianPrince/mm/bpa2.c	2020-08-30 17:21:25.951552499 +0430
+diff -Naur linux-sh4-2.6.32.81-stmicro-4g/mm/bpa2.c linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/mm/bpa2.c
+--- linux-sh4-2.6.32.81-stmicro-4g/mm/bpa2.c	2020-08-30 13:30:04.000000000 +0430
++++ linux-sh4-2.6.32.81-stmicro-4g-PersianPrince/mm/bpa2.c	2020-08-30 17:21:25.951552499 +0430
 @@ -232,25 +232,37 @@
  	/* Allocate/reserve/initialize requested memory area */
  	start_pfn = PFN_DOWN(start);

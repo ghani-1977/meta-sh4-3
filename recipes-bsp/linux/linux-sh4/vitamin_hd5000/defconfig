@@ -1,7 +1,6 @@
 #
 # Automatically generated make config: don't edit
-# Linux kernel version: 2.6.32.71
-# Sun Dec 27 12:01:01 2020
+# Linux kernel version: 2.6.32.81
 #
 CONFIG_SUPERH=y
 CONFIG_SUPERH32=y
