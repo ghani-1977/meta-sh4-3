@@ -24,6 +24,8 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
 	stlirc \
 	"
 
+# eeprom-${BOX_BRAND} should be added to MACHINE_ESSENTIAL_EXTRA_RDEPENDS but it won't compile
+
 MACHINE_FEATURES += "hdmicec 4thgsh4 resellerid"
 
 CAN_USE_ENIGMA2_IN_FLASH = "1"

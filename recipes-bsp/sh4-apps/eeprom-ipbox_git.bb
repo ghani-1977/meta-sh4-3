@@ -1,4 +1,4 @@
-DESCRIPTION = "SH4 tool to read MAC address"
+DESCRIPTION = "${BOX_BRAND} tool to read MAC address"
 
 SH4APPBIN = "eeprom"
 

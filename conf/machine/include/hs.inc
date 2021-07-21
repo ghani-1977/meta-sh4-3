@@ -15,8 +15,8 @@ VIDEOELF = "video_7111.elf"
 SOC_FAMILY = "sti7111"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
+	eeprom-fortis \
 	flash-tools \
-	fortis-eeprom \
 	fp-control \
 	kernel-module-zram \
 	stlinux24-sh4-stmfb-firmware-stx7111 \
