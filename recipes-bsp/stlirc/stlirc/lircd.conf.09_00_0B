@@ -20,14 +20,14 @@ begin remote
 
       begin codes
           KEY_POWER                0xDA25		# POWER
-          KEY_TVSAT                0x3AC5		# TV/SAT
-          KEY_VMODE                0x52AD		# V.FORMAT
+          KEY_TEXT                 0x5AA5		# PROG1
+          KEY_MODE                 0x52AD		# V.FORMAT
           KEY_SLEEP                0x728D		# TIME
           KEY_MUTE                 0x7A85		# MUTE
           KEY_TIME                 0x1AE5		# TimeShift
-          KEY_SHOUTCAST            0x12ED		# PROG2
+          KEY_WWW                  0x12ED		# PROG2
           KEY_F1                   0x32CD		# F1
-          KEY_SPARK                0x5AA5		# PROG1
+          KEY_TV                   0x3AC5		# TV/SAT
           KEY_1                    0x4AB5		# 1BUTTON
           KEY_2                    0x6A95		# 2BUTTON
           KEY_3                    0x42BD		# 3BUTTON
@@ -37,9 +37,9 @@ begin remote
           KEY_7                    0xCA35		# 7BUTTON
           KEY_8                    0xEA15		# 8BUTTON
           KEY_9                    0xC23D		# 9BUTTON
-          KEY_TV                   0x8877		# TV/RADIO
+          KEY_RADIO                0x8877		# TV/RADIO
           KEY_0                    0xA857		# 0BUTTON
-          KEY_RECALL               0x807F		# RECALL
+          KEY_BACK                 0x807F		# RECALL
           KEY_SAT                  0xE21D		# SAT
           KEY_FAVORITES            0x7887		# FAV
           KEY_VOLUMEDOWN           0x38c7		# VOL-
@@ -65,9 +65,9 @@ begin remote
           KEY_PLAY                 0x48B7		# PLAY
           KEY_FASTFORWARD          0x6897		# FASTFORWARD
           KEY_PAUSE                0xC837		# PAUSE
-          KEY_PLAYMODE             0xE01F		# PLAYMODE
+          KEY_PLAYPAUSE            0xE01F		# PLAYMODE
           KEY_FILE                 0x8A75		# FILELIST
-          KEY_USB                  0x609F		# USB
+          KEY_LIST                 0x609F		# USB
           KEY_STOP                 0x08F7		# STOP
           KEY_SLOW                 0xA25D		# SLOW
           KEY_PREVIOUS             0xAA55		# PREV
@@ -98,7 +98,7 @@ begin remote
       begin codes
           KEY_POWER                0x7887		# POWER
           KEY_VMODE                0xF00F		# V.Format
-          KEY_TVSAT                0xD02F		# TV/SAT
+          KEY_TV                   0xD02F		# TV/SAT
           KEY_SLEEP                0x9A65		# SLEEP
           KEY_MUTE                 0x5AA5		# MUTE
           KEY_1                    0x58A7		# 1BUTTON
@@ -110,13 +110,13 @@ begin remote
           KEY_7                    0x48B7		# 7BUTTON
           KEY_8                    0xE817		# 8BUTTON
           KEY_9                    0x0AF5		# 9BUTTON
-          KEY_TV                   0x32CD		# TV/RADIO
+          KEY_RADIO                0x32CD		# TV/RADIO
           KEY_0                    0xC837		# 0BUTTON
-          KEY_RECALL               0x30CF		# RECALL
+          KEY_BACK                 0x30CF		# RECALL
           KEY_CHANNELUP            0x12ED		# P+
           KEY_CHANNELDOWN          0x22DD		# P-
           KEY_FIND                 0x3AC5		# FIND
-          KEY_FILE                 0x9867		# FOLDER
+          KEY_MEDIA                0x9867		# FOLDER
           KEY_VOLUMEUP             0x50AF		# V+
           KEY_VOLUMEDOWN           0x609F		# V-
           KEY_MENU                 0x38C7		# MENU
@@ -130,7 +130,7 @@ begin remote
           KEY_EPG                  0xBA45		# EPG
           KEY_FAVORITES            0xC23D		# FAV
           KEY_SAT                  0xF20D		# SAT
-          KEY_PORTAL               0xDA25		# PORTAL
+          KEY_WWW                  0xDA25		# PORTAL
           KEY_RED                  0x926D		# RED
           KEY_GREEN                0x728D		# GREEN
           KEY_YELLOW               0x8877		# YELLOW
@@ -145,8 +145,8 @@ begin remote
           KEY_REWIND               0x807F		# REWIND
           KEY_SLOW                 0x847B		# SLOW
           KEY_FAST                 0x18E7		# FAST
-          KEY_PLAYMODE             0x4AB5		# PLAY_MODE
-          KEY_USB                  0x20DF		# USB
+          KEY_PLAYPAUSE            0x4AB5		# PLAY_MODE
+          KEY_LIST                 0x20DF		# USB
           KEY_TIME                 0xAA55		# TimeShift
           KEY_F1                   0x6A95		# F1
           KEY_F2                   0xEA15		# F2
