@@ -136,7 +136,7 @@ process_file() {
 			mknod -m 0660 /dev/rc c 147 1
 		fi
 		# If we have zram.ko in Open Vision whenever user installs it.
-		if [ -f /lib/modules/2.6.32.81_stm24_0217/extra/compcache/zram.ko ]; then
+		if [ -f /lib/modules/2.6.32.81_stm24_0218/extra/compcache/zram.ko ]; then
 			[ "$module" == "zram" ] && echo "16777216" > /sys/block/zram0/disksize # Use 16Mb for swap in ram
 		fi
 	done

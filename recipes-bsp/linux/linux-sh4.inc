@@ -3,7 +3,7 @@ LICENSE = "GPLv2"
 SECTION = "kernel"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PV = "${KV}.81-stm24-0217"
+PV = "${KV}.81-stm24-0218"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
@@ -24,7 +24,7 @@ PKG_${KERNEL_PACKAGE_NAME}-image = "${KERNEL_PACKAGE_NAME}-image"
 RPROVIDES_${KERNEL_PACKAGE_NAME}-base = "${KERNEL_PACKAGE_NAME}-${KERNEL_VERSION}"
 RPROVIDES_${KERNEL_PACKAGE_NAME}-image = "${KERNEL_PACKAGE_NAME}-image-${KERNEL_VERSION}"
 
-STM_PATCH_STR = "0217"
+STM_PATCH_STR = "0218"
 LINUX_VERSION = "${KERNELVERSION}.81"
 
 SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.81/archive/stmicro.tar.gz \
@@ -33,8 +33,8 @@ SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.81/archive
 	file://st-coprocessor.h \
 	"
 
-SRC_URI[md5sum] = "44d8982b05d4bcf109ef30d29c87f99e"
-SRC_URI[sha256sum] = "a2d9d9fdd27fbcc6d3e89f2f0f85eafc505f4bae2dcd9df641ae026da65b6dba"
+SRC_URI[md5sum] = "951b11a8efb1a895daa085e41b401647"
+SRC_URI[sha256sum] = "bfc6be6cb98000e0f19483ee6e287eb06f3381b6a08d9760ec9654bfbab6f3b4"
 
 S = "${WORKDIR}/linux-sh4-${KERNELVERSION}.81-stmicro"
 B = "${WORKDIR}/build"
