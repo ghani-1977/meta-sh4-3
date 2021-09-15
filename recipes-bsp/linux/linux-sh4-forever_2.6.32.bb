@@ -13,7 +13,7 @@ SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.81/archive
 	file://timeconst.patch \
 	"
 
-SRC_URI[md5sum] = "abb94f3b359acb99a3481abc8fcf0db1"
-SRC_URI[sha256sum] = "eefa1be8a466c6257e93dbec0e58de2b6945ba9e737795bea063ab54ac76bbe2"
+SRC_URI[md5sum] = "d22997a7426f4f5beb5d9783a0a4ec19"
+SRC_URI[sha256sum] = "b1445440aa83c647344797f0b1334c7dc5188f2663b5aedb1ab04c50d96c410e"
 
 S = "${WORKDIR}/linux-sh4-${KERNELVERSION}.81-stmicro-4g"
