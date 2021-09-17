@@ -3,6 +3,12 @@
 brandcheck=`cat /etc/openvision/brand`
 modelcheck=`cat /etc/openvision/model`
 
+if [ -e /etc/.rccode ]; then
+	echo "/etc/.rccode is present"
+else
+	echo "1" > /etc/.rccode
+fi
+
 if [ $modelcheck == "tf7700" ]; then
 	mknod -m 0660 /dev/rc c 62 1
 else
