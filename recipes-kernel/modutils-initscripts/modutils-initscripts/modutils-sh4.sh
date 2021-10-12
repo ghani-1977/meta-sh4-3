@@ -23,8 +23,8 @@ fi
 
 loaded_modules=" "
 
-brandcheck=`cat /etc/openvision/brand`
-modelcheck=`cat /etc/openvision/model`
+BRANDCHECK=`sed -En 's|^brand=(.+)$|\1|p' /usr/lib/enigma.info`
+MODELCHECK=`sed -En 's|^model=(.+)$|\1|p' /usr/lib/enigma.info`
 
 process_file() {
 	file=$1
@@ -40,25 +40,25 @@ process_file() {
 		eval "$LOAD_MODULE $module $args >/dev/null 2>&1"
 		loaded_modules="${loaded_modules}${module} "
 		mknod -m 0660 /dev/vfd c 147 0
-		if [ $modelcheck == "cuberevo" ] || [ $modelcheck == "cuberevo_250hd" ] || [ $modelcheck == "cuberevo_2000hd" ] || [ $modelcheck == "cuberevo_3000hd" ] || [ $modelcheck == "cuberevo_mini" ] || [ $modelcheck == "cuberevo_mini2" ]; then
+		if [ $MODELCHECK == "cuberevo" ] || [ $MODELCHECK == "cuberevo_250hd" ] || [ $MODELCHECK == "cuberevo_2000hd" ] || [ $MODELCHECK == "cuberevo_3000hd" ] || [ $MODELCHECK == "cuberevo_mini" ] || [ $MODELCHECK == "cuberevo_mini2" ]; then
 			[ "$module" == "cuberevo_micom" ] && echo "LOAD" > /dev/vfd
-		elif [ $modelcheck == "cuberevo_9500hd" ] || [ $modelcheck == "ipbox99" ] || [ $modelcheck == "ipbox9900" ]; then
+		elif [ $MODELCHECK == "cuberevo_9500hd" ] || [ $MODELCHECK == "ipbox99" ] || [ $MODELCHECK == "ipbox9900" ]; then
 			[ "$module" == "micom" ] && echo "LOAD" > /dev/vfd
-		elif [ $brandcheck == "hs" ] || [ $brandcheck == "octagon" ]; then
+		elif [ $BRANDCHECK == "hs" ] || [ $BRANDCHECK == "octagon" ]; then
 			[ "$module" == "nuvoton" ] && echo "LOAD" > /dev/vfd
-		elif [ $modelcheck == "vip1_v2" ] || [ $brandcheck == "vip2" ]; then
+		elif [ $MODELCHECK == "vip1_v2" ] || [ $BRANDCHECK == "vip2" ]; then
 			[ "$module" == "aotom" ] && echo "LOAD" > /dev/vfd
-		elif [ $modelcheck == "vip1_v1" ] || [ $brandcheck == "hl101" ]; then
+		elif [ $MODELCHECK == "vip1_v1" ] || [ $BRANDCHECK == "hl101" ]; then
 			[ "$module" == "proton" ] && echo "LOAD" > /dev/vfd
-		elif [ $brandcheck == "fulan" ]; then
+		elif [ $BRANDCHECK == "fulan" ]; then
 			[ "$module" == "aotom" ] && echo "LOAD" > /dev/vfd
-		elif [ $modelcheck == "spark7162" ]; then
+		elif [ $MODELCHECK == "spark7162" ]; then
 			mknod -m 0644 /dev/rfmod0 c 150 0
-		elif [ $modelcheck == "ufc960" ] || [ $modelcheck == "ufs912" ] || [ $modelcheck == "ufs913" ] || [ $modelcheck == "ufs922" ]; then
+		elif [ $MODELCHECK == "ufc960" ] || [ $MODELCHECK == "ufs912" ] || [ $MODELCHECK == "ufs913" ] || [ $MODELCHECK == "ufs922" ]; then
 			[ "$module" == "kathrein_micom" ] && echo "LOAD" > /dev/vfd
-		elif [ $modelcheck == "ufs910" ]; then
+		elif [ $MODELCHECK == "ufs910" ]; then
 			[ "$module" == "vfd" ] && echo "LOAD" > /dev/vfd
-		elif [ $brandcheck == "nbox" ]; then
+		elif [ $BRANDCHECK == "nbox" ]; then
 			if [ "$module" == "boxtype" ]; then
 				boxtype=`cat /proc/boxtype`
 				echo "boxtype $boxtype"
@@ -130,7 +130,7 @@ process_file() {
 			[ "$module" == "stmfb" ] && echo "LOAD" > /dev/vfd
 		fi
 		# Seems evremote2.sh isn't enough for RC support.
-		if [ $modelcheck == "tf7700" ]; then
+		if [ $MODELCHECK == "tf7700" ]; then
 			mknod -m 0660 /dev/rc c 62 1
 		else
 			mknod -m 0660 /dev/rc c 147 1
