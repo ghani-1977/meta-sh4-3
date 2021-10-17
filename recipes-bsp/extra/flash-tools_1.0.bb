@@ -8,7 +8,7 @@ SRC_URI = "file://fw_env.config \
 	file://flash_erase \
 	"
 
-FILES_${PN} = "${localstatedir}/* /bin/* /sbin/*"
+FILES_${PN} = "${localstatedir}/* ${base_bindir}/* ${base_sbindir}/*"
 
 do_install () {
 	install -d ${D}${localstatedir}
@@ -22,3 +22,5 @@ do_install () {
 	install -d ${D}${base_sbindir}
 	install -m 755 ${WORKDIR}/flash_erase ${D}${base_sbindir}/
 }
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"

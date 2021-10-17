@@ -16,7 +16,7 @@ inherit module machine_kernel_pr gitpkgv
 
 PACKAGES = "${PN} ${PN}-dev"
 
-PV = "${KV}+git${SRCPV}-${MACHINE}"
+PV = "${KV}+git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
 PTI_NP_PATH ?= "/data/pti_np"
@@ -24,7 +24,7 @@ PTI_NP_PATH ?= "/data/pti_np"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "\
-	git://git@github.com/OpenVisionE2/sh4-driver.git;protocol=ssh \
+	git://github.com/OpenVisionE2/sh4-driver.git;protocol=git \
 	file://modules.conf \
 	file://modules-conf.conf \
 	" 

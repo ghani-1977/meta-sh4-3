@@ -14,7 +14,7 @@ SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://git@github.com/OpenVisionE2/sh4-apps.git;protocol=ssh"
+SRC_URI = "git://github.com/OpenVisionE2/sh4-apps.git;protocol=git"
 
 S = "${WORKDIR}/git/tools/${@d.getVar('PN',1).replace('-', '_')}"
 

@@ -35,3 +35,5 @@ do_install () {
 		install -m 644 ${WORKDIR}/${VIDEOELF}  ${D}/boot/video.elf
 	fi
 }
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"

@@ -9,4 +9,3 @@ CFLAGS_append = " -I${STAGING_INCDIR}/directfb -I${WORKDIR}/git/libs/libstgles/i
 PROVIDES = "virtual/libgles1 virtual/egl"
 
 S = "${WORKDIR}/git/libs/libstgles"
-

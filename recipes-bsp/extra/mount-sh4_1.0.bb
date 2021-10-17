@@ -20,3 +20,4 @@ INITSCRIPT_PARAMS = "start 39 S ."
 
 inherit update-rc.d
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
