@@ -58,7 +58,7 @@ FILES_${KERNEL_PACKAGE_NAME}-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}"
 KERNEL_CONFIG_COMMAND = "oe_runmake -C ${S} O=${B} oldconfig"
 
 do_configure_prepend() {
-	oe_machinstall -m 0644 ${WORKDIR}/defconfig ${B}/.config
+	install -m 0644 ${WORKDIR}/defconfig ${B}/.config
 	sed -i "s#^\(CONFIG_EXTRA_FIRMWARE_DIR=\).*#\1\"${STAGING_DIR_HOST}/lib/firmware\"#" ${B}/.config;
 }
 
