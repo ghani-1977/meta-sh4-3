@@ -12,7 +12,7 @@ SRCREV = "${AUTOREV}"
 PV = "git${SRCPV}"
 PKGV = "git${GITPKGV}"
 
-SRC_URI = "git://github.com/OpenVisionE2/sh4-native-tools.git;protocol=git"
+SRC_URI = "${GITHUB_URI}/OpenVisionE2/sh4-native-tools.git;protocol=https"
 
 S = "${WORKDIR}/git/tools/${@d.getVar('PN',1).replace('-native', '')}"
 

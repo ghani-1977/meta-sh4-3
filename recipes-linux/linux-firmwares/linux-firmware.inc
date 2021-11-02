@@ -1,7 +1,7 @@
 LICENSE = "CLOSED"
 
-SRC_URI = "git://github.com/mdamt/linux-firmware.git;protocol=git"
-SRC_URI = "git://github.com/BjornLee/linux-firmware.git;protocol=git"
+SRC_URI = "${GITHUB_URI}/mdamt/linux-firmware.git;protocol=https"
+SRC_URI = "${GITHUB_URI}/BjornLee/linux-firmware.git;protocol=https"
 
 S = "${WORKDIR}/git"
 
