@@ -1,4 +1,4 @@
-DESCRIPTION = "STM Coprocessor firmware"
+SUMMARY = "STM Coprocessor firmware"
 LICENSE = "CLOSED"
 SECTION = "base"
 inherit allarch

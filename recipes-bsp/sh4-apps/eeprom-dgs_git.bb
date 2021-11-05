@@ -1,4 +1,4 @@
-DESCRIPTION = "DGS tool to read MAC address"
+SUMMARY = "DGS tool to read MAC address"
 
 SH4APPBIN = "eeprom"
 

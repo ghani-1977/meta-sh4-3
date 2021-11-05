@@ -1,4 +1,4 @@
-DESCRIPTION = "${MACHINE} tool to read MAC address"
+SUMMARY = "${MACHINE} tool to read MAC address"
 
 SH4APPBIN = "eeprom"
 

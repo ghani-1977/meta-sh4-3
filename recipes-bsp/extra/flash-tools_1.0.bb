@@ -1,4 +1,4 @@
-DESCRIPTION = "Tools for changing internal flash"
+SUMMARY = "Tools for changing internal flash"
 LICENSE = "CLOSED"
 
 SRC_URI = "file://fw_env.config \

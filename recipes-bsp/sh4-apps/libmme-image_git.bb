@@ -1,4 +1,4 @@
-DESCRIPTION = "MME image library"
+SUMMARY = "MME image library"
 
 require sh4-apps.inc
 

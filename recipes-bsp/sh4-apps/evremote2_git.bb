@@ -1,4 +1,4 @@
-DESCRIPTION = "A tool for SH4 remotes"
+SUMMARY = "A tool for SH4 remotes"
 
 require sh4-apps.inc
 

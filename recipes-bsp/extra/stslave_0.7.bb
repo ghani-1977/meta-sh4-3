@@ -20,7 +20,7 @@ LOCAL_SRC = "\
 	file://002-stslave-conf.patch;patch=1;pnum=1 \
 	"
 
-DESCRIPTION = "The Linux stslave command loads an ST2x ST2xx application in the target \
+SUMMARY = "The Linux stslave command loads an ST2x ST2xx application in the target \
 memory and trigger its execution. The program can handle different types of \
 target devices (slaves from now on) and different slaves of the same type"
 

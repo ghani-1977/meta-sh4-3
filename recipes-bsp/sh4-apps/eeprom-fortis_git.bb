@@ -1,4 +1,4 @@
-DESCRIPTION = "Fortis tool to read MAC address"
+SUMMARY = "Fortis tool to read MAC address"
 
 SH4APPBIN = "eeprom"
 

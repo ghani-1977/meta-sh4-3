@@ -1,4 +1,4 @@
-DESCRIPTION = "A tool for uploading the firmware to the slave DSPs"
+SUMMARY = "A tool for uploading the firmware to the slave DSPs"
 
 SH4APPBIN = "fp_control"
 

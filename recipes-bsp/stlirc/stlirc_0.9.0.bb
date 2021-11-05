@@ -1,4 +1,4 @@
-DESCRIPTION = "LIRC is a package that allows you to decode and send infra-red signals of many commonly used remote controls."
+SUMMARY = "LIRC is a package that allows you to decode and send infra-red signals of many commonly used remote controls."
 DESCRIPTION_append_stlirc = " This package contains the lirc daemon, libraries and tools."
 DESCRIPTION_append_stlirc-exec = " This package contains a daemon that runs programs on IR signals."
 DESCRIPTION_append_stlirc-remotes = " This package contains some config files for remotes."

@@ -1,4 +1,4 @@
-DESCRIPTION = "OpenGL ES v1.0 library and headers"
+SUMMARY = "OpenGL ES v1.0 library and headers"
 
 require sh4-apps.inc
 

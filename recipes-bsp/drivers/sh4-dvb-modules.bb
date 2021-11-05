@@ -1,5 +1,5 @@
 SUMMARY = "SH4 driver modules"
-DESCRIPTION = "SH4 driver modules"
+SUMMARY = "SH4 driver modules"
 SECTION = "base"
 PRIORITY = "required"
 LICENSE = " GPLv2"
