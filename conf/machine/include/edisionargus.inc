@@ -3,7 +3,7 @@ require conf/machine/include/normal-sh4-image.inc
 
 BOX_BRAND = "edisionargus"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
+STXNUMBER = "stx7109"
 
 IMAGE_FSTYPES += "tar.gz"
 

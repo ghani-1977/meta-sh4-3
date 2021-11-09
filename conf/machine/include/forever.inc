@@ -3,7 +3,7 @@ require conf/machine/include/ird-ubi-image.inc
 
 BOX_BRAND = "forever"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${BOX_BRAND}"
+STXNUMBER = "stxh205"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"

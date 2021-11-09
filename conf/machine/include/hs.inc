@@ -2,7 +2,7 @@ require conf/machine/include/oem-sh4.inc
 
 BOX_BRAND = "hs"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-hs"
+STXNUMBER = "stx7111"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"

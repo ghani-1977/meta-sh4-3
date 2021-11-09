@@ -2,8 +2,6 @@ require linux-sh4.inc
 
 COMPATIBLE_MACHINE = "^(forever_2424hd|forever_3434hd|forever_9898hd|forever_nanosmart)$"
 
-STXNUMBER = "stxh205"
-
 SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.81/archive/stmicro-4g.tar.gz \
 	file://defconfig \
 	file://${OPENVISION_BASE}/meta-openvision/recipes-linux/kernel-patches/kernel-add-support-for-gcc${VISIONGCCVERSION}.patch \

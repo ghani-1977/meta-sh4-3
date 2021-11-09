@@ -4,10 +4,10 @@ require conf/machine/include/sh4-jffs2.inc
 
 BOX_BRAND = "atemio"
 
+STXNUMBER = "stx7111"
+
 MTD_KERNEL = "mtd1"
 MTD_ROOTFS = "mtd2"
-
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-hs"
 
 ROOTFS_FILE = "root.img"
 KERNEL_FILE = "uImage"

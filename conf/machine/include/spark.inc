@@ -7,8 +7,6 @@ BOX_BRAND = "fulan"
 MTD_KERNEL = "mtd5"
 MTD_ROOTFS = "mtd6"
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-sh4-${MACHINE}"
-
 ROOTFS_FILE = "e2jffs2.img"
 KERNEL_FILE = "uImage"
 

@@ -62,3 +62,5 @@ EXTRA_OECONF_append_pn-enigma2 = " --with-sh4stb"
 IMAGE_CLASSES += "targz-sh4"
 
 UBOOT_MACHINE = "sh4"
+
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-sh4-${STXNUMBER}"
