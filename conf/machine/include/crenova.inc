@@ -10,7 +10,6 @@ KERNEL_FILE = "uImage"
 IMAGE_FSTYPES = "tar.gz"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-	firmware-sh4 \
 	fp-control \
 	"
 
