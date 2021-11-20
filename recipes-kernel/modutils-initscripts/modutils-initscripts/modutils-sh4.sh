@@ -137,7 +137,7 @@ process_file() {
 		fi
 		# If we have zram.ko in Open Vision whenever user installs it.
 		if [ -f /lib/modules/2.6.32.81_stm24_0218/extra/compcache/zram.ko ]; then
-			[ "$module" == "zram" ] && echo "16777216" > /sys/block/zram0/disksize # Use 16Mb for swap in ram
+			[ "$module" == "zram" ] && echo "8388608" > /sys/block/zram0/disksize # Use 8Mb for swap in ram
 		fi
 	done
 }
