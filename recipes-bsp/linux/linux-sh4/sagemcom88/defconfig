@@ -1104,6 +1104,7 @@ CONFIG_DVB_MAX_ADAPTERS=8
 # CONFIG_DVB_DYNAMIC_MINORS is not set
 # CONFIG_DVB_CAPTURE_DRIVERS is not set
 # CONFIG_DAB is not set
+# CONFIG_DVB_AS102 is not set
 
 #
 # Graphics support
