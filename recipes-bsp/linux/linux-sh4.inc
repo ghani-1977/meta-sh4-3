@@ -33,8 +33,8 @@ SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.81/archive
 	file://st-coprocessor.h \
 	"
 
-SRC_URI[md5sum] = "b04152690136b5db6206058f545e6746"
-SRC_URI[sha256sum] = "3f1d78ce9d6e69123313ea128e966d6a840cb3d5b97fa16af6b07e80964de4dd"
+SRC_URI[md5sum] = "38784533ab93a75dd06f96aaa8a0e9af"
+SRC_URI[sha256sum] = "36d47469a22e88b8eb54f6ab91d6574b3cb10ad3e64e57567dd3f96254e77a00"
 
 S = "${WORKDIR}/linux-sh4-${KERNELVERSION}.81-stmicro"
 B = "${WORKDIR}/build"
