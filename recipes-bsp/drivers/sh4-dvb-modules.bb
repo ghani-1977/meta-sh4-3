@@ -103,7 +103,7 @@ do_install() {
     install -m 644 frontcontroller/aotom_spark/aotom_main.h ${D}${includedir}
     install -m 644 player2/components/include/stddefs.h ${D}${includedir}
 
-    #install modutils config
+    # install modutils config
     install -d ${D}${sysconfdir}/modules-load.d
     install -m 644 ${WORKDIR}/modules.conf ${D}${sysconfdir}/modules-load.d/_${MACHINE}.conf
     echo "e2_proc" > ${D}${sysconfdir}/modules-load.d/zeprocfs.conf
@@ -124,11 +124,12 @@ do_install() {
     if [ ! -e ${PTI_NP_PATH}/Makefile ]; then
         if [ -e ${PTI_NP_PATH}/pti.ko ]; then
             echo "Found custom pti binary.." 
-            install -m 644 ${PTI_NP_PATH}/pti.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/pti/pti.ko
+            install -m 644 ${PTI_NP_PATH}/pti.ko ${D}${nonarch_base_libdir}/modules/${KERNEL_VERSION}/extra/pti
         fi
     fi
-	
-    find ${D} -name stmcore-display-sti7106.ko | xargs -r rm # we don't have a 7106 chip
+
+    # we don't have a 7106 chip
+    find ${D}/ -type f -name "stmcore-display-sti7106.ko" | xargs -r rm
 }
 
 PACKAGESPLITFUNCS_append = " handle_driver_rename "
