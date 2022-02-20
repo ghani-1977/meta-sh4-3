@@ -4,7 +4,7 @@ COMPATIBLE_MACHINE = "^(forever_2424hd|forever_3434hd|forever_9898hd|forever_nan
 
 SRC_URI = "https://github.com/OpenVisionE2/linux-sh4-${KERNELVERSION}.81/archive/stmicro-4g.tar.gz \
 	file://defconfig \
-	file://${OPENVISION_BASE}/meta-openvision/recipes-linux/kernel-patches/kernel-add-support-for-gcc${VISIONGCCVERSION}.patch \
+	${GCCKERPATCH} \
 	file://st-coprocessor.h \
 	file://linux-sh4-${MACHINE}_setup_stm24_${STM_PATCH_STR}.patch \
 	file://linux-sh4-4g-stmmac_stm24_${STM_PATCH_STR}.patch \
