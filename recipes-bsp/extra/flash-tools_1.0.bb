@@ -1,6 +1,8 @@
 SUMMARY = "Tools for changing internal flash"
 LICENSE = "CLOSED"
 
+inherit preserve_binary
+
 SRC_URI = "file://fw_env.config \
 	file://fw_printenv \
 	file://fw_setenv \
