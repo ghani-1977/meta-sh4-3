@@ -24,7 +24,7 @@ PTI_NP_PATH ?= "/data/pti_np"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "\
-	${GITHUB_URI}/OpenVisionE2/sh4-driver.git;protocol=https \
+	${GITHUB_URI_PRIVATE}/OpenVisionE2/sh4-driver.git;protocol=ssh;branch=master \
 	file://modules.conf \
 	file://modules-conf.conf \
 	" 
